@@ -1,0 +1,37 @@
+{
+  "name": "canneo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CANNEO - Cannabis Telemedicine Platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:api": "npm run start:dev --workspace=apps/api",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "build": "npm run build --workspaces --if-present",
+    "build:api": "npm run build --workspace=apps/api",
+    "build:web": "npm run build --workspace=apps/web",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "db:generate": "npm run db:generate --workspace=apps/api",
+    "db:migrate": "npm run db:migrate --workspace=apps/api",
+    "db:migrate:dev": "npm run db:migrate:dev --workspace=apps/api",
+    "db:seed": "npm run db:seed --workspace=apps/api",
+    "db:studio": "npm run db:studio --workspace=apps/api"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canneo-health/canneo.git"
+  },
+  "keywords": [
+    "telemedicine",
+    "cannabis",
+    "healthcare",
+    "saas"
+  ],
+  "author": "CANNEO Health",
+  "license": "UNLICENSED"
+}

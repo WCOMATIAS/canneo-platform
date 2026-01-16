@@ -1,0 +1,650 @@
+// ============================================================================
+// CANNEO - Schema Prisma v1
+// Sistema de Telemedicina Cannabis Medicinal
+// Multi-tenant + Billing + LGPD Compliance
+// ============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum OrganizationType {
+  CLINICA
+  ASSOCIACAO
+}
+
+enum MembershipRole {
+  OWNER
+  ADMIN
+  DOCTOR
+  SECRETARY
+  VIEWER
+}
+
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  PAST_DUE
+  CANCELED
+}
+
+enum ConsultationType {
+  PRIMEIRA_CONSULTA
+  RETORNO
+  AJUSTE_DOSE
+  EMERGENCIA
+}
+
+enum ConsultationStatus {
+  SCHEDULED
+  CONFIRMED
+  WAITING
+  IN_PROGRESS
+  COMPLETED
+  CANCELED
+  NO_SHOW
+}
+
+enum MedicalRecordTemplate {
+  PRIMEIRA_CONSULTA
+  RETORNO
+  AJUSTE_DOSE
+}
+
+enum DocumentStatus {
+  DRAFT
+  SIGNED
+  REVOKED
+}
+
+enum AnvisaReportStatus {
+  DRAFT
+  PENDING_SIGNATURE
+  SIGNED
+  SUBMITTED
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  SIGN
+  LOGIN
+  LOGOUT
+  VIEW
+  DOWNLOAD
+  CONSENT_GIVEN
+  CONSENT_REVOKED
+}
+
+// ============================================================================
+// CORE: USER & AUTHENTICATION
+// ============================================================================
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String    @map("password_hash")
+  name          String
+  phone         String?
+  avatarUrl     String?   @map("avatar_url")
+  emailVerified Boolean   @default(false) @map("email_verified")
+  mfaEnabled    Boolean   @default(false) @map("mfa_enabled")
+  mfaSecret     String?   @map("mfa_secret")
+  lastLoginAt   DateTime? @map("last_login_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  memberships     Membership[]
+  doctorProfile   DoctorProfile?
+  refreshTokens   RefreshToken[]
+  otpCodes        OtpCode[]
+  auditLogs       AuditLog[]
+  termAcceptances TermAcceptance[]
+
+  @@map("users")
+}
+
+model DoctorProfile {
+  id              String   @id @default(uuid())
+  userId          String   @unique @map("user_id")
+  crm             String
+  ufCrm           String   @map("uf_crm")
+  specialty       String?
+  rqe             String?  // Registro de Qualificacao de Especialista
+  bio             String?  @db.Text
+  signatureUrl    String?  @map("signature_url")
+  signatureBase64 String?  @map("signature_base64") @db.Text
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  consultations Consultation[]
+  medicalRecords MedicalRecord[]
+  prescriptions Prescription[]
+  anvisaReports AnvisaReport[]
+
+  @@unique([crm, ufCrm])
+  @@map("doctor_profiles")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  revokedAt DateTime? @map("revoked_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@map("refresh_tokens")
+}
+
+model OtpCode {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  code      String
+  type      String   // EMAIL_VERIFY, MFA, PASSWORD_RESET
+  expiresAt DateTime @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, type])
+  @@index([code])
+  @@map("otp_codes")
+}
+
+// ============================================================================
+// MULTI-TENANT: ORGANIZATION & MEMBERSHIP
+// ============================================================================
+
+model Organization {
+  id        String           @id @default(uuid())
+  name      String
+  slug      String           @unique
+  type      OrganizationType @default(CLINICA)
+  cnpj      String?          @unique
+  logo      String?
+  phone     String?
+  email     String?
+  address   Json?
+  settings  Json             @default("{}")
+  createdAt DateTime         @default(now()) @map("created_at")
+  updatedAt DateTime         @updatedAt @map("updated_at")
+
+  memberships          Membership[]
+  patients             Patient[]
+  consultations        Consultation[]
+  subscriptions        Subscription[]
+  availabilities       Availability[]
+  patientOrganizations PatientOrganization[]
+
+  @@map("organizations")
+}
+
+model Membership {
+  id             String         @id @default(uuid())
+  userId         String         @map("user_id")
+  organizationId String         @map("organization_id")
+  role           MembershipRole
+  isActive       Boolean        @default(true) @map("is_active")
+  invitedAt      DateTime?      @map("invited_at")
+  joinedAt       DateTime?      @map("joined_at")
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@index([organizationId])
+  @@index([userId])
+  @@map("memberships")
+}
+
+// ============================================================================
+// BILLING: PLAN & SUBSCRIPTION
+// ============================================================================
+
+model Plan {
+  id                String   @id @default(uuid())
+  name              String   @unique // SOLO, TEAM, CLINIC
+  displayName       String   @map("display_name")
+  description       String?
+  priceMonthly      Decimal  @db.Decimal(10, 2) @map("price_monthly")
+  priceYearly       Decimal  @db.Decimal(10, 2) @map("price_yearly")
+  maxDoctors        Int      @map("max_doctors")
+  maxPatients       Int      @map("max_patients")
+  maxConsultations  Int      @map("max_consultations") // per month, -1 = unlimited
+  features          Json     @default("[]")
+  stripePriceIdMonthly String? @map("stripe_price_id_monthly")
+  stripePriceIdYearly  String? @map("stripe_price_id_yearly")
+  isActive          Boolean  @default(true) @map("is_active")
+  sortOrder         Int      @default(0) @map("sort_order")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  subscriptions Subscription[]
+
+  @@map("plans")
+}
+
+model Subscription {
+  id               String             @id @default(uuid())
+  organizationId   String             @map("organization_id")
+  planId           String             @map("plan_id")
+  status           SubscriptionStatus @default(TRIAL)
+  billingCycle     String             @default("monthly") @map("billing_cycle") // monthly, yearly
+  trialEndsAt      DateTime?          @map("trial_ends_at")
+  currentPeriodStart DateTime?        @map("current_period_start")
+  currentPeriodEnd DateTime?          @map("current_period_end")
+  canceledAt       DateTime?          @map("canceled_at")
+  cancelReason     String?            @map("cancel_reason")
+  stripeCustomerId String?            @map("stripe_customer_id")
+  stripeSubId      String?            @map("stripe_subscription_id")
+  createdAt        DateTime           @default(now()) @map("created_at")
+  updatedAt        DateTime           @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plan         Plan         @relation(fields: [planId], references: [id])
+
+  @@index([organizationId])
+  @@index([status])
+  @@map("subscriptions")
+}
+
+// ============================================================================
+// PATIENTS
+// ============================================================================
+
+model Patient {
+  id             String   @id @default(uuid())
+  organizationId String   @map("organization_id")
+
+  // LGPD: CPF protegido
+  cpfHash        String   @map("cpf_hash")      // SHA256 para lookup
+  cpfEncrypted   String   @map("cpf_encrypted") // AES-256 para exibicao
+  cpfLastFour    String   @map("cpf_last_four") // ultimos 4 digitos
+
+  name           String
+  email          String?
+  phone          String?
+  birthDate      DateTime @map("birth_date")
+  gender         String?
+
+  // Endereco
+  address        Json?
+
+  // Dados clinicos gerais
+  allergies      String[] @default([])
+  conditions     String[] @default([])
+  medications    String[] @default([])
+
+  // Kanban status
+  pipelineStatus String   @default("LEAD") @map("pipeline_status")
+
+  // Timestamps
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  organization         Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  consultations        Consultation[]
+  medicalRecords       MedicalRecord[]
+  prescriptions        Prescription[]
+  anvisaReports        AnvisaReport[]
+  patientOrganizations PatientOrganization[]
+  documents            PatientDocument[]
+
+  @@unique([organizationId, cpfHash])
+  @@index([organizationId])
+  @@index([cpfHash])
+  @@map("patients")
+}
+
+// ============================================================================
+// ASSOCIATION: PATIENT <-> ORGANIZATION CONSENT
+// ============================================================================
+
+model PatientOrganization {
+  id             String    @id @default(uuid())
+  patientId      String    @map("patient_id")
+  organizationId String    @map("organization_id")
+
+  // Consentimento
+  consentGiven   Boolean   @default(false) @map("consent_given")
+  consentDate    DateTime? @map("consent_date")
+  consentIp      String?   @map("consent_ip")
+  revokedAt      DateTime? @map("revoked_at")
+  revokedReason  String?   @map("revoked_reason")
+
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  patient      Patient      @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([patientId, organizationId])
+  @@index([organizationId])
+  @@index([patientId])
+  @@map("patient_organizations")
+}
+
+// ============================================================================
+// AVAILABILITY & CONSULTATIONS
+// ============================================================================
+
+model Availability {
+  id             String   @id @default(uuid())
+  organizationId String   @map("organization_id")
+  doctorId       String   @map("doctor_id")
+
+  dayOfWeek      Int      @map("day_of_week") // 0=Sunday, 6=Saturday
+  startTime      String   @map("start_time")  // "09:00"
+  endTime        String   @map("end_time")    // "18:00"
+  slotDuration   Int      @default(60) @map("slot_duration") // minutes
+  breakStart     String?  @map("break_start")
+  breakEnd       String?  @map("break_end")
+
+  isActive       Boolean  @default(true) @map("is_active")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, doctorId])
+  @@map("availabilities")
+}
+
+model Consultation {
+  id             String             @id @default(uuid())
+  organizationId String             @map("organization_id")
+  patientId      String             @map("patient_id")
+  doctorId       String             @map("doctor_id")
+
+  type           ConsultationType
+  status         ConsultationStatus @default(SCHEDULED)
+
+  scheduledAt    DateTime           @map("scheduled_at")
+  duration       Int                @default(60) // minutes
+
+  startedAt      DateTime?          @map("started_at")
+  endedAt        DateTime?          @map("ended_at")
+
+  // Daily.co
+  dailyRoomName  String?            @map("daily_room_name")
+  dailyRoomUrl   String?            @map("daily_room_url")
+
+  // Notas
+  notes          String?            @db.Text
+  cancelReason   String?            @map("cancel_reason")
+
+  createdAt      DateTime           @default(now()) @map("created_at")
+  updatedAt      DateTime           @updatedAt @map("updated_at")
+
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  patient        Patient        @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctor         DoctorProfile  @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  medicalRecords MedicalRecord[]
+
+  @@index([organizationId])
+  @@index([patientId])
+  @@index([doctorId])
+  @@index([scheduledAt])
+  @@index([status])
+  @@map("consultations")
+}
+
+// ============================================================================
+// MEDICAL RECORDS
+// ============================================================================
+
+model MedicalRecord {
+  id              String               @id @default(uuid())
+  consultationId  String               @map("consultation_id")
+  patientId       String               @map("patient_id")
+  doctorId        String               @map("doctor_id")
+
+  templateType    MedicalRecordTemplate @map("template_type")
+
+  // Dados clinicos em JSON (estrutura depende do template)
+  clinicalData    Json                 @map("clinical_data")
+
+  // Assinatura interna
+  status          DocumentStatus       @default(DRAFT)
+  signatureHash   String?              @map("signature_hash")
+  signedAt        DateTime?            @map("signed_at")
+  signedByIp      String?              @map("signed_by_ip")
+
+  // PDF gerado
+  pdfUrl          String?              @map("pdf_url")
+  pdfGeneratedAt  DateTime?            @map("pdf_generated_at")
+
+  createdAt       DateTime             @default(now()) @map("created_at")
+  updatedAt       DateTime             @updatedAt @map("updated_at")
+
+  consultation  Consultation  @relation(fields: [consultationId], references: [id], onDelete: Cascade)
+  patient       Patient       @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctor        DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  prescriptions Prescription[]
+  anvisaReports AnvisaReport[]
+
+  @@index([consultationId])
+  @@index([patientId])
+  @@index([doctorId])
+  @@map("medical_records")
+}
+
+// ============================================================================
+// PRESCRIPTIONS
+// ============================================================================
+
+model CannabisProduct {
+  id              String   @id @default(uuid())
+  name            String
+  manufacturer    String
+  activeCompound  String   @map("active_compound") // CBD, THC, Full Spectrum, etc.
+  concentration   String   // "100mg/ml", "50mg/ml"
+  thcPercentage   Decimal? @db.Decimal(5, 2) @map("thc_percentage")
+  cbdPercentage   Decimal? @db.Decimal(5, 2) @map("cbd_percentage")
+  presentation    String   // Oil, Capsule, Spray, etc.
+  volume          String?  // "30ml", "60 capsulas"
+  administrationRoute String @map("administration_route") // Oral, Sublingual, etc.
+  description     String?  @db.Text
+  isActive        Boolean  @default(true) @map("is_active")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  prescriptions Prescription[]
+
+  @@map("cannabis_products")
+}
+
+model Prescription {
+  id              String         @id @default(uuid())
+  medicalRecordId String         @map("medical_record_id")
+  patientId       String         @map("patient_id")
+  doctorId        String         @map("doctor_id")
+  productId       String?        @map("product_id")
+
+  // Dados da prescricao
+  productName     String         @map("product_name")
+  concentration   String
+  dosage          String         // "10 gotas 2x ao dia"
+  quantity        String         // "1 frasco de 30ml"
+  instructions    String?        @db.Text
+  validUntil      DateTime       @map("valid_until")
+
+  // Assinatura
+  status          DocumentStatus @default(DRAFT)
+  signatureHash   String?        @map("signature_hash")
+  signedAt        DateTime?      @map("signed_at")
+  signedByIp      String?        @map("signed_by_ip")
+
+  // PDF
+  pdfUrl          String?        @map("pdf_url")
+  pdfGeneratedAt  DateTime?      @map("pdf_generated_at")
+
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  medicalRecord MedicalRecord    @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
+  patient       Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctor        DoctorProfile    @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  product       CannabisProduct? @relation(fields: [productId], references: [id])
+  anvisaReports AnvisaReport[]
+
+  @@index([medicalRecordId])
+  @@index([patientId])
+  @@index([doctorId])
+  @@map("prescriptions")
+}
+
+// ============================================================================
+// ANVISA REPORTS
+// ============================================================================
+
+model AnvisaReport {
+  id              String            @id @default(uuid())
+  medicalRecordId String            @map("medical_record_id")
+  prescriptionId  String?           @map("prescription_id")
+  patientId       String            @map("patient_id")
+  doctorId        String            @map("doctor_id")
+
+  // Dados do formulario (wizard)
+  formData        Json              @map("form_data")
+
+  // Status do laudo
+  status          AnvisaReportStatus @default(DRAFT)
+
+  // Assinatura
+  signatureHash   String?           @map("signature_hash")
+  signedAt        DateTime?         @map("signed_at")
+  signedByIp      String?           @map("signed_by_ip")
+
+  // PDFs
+  pdfUrl          String?           @map("pdf_url")
+  packageUrl      String?           @map("package_url") // ZIP com todos docs
+  pdfGeneratedAt  DateTime?         @map("pdf_generated_at")
+
+  // Submissao ANVISA (manual no MVP)
+  submittedAt     DateTime?         @map("submitted_at")
+  protocolNumber  String?           @map("protocol_number")
+  anvisaResponse  Json?             @map("anvisa_response")
+  expiresAt       DateTime?         @map("expires_at")
+
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+
+  medicalRecord MedicalRecord @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
+  prescription  Prescription? @relation(fields: [prescriptionId], references: [id])
+  patient       Patient       @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctor        DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@index([medicalRecordId])
+  @@index([patientId])
+  @@index([doctorId])
+  @@index([status])
+  @@map("anvisa_reports")
+}
+
+// ============================================================================
+// DOCUMENTS (Generic storage)
+// ============================================================================
+
+model PatientDocument {
+  id         String   @id @default(uuid())
+  patientId  String   @map("patient_id")
+  name       String
+  type       String   // RG, CPF, COMPROVANTE_RESIDENCIA, LAUDO_ANTERIOR, etc.
+  url        String
+  mimeType   String   @map("mime_type")
+  size       Int      // bytes
+  uploadedAt DateTime @default(now()) @map("uploaded_at")
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId])
+  @@map("patient_documents")
+}
+
+// ============================================================================
+// LEGAL TERMS
+// ============================================================================
+
+model LegalTerm {
+  id        String   @id @default(uuid())
+  type      String   // TERMS_OF_USE, PRIVACY_POLICY, TCLE, TELECONSULTA, etc.
+  version   String   // v1.0, v1.1
+  title     String
+  content   String   @db.Text
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  acceptances TermAcceptance[]
+
+  @@unique([type, version])
+  @@map("legal_terms")
+}
+
+model TermAcceptance {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  termId     String   @map("term_id")
+  acceptedAt DateTime @default(now()) @map("accepted_at")
+  ipAddress  String   @map("ip_address")
+  userAgent  String   @map("user_agent") @db.Text
+
+  user User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  term LegalTerm @relation(fields: [termId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, termId])
+  @@index([userId])
+  @@map("term_acceptances")
+}
+
+// ============================================================================
+// AUDIT LOG
+// ============================================================================
+
+model AuditLog {
+  id            String      @id @default(uuid())
+  userId        String?     @map("user_id")
+  organizationId String?    @map("organization_id")
+
+  action        AuditAction
+  entity        String      // User, Patient, Consultation, etc.
+  entityId      String      @map("entity_id")
+
+  oldData       Json?       @map("old_data")
+  newData       Json?       @map("new_data")
+  metadata      Json?       // signatureHash, etc.
+
+  ipAddress     String?     @map("ip_address")
+  userAgent     String?     @map("user_agent") @db.Text
+
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([organizationId])
+  @@index([entity, entityId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
