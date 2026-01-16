@@ -1,0 +1,141 @@
+# ============================================================================
+# CANNEO - Docker Compose para Desenvolvimento Local
+# ============================================================================
+# Uso: docker-compose up -d
+# Parar: docker-compose down
+# Ver logs: docker-compose logs -f
+# ============================================================================
+
+version: '3.8'
+
+services:
+  # ==========================================================================
+  # PostgreSQL Database
+  # ==========================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: canneo-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: canneo_user
+      POSTGRES_PASSWORD: canneo_dev_password
+      POSTGRES_DB: canneo
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U canneo_user -d canneo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================================================
+  # MinIO (S3-compatible storage) - Opcional para produção
+  # ==========================================================================
+  minio:
+    image: minio/minio:latest
+    container_name: canneo-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    ports:
+      - "9000:9000"      # API
+      - "9001:9001"      # Console
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    profiles:
+      - storage
+
+  # ==========================================================================
+  # Redis (para cache/sessões) - Opcional para MVP
+  # ==========================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: canneo-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - cache
+
+  # ==========================================================================
+  # Mailhog (para testar emails localmente)
+  # ==========================================================================
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: canneo-mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"      # SMTP
+      - "8025:8025"      # Web UI
+    profiles:
+      - email
+
+  # ==========================================================================
+  # pgAdmin (interface gráfica para PostgreSQL)
+  # ==========================================================================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: canneo-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@canneo.com.br
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
+    driver: local
+  minio_data:
+    driver: local
+  redis_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+# ============================================================================
+# PROFILES:
+# ============================================================================
+# Uso básico (apenas PostgreSQL):
+#   docker-compose up -d
+#
+# Com MinIO para storage:
+#   docker-compose --profile storage up -d
+#
+# Com Redis para cache:
+#   docker-compose --profile cache up -d
+#
+# Com Mailhog para emails:
+#   docker-compose --profile email up -d
+#
+# Com pgAdmin:
+#   docker-compose --profile tools up -d
+#
+# Todos os serviços:
+#   docker-compose --profile storage --profile cache --profile email --profile tools up -d
+# ============================================================================
