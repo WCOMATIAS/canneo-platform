@@ -166,19 +166,21 @@ export function Sidebar() {
           </div>
         </nav>
 
-        {/* Trial Banner */}
-        <div className="p-4">
-          <div className="bg-gradient-to-r from-canneo-500 to-canneo-600 rounded-lg p-4 text-white">
-            <p className="text-sm font-medium">Trial Gratuito</p>
-            <p className="text-xs opacity-90 mt-1">7 dias restantes</p>
-            <Link
-              href="/billing"
-              className="mt-3 block w-full text-center bg-white text-canneo-600 text-sm font-medium py-2 rounded-md hover:bg-canneo-50 transition-colors"
-            >
-              Fazer Upgrade
-            </Link>
+        {/* Plan Info - only show for non-owner roles or when in trial */}
+        {membership?.role !== 'OWNER' && (
+          <div className="p-4">
+            <div className="bg-gradient-to-r from-canneo-500 to-canneo-600 rounded-lg p-4 text-white">
+              <p className="text-sm font-medium">Trial Gratuito</p>
+              <p className="text-xs opacity-90 mt-1">7 dias restantes</p>
+              <Link
+                href="/billing"
+                className="mt-3 block w-full text-center bg-white text-canneo-600 text-sm font-medium py-2 rounded-md hover:bg-canneo-50 transition-colors"
+              >
+                Fazer Upgrade
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

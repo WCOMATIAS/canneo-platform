@@ -9,13 +9,15 @@ import { MembershipRole } from '@prisma/client';
 import { ROLES_KEY } from '../decorators/roles.decorator';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 
-// Hierarquia de roles (maior = mais permissões)
+// Hierarquia de roles (maior = mais permissoes)
 const ROLE_HIERARCHY: Record<MembershipRole, number> = {
+  SUPER_ADMIN: 200,
   OWNER: 100,
   ADMIN: 80,
   DOCTOR: 60,
   SECRETARY: 40,
   VIEWER: 20,
+  PATIENT: 10,
 };
 
 @Injectable()

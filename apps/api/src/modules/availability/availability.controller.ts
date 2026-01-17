@@ -106,37 +106,4 @@ export class AvailabilityController {
     return this.availabilityService.delete(id, req.user.doctorProfile?.id);
   }
 
-  // ============================================================================
-  // BLOCK SPECIFIC DATE/TIME
-  // ============================================================================
-
-  @Post('block')
-  @Roles('OWNER', 'ADMIN', 'DOCTOR')
-  async createBlockedSlot(
-    @Req() req: any,
-    @Body()
-    body: {
-      date: string;
-      startTime: string;
-      endTime: string;
-      reason?: string;
-    },
-  ) {
-    return this.availabilityService.createBlockedSlot(
-      req.user.doctorProfile?.id,
-      new Date(body.date),
-      body.startTime,
-      body.endTime,
-      body.reason,
-    );
-  }
-
-  @Delete('block/:id')
-  @Roles('OWNER', 'ADMIN', 'DOCTOR')
-  async deleteBlockedSlot(@Req() req: any, @Param('id') id: string) {
-    return this.availabilityService.deleteBlockedSlot(
-      id,
-      req.user.doctorProfile?.id,
-    );
-  }
 }

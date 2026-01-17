@@ -6,7 +6,7 @@ import {
   IsString,
   Matches,
   IsOptional,
-  IsDateString,
+  IsBoolean,
 } from 'class-validator';
 
 export class CreateAvailabilityDto {
@@ -35,10 +35,20 @@ export class CreateAvailabilityDto {
   slotDuration: number; // minutes (15, 30, 45, 60, etc.)
 
   @IsOptional()
-  @IsDateString()
-  validFrom?: string; // optional: specific date range
+  @IsString()
+  @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, {
+    message: 'breakStart must be in HH:mm format',
+  })
+  breakStart?: string;
 
   @IsOptional()
-  @IsDateString()
-  validUntil?: string;
+  @IsString()
+  @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, {
+    message: 'breakEnd must be in HH:mm format',
+  })
+  breakEnd?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
 }

@@ -16,9 +16,19 @@ export interface Organization {
 
 export interface Membership {
   id: string;
-  role: 'OWNER' | 'ADMIN' | 'DOCTOR' | 'SECRETARY' | 'VIEWER';
+  role: 'OWNER' | 'ADMIN' | 'DOCTOR' | 'SECRETARY' | 'VIEWER' | 'PATIENT' | 'SUPER_ADMIN';
   organization: Organization;
 }
+
+// Helper para verificar se é paciente
+export const isPatientRole = (role?: string) => role === 'PATIENT';
+
+// Helper para verificar se é profissional de saúde
+export const isHealthProfessional = (role?: string) =>
+  ['OWNER', 'ADMIN', 'DOCTOR', 'SECRETARY', 'VIEWER'].includes(role || '');
+
+// Helper para verificar se é super admin
+export const isSuperAdmin = (role?: string) => role === 'SUPER_ADMIN';
 
 export interface DoctorProfile {
   id: string;
@@ -111,6 +121,17 @@ export const useAuthStore = create<AuthState>()(
         refreshToken: state.refreshToken,
         isAuthenticated: state.isAuthenticated,
       }),
+      onRehydrateStorage: () => (state, error) => {
+        // Após rehydratar, marca como não loading
+        // O useAuth vai verificar se o token ainda é válido
+        if (!error && state) {
+          console.log('[AuthStore] Rehydrated, isAuthenticated:', state.isAuthenticated);
+          // Usar setTimeout para garantir que o estado seja atualizado após a rehydratação
+          setTimeout(() => {
+            useAuthStore.setState({ isLoading: false });
+          }, 0);
+        }
+      },
     }
   )
 );

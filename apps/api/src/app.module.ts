@@ -26,6 +26,9 @@ import { StorageModule } from './modules/storage/storage.module';
 // Sprint 4: Diferencial
 import { AnvisaReportsModule } from './modules/anvisa-reports/anvisa-reports.module';
 
+// Super Admin
+import { SuperAdminModule } from './modules/super-admin/super-admin.module';
+
 // Guards
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 
@@ -63,6 +66,9 @@ import { AuditLogInterceptor } from './common/interceptors/audit-log.interceptor
 
     // Sprint 4: Diferencial
     AnvisaReportsModule,
+
+    // Super Admin
+    SuperAdminModule,
   ],
   providers: [
     // Global JWT Guard (pode ser desabilitado por rota com @Public())

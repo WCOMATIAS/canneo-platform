@@ -403,6 +403,74 @@ export class AuthService {
   }
 
   // ============================================================================
+  // GET ME - Retorna usuário autenticado com membership e doctorProfile
+  // ============================================================================
+
+  async getMe(userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        doctorProfile: true,
+        memberships: {
+          where: { isActive: true },
+          include: {
+            organization: {
+              include: {
+                subscriptions: {
+                  orderBy: { createdAt: 'desc' },
+                  take: 1,
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('Usuário não encontrado');
+    }
+
+    const firstMembership = user.memberships[0];
+    const organization = firstMembership?.organization;
+    const subscription = organization?.subscriptions[0];
+
+    return {
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        mfaEnabled: user.mfaEnabled,
+        emailVerified: user.emailVerified,
+      },
+      organization: organization
+        ? {
+            id: organization.id,
+            name: organization.name,
+            slug: organization.slug,
+            type: organization.type,
+            role: firstMembership.role,
+          }
+        : null,
+      doctorProfile: user.doctorProfile
+        ? {
+            id: user.doctorProfile.id,
+            name: user.name,
+            crm: user.doctorProfile.crm,
+            ufCrm: user.doctorProfile.ufCrm,
+            specialty: user.doctorProfile.specialty,
+          }
+        : null,
+      subscription: subscription
+        ? {
+            status: subscription.status,
+            trialEndsAt: subscription.trialEndsAt,
+          }
+        : null,
+    };
+  }
+
+  // ============================================================================
   // LOGOUT
   // ============================================================================
 

@@ -16,34 +16,40 @@ import {
 } from 'lucide-react';
 
 // Dados mockados para o dashboard
-const stats = [
+const stats: Array<{
+  name: string;
+  value: string;
+  icon: typeof Users;
+  change: string;
+  changeType: 'positive' | 'negative' | 'neutral';
+}> = [
   {
     name: 'Total de Pacientes',
     value: '0',
     icon: Users,
     change: '+0%',
-    changeType: 'neutral' as const,
+    changeType: 'neutral',
   },
   {
     name: 'Consultas Hoje',
     value: '0',
     icon: Calendar,
     change: '0 agendadas',
-    changeType: 'neutral' as const,
+    changeType: 'neutral',
   },
   {
     name: 'Consultas Este Mes',
     value: '0',
     icon: Video,
     change: '+0%',
-    changeType: 'neutral' as const,
+    changeType: 'neutral',
   },
   {
     name: 'Laudos Gerados',
     value: '0',
     icon: FileText,
     change: '+0%',
-    changeType: 'neutral' as const,
+    changeType: 'neutral',
   },
 ];
 

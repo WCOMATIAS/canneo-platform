@@ -64,13 +64,14 @@ export class AvailabilityService {
 
     return this.prisma.availability.create({
       data: {
+        organizationId,
         doctorId,
         dayOfWeek: dto.dayOfWeek,
         startTime: dto.startTime,
         endTime: dto.endTime,
         slotDuration: dto.slotDuration,
-        validFrom: dto.validFrom ? new Date(dto.validFrom) : null,
-        validUntil: dto.validUntil ? new Date(dto.validUntil) : null,
+        breakStart: dto.breakStart || null,
+        breakEnd: dto.breakEnd || null,
       },
     });
   }
@@ -103,18 +104,6 @@ export class AvailabilityService {
       where: {
         doctorId,
         isActive: true,
-        OR: [
-          { validFrom: null },
-          { validFrom: { lte: endDate } },
-        ],
-        AND: [
-          {
-            OR: [
-              { validUntil: null },
-              { validUntil: { gte: startDate } },
-            ],
-          },
-        ],
       },
     });
 
@@ -155,14 +144,6 @@ export class AvailabilityService {
       );
 
       for (const availability of dayAvailabilities) {
-        // Check if date is within valid range
-        if (availability.validFrom && currentDate < availability.validFrom) {
-          continue;
-        }
-        if (availability.validUntil && currentDate > availability.validUntil) {
-          continue;
-        }
-
         // Generate time slots
         const [startHour, startMin] = availability.startTime.split(':').map(Number);
         const [endHour, endMin] = availability.endTime.split(':').map(Number);
@@ -227,9 +208,13 @@ export class AvailabilityService {
     return this.prisma.availability.update({
       where: { id },
       data: {
-        ...dto,
-        validFrom: dto.validFrom ? new Date(dto.validFrom) : undefined,
-        validUntil: dto.validUntil ? new Date(dto.validUntil) : undefined,
+        dayOfWeek: dto.dayOfWeek,
+        startTime: dto.startTime,
+        endTime: dto.endTime,
+        slotDuration: dto.slotDuration,
+        breakStart: dto.breakStart,
+        breakEnd: dto.breakEnd,
+        isActive: dto.isActive,
       },
     });
   }
@@ -257,39 +242,4 @@ export class AvailabilityService {
     });
   }
 
-  // ============================================================================
-  // BLOCK SPECIFIC DATE/TIME (for vacations, etc.)
-  // ============================================================================
-
-  async createBlockedSlot(
-    doctorId: string,
-    date: Date,
-    startTime: string,
-    endTime: string,
-    reason?: string,
-  ) {
-    return this.prisma.blockedSlot.create({
-      data: {
-        doctorId,
-        date,
-        startTime,
-        endTime,
-        reason,
-      },
-    });
-  }
-
-  async deleteBlockedSlot(id: string, doctorId: string) {
-    const blocked = await this.prisma.blockedSlot.findUnique({
-      where: { id },
-    });
-
-    if (!blocked || blocked.doctorId !== doctorId) {
-      throw new NotFoundException('Blocked slot not found');
-    }
-
-    return this.prisma.blockedSlot.delete({
-      where: { id },
-    });
-  }
 }

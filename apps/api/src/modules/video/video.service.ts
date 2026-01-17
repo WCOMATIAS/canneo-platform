@@ -7,7 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../../prisma/prisma.service';
 
-interface DailyRoomResponse {
+export interface DailyRoomResponse {
   id: string;
   name: string;
   url: string;

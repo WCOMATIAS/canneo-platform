@@ -55,7 +55,7 @@ export class AnvisaReportsService {
         prescriptionId: dto.prescriptionId,
         patientId: medicalRecord.patientId,
         doctorId,
-        formData: dto.formData,
+        formData: dto.formData as any,
         status: 'DRAFT',
       },
       include: {
@@ -277,7 +277,7 @@ export class AnvisaReportsService {
     return this.prisma.anvisaReport.update({
       where: { id },
       data: {
-        formData: updatedFormData,
+        formData: updatedFormData as any,
       },
     });
   }

@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { api, getErrorMessage } from '@/lib/api';
-import { useAuthStore } from '@/stores/auth-store';
+import { useAuthStore, isPatientRole, isSuperAdmin } from '@/stores/auth-store';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
 
@@ -38,33 +38,78 @@ export function useAuth() {
     setLoading,
   } = useAuthStore();
 
-  // Verificar autenticação ao carregar
+  // Ref para evitar múltiplas chamadas
+  const hasCheckedAuth = useRef(false);
+
+  // Verificar autenticação ao carregar (apenas uma vez)
   useEffect(() => {
     const checkAuth = async () => {
+      // Se já verificou ou não está carregando, não faz nada
+      if (hasCheckedAuth.current) {
+        return;
+      }
+
+      hasCheckedAuth.current = true;
+      console.log('[useAuth] Checking auth...');
+
       const token = localStorage.getItem('accessToken');
       if (!token) {
+        console.log('[useAuth] No token found');
+        setLoading(false);
+        return;
+      }
+
+      // Se já está autenticado no store, não precisa verificar de novo
+      if (isAuthenticated && membership) {
+        console.log('[useAuth] Already authenticated from store');
         setLoading(false);
         return;
       }
 
       try {
+        console.log('[useAuth] Calling /auth/me');
         const response = await api.get('/auth/me');
-        setAuth({
-          user: response.data.user,
-          membership: response.data.membership,
-          doctorProfile: response.data.doctorProfile,
-          accessToken: token,
-          refreshToken: localStorage.getItem('refreshToken') || '',
-        });
-      } catch (error) {
-        storeLogout();
+
+        // Adaptar resposta da API /me para o formato esperado
+        const membershipData = response.data.membership || (response.data.organization ? {
+          id: response.data.organization.id,
+          role: response.data.organization.role || 'OWNER',
+          organization: {
+            id: response.data.organization.id,
+            name: response.data.organization.name,
+            slug: response.data.organization.slug,
+            type: 'CLINICA' as const,
+          },
+        } : null);
+
+        if (membershipData) {
+          console.log('[useAuth] Auth successful, setting auth');
+          setAuth({
+            user: response.data.user,
+            membership: membershipData,
+            doctorProfile: response.data.doctorProfile,
+            accessToken: token,
+            refreshToken: localStorage.getItem('refreshToken') || '',
+          });
+        } else {
+          // Sem membership, fazer logout
+          console.log('[useAuth] No membership, logging out');
+          storeLogout();
+        }
+      } catch (error: any) {
+        console.log('[useAuth] Error checking auth:', error?.response?.status);
+        // Só faz logout se for erro de autenticação (401)
+        if (error?.response?.status === 401) {
+          storeLogout();
+        } else {
+          // Para outros erros (como Network Error), só marca como não loading
+          setLoading(false);
+        }
       }
     };
 
-    if (isLoading) {
-      checkAuth();
-    }
-  }, [isLoading, setAuth, setLoading, storeLogout]);
+    checkAuth();
+  }, [isAuthenticated, membership, setAuth, setLoading, storeLogout]);
 
   // Login mutation
   const loginMutation = useMutation({
@@ -80,9 +125,30 @@ export function useAuth() {
         return;
       }
 
+      // Adaptar resposta da API para o formato esperado pelo store
+      const membership = data.organization ? {
+        id: data.organization.id,
+        role: data.organization.role || 'OWNER',
+        organization: {
+          id: data.organization.id,
+          name: data.organization.name,
+          slug: data.organization.slug,
+          type: 'CLINICA' as const,
+        },
+      } : null;
+
+      if (!membership) {
+        toast({
+          title: 'Erro no login',
+          description: 'Usuário não possui organização vinculada',
+          variant: 'destructive',
+        });
+        return;
+      }
+
       setAuth({
         user: data.user,
-        membership: data.membership,
+        membership,
         doctorProfile: data.doctorProfile,
         accessToken: data.accessToken,
         refreshToken: data.refreshToken,
@@ -90,11 +156,18 @@ export function useAuth() {
 
       toast({
         title: 'Login realizado!',
-        description: `Bem-vindo, ${data.doctorProfile?.name || data.user.email}`,
+        description: `Bem-vindo, ${data.user?.name || data.user.email}`,
         variant: 'default',
       });
 
-      router.push('/dashboard');
+      // Redirecionar baseado no tipo de usuário
+      if (isSuperAdmin(membership.role)) {
+        router.push('/super-admin');
+      } else if (isPatientRole(membership.role)) {
+        router.push('/patient-dashboard');
+      } else {
+        router.push('/dashboard');
+      }
     },
     onError: (error) => {
       toast({

@@ -51,7 +51,7 @@ export class PatientsService {
         phone: dto.phone,
         birthDate: new Date(dto.birthDate),
         gender: dto.gender,
-        address: dto.address || {},
+        address: (dto.address || {}) as any,
         allergies: dto.allergies || [],
         conditions: dto.conditions || [],
         medications: dto.medications || [],
@@ -240,7 +240,7 @@ export class PatientsService {
       where: { id },
       data: {
         ...dto,
-        address: dto.address ? dto.address : undefined,
+        address: dto.address ? (dto.address as any) : undefined,
       },
       select: this.getPatientSelect(),
     });

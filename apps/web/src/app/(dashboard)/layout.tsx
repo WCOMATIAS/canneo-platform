@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { Sidebar } from '@/components/layout/sidebar';
 import { Header } from '@/components/layout/header';
 import { Loader2 } from 'lucide-react';
+import { isPatientRole } from '@/stores/auth-store';
 
 export default function DashboardLayout({
   children,
@@ -13,13 +14,17 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, membership } = useAuth();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       router.push('/auth/login');
     }
-  }, [isAuthenticated, isLoading, router]);
+    // Se for paciente, redirecionar para portal do paciente
+    if (!isLoading && isAuthenticated && isPatientRole(membership?.role)) {
+      router.push('/patient-dashboard');
+    }
+  }, [isAuthenticated, isLoading, membership, router]);
 
   if (isLoading) {
     return (

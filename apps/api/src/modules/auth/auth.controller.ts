@@ -1,6 +1,7 @@
 import {
   Controller,
   Post,
+  Get,
   Body,
   HttpCode,
   HttpStatus,
@@ -74,11 +75,10 @@ export class AuthController {
   }
 
   /**
-   * Retorna usuário autenticado
+   * Retorna usuário autenticado com membership e doctorProfile
    */
-  @Post('me')
-  @HttpCode(HttpStatus.OK)
+  @Get('me')
   async me(@CurrentUser() user: CurrentUserData) {
-    return { user };
+    return this.authService.getMe(user.userId);
   }
 }

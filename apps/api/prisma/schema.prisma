@@ -23,11 +23,13 @@ enum OrganizationType {
 }
 
 enum MembershipRole {
+  SUPER_ADMIN
   OWNER
   ADMIN
   DOCTOR
   SECRETARY
   VIEWER
+  PATIENT
 }
 
 enum SubscriptionStatus {

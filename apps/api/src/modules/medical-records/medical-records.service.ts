@@ -53,7 +53,7 @@ export class MedicalRecordsService {
         patientId: consultation.patientId,
         doctorId,
         templateType: dto.templateType,
-        clinicalData: dto.clinicalData,
+        clinicalData: dto.clinicalData as any,
         status: 'DRAFT',
       },
       include: {
@@ -202,7 +202,7 @@ export class MedicalRecordsService {
     return this.prisma.medicalRecord.update({
       where: { id },
       data: {
-        clinicalData: updatedClinicalData,
+        clinicalData: updatedClinicalData as any,
       },
     });
   }
@@ -395,6 +395,6 @@ export class MedicalRecordsService {
       },
     };
 
-    return templates[templateType] || null;
+    return templates[templateType as keyof typeof templates] || null;
   }
 }
