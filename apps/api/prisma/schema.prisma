@@ -620,6 +620,59 @@ model TermAcceptance {
 }
 
 // ============================================================================
+// NOTIFICATIONS
+// ============================================================================
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
+  ORGANIZATION
+  SUBSCRIPTION
+  USER
+  CONSULTATION
+  PRESCRIPTION
+}
+
+model Notification {
+  id             String           @id @default(uuid())
+  userId         String?          @map("user_id")
+  organizationId String?          @map("organization_id")
+
+  type           NotificationType @default(INFO)
+  title          String
+  message        String           @db.Text
+  data           Json?            // Dados adicionais (links, IDs, etc.)
+
+  read           Boolean          @default(false)
+  readAt         DateTime?        @map("read_at")
+
+  createdAt      DateTime         @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([organizationId])
+  @@index([read])
+  @@index([createdAt])
+  @@map("notifications")
+}
+
+// ============================================================================
+// SYSTEM SETTINGS (Super Admin)
+// ============================================================================
+
+model SystemSettings {
+  id             String   @id @default(uuid())
+  key            String   @unique
+  value          Json
+  description    String?
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  updatedBy      String?  @map("updated_by")
+
+  @@map("system_settings")
+}
+
+// ============================================================================
 // AUDIT LOG
 // ============================================================================
 

@@ -29,6 +29,15 @@ import { AnvisaReportsModule } from './modules/anvisa-reports/anvisa-reports.mod
 // Super Admin
 import { SuperAdminModule } from './modules/super-admin/super-admin.module';
 
+// Dashboard
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+
+// Email
+import { EmailModule } from './modules/email/email.module';
+
+// Patient Portal
+import { PatientPortalModule } from './modules/patient-portal/patient-portal.module';
+
 // Guards
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 
@@ -69,6 +78,15 @@ import { AuditLogInterceptor } from './common/interceptors/audit-log.interceptor
 
     // Super Admin
     SuperAdminModule,
+
+    // Dashboard
+    DashboardModule,
+
+    // Email
+    EmailModule,
+
+    // Patient Portal
+    PatientPortalModule,
   ],
   providers: [
     // Global JWT Guard (pode ser desabilitado por rota com @Public())

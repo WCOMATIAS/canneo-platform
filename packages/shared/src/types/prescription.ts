@@ -2,6 +2,8 @@
 // PRESCRIPTION TYPES
 // ============================================================================
 
+import type { DocumentStatus } from './medical-record';
+
 export interface CreatePrescriptionDto {
   medicalRecordId: string;
   productId?: string; // Optional - can use custom product
@@ -33,8 +35,6 @@ export interface PrescriptionDto {
   updatedAt: string;
   product?: CannabisProductDto;
 }
-
-export type DocumentStatus = 'DRAFT' | 'SIGNED' | 'REVOKED';
 
 // ============================================================================
 // CANNABIS PRODUCT TYPES

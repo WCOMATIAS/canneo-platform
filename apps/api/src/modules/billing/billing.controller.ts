@@ -5,6 +5,7 @@ import {
   Body,
   Req,
   UseGuards,
+  Headers,
   RawBodyRequest,
 } from '@nestjs/common';
 import { BillingService } from './billing.service';
@@ -18,7 +19,7 @@ export class BillingController {
   constructor(private readonly billingService: BillingService) {}
 
   /**
-   * Lista planos disponíveis
+   * Lista planos disponiveis
    */
   @Public()
   @Get('plans')
@@ -27,7 +28,7 @@ export class BillingController {
   }
 
   /**
-   * Retorna subscription atual da organização
+   * Retorna subscription atual da organizacao
    */
   @Get('subscription')
   @UseGuards(TenantGuard)
@@ -36,7 +37,16 @@ export class BillingController {
   }
 
   /**
-   * Cria sessão de checkout (Stripe)
+   * Retorna uso atual da subscription
+   */
+  @Get('usage')
+  @UseGuards(TenantGuard)
+  async getSubscriptionUsage(@Req() req: any) {
+    return this.billingService.getSubscriptionUsage(req.organizationId);
+  }
+
+  /**
+   * Cria sessao de checkout (Stripe)
    */
   @Post('checkout')
   @UseGuards(TenantGuard, RolesGuard)
@@ -53,7 +63,7 @@ export class BillingController {
   }
 
   /**
-   * Cria sessão do portal de billing (Stripe)
+   * Cria sessao do portal de billing (Stripe)
    */
   @Post('portal')
   @UseGuards(TenantGuard, RolesGuard)
@@ -77,12 +87,18 @@ export class BillingController {
 
   /**
    * Webhook do Stripe
+   * Requires raw body for signature verification
    */
   @Public()
   @Post('webhook')
-  async handleWebhook(@Req() req: RawBodyRequest<any>) {
-    // TODO: Verificar assinatura do webhook
-    const event = req.body;
-    return this.billingService.handleWebhook(event);
+  async handleWebhook(
+    @Req() req: RawBodyRequest<Request>,
+    @Headers('stripe-signature') signature: string,
+  ) {
+    const rawBody = req.rawBody;
+    if (!rawBody) {
+      return { received: true, error: 'No raw body' };
+    }
+    return this.billingService.handleWebhook(rawBody, signature);
   }
 }

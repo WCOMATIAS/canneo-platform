@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { api, getErrorMessage } from '@/lib/api';
 import { useAuthStore, isPatientRole, isSuperAdmin } from '@/stores/auth-store';
@@ -25,6 +25,11 @@ interface MfaVerifyData {
   tempToken?: string;
 }
 
+// Flag GLOBAL para evitar múltiplas verificações de auth
+// Isso persiste entre navegações client-side
+let hasCheckedAuthGlobal = false;
+let isCheckingAuth = false;
+
 export function useAuth() {
   const router = useRouter();
   const {
@@ -38,33 +43,52 @@ export function useAuth() {
     setLoading,
   } = useAuthStore();
 
-  // Ref para evitar múltiplas chamadas
-  const hasCheckedAuth = useRef(false);
-
-  // Verificar autenticação ao carregar (apenas uma vez)
+  // Verificar autenticação ao carregar (apenas uma vez globalmente)
   useEffect(() => {
     const checkAuth = async () => {
-      // Se já verificou ou não está carregando, não faz nada
-      if (hasCheckedAuth.current) {
+      // Se já verificou globalmente ou está verificando, não faz nada
+      if (hasCheckedAuthGlobal || isCheckingAuth) {
+        // Se já verificou e está autenticado, só garantir que não está loading
+        if (hasCheckedAuthGlobal && isLoading) {
+          setLoading(false);
+        }
         return;
       }
 
-      hasCheckedAuth.current = true;
-      console.log('[useAuth] Checking auth...');
+      // Verificar se o store já foi rehidratado e tem dados válidos
+      const storedAuth = localStorage.getItem('canneo-auth');
+      if (storedAuth) {
+        try {
+          const parsed = JSON.parse(storedAuth);
+          if (parsed.state?.isAuthenticated && parsed.state?.membership) {
+            console.log('[useAuth] Store already has valid auth data');
+            hasCheckedAuthGlobal = true;
+            setLoading(false);
+            return;
+          }
+        } catch (e) {
+          // Ignore parse errors
+        }
+      }
 
       const token = localStorage.getItem('accessToken');
       if (!token) {
         console.log('[useAuth] No token found');
+        hasCheckedAuthGlobal = true;
         setLoading(false);
         return;
       }
 
-      // Se já está autenticado no store, não precisa verificar de novo
-      if (isAuthenticated && membership) {
+      // Se já está autenticado no store com membership válido, não precisa verificar
+      if (isAuthenticated && membership && user) {
         console.log('[useAuth] Already authenticated from store');
+        hasCheckedAuthGlobal = true;
         setLoading(false);
         return;
       }
+
+      // Marcar como verificando para evitar chamadas duplicadas
+      isCheckingAuth = true;
 
       try {
         console.log('[useAuth] Calling /auth/me');
@@ -103,13 +127,17 @@ export function useAuth() {
           storeLogout();
         } else {
           // Para outros erros (como Network Error), só marca como não loading
+          // NÃO faz logout - mantém o estado atual
           setLoading(false);
         }
+      } finally {
+        hasCheckedAuthGlobal = true;
+        isCheckingAuth = false;
       }
     };
 
     checkAuth();
-  }, [isAuthenticated, membership, setAuth, setLoading, storeLogout]);
+  }, [isAuthenticated, membership, user, setAuth, setLoading, storeLogout, isLoading]);
 
   // Login mutation
   const loginMutation = useMutation({
@@ -145,6 +173,9 @@ export function useAuth() {
         });
         return;
       }
+
+      // Resetar flag global após login bem-sucedido
+      hasCheckedAuthGlobal = true;
 
       setAuth({
         user: data.user,
@@ -185,6 +216,8 @@ export function useAuth() {
       return response.data;
     },
     onSuccess: (data) => {
+      hasCheckedAuthGlobal = true;
+
       setAuth({
         user: data.user,
         membership: data.membership,
@@ -222,6 +255,7 @@ export function useAuth() {
     },
     onSuccess: (data) => {
       localStorage.removeItem('mfaTempToken');
+      hasCheckedAuthGlobal = true;
 
       setAuth({
         user: data.user,
@@ -248,11 +282,14 @@ export function useAuth() {
       await api.post('/auth/logout');
     },
     onSuccess: () => {
+      // Resetar flag global no logout
+      hasCheckedAuthGlobal = false;
       storeLogout();
       router.push('/auth/login');
     },
     onError: () => {
       // Mesmo com erro, fazer logout local
+      hasCheckedAuthGlobal = false;
       storeLogout();
       router.push('/auth/login');
     },

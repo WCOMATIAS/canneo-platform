@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileCheck, Plus, ScrollText } from 'lucide-react';
@@ -12,10 +13,12 @@ export default function AnvisaReportsPage() {
           <h1 className="text-2xl font-bold text-gray-900">Laudos ANVISA</h1>
           <p className="text-gray-500">Laudos medicos para autorizacao ANVISA</p>
         </div>
-        <Button className="bg-canneo-600 hover:bg-canneo-700">
-          <Plus className="h-4 w-4 mr-2" />
-          Novo Laudo
-        </Button>
+        <Link href="/anvisa-reports/new">
+          <Button className="bg-canneo-600 hover:bg-canneo-700">
+            <Plus className="h-4 w-4 mr-2" />
+            Novo Laudo
+          </Button>
+        </Link>
       </div>
 
       <Card>
@@ -35,10 +38,12 @@ export default function AnvisaReportsPage() {
               Os laudos ANVISA sao gerados para solicitar autorizacao de importacao
               de produtos a base de cannabis. Crie um laudo apos preencher o prontuario.
             </p>
-            <Button className="mt-4 bg-canneo-600 hover:bg-canneo-700">
-              <Plus className="h-4 w-4 mr-2" />
-              Criar Laudo
-            </Button>
+            <Link href="/anvisa-reports/new">
+              <Button className="mt-4 bg-canneo-600 hover:bg-canneo-700">
+                <Plus className="h-4 w-4 mr-2" />
+                Criar Laudo
+              </Button>
+            </Link>
           </div>
         </CardContent>
       </Card>

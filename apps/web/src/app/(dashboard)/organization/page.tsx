@@ -1,12 +1,25 @@
 'use client';
 
+import { useState } from 'react';
 import { useAuthStore } from '@/stores/auth-store';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Building2, Users, Settings, MapPin } from 'lucide-react';
+import { Building2, Users, Settings, MapPin, UserPlus } from 'lucide-react';
+import { EditOrganizationModal } from '@/components/modals/edit-organization-modal';
+import { AddAddressModal } from '@/components/modals/add-address-modal';
+import { InviteMemberModal } from '@/components/modals/invite-member-modal';
 
 export default function OrganizationPage() {
   const { membership } = useAuthStore();
+  const [isEditOrgOpen, setIsEditOrgOpen] = useState(false);
+  const [isAddAddressOpen, setIsAddAddressOpen] = useState(false);
+  const [isInviteMemberOpen, setIsInviteMemberOpen] = useState(false);
+
+  const organizationData = membership?.organization ? {
+    id: membership.organization.id,
+    name: membership.organization.name,
+    type: membership.organization.type,
+  } : null;
 
   return (
     <div className="space-y-6">
@@ -15,7 +28,7 @@ export default function OrganizationPage() {
           <h1 className="text-2xl font-bold text-gray-900">Organizacao</h1>
           <p className="text-gray-500">Configuracoes da sua clinica</p>
         </div>
-        <Button variant="outline">
+        <Button variant="outline" onClick={() => setIsEditOrgOpen(true)}>
           <Settings className="h-4 w-4 mr-2" />
           Editar
         </Button>
@@ -55,8 +68,13 @@ export default function OrganizationPage() {
           <CardContent>
             <div className="text-center py-8">
               <Users className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-              <p className="text-gray-500">Gerenciamento de equipe em breve</p>
-              <Button variant="outline" className="mt-4" disabled>
+              <p className="text-gray-500">Gerencie sua equipe</p>
+              <Button
+                variant="outline"
+                className="mt-4"
+                onClick={() => setIsInviteMemberOpen(true)}
+              >
+                <UserPlus className="h-4 w-4 mr-2" />
                 Convidar Membro
               </Button>
             </div>
@@ -74,13 +92,41 @@ export default function OrganizationPage() {
             <div className="text-center py-8">
               <MapPin className="h-12 w-12 text-gray-300 mx-auto mb-3" />
               <p className="text-gray-500">Endereco nao cadastrado</p>
-              <Button variant="outline" className="mt-4">
+              <Button
+                variant="outline"
+                className="mt-4"
+                onClick={() => setIsAddAddressOpen(true)}
+              >
+                <MapPin className="h-4 w-4 mr-2" />
                 Adicionar Endereco
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
+
+      {/* Modais */}
+      <EditOrganizationModal
+        open={isEditOrgOpen}
+        onOpenChange={setIsEditOrgOpen}
+        organization={organizationData}
+      />
+
+      {membership?.organization?.id && (
+        <>
+          <AddAddressModal
+            open={isAddAddressOpen}
+            onOpenChange={setIsAddAddressOpen}
+            organizationId={membership.organization.id}
+          />
+
+          <InviteMemberModal
+            open={isInviteMemberOpen}
+            onOpenChange={setIsInviteMemberOpen}
+            organizationId={membership.organization.id}
+          />
+        </>
+      )}
     </div>
   );
 }

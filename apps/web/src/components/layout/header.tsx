@@ -13,13 +13,61 @@ import {
   User,
   ChevronDown,
   Leaf,
+  Calendar,
+  FileText,
+  UserPlus,
+  Check,
 } from 'lucide-react';
+
+// Mock notifications - em producao viriam da API
+const MOCK_NOTIFICATIONS = [
+  {
+    id: '1',
+    type: 'appointment',
+    title: 'Consulta em 30 minutos',
+    message: 'Consulta com Maria Silva as 14:00',
+    time: 'Agora',
+    read: false,
+  },
+  {
+    id: '2',
+    type: 'patient',
+    title: 'Novo paciente cadastrado',
+    message: 'Joao Santos foi cadastrado no sistema',
+    time: '2h atras',
+    read: false,
+  },
+  {
+    id: '3',
+    type: 'document',
+    title: 'Laudo aprovado',
+    message: 'Laudo ANVISA de Ana Costa foi aprovado',
+    time: '1 dia atras',
+    read: true,
+  },
+];
 
 export function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const { logout, logoutLoading } = useAuth();
   const { doctorProfile, membership } = useAuthStore();
+
+  const unreadCount = MOCK_NOTIFICATIONS.filter((n) => !n.read).length;
+
+  const getNotificationIcon = (type: string) => {
+    switch (type) {
+      case 'appointment':
+        return <Calendar className="h-4 w-4 text-blue-500" />;
+      case 'patient':
+        return <UserPlus className="h-4 w-4 text-green-500" />;
+      case 'document':
+        return <FileText className="h-4 w-4 text-purple-500" />;
+      default:
+        return <Bell className="h-4 w-4 text-gray-500" />;
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
@@ -51,15 +99,97 @@ export function Header() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5 text-gray-500" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
-          </Button>
+          <div className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative"
+              onClick={() => {
+                setShowNotifications(!showNotifications);
+                setShowUserMenu(false);
+              }}
+            >
+              <Bell className="h-5 w-5 text-gray-500" />
+              {unreadCount > 0 && (
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+              )}
+            </Button>
+
+            {/* Notifications Dropdown */}
+            {showNotifications && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setShowNotifications(false)}
+                />
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                  <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+                    <h3 className="font-semibold text-gray-900">Notificacoes</h3>
+                    {unreadCount > 0 && (
+                      <span className="text-xs bg-canneo-100 text-canneo-700 px-2 py-0.5 rounded-full">
+                        {unreadCount} novas
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="max-h-96 overflow-y-auto">
+                    {MOCK_NOTIFICATIONS.length === 0 ? (
+                      <div className="px-4 py-8 text-center">
+                        <Bell className="h-8 w-8 text-gray-300 mx-auto mb-2" />
+                        <p className="text-sm text-gray-500">Nenhuma notificacao</p>
+                      </div>
+                    ) : (
+                      MOCK_NOTIFICATIONS.map((notification) => (
+                        <div
+                          key={notification.id}
+                          className={`px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-50 ${
+                            !notification.read ? 'bg-blue-50/50' : ''
+                          }`}
+                        >
+                          <div className="flex gap-3">
+                            <div className="flex-shrink-0 mt-1">
+                              {getNotificationIcon(notification.type)}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className={`text-sm ${!notification.read ? 'font-medium' : ''} text-gray-900`}>
+                                {notification.title}
+                              </p>
+                              <p className="text-xs text-gray-500 truncate">
+                                {notification.message}
+                              </p>
+                              <p className="text-xs text-gray-400 mt-1">
+                                {notification.time}
+                              </p>
+                            </div>
+                            {!notification.read && (
+                              <div className="flex-shrink-0">
+                                <div className="w-2 h-2 bg-canneo-500 rounded-full" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+
+                  <div className="px-4 py-3 border-t border-gray-100">
+                    <button className="text-sm text-canneo-600 hover:underline w-full text-center flex items-center justify-center gap-1">
+                      <Check className="h-3 w-3" />
+                      Marcar todas como lidas
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
 
           {/* User menu */}
           <div className="relative">
             <button
-              onClick={() => setShowUserMenu(!showUserMenu)}
+              onClick={() => {
+                setShowUserMenu(!showUserMenu);
+                setShowNotifications(false);
+              }}
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <div className="w-8 h-8 bg-canneo-100 rounded-full flex items-center justify-center">

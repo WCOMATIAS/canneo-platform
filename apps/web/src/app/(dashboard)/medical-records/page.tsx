@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, Plus, ClipboardList } from 'lucide-react';
@@ -12,10 +13,12 @@ export default function MedicalRecordsPage() {
           <h1 className="text-2xl font-bold text-gray-900">Prontuarios</h1>
           <p className="text-gray-500">Prontuarios eletronicos dos pacientes</p>
         </div>
-        <Button className="bg-canneo-600 hover:bg-canneo-700">
-          <Plus className="h-4 w-4 mr-2" />
-          Novo Prontuario
-        </Button>
+        <Link href="/medical-records/new">
+          <Button className="bg-canneo-600 hover:bg-canneo-700">
+            <Plus className="h-4 w-4 mr-2" />
+            Novo Prontuario
+          </Button>
+        </Link>
       </div>
 
       <Card>
@@ -35,10 +38,12 @@ export default function MedicalRecordsPage() {
               Os prontuarios serao criados automaticamente apos as consultas.
               Voce tambem pode criar um prontuario manualmente.
             </p>
-            <Button className="mt-4 bg-canneo-600 hover:bg-canneo-700">
-              <Plus className="h-4 w-4 mr-2" />
-              Criar Prontuario
-            </Button>
+            <Link href="/medical-records/new">
+              <Button className="mt-4 bg-canneo-600 hover:bg-canneo-700">
+                <Plus className="h-4 w-4 mr-2" />
+                Criar Prontuario
+              </Button>
+            </Link>
           </div>
         </CardContent>
       </Card>

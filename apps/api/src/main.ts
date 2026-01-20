@@ -6,6 +6,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'log'],
+    rawBody: true, // Enable raw body for Stripe webhooks
   });
 
   const configService = app.get(ConfigService);
@@ -15,7 +16,7 @@ async function bootstrap() {
     origin: configService.get('FRONTEND_URL') || 'http://localhost:3001',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-org-id'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-org-id', 'stripe-signature'],
   });
 
   // Validation

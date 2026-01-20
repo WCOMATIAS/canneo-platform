@@ -1,10 +1,14 @@
 'use client';
 
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Video, Plus, FileVideo } from 'lucide-react';
+import { NewConsultationModal } from '@/components/modals/new-consultation-modal';
 
 export default function ConsultationsPage() {
+  const [isNewConsultationOpen, setIsNewConsultationOpen] = useState(false);
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -12,11 +16,19 @@ export default function ConsultationsPage() {
           <h1 className="text-2xl font-bold text-gray-900">Consultas</h1>
           <p className="text-gray-500">Historico de teleconsultas realizadas</p>
         </div>
-        <Button className="bg-canneo-600 hover:bg-canneo-700">
+        <Button
+          className="bg-canneo-600 hover:bg-canneo-700"
+          onClick={() => setIsNewConsultationOpen(true)}
+        >
           <Plus className="h-4 w-4 mr-2" />
           Nova Consulta
         </Button>
       </div>
+
+      <NewConsultationModal
+        open={isNewConsultationOpen}
+        onOpenChange={setIsNewConsultationOpen}
+      />
 
       <Card>
         <CardHeader>
@@ -35,7 +47,10 @@ export default function ConsultationsPage() {
               Agende sua primeira consulta para comecar a atender seus pacientes
               por telemedicina.
             </p>
-            <Button className="mt-4 bg-canneo-600 hover:bg-canneo-700">
+            <Button
+              className="mt-4 bg-canneo-600 hover:bg-canneo-700"
+              onClick={() => setIsNewConsultationOpen(true)}
+            >
               <Plus className="h-4 w-4 mr-2" />
               Agendar Consulta
             </Button>

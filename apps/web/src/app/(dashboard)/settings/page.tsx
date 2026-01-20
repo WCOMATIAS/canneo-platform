@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from 'react';
+import Link from 'next/link';
 import { useAuthStore } from '@/stores/auth-store';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Settings, User, Bell, Shield, Palette } from 'lucide-react';
+import { ChangePasswordModal } from '@/components/modals/change-password-modal';
 
 export default function SettingsPage() {
   const { user, doctorProfile } = useAuthStore();
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
   return (
     <div className="space-y-6">
@@ -36,9 +40,11 @@ export default function SettingsPage() {
               <label className="text-sm font-medium text-gray-500">CRM</label>
               <p className="text-gray-900">{doctorProfile?.crm || '-'} / {doctorProfile?.ufCrm || '-'}</p>
             </div>
-            <Button variant="outline" className="w-full">
-              Editar Perfil
-            </Button>
+            <Link href="/settings/profile">
+              <Button variant="outline" className="w-full">
+                Editar Perfil
+              </Button>
+            </Link>
           </CardContent>
         </Card>
 
@@ -64,7 +70,7 @@ export default function SettingsPage() {
                 <p className="font-medium text-gray-900">Alterar Senha</p>
                 <p className="text-sm text-gray-500">Atualize sua senha de acesso</p>
               </div>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={() => setIsChangePasswordOpen(true)}>
                 Alterar
               </Button>
             </div>
@@ -101,6 +107,12 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Modal de Alterar Senha */}
+      <ChangePasswordModal
+        open={isChangePasswordOpen}
+        onOpenChange={setIsChangePasswordOpen}
+      />
     </div>
   );
 }
