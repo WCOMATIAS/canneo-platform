@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Dashboard Logística Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "secondary": "#2e7d32",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "success": "#2e7d32",
+                        "success-bg": "#e8f5e9",
+                        "warning": "#ed6c02",
+                        "danger": "#d32f2f"
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-item-active {
+            background-color: #e7edf3;
+            border-right: 4px solid #137fec;
+            color: #137fec;
+            font-weight: 700;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cfdbe7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d141b] transition-colors duration-300">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-72 bg-white dark:bg-[#1a242f] border-r border-[#cfdbe7] dark:border-slate-700 flex flex-col shrink-0">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-10">
+<div class="bg-primary size-10 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#0d141b] dark:text-white text-base font-bold leading-none">Portal Admin</h1>
+<p class="text-[#4c739a] text-xs font-medium uppercase tracking-wider">CANNEO Logística</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard Geral</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-item-active" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">conveyor_belt</span>
+<span class="text-sm font-medium">Gestão de Fretes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-medium">Pedidos em Separação</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">partner_reports</span>
+<span class="text-sm font-medium">Transportadoras</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-3 px-4 py-3 mb-4">
+<div class="size-8 rounded-full bg-slate-200 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500">person</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-[#0d141b] dark:text-white">Admin Canneo</span>
+<span class="text-[10px] text-[#4c739a]">Gestor Logístico</span>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Sair</span>
+</a>
+</div>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<div class="max-w-[1400px] mx-auto p-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h1 class="text-[#0d141b] dark:text-white text-3xl font-black tracking-tight mb-2">Monitoramento de Logística</h1>
+<p class="text-[#4c739a] text-base">Acompanhe fluxos de entrega, custos e performance das transportadoras.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-white dark:bg-[#1a242f] px-4 py-2 border border-[#cfdbe7] dark:border-slate-700 rounded-lg text-sm font-semibold text-[#4c739a] hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-lg">download</span> Exportar Relatório
+                        </button>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">sync</span> Atualizar Dados
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-[#1a242f] p-6 rounded-xl border border-[#cfdbe7] dark:border-slate-700 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg text-blue-600">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<span class="text-success text-xs font-bold">+12%</span>
+</div>
+<h3 class="text-[#4c739a] text-sm font-medium mb-1">Pedidos em Transporte</h3>
+<p class="text-2xl font-black text-[#0d141b] dark:text-white">142</p>
+</div>
+<div class="bg-white dark:bg-[#1a242f] p-6 rounded-xl border border-[#cfdbe7] dark:border-slate-700 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="bg-purple-50 dark:bg-purple-900/20 p-2 rounded-lg text-purple-600">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<span class="text-success text-xs font-bold">-0.5d</span>
+</div>
+<h3 class="text-[#4c739a] text-sm font-medium mb-1">Tempo Médio de Entrega</h3>
+<p class="text-2xl font-black text-[#0d141b] dark:text-white">4.2 Dias</p>
+</div>
+<div class="bg-white dark:bg-[#1a242f] p-6 rounded-xl border border-[#cfdbe7] dark:border-slate-700 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="bg-green-50 dark:bg-green-900/20 p-2 rounded-lg text-green-600">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-danger text-xs font-bold">+R$ 1.2k</span>
+</div>
+<h3 class="text-[#4c739a] text-sm font-medium mb-1">Custo Total de Frete</h3>
+<p class="text-2xl font-black text-[#0d141b] dark:text-white">R$ 12.450</p>
+</div>
+<div class="bg-white dark:bg-[#1a242f] p-6 rounded-xl border border-[#cfdbe7] dark:border-slate-700 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="bg-red-50 dark:bg-red-900/20 p-2 rounded-lg text-red-600">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="text-danger text-xs font-bold">8% Total</span>
+</div>
+<h3 class="text-[#4c739a] text-sm font-medium mb-1">Entregas Atrasadas</h3>
+<p class="text-2xl font-black text-[#0d141b] dark:text-white">12</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<div class="lg:col-span-2 bg-white dark:bg-[#1a242f] p-6 rounded-xl border border-[#cfdbe7] dark:border-slate-700 shadow-sm">
+<h3 class="text-lg font-bold text-[#0d141b] dark:text-white mb-6">Volume de Envios por Transportadora</h3>
+<div class="h-[250px] flex items-end gap-12 px-4">
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative h-[85%] group-hover:bg-primary transition-colors">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold text-primary">120</div>
+</div>
+<span class="text-xs font-semibold text-[#4c739a]">Correios</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative h-[60%] group-hover:bg-primary transition-colors">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold text-primary">85</div>
+</div>
+<span class="text-xs font-semibold text-[#4c739a]">Loggi</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative h-[45%] group-hover:bg-primary transition-colors">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold text-primary">42</div>
+</div>
+<span class="text-xs font-semibold text-[#4c739a]">Melhor Envio</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary/20 rounded-t-lg relative h-[30%] group-hover:bg-primary transition-colors">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold text-primary">28</div>
+</div>
+<span class="text-xs font-semibold text-[#4c739a]">Outras</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a242f] p-6 rounded-xl border border-[#cfdbe7] dark:border-slate-700 shadow-sm">
+<h3 class="text-lg font-bold text-[#0d141b] dark:text-white mb-4">Filtros Avançados</h3>
+<div class="space-y-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase text-[#4c739a]">Status Logístico</label>
+<select class="w-full px-3 py-2 text-sm rounded-lg border border-[#cfdbe7] dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-primary focus:border-primary">
+<option>Todos os status</option>
+<option>Em Separação</option>
+<option>Coletado</option>
+<option>Em Rota</option>
+<option>Entregue</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase text-[#4c739a]">Período</label>
+<input class="w-full px-3 py-2 text-sm rounded-lg border border-[#cfdbe7] dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-primary focus:border-primary" type="date"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase text-[#4c739a]">Transportadora</label>
+<div class="space-y-2 mt-1">
+<label class="flex items-center gap-2 text-sm text-[#4c739a]">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/> Correios
+                                    </label>
+<label class="flex items-center gap-2 text-sm text-[#4c739a]">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/> Loggi
+                                    </label>
+<label class="flex items-center gap-2 text-sm text-[#4c739a]">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/> Melhor Envio
+                                    </label>
+</div>
+</div>
+<button class="w-full bg-slate-50 dark:bg-slate-800 py-2 rounded-lg text-sm font-bold text-primary border border-primary/20 hover:bg-primary/5 transition-colors">
+                                Aplicar Filtros
+                            </button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a242f] rounded-xl border border-[#cfdbe7] dark:border-slate-700 overflow-hidden shadow-sm">
+<div class="px-6 py-5 border-b border-[#cfdbe7] dark:border-slate-700 flex items-center justify-between">
+<h2 class="text-lg font-bold text-[#0d141b] dark:text-white">Monitoramento em Tempo Real</h2>
+<div class="relative">
+<input class="pl-10 pr-4 py-2 text-sm rounded-full border border-[#cfdbe7] dark:border-slate-700 dark:bg-slate-900 w-64 focus:ring-primary outline-none" placeholder="Buscar pedido ou rastreio..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-sm">search</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50">
+<tr>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#4c739a]">ID Pedido</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#4c739a]">Farmácia de Origem</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#4c739a]">Destino</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#4c739a]">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#4c739a]">Transportadora</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#4c739a]">Cód. Rastreio</th>
+<th class="px-6 py-4 text-xs font-bold uppercase text-[#4c739a]">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#cfdbe7] dark:divide-slate-700">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 text-sm font-bold text-[#0d141b] dark:text-white">#CN-4920</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">BioFarm Saúde</span>
+<span class="text-[10px] text-[#4c739a]">Curitiba/PR</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">São Paulo/SP</span>
+<span class="text-[10px] text-[#4c739a]">Vila Mariana</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">
+                                            Em Rota
+                                        </span>
+</td>
+<td class="px-6 py-4 text-sm text-[#4c739a]">Loggi</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 group">
+<span class="text-xs font-mono text-[#0d141b] dark:text-slate-300">LG98234201BR</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</td>
+<td class="px-6 py-4">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-[#4c739a]">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 text-sm font-bold text-[#0d141b] dark:text-white">#CN-4921</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Erva Doce Farma</span>
+<span class="text-[10px] text-[#4c739a]">Florianópolis/SC</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Rio de Janeiro/RJ</span>
+<span class="text-[10px] text-[#4c739a]">Ipanema</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-yellow-100 text-yellow-800">
+                                            Coletado
+                                        </span>
+</td>
+<td class="px-6 py-4 text-sm text-[#4c739a]">Correios</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 group">
+<span class="text-xs font-mono text-[#0d141b] dark:text-slate-300">AA123456789BR</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</td>
+<td class="px-6 py-4">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-[#4c739a]">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 text-sm font-bold text-[#0d141b] dark:text-white">#CN-4919</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Canneo Central</span>
+<span class="text-[10px] text-[#4c739a]">Barueri/SP</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Belo Horizonte/MG</span>
+<span class="text-[10px] text-[#4c739a]">Savassi</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">
+                                            Entregue
+                                        </span>
+</td>
+<td class="px-6 py-4 text-sm text-[#4c739a]">Loggi</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 group">
+<span class="text-xs font-mono text-[#0d141b] dark:text-slate-300">LG77221190BR</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</td>
+<td class="px-6 py-4">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-[#4c739a]">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors bg-red-50/20">
+<td class="px-6 py-4 text-sm font-bold text-danger">#CN-4918</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Vital Pharma</span>
+<span class="text-[10px] text-[#4c739a]">Porto Alegre/RS</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Curitiba/PR</span>
+<span class="text-[10px] text-[#4c739a]">Centro</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-800">
+                                            Atrasado
+                                        </span>
+</td>
+<td class="px-6 py-4 text-sm text-[#4c739a]">Melhor Envio</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 group">
+<span class="text-xs font-mono text-[#0d141b] dark:text-slate-300">ME66210034BR</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</td>
+<td class="px-6 py-4">
+<button class="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-[#4c739a]">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-[#cfdbe7] dark:border-slate-700 flex items-center justify-between">
+<span class="text-xs text-[#4c739a]">Exibindo 4 de 1.250 pedidos</span>
+<div class="flex gap-1">
+<button class="size-8 flex items-center justify-center rounded border border-[#cfdbe7] bg-white text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded border border-primary bg-primary text-white text-xs font-bold">1</button>
+<button class="size-8 flex items-center justify-center rounded border border-[#cfdbe7] bg-white text-slate-600 hover:text-primary transition-colors text-xs font-bold">2</button>
+<button class="size-8 flex items-center justify-center rounded border border-[#cfdbe7] bg-white text-slate-600 hover:text-primary transition-colors text-xs font-bold">3</button>
+<button class="size-8 flex items-center justify-center rounded border border-[#cfdbe7] bg-white text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

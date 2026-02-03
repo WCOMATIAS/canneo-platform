@@ -1,0 +1,58 @@
+{
+  "name": "canneo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CANNEO - Plataforma de Telemedicina",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:admin": "turbo run dev --filter=@canneo/admin",
+    "dev:doctor": "turbo run dev --filter=@canneo/doctor",
+    "dev:patient": "turbo run dev --filter=@canneo/patient",
+    "dev:pharmacy": "turbo run dev --filter=@canneo/pharmacy",
+    "dev:api": "turbo run dev --filter=@canneo/api",
+    "dev:hooks": "turbo run dev --filter=@canneo/hooks",
+    "build": "turbo run build",
+    "build:apps": "turbo run build --filter='./apps/*'",
+    "build:packages": "turbo run build --filter='./packages/*'",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "test:coverage": "turbo run test:coverage",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:prod": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset",
+    "db:setup": "./infra/scripts/db-setup.sh",
+    "docker:up": "docker compose -f docker-compose.dev.yml up -d",
+    "docker:down": "docker compose -f docker-compose.dev.yml down",
+    "docker:logs": "docker compose -f docker-compose.dev.yml logs -f",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "prepare": "husky"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "telemedicina",
+    "saude",
+    "healthcare",
+    "monorepo",
+    "nextjs",
+    "nestjs"
+  ],
+  "author": "CANNEO Team",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Início Paciente</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "primary-dark": "#1a6bb8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1c2a38",
+                        "text-main": "#0d141b",
+                        "text-secondary": "#4c739a",
+                        "border-light": "#e7edf3",
+                        "border-dark": "#2d3b4a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white antialiased transition-colors duration-200">
+<div class="relative flex h-screen w-full overflow-hidden">
+<aside class="w-64 flex-none hidden md:flex flex-col bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark">
+<div class="flex flex-col h-full p-4">
+<div class="flex flex-col px-3 py-4 gap-1">
+<h1 class="text-primary text-xl font-bold tracking-tight">CANNEO</h1>
+<p class="text-text-secondary dark:text-slate-400 text-xs font-medium">Portal do Paciente</p>
+</div>
+<nav class="flex flex-col gap-2 mt-6 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-sm font-semibold">Início</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">calendar_add_on</span>
+<span class="text-sm font-medium">Agendar Consulta</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">calendar_month</span>
+<span class="text-sm font-medium">Minhas Consultas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">description</span>
+<span class="text-sm font-medium">Documentos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">shopping_bag</span>
+<span class="text-sm font-medium">Comprar Medicamento</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto">
+<div class="flex items-center gap-3 px-3 py-4 border-t border-border-light dark:border-border-dark">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-slate-500 dark:text-slate-300">logout</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-text-main dark:text-white">Sair</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full min-w-0 bg-background-light dark:bg-background-dark overflow-y-auto">
+<header class="flex-none sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-md px-6 py-3">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-1 rounded-md text-text-main dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-text-main dark:text-white">Painel</h2>
+</div>
+<div class="flex items-center gap-6">
+<label class="hidden sm:flex flex-col min-w-40 h-10 w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-slate-800">
+<div class="text-text-secondary dark:text-slate-400 flex border-none items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-text-secondary dark:placeholder:text-slate-500 px-3 text-sm font-normal text-text-main dark:text-white" placeholder="Buscar consultas, médicos..."/>
+</div>
+</label>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-text-main dark:text-white transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-surface-light dark:border-surface-dark"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Portrait of a smiling woman in a professional setting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABvBejPgBwcdFYVl68iJ__oVqimayPnxyprgDee2dFDENcmYRHwS8xboTlI_IVT0iGhZ7Vx4U8DWd0HLdHHRgQC75O-x35vCMZNRKb5B1Hk3MaT4VoQGyJfIhA8gSU-xYFXlisDQ5EmfXVjT2LxLbzSrydb5ZxohEqlwUSNPxfISy3JR7Ct1JjInGT8lRhVR1gvYO8VbCD9NxeJgodcRvtePhhxy7nGAd-ub3xZphrIkNDTsOU3LSKh6_XRxfuoK5ADkvbOXExf5by");'></div>
+</div>
+</div>
+</header>
+<div class="flex-1 w-full max-w-[1200px] mx-auto p-4 md:p-8 flex flex-col gap-8">
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl md:text-4xl font-black leading-tight tracking-tight text-text-main dark:text-white">Bem-vinda de volta, Sarah</h1>
+<p class="text-text-secondary dark:text-slate-400 text-base">Gerencie sua jornada de terapia com cannabis e acompanhe seu progresso.</p>
+</div>
+<button class="flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white rounded-lg h-12 px-6 font-bold shadow-lg shadow-primary/20 transition-all transform active:scale-95">
+<span class="material-symbols-outlined">add</span>
+<span>Agendar Nova Consulta</span>
+</button>
+</section>
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-1 p-5 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<p class="text-text-secondary dark:text-slate-400 text-sm font-medium">Status da Prescrição</p>
+</div>
+<p class="text-2xl font-bold text-text-main dark:text-white">Ativa</p>
+<p class="text-xs text-text-secondary dark:text-slate-500 mt-1">Válida até 12 de Dez, 2023</p>
+</div>
+<div class="flex flex-col gap-1 p-5 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">medication</span>
+<p class="text-text-secondary dark:text-slate-400 text-sm font-medium">Elegibilidade de Refil</p>
+</div>
+<p class="text-2xl font-bold text-text-main dark:text-white">Disponível Agora</p>
+<p class="text-xs text-text-secondary dark:text-slate-500 mt-1">Último refil: 20 dias atrás</p>
+</div>
+<div class="flex flex-col gap-1 p-5 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-orange-500">pending_actions</span>
+<p class="text-text-secondary dark:text-slate-400 text-sm font-medium">Ações Pendentes</p>
+</div>
+<p class="text-2xl font-bold text-text-main dark:text-white">1 Formulário</p>
+<p class="text-xs text-text-secondary dark:text-slate-500 mt-1">Pesquisa de Check-in Trimestral</p>
+</div>
+<div class="flex flex-col gap-1 p-5 rounded-xl bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800 shadow-sm relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-400">loyalty</span>
+<p class="text-purple-800 dark:text-purple-300 text-sm font-medium">Recompensas</p>
+</div>
+<p class="text-2xl font-bold text-purple-900 dark:text-white">450 Pts</p>
+<a class="text-xs text-purple-700 dark:text-purple-300 font-semibold mt-1 inline-block hover:underline" href="#">Resgatar descontos →</a>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] text-purple-200 dark:text-purple-800/30 opacity-50 z-0">eco</span>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 flex flex-col gap-8">
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-bold text-text-main dark:text-white">Próxima Consulta</h3>
+<div class="flex flex-col md:flex-row items-stretch justify-between rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-sm overflow-hidden">
+<div class="flex flex-col justify-center gap-4 p-6 flex-1">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-300 text-xs font-bold w-fit">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                                        Começando em 15 min
+                                    </div>
+<div class="flex flex-col">
+<p class="text-text-main dark:text-white text-xl font-bold leading-tight">Consulta com Dra. Emily Smith</p>
+<p class="text-text-secondary dark:text-slate-400 text-sm font-normal leading-normal mt-1">24 Out, 14:00 • Videoconsulta</p>
+</div>
+<div class="flex gap-3 mt-2">
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-5 bg-primary hover:bg-primary-dark text-white text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+<span>Entrar na Sala de Espera</span>
+</button>
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-text-main dark:text-white text-sm font-bold transition-colors">
+                                            Reagendar
+                                        </button>
+</div>
+</div>
+<div class="w-full md:w-1/3 min-h-[160px] bg-center bg-no-repeat bg-cover" data-alt="Friendly female doctor wearing a white coat and stethoscope looking at tablet" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9ywAUK_dodFkh3WDOGZ-5UmelGOO3t4zGmIQfAZclhaKag6csp7hX0Wg4Rk_BCbahFkViVcYuVvlGNQ6ovQUFOTyixpq6IHCu9fz4-FJYlqLTbSd62r5gXnwVvYz8gb-eS0m4PDfy5puyH-46wIGgkBQjVRYiSw8FGZ84xOggc2QFcd75wSqOPddOoS1zM118yAeBGHttK9kB-0pWXL-VkNJvzPi9c3R9GKGDnfmSggT5Nj51RXmt8KhhI74dXldWx93vSV12VSY4");'></div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-text-main dark:text-white">Histórico Recente</h3>
+<a class="text-sm font-semibold text-primary hover:text-primary-dark" href="#">Ver Tudo</a>
+</div>
+<div class="flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark overflow-hidden">
+<div class="flex items-center gap-4 p-4 border-b border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<div class="size-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-none">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400">shopping_bag</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-sm font-bold text-text-main dark:text-white truncate">Pedido #4921 - Óleo de CBD Full Spectrum</p>
+<p class="text-xs text-text-secondary dark:text-slate-400">20 Out, 2023</p>
+</div>
+<div class="hidden sm:flex px-2 py-1 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs font-semibold">
+                                        Entregue
+                                    </div>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-text-secondary dark:text-slate-400">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 border-b border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-none">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-sm font-bold text-text-main dark:text-white truncate">Consulta de Acompanhamento</p>
+<p class="text-xs text-text-secondary dark:text-slate-400">10 Out, 2023</p>
+</div>
+<div class="hidden sm:flex px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold">
+                                        Concluída
+                                    </div>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-text-secondary dark:text-slate-400">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<div class="size-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center flex-none">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-400">description</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-sm font-bold text-text-main dark:text-white truncate">Certificado de Cannabis Medicinal</p>
+<p class="text-xs text-text-secondary dark:text-slate-400">10 Out, 2023</p>
+</div>
+<div class="hidden sm:flex px-2 py-1 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-semibold">
+                                        Pronto
+                                    </div>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-text-secondary dark:text-slate-400">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-bold text-text-main dark:text-white">Ações Rápidas</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark hover:border-primary dark:hover:border-primary hover:shadow-md transition-all group">
+<div class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">autorenew</span>
+</div>
+<span class="text-sm font-semibold text-text-main dark:text-white text-center">Renovar Receita</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark hover:border-primary dark:hover:border-primary hover:shadow-md transition-all group">
+<div class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+<span class="text-sm font-semibold text-text-main dark:text-white text-center">Catálogo</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark hover:border-primary dark:hover:border-primary hover:shadow-md transition-all group">
+<div class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<span class="text-sm font-semibold text-text-main dark:text-white text-center">Suporte</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark hover:border-primary dark:hover:border-primary hover:shadow-md transition-all group">
+<div class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">quiz</span>
+</div>
+<span class="text-sm font-semibold text-text-main dark:text-white text-center">FAQ</span>
+</button>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden relative min-h-[240px] flex items-end p-6 bg-cover bg-center group cursor-pointer" data-alt="Close up of high quality organic cannabis oil bottle with dropper on a natural background" style='background-image: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDYEIgSnDzUfcxMTXJ_7QPgYaAPzefhwp6oVHyMs259H_5e-xrc5imoH1FN2EnlEMBcpQA3lysONW7xrmq3HigFQz4sFXX7K-iExPMq_s5Vjzl8sEuw7vxY7Cv4e8b_uJlHiOkwk9rmTeSn2SlmKgegMWBOt83cqlwTfHDJ9nOQxoZ79EUfJiART62pyhL_CUo9i-uE6OAr4OnpCqQ78l1Xxz6GX_mC44zt79i05xINKQ8mN05jrZddA8w6r-wPNcIkPgeHRBLlsUI_");'>
+<div class="relative z-10 w-full">
+<span class="inline-block px-2 py-1 bg-primary text-white text-[10px] font-bold rounded mb-2 uppercase tracking-wide">Novidade</span>
+<h4 class="text-white font-bold text-lg leading-tight mb-1">Óleo Noturno Rest &amp; Relax</h4>
+<p class="text-slate-200 text-xs mb-3">Fórmula rica em CBD para um sono melhor.</p>
+<div class="flex items-center gap-2 text-white font-semibold text-sm group-hover:translate-x-1 transition-transform">
+                                    Comprar Agora <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

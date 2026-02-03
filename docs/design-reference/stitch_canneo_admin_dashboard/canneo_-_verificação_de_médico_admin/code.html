@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Verificação de Médico Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col">
+<!-- Navbar / Header Context -->
+<header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-black text-xl">C</div>
+<span class="font-bold text-lg tracking-tight">CANNEO <span class="text-slate-400 dark:text-slate-500 font-medium">| Admin</span></span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 bg-slate-200 dark:bg-slate-600 rounded-full bg-cover bg-center" data-alt="Admin user avatar thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJp0IEo57NeI-zUCc89DE-dGoxWE4258drdpiyxZ8tw84-NoYUkjuao26HVA1XnIMLD24cUgPCnLyV0Py3XZG3uNBMgmu78W6BGSbHPUeIm5t16bLvounN31paL28-Fk2o-LAmeRHGfpW2csjruIWNfreD9nVrcwv4PJ4VpL4O-df7ZP9Jx0M9kgqdnwTsHhVxKK-fGeiM_lsP9zKYnZGmzW8maH8Yzh69hq58_TLWneTfTQ05dby724EMKcSLyJdLPjvk3ICfzjFd');"></div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-7xl mx-auto p-4 md:p-6 lg:p-8">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex mb-6">
+<ol class="inline-flex items-center space-x-1 md:space-x-3">
+<li class="inline-flex items-center">
+<a class="inline-flex items-center text-sm font-medium text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">
+<span class="material-symbols-outlined text-[20px] mr-2">home</span>
+                        Início
+                    </a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-slate-400 mx-1">chevron_right</span>
+<a class="text-sm font-medium text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white" href="#">Médicos Pendentes</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-slate-400 mx-1">chevron_right</span>
+<span class="text-sm font-medium text-slate-900 dark:text-white">Dr. Roberto Alves</span>
+</div>
+</li>
+</ol>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+<!-- Sidebar: Professional Summary -->
+<div class="lg:col-span-4 xl:col-span-3 flex flex-col gap-6">
+<!-- Profile Card -->
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<div class="p-6 flex flex-col items-center text-center border-b border-slate-100 dark:border-slate-700">
+<div class="relative mb-4">
+<div class="w-28 h-28 rounded-full bg-cover bg-center border-4 border-slate-50 dark:border-slate-700 shadow-sm" data-alt="Portrait of Dr. Roberto Alves" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAt6GvmVZ0Qu_oq9T77rWapvdFm8Bkx4UNjSiXP8P8mZ9NcREjW1gPbOCbVI9tdgU2pRuQPa_jzNHIC6EmATY952h8GSg06j4bM1rs7LvhE3eR8V_fPa4ueuYgcVAwSYffNZGiNVC4WapW696ybDhH_uWDua9lQBHdnFFqNGQPw6eZ2hG4vwquIAdZIg_srP4_s6aRiYRVsY0mRGef6YTvv8ggN3vFeIHn41yeGT7NkUQnhT3Mzd8ZmcLhqcqly51pkswZhshaPvHRl');"></div>
+<div class="absolute bottom-1 right-1 w-6 h-6 bg-yellow-400 border-2 border-white dark:border-slate-800 rounded-full flex items-center justify-center" title="Pendente">
+<span class="material-symbols-outlined text-white text-[14px] font-bold">priority_high</span>
+</div>
+</div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Dr. Roberto Alves</h2>
+<p class="text-primary font-medium text-sm mt-1">Cardiologista</p>
+<div class="mt-4 px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-semibold rounded-full border border-yellow-200 dark:border-yellow-900">
+                            Status: Verificação Pendente
+                        </div>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">CRM/UF</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-slate-400">badge</span>
+                                123456-SP
+                            </p>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Email</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200 flex items-center gap-2 break-all">
+<span class="material-symbols-outlined text-base text-slate-400">mail</span>
+                                roberto.alves@medico.com
+                            </p>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Telefone</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-slate-400">phone</span>
+                                (11) 99999-8888
+                            </p>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Solicitado em</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-slate-400">calendar_today</span>
+                                24/10/2023
+                            </p>
+</div>
+</div>
+</div>
+<!-- Help Box -->
+<div class="bg-blue-50 dark:bg-primary/10 rounded-xl p-4 border border-blue-100 dark:border-primary/20">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">info</span>
+<div>
+<p class="text-sm font-bold text-primary mb-1">Dica de Verificação</p>
+<p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Verifique se o nome no diploma coincide exatamente com o documento de identidade e o registro no CRM.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content: Documents & Action -->
+<div class="lg:col-span-8 xl:col-span-9 flex flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Verificação de Profissional</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Analise os documentos abaixo para aprovar ou reprovar o cadastro.</p>
+</div>
+</div>
+<!-- Documents Section -->
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">folder_open</span>
+                            Documentação Enviada
+                        </h2>
+<span class="text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2 py-1 rounded">3 arquivos</span>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Document Card 1: CRM Photo -->
+<div class="group relative flex flex-col rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-50 dark:bg-slate-900/50 hover:border-primary/50 transition-colors">
+<div class="aspect-video w-full bg-slate-200 dark:bg-slate-700 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a medical ID card" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDfzvr0FB2RtZMeie_vzY-Y8ydXko6JhA4SMnBj70XW0RnP5rhx4uUgi2QenSu3OgHUOpg6tMVSKELzIRN3_Uh9F5FC-T0UHrMwDETShXnfYBRxBxllMFgu18u6JnttHsYhQAd3ElB4qqU9Mx_2c3HFxwPkCzXUKsYsCUqZ7syCy4U32JcfaNQuoiqpojtIWVQRUtY28GJv_uZs6nQQquS1FsIGwBQZWdVD0khtKeQ-bSdRfd0Mws0km8rQgnaDv3k1huCf7Z_ep9nR');"></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/40 text-white transition-colors" title="Visualizar">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="p-3 flex items-start gap-3">
+<div class="p-2 bg-purple-100 dark:bg-purple-900/30 rounded text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined text-[20px]">image</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-slate-900 dark:text-white truncate">CRM-Frente.jpg</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">2.4 MB • 24 Out 2023</p>
+</div>
+<button class="text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Document Card 2: Diploma -->
+<div class="group relative flex flex-col rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-50 dark:bg-slate-900/50 hover:border-primary/50 transition-colors">
+<div class="aspect-video w-full bg-slate-100 dark:bg-slate-800 relative flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-600">picture_as_pdf</span>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-white shadow-sm p-2 rounded-full hover:text-primary text-slate-700 transition-colors transform translate-y-2 group-hover:translate-y-0 duration-300" title="Visualizar">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="p-3 flex items-start gap-3">
+<div class="p-2 bg-red-100 dark:bg-red-900/30 rounded text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-slate-900 dark:text-white truncate">Diploma-Medicina.pdf</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">1.8 MB • 24 Out 2023</p>
+</div>
+<button class="text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Document Card 3: Residence Proof -->
+<div class="group relative flex flex-col rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-50 dark:bg-slate-900/50 hover:border-primary/50 transition-colors">
+<div class="aspect-video w-full bg-slate-100 dark:bg-slate-800 relative flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-600">picture_as_pdf</span>
+<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-white shadow-sm p-2 rounded-full hover:text-primary text-slate-700 transition-colors transform translate-y-2 group-hover:translate-y-0 duration-300" title="Visualizar">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="p-3 flex items-start gap-3">
+<div class="p-2 bg-blue-100 dark:bg-blue-900/30 rounded text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined text-[20px]">home</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-slate-900 dark:text-white truncate">Comp-Residencia.pdf</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">840 KB • 24 Out 2023</p>
+</div>
+<button class="text-slate-400 hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Action / Decision Section -->
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="p-6 border-b border-slate-100 dark:border-slate-700">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">gavel</span>
+                            Parecer da Análise
+                        </h2>
+</div>
+<div class="p-6">
+<div class="mb-6">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="rejection-reason">
+                                Observações ou Motivo da Reprovação
+                                <span class="text-slate-400 font-normal ml-1">(Obrigatório em caso de reprovação)</span>
+</label>
+<textarea class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary dark:focus:border-primary sm:text-sm p-3 placeholder:text-slate-400 dark:placeholder:text-slate-600" id="rejection-reason" placeholder="Descreva os problemas encontrados nos documentos ou deixe uma observação interna..." rows="4"></textarea>
+<p class="mt-2 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">email</span>
+                                Este texto será enviado automaticamente para o e-mail do médico caso seja reprovado.
+                            </p>
+</div>
+<div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
+<button class="w-full sm:w-auto px-5 py-2.5 rounded-lg border border-red-200 dark:border-red-900/50 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/30 font-medium text-sm transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+                                Reprovar Cadastro
+                            </button>
+<button class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-primary hover:bg-blue-600 text-white font-semibold shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                Aprovar Cadastro
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="border-t border-slate-200 dark:border-slate-700 mt-8 py-8 bg-white dark:bg-slate-800">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm text-slate-500 dark:text-slate-400">© 2023 CANNEO Plataforma de Saúde. Todos os direitos reservados.</p>
+<div class="flex gap-4">
+<a class="text-sm text-slate-500 hover:text-primary dark:text-slate-400" href="#">Suporte</a>
+<a class="text-sm text-slate-500 hover:text-primary dark:text-slate-400" href="#">Termos de Uso</a>
+</div>
+</div>
+</footer>
+</body></html>

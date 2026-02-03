@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Configurações de Especialidades Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#36b7e2",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111d21",
+              "canneo-green": "#2bb063",
+              "canneo-blue-dark": "#0e171b",
+              "canneo-blue-light": "#e8f0f3",
+              "canneo-text-gray": "#508495",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-canneo-blue-dark dark:text-white h-screen flex overflow-hidden">
+<aside class="w-64 bg-white dark:bg-[#1a2c32] border-r border-gray-200 dark:border-gray-800 flex flex-col justify-between shrink-0 h-full">
+<div class="flex flex-col h-full">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3 mb-8">
+<div class="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">
+                        C
+                    </div>
+<div class="flex flex-col">
+<h1 class="text-canneo-blue-dark dark:text-white text-base font-bold leading-none tracking-tight">CANNEO</h1>
+<p class="text-canneo-text-gray text-xs font-medium mt-1">Admin Portal</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-[20px]">bar_chart</span>
+<span class="text-sm font-medium">Visão Geral</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-[20px]">filter_alt</span>
+<span class="text-sm font-medium">Funil de Vendas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-[20px]">receipt_long</span>
+<span class="text-sm font-medium">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-[20px]">storefront</span>
+<span class="text-sm font-medium">Farmácias</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] fill-1">medical_services</span>
+<span class="text-sm font-bold">Especialidades</span>
+</a>
+</nav>
+</div>
+<div class="p-4 mt-auto border-t border-gray-100 dark:border-gray-800">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+<div class="mt-4 flex items-center gap-3 px-3">
+<div class="h-9 w-9 rounded-full bg-cover bg-center ring-2 ring-gray-100 dark:ring-gray-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAQu8rpudSPcmKrdk0vD8JgKFcNFVnXyYamo619WrhEiEUoJ5RY-y9ML6LVUTqDI3lSk-DFM77-gVfOfNF7TshZAUsV-KhNKu76oRe8B5onOFtCIhbc041AY7UGAllZ-cVxgTdad4s0ISTJaMte9eCPNmkdni0jpH7n_xA2v41iCE3M39S21vTneby5SdrNueHM3XqrFo0-sExqA-untZC_7_ZiLgvB9sVjI3a0mHkfD-vMsYeeRKqpL0-OFDHduVnSSbGQ7fnw8NAk");'></div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-canneo-blue-dark dark:text-white">Dr. Ricardo S.</p>
+<p class="text-xs text-canneo-text-gray">Administrador</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<header class="h-16 bg-white dark:bg-[#1a2c32] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-8 shrink-0 z-10">
+<h2 class="text-lg font-bold text-canneo-blue-dark dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+                Configurações de Especialidades
+            </h2>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">search</span>
+</div>
+<input class="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-lg text-sm text-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-primary w-64 transition-all" placeholder="Buscar especialidade..." type="text"/>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#1a2c32]"></span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 bg-background-light dark:bg-background-dark">
+<div class="max-w-7xl mx-auto space-y-6">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h1 class="text-2xl font-bold text-canneo-blue-dark dark:text-white">Gestão de Especialidades Médicas</h1>
+<p class="text-sm text-gray-500 mt-1">Configure quais especialidades estão disponíveis e seus requisitos documentais.</p>
+</div>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-md shadow-primary/20 hover:bg-sky-500 transition-all hover:scale-[1.02] active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                        Adicionar Especialidade
+                    </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-[#1a2c32] p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
+<div class="h-12 w-12 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div>
+<p class="text-sm text-gray-500">Total Habilitadas</p>
+<p class="text-2xl font-bold text-canneo-blue-dark dark:text-white">12</p>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2c32] p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
+<div class="h-12 w-12 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-canneo-green">
+<span class="material-symbols-outlined text-[24px]">groups</span>
+</div>
+<div>
+<p class="text-sm text-gray-500">Médicos Ativos</p>
+<p class="text-2xl font-bold text-canneo-blue-dark dark:text-white">1,452</p>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2c32] p-5 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
+<div class="h-12 w-12 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-500">
+<span class="material-symbols-outlined text-[24px]">folder_special</span>
+</div>
+<div>
+<p class="text-sm text-gray-500">Exigem Docs Extras</p>
+<p class="text-2xl font-bold text-canneo-blue-dark dark:text-white">3</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2c32] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 flex flex-wrap justify-between items-center gap-4">
+<div class="relative max-w-sm w-full">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 text-[18px]">filter_list</span>
+</div>
+<input class="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm w-full focus:ring-1 focus:ring-primary focus:border-primary transition-colors" placeholder="Filtrar por nome..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">sort</span>
+                                Ordenar
+                             </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-medium border-b border-gray-100 dark:border-gray-700">
+<tr>
+<th class="px-6 py-4 w-16">Ícone</th>
+<th class="px-6 py-4">Nome da Especialidade</th>
+<th class="px-6 py-4">Descrição Curta</th>
+<th class="px-6 py-4 text-center">Docs Extras?</th>
+<th class="px-6 py-4 text-center">Médicos Ativos</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="h-10 w-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">psychology</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-bold text-canneo-blue-dark dark:text-white block text-base">Psiquiatria</span>
+<span class="text-xs text-gray-400">ID: SPEC-001</span>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 max-w-xs truncate">
+                                        Diagnóstico, tratamento e prevenção de transtornos mentais, emocionais ou comportamentais.
+                                    </td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 border border-orange-200 dark:border-orange-800/50">
+                                            Sim
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="font-semibold text-gray-700 dark:text-gray-200">458</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                            Habilitada
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-red-500 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Desabilitar">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="h-10 w-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">neurology</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-bold text-canneo-blue-dark dark:text-white block text-base">Neurologia</span>
+<span class="text-xs text-gray-400">ID: SPEC-004</span>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 max-w-xs truncate">
+                                        Especialidade médica que trata dos distúrbios estruturais do sistema nervoso.
+                                    </td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                                            Não
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="font-semibold text-gray-700 dark:text-gray-200">312</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                            Habilitada
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-red-500 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Desabilitar">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="h-10 w-10 rounded-lg bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">elderly</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-bold text-canneo-blue-dark dark:text-white block text-base">Geriatria</span>
+<span class="text-xs text-gray-400">ID: SPEC-008</span>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 max-w-xs truncate">
+                                        Focada na saúde do idoso, prevenindo e tratando doenças e incapacidades.
+                                    </td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                                            Não
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="font-semibold text-gray-700 dark:text-gray-200">185</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                            Habilitada
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-red-500 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Desabilitar">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="h-10 w-10 rounded-lg bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">pediatrics</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-bold text-canneo-blue-dark dark:text-white block text-base">Pediatria</span>
+<span class="text-xs text-gray-400">ID: SPEC-012</span>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 max-w-xs truncate">
+                                        Especialidade dedicada à assistência à criança e ao adolescente.
+                                    </td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 border border-orange-200 dark:border-orange-800/50">
+                                            Sim
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="font-semibold text-gray-700 dark:text-gray-200">497</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                            Habilitada
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-red-500 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Desabilitar">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group bg-gray-50/50 dark:bg-gray-800/20">
+<td class="px-6 py-4">
+<div class="h-10 w-10 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 flex items-center justify-center grayscale">
+<span class="material-symbols-outlined text-[24px]">dermatology</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="font-bold text-gray-500 dark:text-gray-400 block text-base">Dermatologia</span>
+<span class="text-xs text-gray-400">ID: SPEC-009</span>
+</td>
+<td class="px-6 py-4 text-gray-500 dark:text-gray-400 max-w-xs truncate italic">
+                                        Diagnóstico e tratamento de doenças que afetam a pele, cabelos e unhas.
+                                    </td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+                                            Não
+                                        </span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="font-semibold text-gray-500 dark:text-gray-400">0</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">
+<span class="w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-400"></span>
+                                            Desabilitada
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-gray-400 hover:text-primary transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-green-500 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Habilitar">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-[#1a2c32] flex items-center justify-between">
+<span class="text-xs text-gray-500">Mostrando 1-5 de 12 especialidades</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-400 hover:text-primary transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/30 rounded-lg p-4 flex gap-3">
+<span class="material-symbols-outlined text-primary text-[24px] shrink-0">info</span>
+<div>
+<h4 class="text-sm font-bold text-canneo-blue-dark dark:text-white mb-1">Importante sobre Validação Documental</h4>
+<p class="text-xs text-gray-600 dark:text-gray-300">
+                            Especialidades marcadas com "Docs Extras" exigirão que o médico faça upload do Certificado de Registro de Qualificação de Especialista (RQE) antes de poder atender pacientes nesta categoria.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

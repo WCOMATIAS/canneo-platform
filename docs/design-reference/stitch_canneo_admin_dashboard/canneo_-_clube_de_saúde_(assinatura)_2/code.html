@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Clube de Saúde</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#19e66f",
+              "primary-dark": "#14b859",
+              "primary-light": "#e0fdf0",
+              "background-light": "#f8fcfa",
+              "background-dark": "#112118",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1a2c22",
+              "border-light": "#d0e7d9",
+              "border-dark": "#2a4235",
+              "text-main": "#0e1b13",
+              "text-secondary": "#4e976d",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+            boxShadow: {
+                'soft': '0 4px 20px -2px rgba(25, 230, 111, 0.1)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom scrollbar for sidebar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #d0e7d9;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white font-display antialiased min-h-screen flex overflow-hidden">
+<!-- Side Navigation -->
+<aside class="w-64 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark hidden lg:flex flex-col h-screen sticky top-0 z-20 transition-colors">
+<div class="p-6 flex flex-col h-full justify-between">
+<div class="flex flex-col gap-8">
+<!-- User Profile Summary -->
+<div class="flex items-center gap-3">
+<div class="relative w-12 h-12 rounded-full overflow-hidden bg-gray-100 ring-2 ring-primary ring-offset-2 dark:ring-offset-surface-dark">
+<div class="bg-center bg-no-repeat bg-cover w-full h-full" data-alt="Portrait of a smiling patient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSia_OAuoibOH_zsLq1zCZk2y7nPeIFOtv-aqWqyTkO2O8E0lISGWuEVOJNXZnidKxtlovstOqezGcITcgFnBrYpPs_allt7iD7OmMpUan1Aw6Mx4MLC4do-Cj8tuGB_VPeoBPs2ZdtrDx1vIHuIUG5OOoCoXzJ9It3J3sNt0PN3eEtzasNs47BSmS7rkxad7JLSMHzMgzTKnyBpaH8ryV6iSC097wNx0h25nsikyKAPUEtAKWMqrqQ0y-TEkVz4v8R-qmEXGiJcAb");'></div>
+</div>
+<div class="flex flex-col">
+<h1 class="text-text-main dark:text-white text-sm font-bold">Roberto Silva</h1>
+<p class="text-text-secondary text-xs">Paciente</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-gray-300 hover:bg-primary-light dark:hover:bg-opacity-10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">home</span>
+<span class="text-sm font-medium">Início</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-gray-300 hover:bg-primary-light dark:hover:bg-opacity-10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">prescriptions</span>
+<span class="text-sm font-medium">Minhas Receitas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-gray-300 hover:bg-primary-light dark:hover:bg-opacity-10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">shopping_bag</span>
+<span class="text-sm font-medium">Pedidos</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary-light dark:bg-primary/20 text-primary-dark dark:text-primary font-bold shadow-sm" href="#">
+<span class="material-symbols-outlined text-primary font-variation-settings-'FILL'1">favorite</span>
+<span class="text-sm">Clube de Saúde</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-gray-300 hover:bg-primary-light dark:hover:bg-opacity-10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors">person</span>
+<span class="text-sm font-medium">Perfil</span>
+</a>
+</nav>
+</div>
+<div class="pt-4 border-t border-border-light dark:border-border-dark">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-gray-300 hover:bg-red-50 dark:hover:bg-red-900/20 group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-red-500 transition-colors">logout</span>
+<span class="text-sm font-medium group-hover:text-red-600 dark:group-hover:text-red-400">Sair</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 h-screen overflow-y-auto relative scroll-smooth">
+<div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 py-8">
+<!-- Mobile Header (Visible only on small screens) -->
+<div class="lg:hidden flex justify-between items-center mb-6">
+<h1 class="text-xl font-bold">Clube de Saúde</h1>
+<button class="p-2 text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Page Layout: Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Content Flow -->
+<div class="xl:col-span-8 flex flex-col gap-8">
+<!-- Hero Banner -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-surface-light to-primary-light border border-primary/20 p-8 shadow-sm">
+<div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[180px] text-primary">spa</span>
+</div>
+<div class="relative z-10 max-w-xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 dark:bg-black/20 border border-primary/20 backdrop-blur-sm mb-4">
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+<span class="text-xs font-bold text-primary-dark dark:text-primary uppercase tracking-wider">Assinatura Oficial CANNEO</span>
+</div>
+<h2 class="text-3xl md:text-4xl font-black tracking-tight text-text-main dark:text-white mb-4 leading-tight">
+                                Receba seu tratamento todo mês com descontos exclusivos
+                            </h2>
+<p class="text-text-secondary dark:text-gray-300 text-lg mb-6 leading-relaxed">
+                                Garanta a continuidade do seu tratamento sem preocupações. Assine o Clube de Saúde e receba seus medicamentos automaticamente.
+                            </p>
+<div class="flex flex-wrap gap-4 text-sm text-text-main dark:text-white font-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span>Entrega automática</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span>Cancele quando quiser</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 1: Medications -->
+<section class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                                Selecione os medicamentos
+                            </h3>
+<a class="text-primary text-sm font-semibold hover:underline" href="#">Ver receita completa</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Med Item 1 -->
+<label class="relative flex items-start gap-4 p-4 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark/50 cursor-pointer hover:border-primary transition-all group">
+<div class="flex items-center h-6">
+<input checked="" class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary/50 transition duration-150 ease-in-out" type="checkbox"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Cannabidiol Full Spectrum 3000mg - 30ml</h4>
+<span class="font-semibold text-text-main dark:text-white">R$ 450,00</span>
+</div>
+<p class="text-sm text-text-secondary mt-1">Posologia: 10 gotas a cada 12 horas</p>
+<div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                                        Disponível em estoque
+                                    </div>
+</div>
+</label>
+<!-- Med Item 2 -->
+<label class="relative flex items-start gap-4 p-4 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark/50 cursor-pointer hover:border-primary transition-all group">
+<div class="flex items-center h-6">
+<input class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary/50 transition duration-150 ease-in-out" type="checkbox"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Extrato de Cannabis THC 5% - 10ml</h4>
+<span class="font-semibold text-text-main dark:text-white">R$ 120,00</span>
+</div>
+<p class="text-sm text-text-secondary mt-1">Posologia: 5 gotas antes de dormir</p>
+<div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                                        Disponível em estoque
+                                    </div>
+</div>
+</label>
+</div>
+</section>
+<!-- Step 2: Plans -->
+<section class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6 shadow-sm">
+<div class="flex items-center mb-6">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                                Escolha a frequência
+                            </h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Plan 1 -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="plan" type="radio"/>
+<div class="h-full rounded-xl border-2 border-border-light dark:border-border-dark p-5 flex flex-col gap-4 bg-background-light dark:bg-background-dark/50 peer-checked:border-primary peer-checked:bg-primary-light/30 dark:peer-checked:bg-primary/10 transition-all hover:border-primary/50">
+<div class="flex justify-between items-center">
+<span class="font-bold text-lg text-text-main dark:text-white">Mensal</span>
+<div class="w-5 h-5 rounded-full border border-gray-300 peer-checked:border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 peer-checked:opacity-100 group-peer-checked:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<div>
+<div class="text-3xl font-black text-text-main dark:text-white">10% <span class="text-sm font-medium text-text-secondary">OFF</span></div>
+<p class="text-sm text-text-secondary mt-1">Cobrança todo mês</p>
+</div>
+</div>
+</label>
+<!-- Plan 2 (Best Value) -->
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="plan" type="radio"/>
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-md">
+                                    RECOMENDADO
+                                </div>
+<div class="h-full rounded-xl border-2 border-primary p-5 flex flex-col gap-4 bg-primary-light/30 dark:bg-primary/10 transition-all shadow-soft">
+<div class="flex justify-between items-center">
+<span class="font-bold text-lg text-primary-dark dark:text-primary">Trimestral</span>
+<div class="w-5 h-5 rounded-full border border-primary flex items-center justify-center bg-white dark:bg-transparent">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+</div>
+<div>
+<div class="text-3xl font-black text-text-main dark:text-white">15% <span class="text-sm font-medium text-text-secondary">OFF</span></div>
+<p class="text-sm text-text-secondary mt-1">Cobrança a cada 3 meses</p>
+</div>
+</div>
+</label>
+<!-- Plan 3 -->
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="plan" type="radio"/>
+<div class="h-full rounded-xl border-2 border-border-light dark:border-border-dark p-5 flex flex-col gap-4 bg-background-light dark:bg-background-dark/50 peer-checked:border-primary peer-checked:bg-primary-light/30 dark:peer-checked:bg-primary/10 transition-all hover:border-primary/50">
+<div class="flex justify-between items-center">
+<span class="font-bold text-lg text-text-main dark:text-white">Semestral</span>
+<div class="w-5 h-5 rounded-full border border-gray-300 peer-checked:border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 peer-checked:opacity-100 group-peer-checked:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<div>
+<div class="text-3xl font-black text-text-main dark:text-white">20% <span class="text-sm font-medium text-text-secondary">OFF</span></div>
+<p class="text-sm text-text-secondary mt-1">Cobrança a cada 6 meses</p>
+</div>
+</div>
+</label>
+</div>
+</section>
+</div>
+<!-- Right Column: Sticky Summary -->
+<div class="xl:col-span-4 relative">
+<div class="sticky top-6 flex flex-col gap-6">
+<!-- Summary Card -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-lg border border-border-light dark:border-border-dark overflow-hidden">
+<div class="p-6 border-b border-border-light dark:border-border-dark">
+<h3 class="text-lg font-bold text-text-main dark:text-white mb-1">Resumo da Assinatura</h3>
+<p class="text-sm text-text-secondary">Plano Trimestral selecionado</p>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<!-- Order Items List (Simplified) -->
+<div class="flex justify-between text-sm">
+<span class="text-text-secondary">1x Cannabidiol Full Spectrum</span>
+<span class="font-medium text-text-main dark:text-white">R$ 450,00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-text-secondary">Frete</span>
+<span class="font-medium text-green-600 dark:text-green-400">Grátis</span>
+</div>
+<div class="my-2 h-px bg-border-light dark:bg-border-dark"></div>
+<!-- Calculations -->
+<div class="flex justify-between items-center">
+<span class="text-text-main dark:text-gray-300">Subtotal mensal</span>
+<span class="font-medium text-text-main dark:text-white">R$ 450,00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-primary-dark dark:text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">sell</span>
+                                        Desconto (15%)
+                                    </span>
+<span class="font-bold text-primary-dark dark:text-primary">- R$ 67,50</span>
+</div>
+<div class="bg-primary-light/50 dark:bg-primary/10 rounded-lg p-3 mt-2 border border-primary/20">
+<div class="flex justify-between items-center">
+<span class="text-sm text-text-secondary">Economia anual prevista</span>
+<span class="font-bold text-primary-dark dark:text-primary">R$ 810,00</span>
+</div>
+</div>
+</div>
+<div class="bg-background-light dark:bg-background-dark p-6 border-t border-border-light dark:border-border-dark">
+<div class="flex justify-between items-end mb-6">
+<span class="text-sm font-medium text-text-secondary mb-1">Total Mensal</span>
+<div class="text-right">
+<span class="block text-2xl font-black text-text-main dark:text-white">R$ 382,50</span>
+<span class="text-xs text-text-secondary">Cobrado a cada 3 meses</span>
+</div>
+</div>
+<!-- Delivery Date Picker -->
+<div class="mb-6">
+<label class="block text-xs font-bold text-text-secondary uppercase mb-2">Dia preferencial de entrega</label>
+<div class="relative">
+<select class="block w-full rounded-lg border-border-light dark:border-border-dark bg-white dark:bg-surface-dark text-text-main dark:text-white py-2.5 pl-3 pr-10 text-sm focus:border-primary focus:ring-primary">
+<option>Dia 05 de cada mês</option>
+<option>Dia 10 de cada mês</option>
+<option>Dia 15 de cada mês</option>
+<option>Dia 20 de cada mês</option>
+</select>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 px-4 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+<span>Ativar Assinatura Recorrente</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-2 mt-4 text-xs text-text-secondary">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span>Pagamento seguro. Cancele quando quiser.</span>
+</div>
+</div>
+</div>
+<!-- Help Card -->
+<div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex items-start gap-3 border border-blue-100 dark:border-blue-800/30">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 mt-0.5">headset_mic</span>
+<div>
+<h4 class="text-sm font-bold text-blue-900 dark:text-blue-100">Precisa de ajuda?</h4>
+<p class="text-xs text-blue-700 dark:text-blue-300 mt-1">Fale com nosso suporte farmacêutico se tiver dúvidas sobre a posologia.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to toggle checkbox styling
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(chk => {
+            chk.addEventListener('change', function() {
+                // In a real app, this would update the total price
+                const parent = this.closest('label');
+                if(this.checked) {
+                    parent.classList.add('border-primary', 'bg-primary-light/10');
+                    parent.classList.remove('border-border-light', 'dark:border-border-dark');
+                } else {
+                    parent.classList.remove('border-primary', 'bg-primary-light/10');
+                    parent.classList.add('border-border-light', 'dark:border-border-dark');
+                }
+            });
+        });
+    </script>
+</body></html>

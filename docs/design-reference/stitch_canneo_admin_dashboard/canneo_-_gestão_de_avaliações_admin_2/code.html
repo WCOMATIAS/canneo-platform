@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Gestão de Avaliações Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 overflow-hidden h-screen flex">
+<!-- Sidebar -->
+<aside class="w-72 bg-white dark:bg-[#1a2634] border-r border-slate-200 dark:border-slate-700 flex flex-col flex-shrink-0 transition-all duration-300">
+<div class="p-6 flex items-center gap-3">
+<div class="h-10 w-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">local_hospital</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">CANNEO</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Portal Administrativo</p>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 py-2 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">group</span>
+<span class="font-medium text-sm">Usuários</span>
+</a>
+<div class="pt-2 pb-1">
+<p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Médico</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">stethoscope</span>
+<span class="font-medium text-sm">Médicos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">medication</span>
+<span class="font-medium text-sm">Produtos</span>
+</a>
+<div class="pt-2 pb-1">
+<p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Moderação</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary font-medium" href="#">
+<span class="material-symbols-outlined fill">star</span>
+<span class="text-sm">Avaliações</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">flag</span>
+<span class="font-medium text-sm">Denúncias</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-700">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+<div class="bg-center bg-cover rounded-full h-9 w-9 border border-slate-200 dark:border-slate-600" data-alt="Admin user avatar showing a smiling man" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAb-4dGtlXqAD4cN8U8xTC52TNOfNjfRg1noBt9Yrey-cN6VTOGb6UJ5K16NoyDVfaqCjXqMgpI9zf6tzQSLvNbtjj-N7eLrqVQrwHdKZwGkRbYpZYV4qwwIBizjmCftATuTh7D5KNQKhiFApOXRl9QiFPtRLQBc0B0ev4CIf3uiEeCUUnhd2MR8RcVa1oZmYPSSHJMqfzcpXEPKuTUUoMECEeTcuMfpvmM3QVJhohFN1VT9ZmMrfltcKO9F4eZ9dHRiFi8QEC9gLQw");'></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">Ricardo Admin</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">ricardo@canneo.com.br</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Header -->
+<header class="h-16 bg-white dark:bg-[#1a2634] border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-8 flex-shrink-0">
+<div class="flex items-center gap-4">
+<!-- Mobile Menu Trigger (Visible on small screens only if responsive was fully implemented) -->
+<button class="lg:hidden text-slate-500 hover:text-slate-700">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="mx-2">/</span>
+<a class="hover:text-primary transition-colors" href="#">Admin</a>
+<span class="mx-2">/</span>
+<span class="text-slate-900 dark:text-white font-medium">Avaliações</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center w-10 h-10 rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#1a2634]"></span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Page Content Scrollable Area -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-[1400px] mx-auto flex flex-col gap-6">
+<!-- Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Gestão de Avaliações</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Gerencie, aprove ou oculte avaliações de médicos e produtos farmacêuticos.</p>
+</div>
+<div class="flex gap-3">
+<button class="inline-flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-primary/50 gap-2">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+                            Exportar Relatório
+                        </button>
+</div>
+</div>
+<!-- Filters Card -->
+<div class="bg-white dark:bg-[#1a2634] rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
+<div class="flex flex-col lg:flex-row gap-4">
+<div class="flex-1 relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg leading-5 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm" placeholder="Buscar por paciente, médico ou produto..." type="text"/>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-2 lg:pb-0">
+<div class="w-48 flex-shrink-0">
+<label class="sr-only">Status</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">filter_list</span>
+</div>
+<select class="block w-full pl-10 pr-10 py-2.5 text-base border-slate-200 dark:border-slate-600 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 appearance-none cursor-pointer">
+<option>Todos os Status</option>
+<option>Pendente</option>
+<option>Aprovado</option>
+<option>Oculto</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="w-48 flex-shrink-0">
+<label class="sr-only">Nota</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">star</span>
+</div>
+<select class="block w-full pl-10 pr-10 py-2.5 text-base border-slate-200 dark:border-slate-600 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 appearance-none cursor-pointer">
+<option>Todas as Notas</option>
+<option>5 Estrelas</option>
+<option>4 Estrelas</option>
+<option>3 Estrelas</option>
+<option>2 Estrelas</option>
+<option>1 Estrela</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<button class="inline-flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 transition-colors">
+                                Limpar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Table Card -->
+<div class="bg-white dark:bg-[#1a2634] border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+<thead class="bg-slate-50 dark:bg-slate-800">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Tipo</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Usuário</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Alvo (Médico/Produto)</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Nota</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-1/4" scope="col">Comentário</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Data</th>
+<th class="px-6 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Status</th>
+<th class="px-6 py-3 text-right text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" scope="col">Ações</th>
+</tr>
+</thead>
+<tbody class="bg-white dark:bg-[#1a2634] divide-y divide-slate-200 dark:divide-slate-700">
+<!-- Row 1: Pending -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">stethoscope</span>
+</div>
+<span class="ml-2 text-xs font-medium text-slate-500 dark:text-slate-400">Consulta</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="h-8 w-8 rounded-full bg-slate-200 bg-cover bg-center" data-alt="Avatar of Maria Silva" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwR0eLCVbdoBeOStZHsq7grShnazKzWnmYmnTvi6nhSlhNXkv7C127lKn-1hSvYSP3ux9gMqZ0lEa3yfy_nMl4Dk_a0sLA3ABPEnaZ8Y9P-YFuInaSf2mHumH5S_UAujFH0GRfA93s3uQmxmdM82M68WTMBhPdw17Fivlckeoa9PYfnAIV6iKTyxlM2dYH5MEInrqdsP3JG-gjHpp6pbMdbeTrJ40jkVyu2pCVoBSX-MV5dEmI5o4gik1FFm1bFhGtWroWPjSigO_w")'></div>
+<div class="ml-3">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Maria Silva</div>
+<div class="text-xs text-slate-500">Paciente</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="text-sm text-slate-900 dark:text-white">Dr. João Santos</div>
+<div class="text-xs text-slate-500">Cardiologista</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-2" title="Excelente atendimento, muito atencioso e explicou tudo com detalhes. Recomendo muito!">
+                                            Excelente atendimento, muito atencioso e explicou tudo com detalhes. Recomendo muito!
+                                        </p>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                        12 Out 2023
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                                            Pendente
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors p-1" title="Responder">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+</button>
+<button class="text-slate-400 hover:text-emerald-600 transition-colors p-1" title="Aprovar">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1" title="Ocultar">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Approved -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-8 w-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">medication</span>
+</div>
+<span class="ml-2 text-xs font-medium text-slate-500 dark:text-slate-400">Produto</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 text-xs font-bold">CS</div>
+<div class="ml-3">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Carlos Souza</div>
+<div class="text-xs text-slate-500">Comprador</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="text-sm text-slate-900 dark:text-white">Vitamina C 500mg</div>
+<div class="text-xs text-slate-500">Farmácia Central</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined text-slate-300 text-[18px]">star</span>
+<span class="material-symbols-outlined text-slate-300 text-[18px]">star</span>
+<span class="material-symbols-outlined text-slate-300 text-[18px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-2" title="O produto é bom, mas a entrega demorou mais que o previsto.">
+                                            O produto é bom, mas a entrega demorou mais que o previsto.
+                                        </p>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                        11 Out 2023
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                                            Aprovado
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors p-1" title="Responder">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+</button>
+<button class="text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 rounded-full p-1 cursor-default" title="Já Aprovado">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1" title="Ocultar">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Hidden -->
+<tr class="bg-slate-50/50 dark:bg-slate-800/30 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">stethoscope</span>
+</div>
+<span class="ml-2 text-xs font-medium text-slate-500 dark:text-slate-400">Consulta</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="h-8 w-8 rounded-full bg-cover bg-center" data-alt="Avatar of Roberto Dias" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBD1Svggr4tm--Q2nOrfAX-Qao9sEey1xSlClDOh-tDJYZHzFL9AHg6iGTHTAVCUGDiTdemzJv_Msn5wVjqF6GS2NKmzV1YrAOPBkr7JvEeTyYo3PzwWDny3npo-0BQpFLlSBuSHjDBGJAwnqTeUFxLvXoRmmnBhAUDxsyyScJrPrz413aOmEfMyVvNF6lqnBe7alIUh6q0fjBwd5HtMMfXpBm4gUMLH2BoWKKYG3biFhSkZd2Iak3D5iaq9uRCYuujKP1ix7wNPPWd")'></div>
+<div class="ml-3">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Roberto Dias</div>
+<div class="text-xs text-slate-500">Paciente</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="text-sm text-slate-900 dark:text-white">Dr. Pedro Alves</div>
+<div class="text-xs text-slate-500">Dermatologista</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined text-slate-300 text-[18px]">star</span>
+<span class="material-symbols-outlined text-slate-300 text-[18px]">star</span>
+<span class="material-symbols-outlined text-slate-300 text-[18px]">star</span>
+<span class="material-symbols-outlined text-slate-300 text-[18px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-400 italic line-clamp-2" title="Conteúdo ofensivo ocultado pelo sistema.">
+                                            [Conteúdo ocultado: Linguagem imprópria]
+                                        </p>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                        10 Out 2023
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">
+                                            Oculto
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-300 cursor-not-allowed p-1" disabled="">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+</button>
+<button class="text-slate-400 hover:text-emerald-600 transition-colors p-1" title="Restaurar / Aprovar">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</button>
+<button class="text-red-500 bg-red-50 dark:bg-red-900/20 rounded-full p-1 cursor-default">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Pending Product -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-8 w-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">medication</span>
+</div>
+<span class="ml-2 text-xs font-medium text-slate-500 dark:text-slate-400">Produto</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="h-8 w-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold">AL</div>
+<div class="ml-3">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Ana Luiza</div>
+<div class="text-xs text-slate-500">Paciente</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="text-sm text-slate-900 dark:text-white">Protetor Solar FPS 70</div>
+<div class="text-xs text-slate-500">Dermocosméticos BR</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+<span class="material-symbols-outlined fill text-[18px]">star</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-2" title="Melhor protetor que já usei, não deixa a pele oleosa.">
+                                            Melhor protetor que já usei, não deixa a pele oleosa.
+                                        </p>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                        09 Out 2023
+                                    </td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                                            Pendente
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex items-center justify-end gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors p-1" title="Responder">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+</button>
+<button class="text-slate-400 hover:text-emerald-600 transition-colors p-1" title="Aprovar">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1" title="Ocultar">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="bg-white dark:bg-[#1a2634] px-4 py-3 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between sm:px-6">
+<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-slate-700 dark:text-slate-300">
+                                    Mostrando <span class="font-medium">1</span> até <span class="font-medium">4</span> de <span class="font-medium">28</span> resultados
+                                </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+<a class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700" href="#">
+<span class="sr-only">Anterior</span>
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</a>
+<a aria-current="page" class="z-10 bg-primary/10 border-primary text-primary relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#">
+                                        1
+                                    </a>
+<a class="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#">
+                                        2
+                                    </a>
+<a class="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#">
+                                        3
+                                    </a>
+<span class="relative inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-700 dark:text-slate-300">
+                                        ...
+                                    </span>
+<a class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700" href="#">
+<span class="sr-only">Próximo</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

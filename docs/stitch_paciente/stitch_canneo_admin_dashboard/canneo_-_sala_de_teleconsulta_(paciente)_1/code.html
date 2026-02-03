@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Sala de Teleconsulta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .video-gradient-overlay {
+            background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-8 py-3 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">CANNEO</h2>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-800 dark:text-slate-200">Dr. Guilherme Silva</span>
+<span class="text-xs text-slate-500">Cardiologia • CRM 123456-SP</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 px-3 py-1.5 rounded-lg border border-emerald-100 dark:border-emerald-800">
+<span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<div class="flex items-center gap-2">
+<div class="flex gap-1 items-baseline">
+<span class="text-emerald-700 dark:text-emerald-400 text-lg font-bold leading-none">14</span>
+<span class="text-emerald-600 dark:text-emerald-500 text-[10px] uppercase font-bold">min</span>
+</div>
+<span class="text-emerald-300 dark:text-emerald-700">:</span>
+<div class="flex gap-1 items-baseline">
+<span class="text-emerald-700 dark:text-emerald-400 text-lg font-bold leading-none">22</span>
+<span class="text-emerald-600 dark:text-emerald-500 text-[10px] uppercase font-bold">seg</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">enhanced_encryption</span>
+<span class="text-xs font-medium uppercase tracking-wider">Conexão Segura</span>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="Patient profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBXxaFCScposL8RBG8k1jLvvctdn9s65iM0gPlrpIlyQcnsOqzq-Ap4r6A5h5Q0NcYglV6LIQOuBk0-cL8c-WWV9v-29GkGfNjbpjISnCZjLGtu8NSjAUildkNYwWJwTT07Dc7ROnwP81vq1j5w9s-Gr8Boj5DqCeDX5hcaKA7N_cRLcKqFFCnTfE4dCVLKxMliLjlw-U0XD8kfQSr52uCFxGc8nE1_UeFZ68xCSYOZiVW__i4k39cQRSJlW2m6s-aFXiAV8nH6Wyeq");'></div>
+</div>
+</header>
+<main class="flex flex-1 overflow-hidden p-4 gap-4">
+<!-- Main Video Area -->
+<section class="flex-1 flex flex-col relative bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm">
+<!-- Doctor's Video (Main Feed) -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Main video feed showing a friendly male doctor in a white coat" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDDLA2bVtrwD28N2p975cEF1H-vyR3Mlmmn0c2RQ4Q7aDtfT6h9xVLeGOZqOeSvFtPYvSJxEbY2_4Eu635OxIEnaIbz4CTaiWJqE6pr8J0Z5NvQXwrORGOQUmK7mTYm1KUPqQ7a8-TmX1CTiiYfBfBELOLk0yrnryXokv2xI0O1PxNzHNyuNebGO85x5Bg-D-04iRe7kD_RUKEWzDXrkylRVczmTkdpo2yEwiNuCSKEoacVd-m1RHxyWmAboemfdvsjeAEA2N9OyZAR");'>
+<div class="absolute inset-0 video-gradient-overlay"></div>
+<!-- Doctor Name Tag on Video -->
+<div class="absolute top-6 left-6 bg-black/30 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10">
+<p class="text-white text-sm font-medium">Dr. Guilherme Silva (Remoto)</p>
+</div>
+<!-- Patient's Self-View (PiP) -->
+<div class="absolute bottom-6 right-6 w-48 aspect-video bg-slate-900 rounded-lg shadow-2xl border-2 border-white/20 overflow-hidden group">
+<div class="w-full h-full bg-cover bg-center" data-alt="Patient self-view video feed" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9riQZyC3UvUbe0gIZVdkOQagwtrMN2bCHFCY3Nrl8ErP7yRQg29bEHyKUzvqClTRucngMc1IiwoaFxHV8mHpvDTFPFzpLpSLj5iHUcXg2_ntg-g-sOe-wAKI50TWtfS8rz_SjJgRG1-73uSIlF1SPf1Uyxo99LQ4_K9rofPOM_I1xqyqAZUZ9OeCBZ-gayfmzrWXVaOd4jRT_I6bmt02zF2ksGFkUpYvR3dENNtoLUMEircCzfBNKoivi2QXWkbUrhD5gBt9QqV4B");'></div>
+<div class="absolute bottom-2 left-2 bg-black/40 px-2 py-0.5 rounded text-[10px] text-white font-medium">Você</div>
+</div>
+</div>
+<!-- Controls Overlay -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 px-6 py-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20">
+<button class="flex items-center justify-center size-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="flex items-center justify-center size-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+<button class="flex items-center justify-center size-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">present_to_all</span>
+</button>
+<button class="flex items-center justify-center size-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-px h-8 bg-slate-200 dark:bg-slate-700 mx-2"></div>
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold transition-all shadow-lg shadow-red-500/20">
+<span class="material-symbols-outlined">call_end</span>
+<span class="text-sm">Sair da Consulta</span>
+</button>
+</div>
+</section>
+<!-- Sidebar Interaction Panel -->
+<aside class="w-[380px] flex flex-col bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Tabs -->
+<div class="flex border-b border-slate-200 dark:border-slate-800">
+<button class="flex-1 py-4 text-sm font-bold text-primary border-b-2 border-primary">
+                    Chat com Médico
+                </button>
+<button class="flex-1 py-4 text-sm font-medium text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">
+                    Notas e Orientações
+                </button>
+</div>
+<!-- Chat Content -->
+<div class="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+<!-- System Message -->
+<div class="text-center py-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 dark:bg-slate-800 px-3 py-1 rounded-full">Consulta iniciada às 14:00</span>
+</div>
+<!-- Message From Doctor -->
+<div class="flex gap-2 max-w-[85%]">
+<div class="size-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-sm">medical_services</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="bg-slate-100 dark:bg-slate-800 p-3 rounded-tr-xl rounded-br-xl rounded-bl-xl text-sm leading-relaxed">
+                            Olá, João! Tudo bem? Como você tem se sentido desde que começou a medicação?
+                        </div>
+<span class="text-[10px] text-slate-400">Dr. Guilherme • 14:02</span>
+</div>
+</div>
+<!-- Message From Patient -->
+<div class="flex gap-2 max-w-[85%] self-end flex-row-reverse">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-slate-500 text-sm">person</span>
+</div>
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-primary text-white p-3 rounded-tl-xl rounded-bl-xl rounded-br-xl text-sm leading-relaxed">
+                            Estou me sentindo melhor, mas tive uma leve dor de cabeça ontem à noite.
+                        </div>
+<span class="text-[10px] text-slate-400">Você • 14:05</span>
+</div>
+</div>
+<!-- Doctor is typing indicator -->
+<div class="flex gap-2 items-center text-slate-400 italic text-xs">
+<div class="flex gap-1">
+<span class="size-1 bg-slate-400 rounded-full animate-bounce"></span>
+<span class="size-1 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+<span class="size-1 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+</div>
+<span>Dr. Guilherme está digitando...</span>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="relative">
+<input class="w-full pl-4 pr-12 py-3 bg-slate-50 dark:bg-slate-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-sm" placeholder="Envie uma mensagem..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<div class="mt-3 flex gap-4">
+<button class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-base">attach_file</span>
+                        Anexar Exame
+                    </button>
+<button class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-base">image</span>
+                        Enviar Foto
+                    </button>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer Security Banner -->
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-8 py-2 flex justify-between items-center text-[10px] text-slate-400 font-medium uppercase tracking-widest">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> Em conformidade com a LGPD</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">security</span> Criptografia de Ponta a Ponta</span>
+</div>
+<div>ID da Sessão: CNN-2024-8832-XPL</div>
+</footer>
+</body></html>

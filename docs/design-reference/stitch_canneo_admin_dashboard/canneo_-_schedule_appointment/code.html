@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Agendar Consulta</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<header class="bg-white dark:bg-[#1e2832] border-b border-slate-200 dark:border-slate-700 px-6 py-4 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl">local_pharmacy</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">CANNEO</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary dark:text-slate-400 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center gap-2 pl-4 border-l border-slate-200 dark:border-slate-700">
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden bg-cover bg-center" data-alt="Foto de perfil do usuário" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBZMfjcINYHQvSIJzhuLIcvj-jlnbU9Ctq9eOz_-VczOMIUZ7ddYLX1EdTvyeLSGMHksVfZfDgwPpMZ4Lv4tdZcTlH953vLGUO04yBloYw9P3q0VryghFq-kDLm17SymDAHuvs46jG23p2drchG7V-a46kFXmX255M0aecBhCW2nHqihahd2tKpkoiBrWOn5eevRCcweNEEUBEyqu_5xLCkiyNNyqCPBcXyTaUgAkx1JK-kust_PdWyfzSjSaWq4lCJU3YKWC2sFP-G");'></div>
+<span class="hidden sm:block text-sm font-medium text-slate-700 dark:text-slate-200">Alex Morgan</span>
+<span class="material-symbols-outlined text-slate-400 text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<div class="mb-10 overflow-x-auto">
+<div class="flex min-w-max w-full justify-between items-center relative">
+<div class="absolute top-1/2 left-0 w-full h-1 bg-slate-200 dark:bg-slate-700 -z-10 -translate-y-1/2 rounded-full"></div>
+<div class="flex flex-col items-center gap-2 bg-background-light dark:bg-background-dark px-2 z-10">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg shadow-primary/30 ring-4 ring-background-light dark:ring-background-dark transition-all">
+<span class="material-symbols-outlined text-xl">person_search</span>
+</div>
+<span class="text-sm font-bold text-primary whitespace-nowrap">1. Escolher Médico</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-background-light dark:bg-background-dark px-2 z-10 opacity-60">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 flex items-center justify-center font-bold ring-4 ring-background-light dark:ring-background-dark">
+<span class="material-symbols-outlined text-xl">calendar_month</span>
+</div>
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap">2. Escolher Data/Hora</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-background-light dark:bg-background-dark px-2 z-10 opacity-60">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 flex items-center justify-center font-bold ring-4 ring-background-light dark:ring-background-dark">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+</div>
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap">3. Checkout</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-background-light dark:bg-background-dark px-2 z-10 opacity-60">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 flex items-center justify-center font-bold ring-4 ring-background-light dark:ring-background-dark">
+<span class="material-symbols-outlined text-xl">credit_card</span>
+</div>
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap">4. Pagamento</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-8 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">info</span>
+<div>
+<h3 class="text-primary font-bold text-sm mb-1">Nota Importante</h3>
+<p class="text-slate-600 dark:text-slate-300 text-sm">A consulta só será confirmada após o pagamento.</p>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8 items-start">
+<aside class="w-full lg:w-72 shrink-0 bg-white dark:bg-[#1e2832] rounded-xl border border-slate-200 dark:border-slate-700 p-5 sticky top-24 self-start">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-bold">Filtros</h2>
+<button class="text-sm text-primary hover:text-primary/80 font-medium">Limpar Tudo</button>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-semibold mb-3 text-slate-900 dark:text-white">Especialidade</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded text-primary focus:ring-primary border-slate-300 dark:border-slate-600 dark:bg-slate-800" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">Gestão da Dor</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded text-primary focus:ring-primary border-slate-300 dark:border-slate-600 dark:bg-slate-800" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">Ansiedade e Estresse</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded text-primary focus:ring-primary border-slate-300 dark:border-slate-600 dark:bg-slate-800" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">Insônia</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded text-primary focus:ring-primary border-slate-300 dark:border-slate-600 dark:bg-slate-800" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">Consulta Geral</span>
+</label>
+</div>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-semibold mb-3 text-slate-900 dark:text-white">Avaliação</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary focus:ring-primary border-slate-300 dark:border-slate-600 dark:bg-slate-800" name="rating" type="radio"/>
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-[18px] fill-current">star</span>
+<span class="material-symbols-outlined text-[18px] fill-current">star</span>
+<span class="material-symbols-outlined text-[18px] fill-current">star</span>
+<span class="material-symbols-outlined text-[18px] fill-current">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+<span class="text-sm text-slate-600 dark:text-slate-300 ml-2 group-hover:text-primary transition-colors">e acima</span>
+</div>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="text-primary focus:ring-primary border-slate-300 dark:border-slate-600 dark:bg-slate-800" name="rating" type="radio"/>
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-[18px] fill-current">star</span>
+<span class="material-symbols-outlined text-[18px] fill-current">star</span>
+<span class="material-symbols-outlined text-[18px] fill-current">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+<span class="text-sm text-slate-600 dark:text-slate-300 ml-2 group-hover:text-primary transition-colors">e acima</span>
+</div>
+</label>
+</div>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-semibold mb-3 text-slate-900 dark:text-white">Disponibilidade</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded text-primary focus:ring-primary border-slate-300 dark:border-slate-600 dark:bg-slate-800" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">Disponível Hoje</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded text-primary focus:ring-primary border-slate-300 dark:border-slate-600 dark:bg-slate-800" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">Disponível nos próx. 3 dias</span>
+</label>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-700">
+<button class="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-sm font-medium rounded-lg transition-colors">
+                        Aplicar Filtros
+                    </button>
+</div>
+</aside>
+<div class="flex-1 flex flex-col gap-5 w-full">
+<div class="flex items-center justify-between pb-2">
+<h2 class="text-xl font-bold">Médicos Disponíveis <span class="text-slate-400 font-normal text-base ml-2">(14 resultados)</span></h2>
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-500 hidden sm:inline">Ordenar por:</span>
+<select class="form-select bg-transparent border-none text-sm font-medium text-slate-900 dark:text-white focus:ring-0 py-1 pr-8 pl-0 cursor-pointer">
+<option>Recomendado</option>
+<option>Preço: Menor para Maior</option>
+<option>Melhor Avaliados</option>
+</select>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1e2832] rounded-xl border border-slate-200 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
+<div class="flex flex-col md:flex-row gap-5">
+<div class="shrink-0 relative">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-lg bg-slate-200 overflow-hidden">
+<img alt="Dr. Sarah Green portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp16XtKgcW3LLV5Fgn7OTa66V7ECII052dsiJe46ODC_188ZWSIlFxnsptTMY8sA_5bhnQHrspvfQcA1wAH9aZF8AV1AH2hxwyr3kOGY1O5-kl8m19Fic2u6_mB2Ywvczki9XNURxN-iQu37ose5gGr3DfofYX2XHOg3tTdQyO17eu9c0y5Tt0E0I-lDVAAUNQGtOrElfJrf_dJrKrIIUpOzrbF6QWHFzzyisGVhdbX7Y6EVLRR4cH-lFqj2Ik4hAiHeTRihcdCFn8"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full border-2 border-white dark:border-[#1e2832] shadow-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> ONLINE
+                            </div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-col md:flex-row justify-between items-start gap-2 mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white leading-tight">Dr. Sarah Green, MD</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Especialista em Cannabis • 8 Anos de Experiência</p>
+</div>
+<div class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded text-yellow-700 dark:text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-sm font-bold">4.9</span>
+<span class="text-xs opacity-80">(124 avaliações)</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full">Gestão da Dor</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full">Ansiedade</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full">Inglês / Espanhol</span>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700 gap-4">
+<div>
+<p class="text-xs text-slate-500 mb-1">Valor da Consulta</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">$150.00</p>
+</div>
+<div class="flex-1 w-full sm:w-auto">
+<p class="text-xs text-slate-500 mb-2 sm:text-right">Próximos horários:</p>
+<div class="flex gap-2 overflow-x-auto pb-1 sm:justify-end no-scrollbar">
+<button class="shrink-0 px-3 py-1.5 border border-primary text-primary bg-primary/5 hover:bg-primary hover:text-white text-xs font-semibold rounded-lg transition-colors">
+                                            Hoje, 14:00
+                                        </button>
+<button class="shrink-0 px-3 py-1.5 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary text-xs font-medium rounded-lg transition-colors">
+                                            Hoje, 16:30
+                                        </button>
+<button class="shrink-0 px-3 py-1.5 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary text-xs font-medium rounded-lg transition-colors">
+                                            Amanhã, 09:00
+                                        </button>
+</div>
+</div>
+<button class="w-full sm:w-auto px-6 py-2.5 bg-primary hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm shadow-blue-500/30 transition-all flex items-center justify-center gap-2">
+                                    Selecionar Médico
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1e2832] rounded-xl border border-slate-200 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
+<div class="flex flex-col md:flex-row gap-5">
+<div class="shrink-0 relative">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-lg bg-slate-200 overflow-hidden">
+<img alt="Dr. James Wilson portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDPzBkT5RDhH4rZaeE2a4hEsQSJew23wm7rL5GcZamz_jlQL234ZbkXFeDgHP6_naRgttSlAf95QUCxqOQ0ja9q-F5KHJnclSSEvO0eUWN9boRH4SyN6VlsvHRFQN1--WCaDx9PhA8Q-cByyWnVMQVmTB3pKKcp4OuZmK3A5jt5VpCw4_6VOjBeVloZqoe4b2sZsVdRihHhUticCj5sSM7CnAUJlC4KbjbqkPJLYqaCCVKtBa9l_G5fElsXWSB3M5BOC206PDQbj6I"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-col md:flex-row justify-between items-start gap-2 mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white leading-tight">Dr. James Wilson, DO</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Clínico Geral • 15 Anos de Experiência</p>
+</div>
+<div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-sm fill-current text-yellow-500">star</span>
+<span class="text-sm font-bold">4.7</span>
+<span class="text-xs opacity-80">(86 avaliações)</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full">Medicina Holística</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full">TEPT</span>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700 gap-4">
+<div>
+<p class="text-xs text-slate-500 mb-1">Valor da Consulta</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">$135.00</p>
+</div>
+<div class="flex-1 w-full sm:w-auto">
+<p class="text-xs text-slate-500 mb-2 sm:text-right">Próximos horários:</p>
+<div class="flex gap-2 overflow-x-auto pb-1 sm:justify-end no-scrollbar">
+<button class="shrink-0 px-3 py-1.5 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary text-xs font-medium rounded-lg transition-colors">
+                                            Amanhã, 10:00
+                                        </button>
+<button class="shrink-0 px-3 py-1.5 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary text-xs font-medium rounded-lg transition-colors">
+                                            Amanhã, 14:00
+                                        </button>
+<button class="shrink-0 px-3 py-1.5 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary text-xs font-medium rounded-lg transition-colors">
+                                            Qua., 09:00
+                                        </button>
+</div>
+</div>
+<button class="w-full sm:w-auto px-6 py-2.5 bg-primary hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm shadow-blue-500/30 transition-all flex items-center justify-center gap-2">
+                                    Selecionar Médico
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1e2832] rounded-xl border border-slate-200 dark:border-slate-700 p-5 hover:shadow-md transition-shadow">
+<div class="flex flex-col md:flex-row gap-5">
+<div class="shrink-0 relative">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-lg bg-slate-200 overflow-hidden">
+<img alt="Dr. Emily Chen portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJt3so17j2fr11qbgNP_lmetZwqwrwstRcZ9t6Ee2S_ECrIQI500A0MHOVTHEWS_EXu-cE0pO-CYMi1dRu47yOaA9AWhgreFNluNuOXSQN8yYQmzWDIMKHqQ7tupzkuM35vj6JP2t6KhV70-MGPs1u7UgX1KuVZjKbo9qXpmE-6mIHW_PNWuHcx4IPOjJIv-dNII7lt6O_uXPWKiazz9zzIarr_rQZQ51GJT7f9Bc8p469TlEFAjKA8dOtPJavePXgrqW75nztiG-B"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-col md:flex-row justify-between items-start gap-2 mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white leading-tight">Dr. Emily Chen, PsyD</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Psiquiatra • 12 Anos de Experiência</p>
+</div>
+<div class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 rounded text-yellow-700 dark:text-yellow-500">
+<span class="material-symbols-outlined text-sm fill-current">star</span>
+<span class="text-sm font-bold">5.0</span>
+<span class="text-xs opacity-80">(42 avaliações)</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full">Insônia</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full">Ansiedade</span>
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full">Depressão</span>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700 gap-4">
+<div>
+<p class="text-xs text-slate-500 mb-1">Valor da Consulta</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">$200.00</p>
+</div>
+<div class="flex-1 w-full sm:w-auto">
+<p class="text-xs text-slate-500 mb-2 sm:text-right">Próximos horários:</p>
+<div class="flex gap-2 overflow-x-auto pb-1 sm:justify-end no-scrollbar">
+<button class="shrink-0 px-3 py-1.5 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary text-xs font-medium rounded-lg transition-colors">
+                                            Qua., 15:00
+                                        </button>
+<button class="shrink-0 px-3 py-1.5 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-primary hover:text-primary text-xs font-medium rounded-lg transition-colors">
+                                            Qui., 11:00
+                                        </button>
+</div>
+</div>
+<button class="w-full sm:w-auto px-6 py-2.5 bg-primary hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm shadow-blue-500/30 transition-all flex items-center justify-center gap-2">
+                                    Selecionar Médico
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 flex justify-center">
+<button class="flex items-center gap-2 text-slate-500 hover:text-primary font-medium transition-colors">
+                        Mostrar mais médicos
+                        <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Gestão de Assinaturas</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#36b7e2",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111d21",
+                        "text-dark": "#0e171b",
+                        "text-light": "#e2e8f0",
+                        "muted": "#508495",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-dark dark:text-text-light antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="w-72 flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#16252b] transition-colors duration-200">
+<!-- Brand -->
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<div class="flex gap-3 items-center">
+<div class="bg-primary/10 flex items-center justify-center rounded-lg size-10 text-primary">
+<span class="material-symbols-outlined text-3xl">health_and_safety</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-text-dark dark:text-white text-lg font-bold leading-none tracking-tight">CANNEO</h1>
+<p class="text-muted dark:text-slate-400 text-xs font-medium mt-1">Portal Admin</p>
+</div>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-2">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 text-primary group transition-all" href="#">
+<span class="material-symbols-outlined icon-filled">dashboard</span>
+<span class="text-sm font-semibold">Visão Geral</span>
+</a>
+<!-- Subscribers -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-text-dark dark:hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Assinantes</span>
+</a>
+<!-- Plans -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-text-dark dark:hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="text-sm font-medium">Planos de Saúde</span>
+</a>
+<!-- Financial -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-text-dark dark:hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium">Financeiro</span>
+</a>
+<!-- Reports -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-text-dark dark:hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm font-medium">Relatórios</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-text-dark dark:hover:text-white transition-all mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<!-- User Profile Snippet -->
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors">
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Admin user avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzoy1Jxr77dZSZp6pq5XV6NJe8ZIKHmBf2cFINwHZbfDNKnTDFim8Xyhc6SM20U_NuWVW53VJVcKhb3rsVPnIMxkgr4EiCU6gM9woOjnkJSaj5p4jf--Ck8BbKvhwwf9T_AZJ5evYs4mbqlIVTNlFgKMByO02qPJYouhQUlqlwqVBpEPWcxOuYJ9BxixkgFQj6_c7bgZVU5Tc_lWgtmOaqZNnaFrzvCs_lm9EXHD6s0NNBKLXrGcPpfoAWVg3vNQR0WDf1hm4uBfQr');"></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-semibold text-text-dark dark:text-white truncate">Dr. Ricardo M.</p>
+<p class="text-xs text-muted dark:text-slate-500 truncate">Administrador Geral</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Header -->
+<header class="w-full px-8 py-6 bg-background-light dark:bg-background-dark z-10">
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl font-black text-text-dark dark:text-white tracking-tight">Gestão de Assinaturas</h2>
+<p class="text-muted dark:text-slate-400 text-base">Monitoramento em tempo real do Clube de Saúde</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center h-10 px-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined mr-2 text-[18px]">calendar_today</span>
+<span>Últimos 30 dias</span>
+</button>
+<button class="flex items-center justify-center h-10 px-4 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold shadow-md shadow-primary/20 transition-colors">
+<span class="material-symbols-outlined mr-2 text-[18px]">download</span>
+<span>Exportar Relatório</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-8 pb-10">
+<div class="max-w-[1200px] flex flex-col gap-8 mx-auto">
+<!-- KPI Cards -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-[#1e2a30] rounded-xl p-6 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col gap-3 group hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start">
+<div class="bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<span class="flex items-center text-emerald-600 dark:text-emerald-400 text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+                                    +5.4%
+                                </span>
+</div>
+<div>
+<p class="text-muted dark:text-slate-400 text-sm font-medium mb-1">Total de Assinantes</p>
+<p class="text-text-dark dark:text-white text-2xl font-bold tracking-tight">1.248</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-[#1e2a30] rounded-xl p-6 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col gap-3 group hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start">
+<div class="bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">attach_money</span>
+</div>
+<span class="flex items-center text-emerald-600 dark:text-emerald-400 text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+                                    +8.2%
+                                </span>
+</div>
+<div>
+<p class="text-muted dark:text-slate-400 text-sm font-medium mb-1">Receita Mensal (MRR)</p>
+<p class="text-text-dark dark:text-white text-2xl font-bold tracking-tight">R$ 84.500</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-[#1e2a30] rounded-xl p-6 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col gap-3 group hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start">
+<div class="bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">person_off</span>
+</div>
+<span class="flex items-center text-emerald-600 dark:text-emerald-400 text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_down</span>
+                                    -0.5%
+                                </span>
+</div>
+<div>
+<p class="text-muted dark:text-slate-400 text-sm font-medium mb-1">Churn Rate</p>
+<p class="text-text-dark dark:text-white text-2xl font-bold tracking-tight">1.2%</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white dark:bg-[#1e2a30] rounded-xl p-6 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col gap-3 group hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start">
+<div class="bg-blue-50 dark:bg-blue-900/20 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">savings</span>
+</div>
+<span class="flex items-center text-emerald-600 dark:text-emerald-400 text-xs font-bold bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+                                    +12%
+                                </span>
+</div>
+<div>
+<p class="text-muted dark:text-slate-400 text-sm font-medium mb-1">Economia Gerada</p>
+<p class="text-text-dark dark:text-white text-2xl font-bold tracking-tight">R$ 320.000</p>
+</div>
+</div>
+</section>
+<!-- Chart Section -->
+<section class="bg-white dark:bg-[#1e2a30] rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm p-6">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+<div>
+<h3 class="text-text-dark dark:text-white text-lg font-bold">Crescimento da Recorrência</h3>
+<p class="text-muted dark:text-slate-400 text-sm">Evolução do MRR nos últimos 6 meses</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">Receita Recorrente</span>
+</div>
+</div>
+<div class="w-full h-[240px] relative">
+<!-- Custom SVG Chart based on input, modified colors for theme -->
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 478 150" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="chartGradient" x1="239" x2="239" y1="0" y2="150">
+<stop offset="0%" stop-color="#36b7e2" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#36b7e2" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line class="dark:stroke-slate-700" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="478" y1="149" y2="149"></line>
+<line class="dark:stroke-slate-700" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="478" y1="100" y2="100"></line>
+<line class="dark:stroke-slate-700" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="478" y1="50" y2="50"></line>
+<!-- Area Fill -->
+<path d="M0 109C18.15 109 18.15 45 36.3 45C54.46 45 54.46 65 72.6 65C90.7 65 90.7 110 108.9 110C127 110 127 50 145 50C163 50 163 120 181 120C199 120 199 80 217 80C236 80 236 60 254 60C272 60 272 130 290 130C308 130 308 149 326 149C344 149 344 20 363 20C381 20 381 90 399 90C417 90 417 135 435 135C453 135 453 40 472 40V150H0V109Z" fill="url(#chartGradient)"></path>
+<!-- Line Stroke -->
+<path d="M0 109C18.15 109 18.15 45 36.3 45C54.46 45 54.46 65 72.6 65C90.7 65 90.7 110 108.9 110C127 110 127 50 145 50C163 50 163 120 181 120C199 120 199 80 217 80C236 80 236 60 254 60C272 60 272 130 290 130C308 130 308 149 326 149C344 149 344 20 363 20C381 20 381 90 399 90C417 90 417 135 435 135C453 135 453 40 472 40" stroke="#36b7e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+<!-- Tooltip Dummy -->
+<div class="absolute top-[10%] left-[75%] bg-slate-900 text-white text-xs py-1 px-2 rounded transform -translate-x-1/2 pointer-events-none">
+                                R$ 92k
+                                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45"></div>
+</div>
+</div>
+<div class="flex justify-between px-2 mt-4 text-xs font-bold text-muted dark:text-slate-500 uppercase tracking-wider">
+<span>Jan</span>
+<span>Fev</span>
+<span>Mar</span>
+<span>Abr</span>
+<span>Mai</span>
+<span>Jun</span>
+</div>
+</section>
+<!-- Table Section -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-text-dark dark:text-white text-xl font-bold">Detalhamento de Assinaturas</h3>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-white dark:bg-[#1e2a30] border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-text-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 w-64 placeholder:text-slate-400" placeholder="Buscar paciente..." type="text"/>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1e2a30] rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-muted dark:text-slate-400">Paciente</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-muted dark:text-slate-400">Plano</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-muted dark:text-slate-400">Próxima Cobrança</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-muted dark:text-slate-400">Valor</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-muted dark:text-slate-400">Status</th>
+<th class="py-4 px-6 text-right text-xs font-bold uppercase tracking-wider text-muted dark:text-slate-400">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-cover bg-center bg-slate-200" data-alt="Avatar of Ana Silva" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkEyV_xsOiLC7x6WoWP6fYb4vb3C9xq_CD9pgK8ab49DusfBotTFyHvz36Ez9uAT8_gFvTn6ZH5Ru1aMhl85PG_mW32XVCT3pa9PgxGYcYADfWkAAtey7Xak3M_C3SWNO1OoiSwDIapwvfS-lQw43HrECTSAog6fZDmdAWG8HBAF80M2l15BMPqrLIfOdgdAUTIdRQpXtrUVG16EfFDytIBkl2NE-mHmNFOkxaWzwElNZC8AxMY8k5GJtXKwq8wBjx3RO9qBm3bIKz');"></div>
+<div>
+<p class="text-sm font-semibold text-text-dark dark:text-white">Ana Silva</p>
+<p class="text-xs text-muted dark:text-slate-500">ana.silva@email.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Plano Premium</span>
+<span class="text-xs text-muted dark:text-slate-500">Individual</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">15 Nov 2023</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">R$ 199,90</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                                    Ativa
+                                                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-cover bg-center bg-slate-200" data-alt="Avatar of Carlos Souza" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBf1Y1UiLVhnaOWnWtUkR2SGy23jjIfmtiSgnyf-as1uSqiBTIBuDiuA6pXUGrfkFkzUsgxZpyfHtShd5zKbxkzyBvQKnlO44_BNhVxaXD2hM4kuKz7qJdjwM38E7Emr-4xQ9Jarlg3BJAiZhnkwzz9yMM6WGJcRakiiDRb6GNJNOAtLGr30X1YdmNXLIrfABQo0d9AAx3tgmetmD1RUQmxBI3WY2rvNmnURntNVdKha9usAORdTHgwMESVNuHKvsgdqMILUxNa7dIb');"></div>
+<div>
+<p class="text-sm font-semibold text-text-dark dark:text-white">Carlos Souza</p>
+<p class="text-xs text-muted dark:text-slate-500">carlos.souza@email.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Plano Básico</span>
+<span class="text-xs text-muted dark:text-slate-500">Individual</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">12 Nov 2023</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">R$ 89,90</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                                                    Falha Pagto.
+                                                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-cover bg-center bg-slate-200" data-alt="Avatar of Mariana Costa" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAEsxK7nHOhkgdTlNr3-W8RhAiezFQGQl-8peDree4ulCdtgwJGkfjNbB_BS36qiiAl_qkHwjHlLVUIVwdyuFVMMzj8mEDIMiUxIiXCysBd2ahWJrKFJRr9MBvwwhZ0GybKixNNZACtZmbsWis1GSjn-AZa20v0yRSPrctMj0UPaQaBzOylm5tJa8OdkIjb6UN6iIp6BgsZ5_HzgcDFPpjWaeJARQjtHhotPnyZucvUs5AMzut0ICNCf2w7zxVghzHtMGSrbws67V35');"></div>
+<div>
+<p class="text-sm font-semibold text-text-dark dark:text-white">Mariana Costa</p>
+<p class="text-xs text-muted dark:text-slate-500">mariana.costa@email.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Plano Família</span>
+<span class="text-xs text-muted dark:text-slate-500">3 Dependentes</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">20 Nov 2023</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">R$ 349,90</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+<span class="size-1.5 rounded-full bg-amber-500"></span>
+                                                    Pausada
+                                                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-9 rounded-full bg-cover bg-center bg-slate-200" data-alt="Avatar of Roberto Lima" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBs-a7NLroV_nPkb8Yp5XrLDfMkkXtJ0tg0n-6FKB98gNxzQWIDsEgjnzKLG0ADE5xXGIWQg1NilR1RSCNf6uazvT8pcSUg1WOb3itWBINLqAVOyVhgQDubyKJBL71Grx2fA2RhRS1Zy3D6oK1VWphFsgY4ixG6t5PZCc6LQtMKLSjTwgdXQFWg_W2nvolPTSG8Sig0ZDNDhWxQKvI3vP-GZCRunXkickry0QfW4zV3C0NknE34V0Hkfn0UW7MpO78GOHVbuXt8sM1j');"></div>
+<div>
+<p class="text-sm font-semibold text-text-dark dark:text-white">Roberto Lima</p>
+<p class="text-xs text-muted dark:text-slate-500">roberto.lima@email.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Plano Premium</span>
+<span class="text-xs text-muted dark:text-slate-500">Individual</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">22 Nov 2023</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">R$ 199,90</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                                    Ativa
+                                                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<p class="text-sm text-muted dark:text-slate-500">Mostrando 4 de 1.248 resultados</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-sm border border-slate-200 dark:border-slate-700 rounded hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors disabled:opacity-50" disabled="">Anterior</button>
+<button class="px-3 py-1 text-sm border border-slate-200 dark:border-slate-700 rounded hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">Próximo</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+</body></html>

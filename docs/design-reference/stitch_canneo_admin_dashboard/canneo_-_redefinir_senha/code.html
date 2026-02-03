@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Redefinir Senha</title>
+<!-- Google Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecda",
+                        "primary-hover": "#0fbdb0",
+                        "background-light": "#f8fcfb",
+                        "background-dark": "#0d1b1a",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#162826",
+                        "border-light": "#e7f3f2",
+                        "border-dark": "#2a403d",
+                        "text-main": "#0d1b1a",
+                        "text-muted": "#4c9a93",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(19, 236, 218, 0.1)',
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white font-display min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-6 py-4 bg-surface-light dark:bg-surface-dark sticky top-0 z-50">
+<div class="flex items-center gap-4 text-text-main dark:text-white">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">token</span>
+</div>
+<h2 class="text-text-main dark:text-white text-xl font-bold leading-tight tracking-tight">CANNEO</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<div class="flex items-center gap-6">
+<a class="text-text-main dark:text-gray-300 hover:text-primary text-sm font-medium transition-colors" href="#">Ajuda</a>
+<a class="text-text-main dark:text-gray-300 hover:text-primary text-sm font-medium transition-colors" href="#">Contato</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary hover:bg-primary-hover text-background-dark text-sm font-bold transition-all duration-200">
+<span class="truncate">Entrar</span>
+</button>
+</div>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden text-text-main dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col items-center justify-center p-4 md:p-10">
+<div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Intro Text (Visible on larger screens to balance layout) -->
+<div class="hidden lg:flex lg:col-span-4 flex-col gap-6 pt-10">
+<div class="size-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-3xl">lock_reset</span>
+</div>
+<h1 class="text-4xl font-bold tracking-tight text-text-main dark:text-white">Recuperação de Acesso</h1>
+<p class="text-text-muted dark:text-gray-400 text-lg leading-relaxed">
+                    Você está a um passo de recuperar sua conta. Defina uma nova senha forte para proteger seus dados na plataforma CANNEO.
+                </p>
+<div class="flex items-center gap-2 text-sm text-text-muted dark:text-gray-500 mt-4">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+<span>Ambiente Seguro SSL</span>
+</div>
+</div>
+<!-- Right Column: Form Card -->
+<div class="lg:col-span-8 w-full">
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-soft border border-border-light dark:border-border-dark overflow-hidden">
+<!-- Card Header -->
+<div class="p-8 pb-0">
+<h2 class="text-2xl font-bold text-text-main dark:text-white mb-2">Criar Nova Senha</h2>
+<p class="text-text-muted dark:text-gray-400">Sua identidade foi confirmada. Agora, escolha uma senha segura.</p>
+</div>
+<div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+<!-- Form Fields -->
+<div class="flex flex-col gap-6">
+<!-- New Password Field -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-text-main dark:text-gray-200" for="new-password">
+                                    Nova Senha
+                                </label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark/50 p-3 pr-10 text-text-main dark:text-white placeholder-text-muted focus:border-primary focus:ring-primary dark:focus:border-primary dark:focus:ring-primary sm:text-sm transition-shadow" id="new-password" placeholder="Digite sua nova senha" type="password"/>
+<button class="absolute right-3 text-text-muted hover:text-text-main dark:hover:text-white transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Confirm Password Field -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-text-main dark:text-gray-200" for="confirm-password">
+                                    Confirmar Nova Senha
+                                </label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark/50 p-3 pr-10 text-text-main dark:text-white placeholder-text-muted focus:border-primary focus:ring-primary dark:focus:border-primary dark:focus:ring-primary sm:text-sm transition-shadow" id="confirm-password" placeholder="Confirme sua nova senha" type="password"/>
+<button class="absolute right-3 text-text-muted hover:text-text-main dark:hover:text-white transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-2">
+<button class="w-full flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-primary-hover py-3.5 px-4 text-center text-sm font-bold text-background-dark transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background-dark">
+<span>Salvar Nova Senha</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Requirements Checklist -->
+<div class="bg-background-light dark:bg-background-dark/30 rounded-xl p-6 border border-border-light dark:border-border-dark h-fit">
+<h3 class="text-sm font-semibold text-text-main dark:text-white mb-4 uppercase tracking-wider">Requisitos da Senha</h3>
+<ul class="space-y-3">
+<!-- Example of a met requirement -->
+<li class="flex items-center gap-3 text-sm text-text-main dark:text-gray-200">
+<div class="flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-[14px] font-bold">check</span>
+</div>
+<span class="font-medium line-through decoration-primary/50 text-gray-500 dark:text-gray-500">Mínimo 8 caracteres</span>
+</li>
+<!-- Example of an unmet requirement -->
+<li class="flex items-center gap-3 text-sm text-text-muted dark:text-gray-400">
+<div class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 dark:border-gray-600 bg-transparent">
+<div class="h-1.5 w-1.5 rounded-full bg-transparent"></div>
+</div>
+<span>Letra maiúscula</span>
+</li>
+<li class="flex items-center gap-3 text-sm text-text-muted dark:text-gray-400">
+<div class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 dark:border-gray-600 bg-transparent">
+<div class="h-1.5 w-1.5 rounded-full bg-transparent"></div>
+</div>
+<span>Número</span>
+</li>
+<li class="flex items-center gap-3 text-sm text-text-muted dark:text-gray-400">
+<div class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 dark:border-gray-600 bg-transparent">
+<div class="h-1.5 w-1.5 rounded-full bg-transparent"></div>
+</div>
+<span>Símbolo</span>
+</li>
+</ul>
+<div class="mt-6 pt-6 border-t border-border-light dark:border-border-dark">
+<p class="text-xs text-text-muted dark:text-gray-500 leading-normal">
+                                    Senhas fortes ajudam a prevenir acesso não autorizado à sua conta. Evite usar informações pessoais óbvias.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer decoration (abstract) -->
+<div class="w-full h-2 bg-gradient-to-r from-background-light via-primary to-background-light dark:from-background-dark dark:via-primary/50 dark:to-background-dark opacity-50"></div>
+</body></html>

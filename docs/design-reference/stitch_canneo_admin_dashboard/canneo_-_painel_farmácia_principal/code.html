@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Painel Farmácia Principal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30abe8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111c21",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1e293b",
+                        "text-main": "#0e171b",
+                        "text-secondary": "#4e7f97",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-gray-100 min-h-screen flex overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark flex flex-col justify-between h-screen fixed left-0 top-0 z-10 transition-colors duration-300">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-10">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl">local_pharmacy</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-text-main dark:text-white text-lg font-bold leading-tight">CANNEO</h1>
+<p class="text-text-secondary text-xs font-medium">Portal da Farmácia</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 text-primary group transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-sm font-semibold">Painel</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-text-main dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-sm font-medium">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-text-main dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-medium">Produtos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-text-main dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+</div>
+<div class="p-6 border-t border-slate-200 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2 text-text-secondary hover:text-red-500 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Sair</span>
+</a>
+<div class="mt-4 flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center" data-alt="Portrait of a pharmacist doctor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAKoI8fkFeW4U8pOTlhL0W6Qe-g6KfA5YewPlcJtQruImR1F-AxPJysw5DK_3fcmKbzGiDcgFGuTsFsnWwsydkpCn3KXPgVhj0Pylh6QhxzS7GeMkXp2wgIMQ8wae4zg8zBUScB6VXRC4V4xQpL1WN49xk3lylPOoCQE83o84kvY-5UQd2BZ6TvxbwdMaiCce0oFjp_sPl2bpp7DgY1ta9tiM1UNQ2Hr1xRwEh7GNjP2ESKzwFQ0DS8M9J6te_vZfqFb9kIFZMgqczV");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-text-main dark:text-white">Dr. André L.</span>
+<span class="text-xs text-text-secondary">Farmacêutico</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<!-- Header -->
+<header class="h-20 flex-shrink-0 bg-surface-light dark:bg-surface-dark border-b border-slate-200 dark:border-slate-800 px-8 flex items-center justify-between sticky top-0 z-20">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold text-text-main dark:text-white">Painel Principal</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative w-72">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary text-xl">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg bg-background-light dark:bg-slate-800 text-sm text-text-main dark:text-white placeholder-text-secondary focus:ring-2 focus:ring-primary/50 transition-shadow" placeholder="Buscar pedido, cliente..." type="text"/>
+</div>
+<button class="relative p-2 rounded-full hover:bg-background-light dark:hover:bg-slate-700 text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-surface-light dark:border-surface-dark"></span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-8">
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col gap-4 group hover:border-primary/50 transition-colors">
+<div class="flex items-center justify-between">
+<p class="text-text-secondary text-sm font-medium">Pedidos Hoje</p>
+<div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold text-text-main dark:text-white">24</h3>
+<span class="text-sm font-medium text-emerald-500 flex items-center">
+<span class="material-symbols-outlined text-base">trending_up</span>
+                                +10%
+                            </span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col gap-4 group hover:border-primary/50 transition-colors">
+<div class="flex items-center justify-between">
+<p class="text-text-secondary text-sm font-medium">Enviados</p>
+<div class="p-2 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg text-emerald-600">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold text-text-main dark:text-white">12</h3>
+<span class="text-sm font-medium text-emerald-500 flex items-center">
+<span class="material-symbols-outlined text-base">trending_up</span>
+                                +2%
+                            </span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col gap-4 group hover:border-primary/50 transition-colors">
+<div class="flex items-center justify-between">
+<p class="text-text-secondary text-sm font-medium">Para Retirada</p>
+<div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg text-orange-600">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold text-text-main dark:text-white">5</h3>
+<span class="text-sm font-medium text-red-500 flex items-center">
+<span class="material-symbols-outlined text-base">trending_down</span>
+                                -1%
+                            </span>
+</div>
+</div>
+</div>
+<!-- Recent Orders Section -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-text-main dark:text-white">Pedidos Recentes</h3>
+<a class="text-sm font-semibold text-primary hover:text-primary/80 flex items-center gap-1" href="#">
+                            Ver todos
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-secondary">ID do Pedido</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-secondary">Cliente</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-secondary">Data/Hora</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-secondary">Qtd. Itens</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-secondary">Valor Total</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-secondary">Status</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-secondary text-right">Ação</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-text-main dark:text-white">#1234</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="Portrait of Maria Silva" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-rU6Ka4mFbBFBkmi0Epl3HUDfE-6axtlc6S1yN54rlA3G9GouSiU5g2CsYjTUyf04mWkMyDGWUGl5sgv9RXAK-2oyJOwi0OKOJVSVpI-k-9shqSzMHs1W7P2VlnwUROUjUNtig-hx_U44uZFROujPtGU9pdw0s_Oo6iI7d739zKlY-A_Y3syFFHQ1tg05xrZTe5pdkrxc-eiCCOaHvi1uIBJL6iPmIcO2BXN0gz_WoGnIj5vAjqx8arSasroObNUdC-JAhwEEYtzU");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main dark:text-white">Maria Silva</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-secondary">Hoje, 10:30</td>
+<td class="px-6 py-4 text-sm text-text-secondary">3</td>
+<td class="px-6 py-4 text-sm font-semibold text-text-main dark:text-white">R$ 150,00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+<span class="size-1.5 rounded-full bg-amber-500"></span>
+                                                Aguardando Separação
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-primary/80 font-medium text-sm">Detalhes</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-text-main dark:text-white">#1235</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold text-xs">JS</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main dark:text-white">João Souza</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-secondary">Hoje, 10:15</td>
+<td class="px-6 py-4 text-sm text-text-secondary">1</td>
+<td class="px-6 py-4 text-sm font-semibold text-text-main dark:text-white">R$ 45,90</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Pronto para Envio
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-primary/80 font-medium text-sm">Detalhes</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-text-main dark:text-white">#1236</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="Portrait of Ana Clara" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD1gY_j-mU7NEgYl9VcRVvsdYd9Q99KYa-BYI6oAMvD1Wnt_gDtfP9yx0FGUzblaAjtYCQHP-Ir4vMDrFK_xuR1vGg8dnXh_kq2D9iDOr71ajglLuzpOpSDSI6rmxPUiR1GE1yrd-bHBNcVUunIl9MA8rMpFMLlqUMeo-SuGTT4KWpUcVPJIf9Ehg-9Xotb5lrDLF7Bfc8VVTyXhv79uZ0zNIak1CoIwyz3NHFWzZFt1CZANklaGpKqYS9JMVDfurfENb06KFujvf9N");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main dark:text-white">Ana Clara</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-secondary">Hoje, 09:45</td>
+<td class="px-6 py-4 text-sm text-text-secondary">2</td>
+<td class="px-6 py-4 text-sm font-semibold text-text-main dark:text-white">R$ 89,00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+<span class="size-1.5 rounded-full bg-amber-500"></span>
+                                                Aguardando Separação
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-primary/80 font-medium text-sm">Detalhes</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-text-main dark:text-white">#1237</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold text-xs">PS</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main dark:text-white">Pedro Santos</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-secondary">Ontem, 18:20</td>
+<td class="px-6 py-4 text-sm text-text-secondary">5</td>
+<td class="px-6 py-4 text-sm font-semibold text-text-main dark:text-white">R$ 210,50</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                                Pronto para Envio
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-primary/80 font-medium text-sm">Detalhes</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 text-sm font-medium text-text-main dark:text-white">#1238</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="Portrait of Carla Dias" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3sHZiTfUcOYenFxrAwcWj2S_ZcE3ZVkJkHtM1pWQmzlE2sigHuQCNQb54ldziQ7yXdHWCJrjzdUtU5g4ExVoMXA9hQe1qbPFyjHgQb5bLRv7-gMNa4Y6tpA0EMFQZfkIBZISJwsxS0iDNxHN_bYb36wNWQ_uts39Z28Oq15URVR27sCUrE5KlduZgLlU-hW27pHcsKeMrkkBxpMcdmwOUadltwI6BpkvSSW5Ap-fTtMNCqtkMu-VhdGxwklAN2NJqIqbzUGywTRVL");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main dark:text-white">Carla Dias</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-text-secondary">Ontem, 17:50</td>
+<td class="px-6 py-4 text-sm text-text-secondary">1</td>
+<td class="px-6 py-4 text-sm font-semibold text-text-main dark:text-white">R$ 30,00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+<span class="size-1.5 rounded-full bg-amber-500"></span>
+                                                Aguardando Separação
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-primary/80 font-medium text-sm">Detalhes</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/20 flex justify-center">
+<button class="text-xs font-medium text-text-secondary hover:text-primary transition-colors flex items-center gap-1">
+                                Carregar mais pedidos
+                                <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

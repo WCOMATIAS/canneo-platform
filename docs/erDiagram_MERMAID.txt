@@ -1,0 +1,557 @@
+erDiagram
+  %% =========================
+  %% CANNEO — MERMAID ER SCHEMA
+  %% (Telemedicina + Gateway/Ledger + Farmácia/Logística + Consent/Audit)
+  %% =========================
+
+  TENANT {
+    string id PK
+    string name
+    string slug UK
+    boolean isActive
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  USER {
+    string id PK
+    string tenantId FK
+    string email UK
+    string passwordHash
+    string role
+    string status
+    string fullName
+    string phone
+    datetime lastLoginAt
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  SESSION {
+    string id PK
+    string userId FK
+    string refreshTokenHash
+    datetime accessIssuedAt
+    datetime refreshExpiresAt
+    string deviceHash
+    string ipMasked
+    string userAgentHash
+    datetime revokedAt
+    datetime createdAt
+  }
+
+  MFA_SECRET {
+    string id PK
+    string userId FK
+    string type
+    string secretEnc
+    datetime enabledAt
+    datetime verifiedAt
+    datetime createdAt
+  }
+
+  DOCTOR {
+    string id PK
+    string tenantId FK
+    string userId UK_FK
+    string crmNumber
+    string crmUF
+    string specialty
+    string verifiedStatus
+    datetime verifiedAt
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  PATIENT {
+    string id PK
+    string tenantId FK
+    string userId UK_FK
+    string cpfEnc
+    datetime birthDate
+    string addressId FK
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  PHARMACY {
+    string id PK
+    string tenantId FK
+    string name
+    string cnpjEnc
+    string phone
+    string email
+    string addressId FK
+    string shippingOriginCep
+    float lat
+    float lng
+    int slaMinutes
+    boolean supportsPickup
+    boolean supportsDelivery
+    float rating
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  PHARMACY_USER {
+    string id PK
+    string pharmacyId FK
+    string userId UK_FK
+    datetime createdAt
+  }
+
+  ADDRESS {
+    string id PK
+    string street
+    string number
+    string complement
+    string district
+    string city
+    string state
+    string country
+    string cep
+    float lat
+    float lng
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  APPOINTMENT_SLOT {
+    string id PK
+    string doctorId FK
+    datetime startsAt
+    datetime endsAt
+    boolean isBooked
+    datetime createdAt
+  }
+
+  APPOINTMENT {
+    string id PK
+    string tenantId FK
+    string status
+    string doctorId FK
+    string patientId FK
+    string slotId UK_FK
+    string paymentIntentId FK
+    datetime startedAt
+    datetime endedAt
+    string notes
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  VIDEO_SESSION {
+    string id PK
+    string appointmentId UK_FK
+    string provider
+    string roomName
+    string roomUrl
+    string meetingId
+    string status
+    boolean recordingEnabled
+    boolean transcriptionEnabled
+    string recordingUrl
+    string transcriptionUrl
+    string transcriptionText
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  MEDICAL_RECORD {
+    string id PK
+    string patientId UK_FK
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  RECORD_ENTRY {
+    string id PK
+    string medicalRecordId FK
+    string authorUserId FK
+    string type
+    string content
+    datetime createdAt
+  }
+
+  PRESCRIPTION {
+    string id PK
+    string appointmentId FK
+    string doctorId FK
+    string patientId FK
+    string status
+    string productName
+    float thcPercent
+    float cbdPercent
+    string dosage
+    int durationDays
+    string quantityText
+    boolean sncrRequired
+    string sncrNumber
+    string sncrStatus
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  DOCUMENT {
+    string id PK
+    string medicalRecordId FK
+    string appointmentId FK
+    string prescriptionId FK
+    string type
+    string fileUrl
+    string hashPre
+    string hashPost
+    string signedByUserId FK
+    datetime signedAt
+    datetime createdAt
+  }
+
+  %% =========================
+  %% PAYMENTS CORE (LEDGER/WALLET)
+  %% =========================
+
+  WALLET {
+    string id PK
+    string tenantId FK
+    string ownerType
+    string ownerId
+    string currency
+    datetime createdAt
+  }
+
+  WALLET_BALANCE {
+    string id PK
+    string walletId UK_FK
+    int balanceTotal
+    int balancePending
+    int balanceAvailable
+    int balanceOnHold
+    int balanceWithdrawn
+    datetime updatedAt
+  }
+
+  LEDGER_ENTRY {
+    string id PK
+    string tenantId FK
+    string walletId FK
+    string direction
+    int amountCents
+    string currency
+    string entryType
+    string referenceType
+    string referenceId
+    string idempotencyKey
+    datetime createdAt
+  }
+
+  PAYMENT_INTENT {
+    string id PK
+    string tenantId FK
+    string kind
+    string method
+    string status
+    int amountCents
+    string currency
+    string customerUserId FK
+    datetime expiresAt
+    json metadata
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  PAYMENT_ATTEMPT {
+    string id PK
+    string paymentIntentId FK
+    string pspProvider
+    string pspPaymentId
+    string status
+    string failureCode
+    json rawPayload
+    datetime createdAt
+  }
+
+  WEBHOOK_EVENT {
+    string id PK
+    string provider
+    string eventId UK
+    string eventType
+    string status
+    datetime receivedAt
+    datetime processedAt
+    json rawPayload
+  }
+
+  FEE {
+    string id PK
+    string tenantId FK
+    string paymentIntentId UK_FK
+    int gatewayFeeCents
+    int canneoFeeCents
+    int otherFeeCents
+    int gatewayRateBps
+    int canneoRateBps
+    datetime createdAt
+  }
+
+  HOLD {
+    string id PK
+    string tenantId FK
+    string paymentIntentId FK
+    string walletId FK
+    int amountCents
+    string reason
+    string status
+    datetime releaseAt
+    datetime createdAt
+    datetime releasedAt
+  }
+
+  REFUND {
+    string id PK
+    string tenantId FK
+    string paymentIntentId FK
+    int amountCents
+    string status
+    string reason
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  CHARGEBACK {
+    string id PK
+    string tenantId FK
+    string paymentIntentId FK
+    int amountCents
+    string status
+    datetime openedAt
+    datetime closedAt
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  BANK_ACCOUNT {
+    string id PK
+    string tenantId FK
+    string ownerType
+    string ownerId
+    string bankCode
+    string branch
+    string account
+    string accountDigit
+    string pixKeyEnc
+    datetime verifiedAt
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  WITHDRAWAL {
+    string id PK
+    string tenantId FK
+    string doctorId FK
+    string walletId FK
+    string bankAccountId FK
+    int amountCents
+    string currency
+    string status
+    datetime requestedAt
+    datetime processedAt
+    string failureReason
+    string pspProvider
+    string pspPayoutId
+  }
+
+  %% =========================
+  %% PHARMACY COMMERCE + SHIPPING
+  %% =========================
+
+  PRODUCT {
+    string id PK
+    string name
+    string description
+    string sku UK
+    boolean active
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  INVENTORY_ITEM {
+    string id PK
+    string pharmacyId FK
+    string productId FK
+    int priceCents
+    boolean inStock
+    int stockQty
+    datetime updatedAt
+  }
+
+  "ORDER" {
+    string id PK
+    string tenantId FK
+    string status
+    string patientId FK
+    string pharmacyId FK
+    string fulfillmentType
+    int subtotalCents
+    int shippingCents
+    int totalCents
+    string currency
+    string shippingAddressId FK
+    string paymentIntentId FK
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  ORDER_ITEM {
+    string id PK
+    string orderId FK
+    string productId FK
+    int quantity
+    int unitPriceCents
+    int lineTotalCents
+  }
+
+  SHIPPING_QUOTE {
+    string id PK
+    string orderId FK
+    string pharmacyId FK
+    string originCep
+    string destinationCep
+    string provider
+    string serviceName
+    string serviceCode
+    int priceCents
+    int deliveryDays
+    json rawPayload
+    datetime createdAt
+  }
+
+  SHIPMENT {
+    string id PK
+    string orderId UK_FK
+    string status
+    string provider
+    string serviceName
+    string serviceCode
+    string trackingCode
+    string labelUrl
+    string melhorEnvioCartId
+    string melhorEnvioShipmentId
+    datetime shippedAt
+    datetime deliveredAt
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  MELHOR_ENVIO_TOKEN {
+    string id PK
+    string pharmacyId UK_FK
+    string accessTokenEnc
+    string refreshTokenEnc
+    datetime expiresAt
+    string scope
+    datetime createdAt
+    datetime updatedAt
+  }
+
+  %% =========================
+  %% CONSENTS & AUDIT
+  %% =========================
+
+  CONSENT {
+    string id PK
+    string tenantId FK
+    string userId FK
+    string type
+    string version
+    datetime acceptedAt
+    datetime revokedAt
+    string ipMasked
+    string userAgentHash
+  }
+
+  AUDIT_LOG {
+    string id PK
+    string tenantId FK
+    string actorUserId FK
+    string actorRole
+    string action
+    string resourceType
+    string resourceId
+    string correlationId
+    string ipMasked
+    string userAgentHash
+    json metadata
+    datetime createdAt
+  }
+
+  %% =========================
+  %% RELATIONSHIPS
+  %% =========================
+
+  TENANT ||--o{ USER : has
+  TENANT ||--o{ DOCTOR : has
+  TENANT ||--o{ PATIENT : has
+  TENANT ||--o{ PHARMACY : has
+  TENANT ||--o{ WALLET : has
+  TENANT ||--o{ AUDIT_LOG : logs
+  TENANT ||--o{ CONSENT : governs
+
+  USER ||--o{ SESSION : has
+  USER ||--o{ MFA_SECRET : has
+  USER ||--o| DOCTOR : is
+  USER ||--o| PATIENT : is
+  USER ||--o| PHARMACY_USER : is
+  USER ||--o{ CONSENT : accepts
+  USER ||--o{ AUDIT_LOG : actor
+  USER ||--o{ RECORD_ENTRY : writes
+  USER ||--o{ DOCUMENT : signs
+  USER ||--o{ PAYMENT_INTENT : customer
+
+  PATIENT }o--|| ADDRESS : lives_at
+  PHARMACY }o--|| ADDRESS : located_at
+
+  DOCTOR ||--o{ APPOINTMENT_SLOT : offers
+  DOCTOR ||--o{ APPOINTMENT : attends
+  PATIENT ||--o{ APPOINTMENT : books
+
+  APPOINTMENT }o--|| APPOINTMENT_SLOT : uses
+  APPOINTMENT }o--|| PAYMENT_INTENT : paid_by
+  APPOINTMENT ||--o| VIDEO_SESSION : has
+
+  PATIENT ||--o| MEDICAL_RECORD : owns
+  MEDICAL_RECORD ||--o{ RECORD_ENTRY : contains
+  MEDICAL_RECORD ||--o{ DOCUMENT : stores
+
+  APPOINTMENT ||--o{ PRESCRIPTION : generates
+  PRESCRIPTION ||--o{ DOCUMENT : outputs
+  APPOINTMENT ||--o{ DOCUMENT : attaches
+
+  PHARMACY ||--o{ PHARMACY_USER : has
+  PHARMACY ||--o{ INVENTORY_ITEM : stocks
+  PRODUCT ||--o{ INVENTORY_ITEM : listed_in
+
+  PATIENT ||--o{ "ORDER" : places
+  PHARMACY ||--o{ "ORDER" : fulfills
+  "ORDER" ||--o{ ORDER_ITEM : includes
+  PRODUCT ||--o{ ORDER_ITEM : item
+
+  "ORDER" }o--|| PAYMENT_INTENT : paid_by
+  "ORDER" ||--o| SHIPMENT : ships
+  PHARMACY ||--o{ SHIPPING_QUOTE : quotes
+  "ORDER" ||--o{ SHIPPING_QUOTE : has_quotes
+
+  PHARMACY ||--o| MELHOR_ENVIO_TOKEN : auth
+
+  WALLET ||--|| WALLET_BALANCE : balance
+  WALLET ||--o{ LEDGER_ENTRY : posts
+  PAYMENT_INTENT ||--o{ PAYMENT_ATTEMPT : attempts
+  PAYMENT_INTENT ||--o| FEE : fees
+  PAYMENT_INTENT ||--o{ HOLD : holds
+  PAYMENT_INTENT ||--o{ REFUND : refunds
+  PAYMENT_INTENT ||--o{ CHARGEBACK : chargebacks
+
+  DOCTOR ||--o{ WITHDRAWAL : requests
+  WALLET ||--o{ WITHDRAWAL : from
+  BANK_ACCOUNT ||--o{ WITHDRAWAL : to
+  DOCTOR ||--o{ BANK_ACCOUNT : has
+  PHARMACY ||--o{ BANK_ACCOUNT : has

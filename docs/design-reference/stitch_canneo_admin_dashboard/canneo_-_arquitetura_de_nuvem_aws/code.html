@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Arquitetura de Nuvem AWS</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "aws-orange": "#FF9900",
+                        "aws-blue": "#232F3E",
+                        "aws-compute": "#D86613",
+                        "aws-storage": "#277025",
+                        "aws-db": "#C925D1",
+                        "aws-network": "#8C4FFF",
+                        "success": "#10B981",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-body">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- Top Navigation -->
+<header class="flex flex-none items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#15202b] px-6 py-3 z-20 shadow-sm">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-[32px]">cloud_circle</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-[-0.015em] font-display">CANNEO</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-0.5 transition-colors" href="#">Arquitetura</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Monitoramento</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Segurança</a>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-700">
+<button class="flex items-center justify-center gap-2 h-9 px-4 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Operacional</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-center bg-cover" data-alt="User avatar profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBu07-80P7AIOnHfvOaRFnQxQpy17zzs-hCZN4aWSSLZcqxhhpytlBcFHQeQlbeoV_FP2dMTNsOYG3kJz7fJrq-z3omUNq_XbRqxL1vi7PFQN2okrmcPUPXJTZyol8MYZqkBKCJ0Cgslqi1J5GC0Dqsd_FHh37Dct9FLbKOLvYiRFPP5Q-PQH7dv9HkR_EylzCZ74gkZKszTob8tMgK_6c_GlVUzX_DhY2y6uTV6l-gBbuwF3aWDYTDI3WsXDEnlOfGzJY0V36maWW_");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex flex-1 overflow-hidden">
+<!-- Left Sidebar / Legend -->
+<aside class="w-64 flex-none border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#15202b] flex flex-col z-10 hidden lg:flex">
+<div class="p-4 border-b border-slate-200 dark:border-slate-800">
+<p class="text-xs font-bold text-slate-500 uppercase mb-3 font-display">Navegação</p>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+                            Topologia de Rede
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">database</span>
+                            Fluxo de Dados
+                        </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+                            Segurança &amp; WAF
+                        </a>
+</nav>
+</div>
+<div class="p-4 flex-1 overflow-y-auto">
+<p class="text-xs font-bold text-slate-500 uppercase mb-3 font-display">Legenda</p>
+<div class="space-y-3">
+<div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+<span class="size-3 rounded-full bg-aws-compute"></span>
+<span>Compute (EKS/EC2)</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+<span class="size-3 rounded-full bg-aws-db"></span>
+<span>Database (RDS)</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+<span class="size-3 rounded-full bg-aws-storage"></span>
+<span>Storage (S3)</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+<span class="size-3 rounded-full bg-aws-network"></span>
+<span>Networking (ALB/CF)</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+<span class="size-3 rounded-full bg-gray-400 border border-gray-500"></span>
+<span>External Integration</span>
+</div>
+</div>
+<div class="mt-8">
+<p class="text-xs font-bold text-slate-500 uppercase mb-3 font-display">Conformidade</p>
+<div class="flex items-center gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-800">
+<span class="material-symbols-outlined text-success">verified_user</span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-slate-800 dark:text-slate-200">LGPD Compliant</span>
+<span class="text-[10px] text-slate-500">Dados Criptografados</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Center Canvas Area -->
+<div class="flex-1 flex flex-col relative bg-slate-50 dark:bg-[#0b1116] overflow-hidden">
+<!-- Breadcrumbs & Heading -->
+<div class="absolute top-0 left-0 right-0 z-10 p-6 pointer-events-none bg-gradient-to-b from-slate-50 via-slate-50/90 to-transparent dark:from-[#0b1116] dark:via-[#0b1116]/90 pb-12">
+<div class="pointer-events-auto flex justify-between items-start">
+<div>
+<div class="flex items-center gap-2 text-sm text-slate-500 mb-1 font-display">
+<span class="hover:text-primary cursor-pointer">Infraestrutura</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-medium">Arquitetura AWS (Produção)</span>
+</div>
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white font-display">Topologia de Rede &amp; Infraestrutura</h1>
+<p class="text-slate-500 text-sm mt-1">Ambiente de produção us-east-1 • Última atualização: há 10 min</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center gap-2 h-9 px-4 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                                Exportar PDF
+                            </button>
+<button class="flex items-center justify-center gap-2 h-9 px-4 rounded-lg bg-primary text-white text-sm font-medium hover:bg-blue-600 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                                Atualizar
+                            </button>
+</div>
+</div>
+</div>
+<!-- DIAGRAM CANVAS -->
+<div class="flex-1 overflow-auto p-8 pt-32 pb-20 relative min-w-[800px]">
+<!-- Edge Layer -->
+<div class="flex justify-center mb-12">
+<div class="relative group">
+<div class="absolute -inset-4 bg-purple-100 dark:bg-purple-900/20 rounded-xl border border-dashed border-purple-300 dark:border-purple-700 z-0"></div>
+<div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-purple-100 dark:bg-purple-900/40 px-3 py-1 rounded-full text-xs font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wide border border-purple-200 dark:border-purple-700 z-10 whitespace-nowrap">
+                                Edge Location (Global)
+                            </div>
+<div class="flex gap-12 relative z-10">
+<!-- CloudFront -->
+<div class="flex flex-col items-center gap-2 cursor-pointer transition-transform hover:scale-105">
+<div class="size-16 bg-white dark:bg-slate-800 rounded-lg shadow-md border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-aws-network text-[36px]">public</span>
+</div>
+<div class="text-center">
+<p class="font-bold text-sm text-slate-800 dark:text-slate-200 font-display">CloudFront</p>
+<p class="text-xs text-slate-500">CDN Cache</p>
+</div>
+</div>
+<!-- WAF -->
+<div class="flex flex-col items-center gap-2 cursor-pointer transition-transform hover:scale-105">
+<div class="size-16 bg-white dark:bg-slate-800 rounded-lg shadow-md border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-red-500 text-[36px]">security</span>
+</div>
+<div class="text-center">
+<p class="font-bold text-sm text-slate-800 dark:text-slate-200 font-display">AWS WAF</p>
+<p class="text-xs text-slate-500">Firewall Rules</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Connection Line Vertical -->
+<div class="w-px h-12 bg-slate-300 dark:bg-slate-700 mx-auto -mt-12 mb-0 relative">
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 size-2 bg-slate-400 rounded-full"></div>
+</div>
+<!-- VPC Container -->
+<div class="border-2 border-slate-300 dark:border-slate-700 rounded-2xl p-8 pt-12 relative bg-white/50 dark:bg-slate-900/50 max-w-5xl mx-auto">
+<div class="absolute -top-4 left-8 bg-slate-200 dark:bg-slate-800 px-4 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-orange-500 text-lg">cloud</span>
+<span class="text-sm font-bold text-slate-800 dark:text-slate-200 font-display">VPC (us-east-1)</span>
+<span class="text-xs text-slate-500 border-l border-slate-400 pl-2">10.0.0.0/16</span>
+</div>
+<!-- Public Subnet -->
+<div class="mb-12 border border-dashed border-blue-300 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/10 rounded-xl p-6 relative">
+<div class="absolute -top-3 left-4 bg-blue-100 dark:bg-blue-900/50 px-3 py-0.5 rounded text-xs font-bold text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 uppercase">Public Subnet</div>
+<div class="flex justify-around items-center">
+<!-- ALB -->
+<div class="flex flex-col items-center gap-2 cursor-pointer group">
+<div class="size-14 bg-white dark:bg-slate-800 rounded-lg shadow-sm border-2 border-primary group-hover:shadow-md transition-all flex items-center justify-center relative">
+<span class="material-symbols-outlined text-aws-compute text-[32px]">alt_route</span>
+<div class="absolute -top-2 -right-2 size-4 bg-green-500 rounded-full border-2 border-white dark:border-slate-800"></div>
+</div>
+<div class="text-center">
+<p class="font-bold text-xs text-slate-800 dark:text-slate-200 font-display">Application Load Balancer</p>
+<p class="text-[10px] text-slate-500">Ingress Controller</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Connection Line Internal -->
+<div class="w-px h-8 bg-slate-300 dark:bg-slate-700 mx-auto -mt-12 mb-4"></div>
+<!-- Private Subnet -->
+<div class="border border-dashed border-slate-400 dark:border-slate-600 bg-slate-100/50 dark:bg-slate-800/30 rounded-xl p-6 relative grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="absolute -top-3 left-4 bg-slate-200 dark:bg-slate-700 px-3 py-0.5 rounded text-xs font-bold text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-600 uppercase">Private Subnet</div>
+<!-- Compute Column -->
+<div class="col-span-1 border-r border-slate-200 dark:border-slate-700/50 pr-4 flex flex-col items-center justify-center gap-6">
+<div class="w-full text-center mb-2">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Application Layer</span>
+</div>
+<!-- EKS Cluster -->
+<div class="w-full bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary cursor-pointer group transition-colors">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-aws-compute/10 flex items-center justify-center text-aws-compute">
+<span class="material-symbols-outlined text-2xl">grid_view</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm text-slate-800 dark:text-slate-200 font-display group-hover:text-primary">Amazon EKS Cluster</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-[10px] text-slate-500 bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded">v1.28</span>
+<span class="text-[10px] text-green-600 dark:text-green-400">● 5 Nodes</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Column -->
+<div class="col-span-2 pl-4">
+<div class="w-full text-center mb-4">
+<span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Data Layer</span>
+</div>
+<div class="flex justify-center gap-8 items-start h-full">
+<!-- RDS -->
+<div class="flex flex-col items-center gap-2 cursor-pointer group">
+<div class="size-14 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-primary transition-all flex items-center justify-center relative">
+<span class="material-symbols-outlined text-aws-db text-[32px]">database</span>
+<div class="absolute -bottom-2 -right-2 bg-white dark:bg-slate-800 rounded-full p-0.5 shadow-sm border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-xs text-slate-500">lock</span>
+</div>
+</div>
+<div class="text-center">
+<p class="font-bold text-xs text-slate-800 dark:text-slate-200 font-display">Amazon RDS</p>
+<p class="text-[10px] text-slate-500">PostgreSQL (Multi-AZ)</p>
+</div>
+</div>
+<!-- Connection Line Horizontal -->
+<div class="h-px w-12 bg-slate-300 dark:bg-slate-700 mt-7"></div>
+<!-- S3 -->
+<div class="flex flex-col items-center gap-2 cursor-pointer group">
+<div class="size-14 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-primary transition-all flex items-center justify-center relative">
+<span class="material-symbols-outlined text-aws-storage text-[32px]">folder_data</span>
+<div class="absolute -bottom-2 -right-2 bg-white dark:bg-slate-800 rounded-full p-0.5 shadow-sm border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-xs text-slate-500">lock</span>
+</div>
+</div>
+<div class="text-center">
+<p class="font-bold text-xs text-slate-800 dark:text-slate-200 font-display">Amazon S3</p>
+<p class="text-[10px] text-slate-500">Exames &amp; Imagens</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- External Integrations -->
+<div class="flex justify-center mt-12 gap-8 relative">
+<!-- Connecting Lines from VPC -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-px h-12 bg-slate-300 dark:bg-slate-700"></div>
+<div class="absolute -top-6 left-1/4 right-1/4 h-px bg-slate-300 dark:bg-slate-700"></div>
+<div class="absolute -top-6 left-1/4 w-px h-6 bg-slate-300 dark:bg-slate-700"></div>
+<div class="absolute -top-6 right-1/4 w-px h-6 bg-slate-300 dark:bg-slate-700"></div>
+<!-- Iugu -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm w-36 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-slate-500 mb-1">payments</span>
+<span class="font-bold text-xs font-display">Iugu / Stone</span>
+<span class="text-[10px] text-slate-400">Gateway Pagto</span>
+</div>
+<!-- WhatsApp -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm w-36 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-green-500 mb-1">chat</span>
+<span class="font-bold text-xs font-display">WhatsApp API</span>
+<span class="text-[10px] text-slate-400">Notificações</span>
+</div>
+<!-- WebRTC -->
+<div class="bg-white dark:bg-slate-800 p-3 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm w-36 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-blue-500 mb-1">video_call</span>
+<span class="font-bold text-xs font-display">WebRTC Provider</span>
+<span class="text-[10px] text-slate-400">Telemedicina</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Info Panel (Contextual) -->
+<aside class="w-80 flex-none border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-[#15202b] flex flex-col z-20 shadow-lg">
+<div class="p-5 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-bold text-lg font-display text-slate-900 dark:text-white">Detalhes</h3>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-5">
+<!-- Component Header -->
+<div class="flex items-start gap-4 mb-6">
+<div class="size-12 rounded bg-aws-db/10 flex items-center justify-center text-aws-db shrink-0">
+<span class="material-symbols-outlined text-3xl">database</span>
+</div>
+<div>
+<h4 class="font-bold text-base text-slate-900 dark:text-white leading-tight">Amazon RDS</h4>
+<p class="text-xs text-slate-500 mt-1">Managed Relational Database Service</p>
+</div>
+</div>
+<!-- Status -->
+<div class="mb-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Status</span>
+<span class="flex items-center gap-1.5 text-xs font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full border border-green-100 dark:border-green-900/30">
+<span class="size-1.5 rounded-full bg-green-500"></span> Available
+                            </span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mt-2">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<!-- Properties Table -->
+<div class="space-y-4 mb-8">
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Configuração</p>
+<div class="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3 space-y-2 border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Engine</span>
+<span class="font-medium text-slate-800 dark:text-slate-200">PostgreSQL 14.7</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Instance Class</span>
+<span class="font-medium text-slate-800 dark:text-slate-200">db.m6g.xlarge</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Storage</span>
+<span class="font-medium text-slate-800 dark:text-slate-200">500 GB (gp3)</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Deployment</span>
+<span class="font-medium text-slate-800 dark:text-slate-200">Multi-AZ</span>
+</div>
+</div>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Segurança (LGPD)</p>
+<div class="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3 space-y-3 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-[18px]">lock</span>
+<span>Encryption at Rest (KMS)</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-[18px]">vpn_lock</span>
+<span>SSL/TLS In-Transit</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-[18px]">history</span>
+<span>7 Days Backup Retention</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CloudWatch Integration -->
+<div>
+<div class="flex items-center justify-between mb-3">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Métricas (1h)</p>
+<a class="text-primary text-xs font-bold hover:underline" href="#">View CloudWatch</a>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-100 dark:border-slate-800">
+<p class="text-[10px] text-slate-500 mb-1">CPU Utilization</p>
+<p class="text-lg font-bold text-slate-800 dark:text-slate-200">12%</p>
+<div class="h-1 w-full bg-slate-200 dark:bg-slate-700 rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-primary w-[12%]"></div>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-100 dark:border-slate-800">
+<p class="text-[10px] text-slate-500 mb-1">Connections</p>
+<p class="text-lg font-bold text-slate-800 dark:text-slate-200">248</p>
+<div class="h-1 w-full bg-slate-200 dark:bg-slate-700 rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-green-500 w-[60%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#101922]">
+<button class="w-full py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-700 dark:text-slate-300 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        Gerenciar no Console AWS
+                    </button>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

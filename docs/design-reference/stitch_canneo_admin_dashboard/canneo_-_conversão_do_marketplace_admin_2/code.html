@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Dashboard de Conversão</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#36b7e2",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111d21",
+              "canneo-green": "#2bb063",
+              "canneo-blue-dark": "#0e171b",
+              "canneo-blue-light": "#e8f0f3",
+              "canneo-text-gray": "#508495",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-canneo-blue-dark dark:text-white h-screen flex overflow-hidden">
+<!-- Side Navigation -->
+<aside class="w-64 bg-white dark:bg-[#1a2c32] border-r border-gray-200 dark:border-gray-800 flex flex-col justify-between shrink-0 h-full">
+<div class="flex flex-col h-full">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3 mb-8">
+<div class="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">
+                        C
+                    </div>
+<div class="flex flex-col">
+<h1 class="text-canneo-blue-dark dark:text-white text-base font-bold leading-none tracking-tight">CANNEO</h1>
+<p class="text-canneo-text-gray text-xs font-medium mt-1">Admin Portal</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-[20px]">bar_chart</span>
+<span class="text-sm font-medium">Visão Geral</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] fill-1">filter_alt</span>
+<span class="text-sm font-bold">Funil de Vendas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-[20px]">receipt_long</span>
+<span class="text-sm font-medium">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-[20px]">storefront</span>
+<span class="text-sm font-medium">Farmácias</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary text-[20px]">inventory_2</span>
+<span class="text-sm font-medium">Produtos</span>
+</a>
+</nav>
+</div>
+<div class="p-4 mt-auto border-t border-gray-100 dark:border-gray-800">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-canneo-text-gray hover:bg-canneo-blue-light dark:hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+<div class="mt-4 flex items-center gap-3 px-3">
+<div class="h-9 w-9 rounded-full bg-cover bg-center ring-2 ring-gray-100 dark:ring-gray-700" data-alt="User avatar profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAQu8rpudSPcmKrdk0vD8JgKFcNFVnXyYamo619WrhEiEUoJ5RY-y9ML6LVUTqDI3lSk-DFM77-gVfOfNF7TshZAUsV-KhNKu76oRe8B5onOFtCIhbc041AY7UGAllZ-cVxgTdad4s0ISTJaMte9eCPNmkdni0jpH7n_xA2v41iCE3M39S21vTneby5SdrNueHM3XqrFo0-sExqA-untZC_7_ZiLgvB9sVjI3a0mHkfD-vMsYeeRKqpL0-OFDHduVnSSbGQ7fnw8NAk");'></div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-canneo-blue-dark dark:text-white">Dr. Ricardo S.</p>
+<p class="text-xs text-canneo-text-gray">Administrador</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Header -->
+<header class="h-16 bg-white dark:bg-[#1a2c32] border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-8 shrink-0 z-10">
+<h2 class="text-lg font-bold text-canneo-blue-dark dark:text-white">Dashboard de Conversão</h2>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">search</span>
+</div>
+<input class="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-lg text-sm text-gray-600 dark:text-gray-300 focus:ring-2 focus:ring-primary w-64 transition-all" placeholder="Buscar dados..." type="text"/>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#1a2c32]"></span>
+</button>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-8 bg-background-light dark:bg-background-dark">
+<div class="max-w-7xl mx-auto space-y-6">
+<!-- Filters Section -->
+<div class="flex flex-wrap items-center justify-between gap-4 bg-white dark:bg-[#1a2c32] p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-800">
+<div class="flex flex-wrap gap-3 items-center">
+<span class="text-sm font-semibold text-gray-500 mr-2">Filtros:</span>
+<!-- Period Filter -->
+<div class="relative">
+<button class="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm font-medium text-canneo-blue-dark dark:text-white border border-gray-200 dark:border-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_today</span>
+                                Últimos 30 dias
+                                <span class="material-symbols-outlined text-[18px] text-gray-400">expand_more</span>
+</button>
+</div>
+<!-- Category Filter -->
+<div class="relative">
+<button class="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm font-medium text-canneo-blue-dark dark:text-white border border-gray-200 dark:border-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-primary">category</span>
+                                Categoria: Todas
+                                <span class="material-symbols-outlined text-[18px] text-gray-400">expand_more</span>
+</button>
+</div>
+<!-- Source Filter -->
+<div class="relative">
+<button class="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-sm font-medium text-canneo-blue-dark dark:text-white border border-gray-200 dark:border-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-primary">traffic</span>
+                                Origem: Todas
+                                <span class="material-symbols-outlined text-[18px] text-gray-400">expand_more</span>
+</button>
+</div>
+</div>
+<button class="flex items-center gap-2 px-5 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-md shadow-primary/20 hover:bg-sky-500 transition-all">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Exportar Relatório
+                    </button>
+</div>
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Global Conversion Rate -->
+<div class="bg-white dark:bg-[#1a2c32] p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+<span class="material-symbols-outlined text-primary text-[24px]">trending_up</span>
+</div>
+<span class="flex items-center text-xs font-bold text-canneo-green bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">
+                                +0.2%
+                                <span class="material-symbols-outlined text-[14px] ml-0.5">arrow_upward</span>
+</span>
+</div>
+<h3 class="text-gray-500 text-sm font-medium mb-1">Taxa de Conversão Global</h3>
+<p class="text-3xl font-black text-canneo-blue-dark dark:text-white tracking-tight">2.4%</p>
+</div>
+<!-- Ticket Médio -->
+<div class="bg-white dark:bg-[#1a2c32] p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+<span class="material-symbols-outlined text-primary text-[24px]">payments</span>
+</div>
+<span class="flex items-center text-xs font-bold text-canneo-green bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">
+                                +R$ 12.50
+                                <span class="material-symbols-outlined text-[14px] ml-0.5">arrow_upward</span>
+</span>
+</div>
+<h3 class="text-gray-500 text-sm font-medium mb-1">Ticket Médio</h3>
+<p class="text-3xl font-black text-canneo-blue-dark dark:text-white tracking-tight">R$ 145,00</p>
+</div>
+<!-- Cart Abandonment -->
+<div class="bg-white dark:bg-[#1a2c32] p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-red-50 dark:bg-red-900/20 rounded-lg">
+<span class="material-symbols-outlined text-red-500 text-[24px]">shopping_cart_off</span>
+</div>
+<span class="flex items-center text-xs font-bold text-green-600 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">
+                                -1.5%
+                                <span class="material-symbols-outlined text-[14px] ml-0.5">arrow_downward</span>
+</span>
+</div>
+<h3 class="text-gray-500 text-sm font-medium mb-1">Abandono de Carrinho</h3>
+<p class="text-3xl font-black text-canneo-blue-dark dark:text-white tracking-tight">68%</p>
+</div>
+<!-- Best Seller -->
+<div class="bg-white dark:bg-[#1a2c32] p-6 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+<span class="material-symbols-outlined text-yellow-600 text-[24px]">star</span>
+</div>
+<span class="text-xs font-medium text-gray-500">1.2k vendas</span>
+</div>
+<h3 class="text-gray-500 text-sm font-medium mb-1">Produto Mais Vendido</h3>
+<p class="text-xl font-bold text-canneo-blue-dark dark:text-white tracking-tight line-clamp-1">Vitamina C 500mg</p>
+<p class="text-xs text-primary font-medium mt-1">Cimed</p>
+</div>
+</div>
+<!-- Main Analysis Section: Funnel & Chart -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Sales Funnel Visualization -->
+<div class="lg:col-span-2 bg-white dark:bg-[#1a2c32] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm p-6">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-lg font-bold text-canneo-blue-dark dark:text-white">Funil de Vendas</h3>
+<p class="text-sm text-gray-500">Fluxo de conversão do último período</p>
+</div>
+<button class="text-primary hover:text-blue-600 text-sm font-medium flex items-center gap-1">
+                                Ver detalhes
+                                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="space-y-4">
+<!-- Step 1: Views -->
+<div class="relative">
+<div class="flex items-center justify-between mb-2">
+<span class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+<span class="p-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-500 dark:text-gray-300 material-symbols-outlined text-[16px]">visibility</span>
+                                        Visualizações de Produtos
+                                    </span>
+<span class="font-bold text-canneo-blue-dark dark:text-white">150,000</span>
+</div>
+<div class="w-full h-12 bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden flex relative">
+<div class="h-full bg-primary/20 w-full rounded-r-lg" style="clip-path: polygon(0 0, 95% 0, 100% 50%, 95% 100%, 0 100%);"></div>
+</div>
+</div>
+<!-- Connector 1 -->
+<div class="flex justify-center -my-2 relative z-10">
+<div class="bg-white dark:bg-[#1a2c32] border border-gray-200 dark:border-gray-700 px-3 py-1 rounded-full text-xs font-bold text-gray-500 shadow-sm">
+                                    12% Conversão
+                                </div>
+</div>
+<!-- Step 2: Add to Cart -->
+<div class="relative">
+<div class="flex items-center justify-between mb-2">
+<span class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+<span class="p-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-500 dark:text-gray-300 material-symbols-outlined text-[16px]">shopping_cart</span>
+                                        Adições ao Carrinho
+                                    </span>
+<span class="font-bold text-canneo-blue-dark dark:text-white">18,000</span>
+</div>
+<div class="w-full h-12 bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden flex relative pl-[10%]">
+<div class="h-full bg-primary/40 w-[60%] rounded-r-lg" style="clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);"></div>
+</div>
+</div>
+<!-- Connector 2 -->
+<div class="flex justify-center -my-2 relative z-10">
+<div class="bg-white dark:bg-[#1a2c32] border border-gray-200 dark:border-gray-700 px-3 py-1 rounded-full text-xs font-bold text-gray-500 shadow-sm">
+                                    45% Conversão
+                                </div>
+</div>
+<!-- Step 3: Checkout -->
+<div class="relative">
+<div class="flex items-center justify-between mb-2">
+<span class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+<span class="p-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-500 dark:text-gray-300 material-symbols-outlined text-[16px]">credit_card</span>
+                                        Início do Checkout
+                                    </span>
+<span class="font-bold text-canneo-blue-dark dark:text-white">8,100</span>
+</div>
+<div class="w-full h-12 bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden flex relative pl-[20%]">
+<div class="h-full bg-primary/70 w-[35%] rounded-r-lg" style="clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%);"></div>
+</div>
+</div>
+<!-- Connector 3 -->
+<div class="flex justify-center -my-2 relative z-10">
+<div class="bg-white dark:bg-[#1a2c32] border border-gray-200 dark:border-gray-700 px-3 py-1 rounded-full text-xs font-bold text-gray-500 shadow-sm">
+                                    44% Conversão
+                                </div>
+</div>
+<!-- Step 4: Paid -->
+<div class="relative">
+<div class="flex items-center justify-between mb-2">
+<span class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300">
+<span class="p-1 bg-green-100 dark:bg-green-900/30 rounded text-green-600 dark:text-green-400 material-symbols-outlined text-[16px]">check_circle</span>
+                                        Pedidos Pagos
+                                    </span>
+<span class="font-bold text-canneo-green">3,600</span>
+</div>
+<div class="w-full h-12 bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden flex relative pl-[30%]">
+<div class="h-full bg-primary w-[20%] rounded-lg shadow-lg shadow-primary/20 flex items-center justify-end pr-4">
+<span class="text-white text-xs font-bold opacity-90">Sucesso</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Revenue Chart Column -->
+<div class="bg-white dark:bg-[#1a2c32] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm p-6 flex flex-col">
+<h3 class="text-lg font-bold text-canneo-blue-dark dark:text-white mb-2">Faturamento por Categoria</h3>
+<p class="text-sm text-gray-500 mb-8">Comparativo de performance</p>
+<div class="flex-1 flex flex-col justify-end space-y-4">
+<!-- Bar 1 -->
+<div class="space-y-1 group cursor-pointer">
+<div class="flex justify-between text-xs font-medium text-gray-500">
+<span>Genéricos</span>
+<span class="text-canneo-blue-dark dark:text-white group-hover:text-primary">R$ 450k</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[85%] group-hover:bg-blue-600 transition-colors"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div class="space-y-1 group cursor-pointer">
+<div class="flex justify-between text-xs font-medium text-gray-500">
+<span>Dermocosméticos</span>
+<span class="text-canneo-blue-dark dark:text-white group-hover:text-primary">R$ 320k</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+<div class="bg-primary/70 h-full rounded-full w-[65%] group-hover:bg-blue-500 transition-colors"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div class="space-y-1 group cursor-pointer">
+<div class="flex justify-between text-xs font-medium text-gray-500">
+<span>Higiene Pessoal</span>
+<span class="text-canneo-blue-dark dark:text-white group-hover:text-primary">R$ 180k</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+<div class="bg-primary/50 h-full rounded-full w-[35%] group-hover:bg-blue-400 transition-colors"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div class="space-y-1 group cursor-pointer">
+<div class="flex justify-between text-xs font-medium text-gray-500">
+<span>Infantil &amp; Mamãe</span>
+<span class="text-canneo-blue-dark dark:text-white group-hover:text-primary">R$ 120k</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+<div class="bg-primary/30 h-full rounded-full w-[25%] group-hover:bg-blue-300 transition-colors"></div>
+</div>
+</div>
+<!-- Bar 5 -->
+<div class="space-y-1 group cursor-pointer">
+<div class="flex justify-between text-xs font-medium text-gray-500">
+<span>Suplementos</span>
+<span class="text-canneo-blue-dark dark:text-white group-hover:text-primary">R$ 90k</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+<div class="bg-primary/20 h-full rounded-full w-[18%] group-hover:bg-blue-200 transition-colors"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-800 flex justify-between items-center">
+<span class="text-xs text-gray-400">Atualizado: Hoje 14:30</span>
+<button class="text-primary hover:text-blue-600 text-xs font-bold">Ver relatório completo</button>
+</div>
+</div>
+</div>
+<!-- Pharmacies Table -->
+<div class="bg-white dark:bg-[#1a2c32] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+<div>
+<h3 class="text-lg font-bold text-canneo-blue-dark dark:text-white">Conversão por Farmácia</h3>
+<p class="text-sm text-gray-500">Parceiros com maior volume de vendas</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                Filtrar
+                             </button>
+<button class="px-3 py-1.5 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                Colunas
+                             </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-medium">
+<tr>
+<th class="px-6 py-4">Farmácia Parceira</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Visitas</th>
+<th class="px-6 py-4 text-right">Pedidos</th>
+<th class="px-6 py-4 text-center">Taxa de Conv.</th>
+<th class="px-6 py-4 text-right">Receita Total</th>
+<th class="px-6 py-4 text-center">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-gray-100 dark:bg-gray-700 bg-cover bg-center" data-alt="Drogaria São Paulo Logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCju40S0dbCjwzjeyWEX3h5FOqtTn4C_TE3B2I6HkMe_IBQOTl1xTfUiIgOZWM0HJFF8t1k6eRYZ10a6Xc9s-O-O38TLkfjFfHl_FfGU8ffzSssnQD1cbxqlNn6kUogTNAVG9HvAOKB3IblACpWjqKnV19QO4sc77d0ON0ALCp_CmrXqnMqqlo4iiYEtx-1rd3LkjU-RPwZXiKCJG4_c4QAIk89dzKORFnWowuZxnXtOqQeRZRUpPYK7hSt05l4FP1yjVVjwJaUFb4K");'></div>
+<div class="flex flex-col">
+<span class="font-bold text-canneo-blue-dark dark:text-white">Drogaria Central</span>
+<span class="text-xs text-gray-400">São Paulo, SP</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                            Ativo
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right font-medium text-gray-600 dark:text-gray-300">45,230</td>
+<td class="px-6 py-4 text-right font-medium text-gray-600 dark:text-gray-300">1,850</td>
+<td class="px-6 py-4 text-center">
+<span class="text-canneo-green font-bold bg-green-50 dark:bg-green-900/10 px-2 py-1 rounded">4.1%</span>
+</td>
+<td class="px-6 py-4 text-right font-bold text-canneo-blue-dark dark:text-white">R$ 285.400</td>
+<td class="px-6 py-4 text-center">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-gray-100 dark:bg-gray-700 bg-cover bg-center" data-alt="Pharma Life Logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAk1oatzv8heuk4ODIDJoMlURF6UpFJMoStHJU1ueFYtHEYOyX8fyH07JrCi-EIuF1kinsXgg-s0CKZ641AfXtn0HAQSJ0X1eF_chDcVEx26d1SjAUjT-JbclAgwm37ldd9ZKA7KdH3TkUUq1IMX2HYbgTQEutGBziUNlaksN3YwKF20rS4gBFujLGpOz0k5uFXIuPJ8foHEov0SZklcVCHPAKmRNYk3-DH5gPtTmx3nrhP2CNXmFJ_uHZwvWl-xB51BOPRA8aFB7ha");'></div>
+<div class="flex flex-col">
+<span class="font-bold text-canneo-blue-dark dark:text-white">Pharma Life</span>
+<span class="text-xs text-gray-400">Rio de Janeiro, RJ</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                            Ativo
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right font-medium text-gray-600 dark:text-gray-300">32,100</td>
+<td class="px-6 py-4 text-right font-medium text-gray-600 dark:text-gray-300">890</td>
+<td class="px-6 py-4 text-center">
+<span class="text-yellow-600 font-bold bg-yellow-50 dark:bg-yellow-900/10 px-2 py-1 rounded">2.8%</span>
+</td>
+<td class="px-6 py-4 text-right font-bold text-canneo-blue-dark dark:text-white">R$ 142.200</td>
+<td class="px-6 py-4 text-center">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-gray-100 dark:bg-gray-700 bg-cover bg-center" data-alt="Rede Saúde Logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDYD4KAB4-yJcEi1iQf5sTrx-DLeGmjn59q7W5KRiIVYU3SwD63JYCpieHp_FQhxQ20L6FaSPC11LyxUy4HdtAC6YZYjzNWrxBiY4M9peh3eKyibSPL0aMwU42rvabjGxJatXs-5_4V4gxUwa_ziVh5G9rRC60zDlZqqK6xV2iXO2lp9LncbOZDouPYOdCjsWgsdg4Ye8ZFt3QZwdy4dnHFb_dosn-8b1yu232eEb1UKe74r0SsEx-8mWmo2-LFyHGfJKLX8ZHBFfFh");'></div>
+<div class="flex flex-col">
+<span class="font-bold text-canneo-blue-dark dark:text-white">Rede Saúde Mais</span>
+<span class="text-xs text-gray-400">Belo Horizonte, MG</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">
+<span class="w-1.5 h-1.5 rounded-full bg-yellow-500 dark:bg-yellow-400"></span>
+                                            Atenção
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right font-medium text-gray-600 dark:text-gray-300">15,400</td>
+<td class="px-6 py-4 text-right font-medium text-gray-600 dark:text-gray-300">230</td>
+<td class="px-6 py-4 text-center">
+<span class="text-red-600 font-bold bg-red-50 dark:bg-red-900/10 px-2 py-1 rounded">1.5%</span>
+</td>
+<td class="px-6 py-4 text-right font-bold text-canneo-blue-dark dark:text-white">R$ 38.450</td>
+<td class="px-6 py-4 text-center">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-[#1a2c32] flex items-center justify-between">
+<span class="text-xs text-gray-500">Mostrando 3 de 48 farmácias</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-400 hover:text-primary transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Privacidade e LGPD</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white h-screen flex overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-72 bg-white dark:bg-[#1e293b] border-r border-slate-200 dark:border-slate-700 flex flex-col h-full shrink-0 z-20">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 shadow-sm" data-alt="Abstract blue and white medical cross logo gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDWYqA6V61a8yOWW8BFtDjiqEdXreTORs_bfxsu-CxFZH69CnnUTDYMXjJYaZNyN2qArLIWpg0dwQydUHt2QB6d02onAWEj766xAc8n_p9D7KKlSvxF0QlSIUIxV0V-Pwjb5gqk14eUHHQ1eQ_zHawQYbPpPioNNi4lFfKZvVsFbBf74cnawkeLU_LNIGDsC77oShkCE6-7RpC5C9s8x19y-oFeOlMd4c6oRIUfZ3Mw31_8cUeKwKr2ykVbjJAV9Nof-poe2JJwcrU9");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-normal tracking-tight">CANNEO</h1>
+<p class="text-primary text-xs font-medium uppercase tracking-wider">Portal do Paciente</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium leading-normal">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">monitor_heart</span>
+<span class="text-sm font-medium leading-normal">Minha Saúde</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">calendar_month</span>
+<span class="text-sm font-medium leading-normal">Agendamentos</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined text-primary fill-1">shield_lock</span>
+<span class="text-sm font-bold leading-normal">Privacidade</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">account_circle</span>
+<span class="text-sm font-medium leading-normal">Perfil</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-200 dark:border-slate-700">
+<div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10" data-alt="Portrait of a smiling patient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDFwgi-UvAo3x8KIlOzPOkz--XOQDqB6824GYFlmGDLq7nSFF5EmR9a-vBwhPNNFcHt0-mFPlpR7eFULOL49Nzf3n3B89qZMvL45yXs5dZZfwQ8V27qokI_Yol1lbkVATSrW7YMcg0bRy613O5DMPPt1AwXkBEXhf55ephHqgGIRu7S8S-WSThc4EQ8ZDCgGCrbwP_p9E32mQvY0Dvmez1Cknm_RAlI3TOvW_1ou73EIzFf_WnzFptrPPISQtKDLKk9Zxb8PrW-t1ps");'></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-slate-900 dark:text-white text-sm font-bold truncate">Mariana Costa</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs truncate">Plano Premium</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark">
+<!-- Scrollable Area -->
+<div class="flex-1 overflow-y-auto">
+<div class="max-w-[1000px] mx-auto p-6 md:p-12 flex flex-col gap-8">
+<!-- Page Heading -->
+<header class="flex flex-col gap-3">
+<h1 class="text-slate-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">Privacidade e LGPD</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg font-normal leading-relaxed max-w-3xl">
+                        Gerencie seus consentimentos, controle seus dados e acompanhe o histórico de acessos conforme a Lei Geral de Proteção de Dados (LGPD).
+                    </p>
+</header>
+<hr class="border-slate-200 dark:border-slate-700"/>
+<!-- Section 1: Consentimentos -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-2 px-1">
+<span class="material-symbols-outlined text-primary">thumb_up</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">Meus Consentimentos</h2>
+</div>
+<div class="bg-white dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<!-- Toggle Item 1 -->
+<div class="p-5 border-b border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Uso de dados para Telemedicina</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-normal">Permite que médicos acessem seu histórico completo durante consultas virtuais na plataforma.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 dark:peer-focus:ring-primary/30 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item 2 -->
+<div class="p-5 border-b border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Alertas via WhatsApp</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-normal">Receba lembretes automáticos de consultas, exames e resultados diretamente no seu WhatsApp.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 dark:peer-focus:ring-primary/30 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item 3 -->
+<div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Pesquisa Clínica Anônima</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-normal">Contribua com a ciência compartilhando dados anonimizados para estudos estatísticos de saúde pública.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 dark:peer-focus:ring-primary/30 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Section 2: Gerenciar Meus Dados -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-2 px-1">
+<span class="material-symbols-outlined text-primary">folder_managed</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">Gerenciar Meus Dados</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card 1: Export -->
+<div class="bg-white dark:bg-[#1e293b] p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between gap-4 hover:border-primary/50 transition-colors">
+<div class="flex flex-col gap-2">
+<div class="size-10 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">download</span>
+</div>
+<h3 class="text-slate-900 dark:text-white font-bold">Portabilidade de Dados</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Baixe uma cópia completa do seu prontuário em formato aberto (JSON ou PDF).</p>
+</div>
+<button class="w-full py-2 px-4 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+                                Exportar
+                            </button>
+</div>
+<!-- Card 2: Revoke Access -->
+<div class="bg-white dark:bg-[#1e293b] p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between gap-4 hover:border-orange-300 transition-colors">
+<div class="flex flex-col gap-2">
+<div class="size-10 rounded-lg bg-orange-50 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center">
+<span class="material-symbols-outlined">lock_reset</span>
+</div>
+<h3 class="text-slate-900 dark:text-white font-bold">Revogar Acessos</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Remova imediatamente todas as permissões concedidas a clínicas e terceiros.</p>
+</div>
+<button class="w-full py-2 px-4 rounded-lg border border-orange-200 text-orange-700 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20 text-sm font-medium hover:bg-orange-100 dark:hover:bg-orange-900/40 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">block</span>
+                                Revogar
+                            </button>
+</div>
+<!-- Card 3: Delete Account -->
+<div class="bg-white dark:bg-[#1e293b] p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between gap-4 hover:border-red-300 transition-colors">
+<div class="flex flex-col gap-2">
+<div class="size-10 rounded-lg bg-red-50 dark:bg-red-900/30 text-red-600 flex items-center justify-center">
+<span class="material-symbols-outlined">delete_forever</span>
+</div>
+<h3 class="text-slate-900 dark:text-white font-bold">Excluir Conta</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Solicite a exclusão definitiva dos seus dados pessoais e de acesso.</p>
+</div>
+<button class="w-full py-2 px-4 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                                Solicitar Exclusão
+                            </button>
+</div>
+</div>
+</section>
+<!-- Section 3: Logs -->
+<section class="flex flex-col gap-4 mb-8">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">history</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">Registro de Acessos Recentes</h2>
+</div>
+<button class="text-primary text-sm font-medium hover:underline">Ver histórico completo</button>
+</div>
+<div class="bg-white dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+<thead class="bg-slate-50 dark:bg-slate-800 text-xs uppercase font-semibold text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
+<tr>
+<th class="px-6 py-4" scope="col">Data e Hora</th>
+<th class="px-6 py-4" scope="col">Agente</th>
+<th class="px-6 py-4" scope="col">Motivo / Ação</th>
+<th class="px-6 py-4 text-right" scope="col">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap">12/05/2024 - 14:30</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-200 dark:bg-slate-600 flex items-center justify-center text-[10px] font-bold text-slate-600 dark:text-slate-300">DS</div>
+                                                Dr. Silva (Cardiologia)
+                                            </div>
+</td>
+<td class="px-6 py-4">Consulta de Prontuário</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center gap-1 rounded-full bg-green-50 dark:bg-green-900/30 px-2 py-1 text-xs font-semibold text-green-700 dark:text-green-400">
+<span class="h-1.5 w-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                                Autorizado
+                                            </span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap">10/05/2024 - 09:15</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-[10px] font-bold text-blue-600 dark:text-blue-300">LE</div>
+                                                Lab. Exames Plus
+                                            </div>
+</td>
+<td class="px-6 py-4">Inserção de Resultados (Hemograma)</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center gap-1 rounded-full bg-green-50 dark:bg-green-900/30 px-2 py-1 text-xs font-semibold text-green-700 dark:text-green-400">
+<span class="h-1.5 w-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                                Autorizado
+                                            </span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap">05/05/2024 - 18:20</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-[10px] font-bold text-purple-600 dark:text-purple-300">SY</div>
+                                                Sistema CANNEO
+                                            </div>
+</td>
+<td class="px-6 py-4">Backup Automático Diário</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center gap-1 rounded-full bg-slate-100 dark:bg-slate-700 px-2 py-1 text-xs font-semibold text-slate-600 dark:text-slate-400">
+                                                Automático
+                                            </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<footer class="flex flex-col items-center justify-center py-6 text-center gap-2 border-t border-slate-200 dark:border-slate-700 mt-auto">
+<p class="text-slate-500 dark:text-slate-400 text-sm">
+                        Seus dados são protegidos conforme a Lei nº 13.709/2018 (LGPD).
+                    </p>
+<a class="text-primary hover:text-blue-700 dark:hover:text-blue-400 text-sm font-semibold flex items-center gap-1" href="#">
+                        Política de Privacidade Completa
+                        <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</footer>
+</div>
+</div>
+</main>
+</body></html>

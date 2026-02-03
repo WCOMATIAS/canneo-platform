@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Relatórios por Especialidade</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#36b7e2",
+                        "secondary": "#078836",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111d21",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for table if needed */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1e1e6;
+            border-radius: 10px;
+        }
+        /* Donut Chart CSS */
+        .donut-chart {
+            background: conic-gradient(
+                #36b7e2 0% 35%, 
+                #078836 35% 60%, 
+                #818cf8 60% 80%, 
+                #cbd5e1 80% 100%
+            );
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0e171b] antialiased">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-64 flex-shrink-0 flex flex-col bg-surface-light border-r border-[#e8f0f3] h-full hidden md:flex">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<!-- Logo / User Area -->
+<div class="flex gap-3 items-center px-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shadow-sm" data-alt="Admin profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmyXf14a9wrF4x0DGobKpic9rPDCX9zYs39qBZ9rO3JszcwYOPT_28cAdKQ2TWK96u7oDPZGXEF3KyfDSOuUynFlclmgpZ4nzH2501qLUnF10cuHyCj-Z-lSf4xFRg8eKc-TICh0-VkCs52r86DYL3IJSYSSpddHilMztAnpv0E-lvsCXDfYrOcyhNwEmQRaJEAnmtryAMOjJn5dARz5i79jzr5ja9dEytd3rygArO_MBlXxR351TNjirJW0Qrsk3hFQb9mQ_lBO2y");'></div>
+<div class="flex flex-col">
+<h1 class="text-[#0e171b] text-base font-bold leading-normal">Admin Portal</h1>
+<p class="text-[#508495] text-xs font-normal leading-normal">CANNEO Saúde</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium leading-normal">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium leading-normal">Usuários</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">account_balance_wallet</span>
+<span class="text-sm font-medium leading-normal">Financeiro</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] fill-1">pie_chart</span>
+<span class="text-sm font-bold leading-normal">Relatórios</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium leading-normal">Configurações</span>
+</a>
+</nav>
+</div>
+<div class="px-2">
+<button class="flex items-center gap-3 px-3 py-2 w-full text-left text-[#508495] hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[24px]">logout</span>
+<span class="text-sm font-medium leading-normal">Sair</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto bg-background-light">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-6 md:px-12 flex flex-1 justify-center py-8">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1 gap-6">
+<!-- Header Section -->
+<div class="flex flex-col gap-4">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 items-center">
+<a class="text-[#508495] text-sm font-medium leading-normal hover:text-primary" href="#">Home</a>
+<span class="text-[#508495] text-sm font-medium leading-normal">/</span>
+<a class="text-[#508495] text-sm font-medium leading-normal hover:text-primary" href="#">Relatórios</a>
+<span class="text-[#508495] text-sm font-medium leading-normal">/</span>
+<span class="text-[#0e171b] text-sm font-medium leading-normal">Especialidades</span>
+</div>
+<!-- Page Heading & Actions -->
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h2 class="text-[#0e171b] text-3xl md:text-4xl font-black leading-tight tracking-tight">Relatórios por Especialidade</h2>
+<p class="text-[#508495] text-base font-normal leading-normal">Análise detalhada de performance clínica e financeira por área médica.</p>
+</div>
+<button class="flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-wide shadow-sm hover:bg-[#2da1c9] transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="truncate">Exportar Relatório</span>
+</button>
+</div>
+<!-- Filters (Chips) -->
+<div class="flex gap-3 flex-wrap items-center mt-2">
+<div class="relative group">
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#d1e1e6] pl-4 pr-3 hover:border-primary/50 transition-colors shadow-sm">
+<p class="text-[#0e171b] text-sm font-medium">Período: Últimos 30 dias</p>
+<span class="material-symbols-outlined text-[20px] text-[#508495]">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#d1e1e6] pl-4 pr-3 hover:border-primary/50 transition-colors shadow-sm">
+<p class="text-[#0e171b] text-sm font-medium">Status: Concluída</p>
+<span class="material-symbols-outlined text-[20px] text-[#508495]">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#d1e1e6] pl-4 pr-3 hover:border-primary/50 transition-colors shadow-sm">
+<p class="text-[#0e171b] text-sm font-medium">Tipo: Todas</p>
+<span class="material-symbols-outlined text-[20px] text-[#508495]">keyboard_arrow_down</span>
+</button>
+</div>
+<button class="text-primary text-sm font-bold hover:underline ml-auto md:ml-2">Limpar Filtros</button>
+</div>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card 1 -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white border border-[#e8f0f3] shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<p class="text-[#508495] text-sm font-medium uppercase tracking-wider">Especialidade Top</p>
+<div class="p-2 bg-primary/10 rounded-full text-primary">
+<span class="material-symbols-outlined text-[20px]">trophy</span>
+</div>
+</div>
+<div>
+<p class="text-[#0e171b] text-2xl font-bold leading-tight">Neurologia</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">trending_up</span>
+<p class="text-secondary text-sm font-semibold">+12% <span class="text-[#9abdc9] font-normal">vs. mês anterior</span></p>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white border border-[#e8f0f3] shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<p class="text-[#508495] text-sm font-medium uppercase tracking-wider">Ticket Médio</p>
+<div class="p-2 bg-primary/10 rounded-full text-primary">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</div>
+</div>
+<div>
+<p class="text-[#0e171b] text-2xl font-bold leading-tight">R$ 350,00</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">trending_up</span>
+<p class="text-secondary text-sm font-semibold">+5% <span class="text-[#9abdc9] font-normal">em faturamento</span></p>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col gap-3 rounded-xl p-6 bg-white border border-[#e8f0f3] shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<p class="text-[#508495] text-sm font-medium uppercase tracking-wider">Taxa de Retorno</p>
+<div class="p-2 bg-primary/10 rounded-full text-primary">
+<span class="material-symbols-outlined text-[20px]">repeat</span>
+</div>
+</div>
+<div>
+<p class="text-[#0e171b] text-2xl font-bold leading-tight">24%</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">arrow_upward</span>
+<p class="text-secondary text-sm font-semibold">+2% <span class="text-[#9abdc9] font-normal">fidelização</span></p>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Grid: Chart & Table -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Chart Section -->
+<div class="flex flex-col rounded-xl bg-white border border-[#e8f0f3] shadow-sm p-6 lg:col-span-1">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-[#0e171b] text-lg font-bold">Distribuição</h3>
+<button class="text-primary text-sm font-medium hover:underline">Detalhes</button>
+</div>
+<div class="flex flex-col items-center justify-center gap-6">
+<!-- CSS Donut Chart -->
+<div class="relative size-48 donut-chart rounded-full flex items-center justify-center shadow-inner">
+<div class="bg-white size-32 rounded-full flex flex-col items-center justify-center shadow-sm z-10">
+<span class="text-3xl font-bold text-[#0e171b]">1.4k</span>
+<span class="text-xs text-[#508495]">Total Consultas</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="w-full flex flex-col gap-3 mt-2">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-[#36b7e2]"></div>
+<span class="text-[#0e171b] font-medium">Neurologia</span>
+</div>
+<span class="text-[#508495] font-medium">35%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-[#078836]"></div>
+<span class="text-[#0e171b] font-medium">Psiquiatria</span>
+</div>
+<span class="text-[#508495] font-medium">25%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-[#818cf8]"></div>
+<span class="text-[#0e171b] font-medium">Cannabis Med.</span>
+</div>
+<span class="text-[#508495] font-medium">20%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-[#cbd5e1]"></div>
+<span class="text-[#0e171b] font-medium">Outros</span>
+</div>
+<span class="text-[#508495] font-medium">20%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Table Section -->
+<div class="flex flex-col rounded-xl bg-white border border-[#e8f0f3] shadow-sm p-0 lg:col-span-2 overflow-hidden">
+<div class="p-6 border-b border-[#e8f0f3] flex flex-wrap gap-4 justify-between items-center bg-white">
+<h3 class="text-[#0e171b] text-lg font-bold">Detalhamento Financeiro e Clínico</h3>
+<div class="relative">
+<input class="h-9 rounded-lg border border-[#d1e1e6] bg-[#f8fbfb] pl-9 pr-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[#0e171b] placeholder:text-[#508495] w-48 md:w-64" placeholder="Buscar especialidade..." type="text"/>
+<span class="material-symbols-outlined text-[18px] text-[#508495] absolute left-2.5 top-2.5">search</span>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left text-sm whitespace-nowrap">
+<thead class="bg-[#f8fbfb] text-[#508495]">
+<tr>
+<th class="px-6 py-4 font-semibold">Especialidade</th>
+<th class="px-6 py-4 font-semibold text-center">Consultas</th>
+<th class="px-6 py-4 font-semibold text-right">Fat. Bruto</th>
+<th class="px-6 py-4 font-semibold text-right">Fat. Líquido</th>
+<th class="px-6 py-4 font-semibold text-center">Avaliação</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e8f0f3]">
+<!-- Row 1 -->
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 text-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">neurology</span>
+</div>
+<span class="font-medium text-[#0e171b]">Neurologia</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                                        490
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-medium text-[#0e171b]">R$ 171.500</td>
+<td class="px-6 py-4 text-right font-medium text-secondary">R$ 154.350</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="text-[#0e171b] font-bold">4.9</span>
+<span class="material-symbols-outlined text-[16px] text-amber-400 fill-1" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 text-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<span class="font-medium text-[#0e171b]">Psiquiatria</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                                        350
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-medium text-[#0e171b]">R$ 105.000</td>
+<td class="px-6 py-4 text-right font-medium text-secondary">R$ 94.500</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="text-[#0e171b] font-bold">4.8</span>
+<span class="material-symbols-outlined text-[16px] text-amber-400 fill-1" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 text-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">eco</span>
+</div>
+<span class="font-medium text-[#0e171b]">Cannabis Med.</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                                        280
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-medium text-[#0e171b]">R$ 98.000</td>
+<td class="px-6 py-4 text-right font-medium text-secondary">R$ 88.200</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="text-[#0e171b] font-bold">4.7</span>
+<span class="material-symbols-outlined text-[16px] text-amber-400 fill-1" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 text-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">healing</span>
+</div>
+<span class="font-medium text-[#0e171b]">Dor Crônica</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                                                        150
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-medium text-[#0e171b]">R$ 45.000</td>
+<td class="px-6 py-4 text-right font-medium text-secondary">R$ 40.500</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="text-[#0e171b] font-bold">4.9</span>
+<span class="material-symbols-outlined text-[16px] text-amber-400 fill-1" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 text-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">cardiology</span>
+</div>
+<span class="font-medium text-[#0e171b]">Cardiologia</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                                                        130
+                                                    </span>
+</td>
+<td class="px-6 py-4 text-right font-medium text-[#0e171b]">R$ 39.000</td>
+<td class="px-6 py-4 text-right font-medium text-secondary">R$ 35.100</td>
+<td class="px-6 py-4 text-center">
+<div class="flex items-center justify-center gap-1">
+<span class="text-[#0e171b] font-bold">4.6</span>
+<span class="material-symbols-outlined text-[16px] text-amber-400 fill-1" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-[#f8fbfb] px-6 py-4 border-t border-[#e8f0f3] flex items-center justify-between">
+<p class="text-sm text-[#508495]">Mostrando 1-5 de 12 especialidades</p>
+<div class="flex gap-2">
+<button class="size-8 rounded flex items-center justify-center border border-[#d1e1e6] bg-white text-[#508495] hover:bg-gray-50 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="size-8 rounded flex items-center justify-center border border-primary bg-primary text-white">1</button>
+<button class="size-8 rounded flex items-center justify-center border border-[#d1e1e6] bg-white text-[#508495] hover:bg-gray-50">2</button>
+<button class="size-8 rounded flex items-center justify-center border border-[#d1e1e6] bg-white text-[#508495] hover:bg-gray-50">3</button>
+<button class="size-8 rounded flex items-center justify-center border border-[#d1e1e6] bg-white text-[#508495] hover:bg-gray-50">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

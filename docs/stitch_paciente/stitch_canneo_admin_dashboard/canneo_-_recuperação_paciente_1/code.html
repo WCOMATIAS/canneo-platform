@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Adesão ao Clube de Saúde</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19e619",
+                        "canneo-blue": "#1a56db",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0e1b0e",
+                        "canneo-dark-green": "#0e1b0e",
+                        "canneo-soft-green": "#4e974e",
+                        "canneo-border": "#e2e8f0",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { @apply border-b-2 border-primary text-canneo-dark-green font-bold; }
+        .card-shadow { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display text-canneo-dark-green">
+<header class="w-full bg-white dark:bg-[#1a2e1a] border-b border-canneo-border dark:border-[#2a452a] sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg class="h-full w-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold tracking-tight">CANNEO</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-6 text-sm font-medium">
+<a class="text-canneo-soft-green hover:text-canneo-dark-green transition-colors" href="#">Produtos</a>
+<a class="text-canneo-soft-green hover:text-canneo-dark-green transition-colors" href="#">Meus Pedidos</a>
+<a class="text-primary font-bold" href="#">Clube de Saúde</a>
+</nav>
+<div class="h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold border border-slate-300">
+                JD
+            </div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<div class="w-full bg-[#e7f3e7] dark:bg-[#1a2e1a] py-12 border-b border-canneo-border dark:border-[#2a452a]">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="max-w-2xl text-center md:text-left">
+<span class="inline-block px-4 py-1 bg-primary/20 text-canneo-dark-green text-xs font-bold uppercase tracking-wider rounded-full mb-4">Clube de Saúde CANNEO</span>
+<h2 class="text-canneo-dark-green dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-tight mb-4">
+                    Seu tratamento sem interrupções e com economia
+                </h2>
+<p class="text-canneo-soft-green dark:text-gray-300 text-lg">
+                    Assine seus medicamentos e receba automaticamente em casa com descontos exclusivos e frete por nossa conta.
+                </p>
+</div>
+<div class="hidden lg:block relative">
+<div class="absolute -inset-4 bg-primary/20 blur-3xl rounded-full"></div>
+<img alt="Medicação" class="relative rounded-2xl w-64 h-64 object-cover shadow-2xl border-4 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO7oXvUpBin5cGsZzoqXutUjtF5MZ1xMONUl3kITNPS40vS44oXWpa2pzqtAeSC_GngSv6tNCOSZFDQh6KqK3FsahkK7Acs4oUhuWtiI8vc_KzQt_IbLk-0Vov2b9raZUPEzMawfPkbaINbIPiTfLZPMqx0qUwncsNi4w05-YcjRc81KVlG0XVP2H6izWTO7DPak11bq0oZpjq7arolJdAH0BgXOPgn67_lHVMxddl0CtgaS9UaE0-S3tHJpZ_twFfpKncFtVFCpIQ"/>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 py-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-white p-6 rounded-2xl border border-canneo-border flex items-start gap-4 card-shadow">
+<div class="bg-blue-50 p-3 rounded-xl text-canneo-blue">
+<span class="material-symbols-outlined text-3xl">local_shipping</span>
+</div>
+<div>
+<h3 class="font-bold text-lg">Frete Grátis</h3>
+<p class="text-sm text-slate-500">Em todas as suas recorrências para qualquer lugar do Brasil.</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-canneo-border flex items-start gap-4 card-shadow">
+<div class="bg-green-50 p-3 rounded-xl text-canneo-soft-green">
+<span class="material-symbols-outlined text-3xl">trending_down</span>
+</div>
+<div>
+<h3 class="font-bold text-lg">Descontos Progressivos</h3>
+<p class="text-sm text-slate-500">Economize até 20% conforme o plano de periodicidade escolhido.</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-canneo-border flex items-start gap-4 card-shadow">
+<div class="bg-yellow-50 p-3 rounded-xl text-yellow-600">
+<span class="material-symbols-outlined text-3xl">priority_high</span>
+</div>
+<div>
+<h3 class="font-bold text-lg">Prioridade no Estoque</h3>
+<p class="text-sm text-slate-500">Garanta seus medicamentos reservados antes de todo mundo.</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-grow space-y-8">
+<section>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="bg-canneo-dark-green text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                        Escolha a periodicidade
+                    </h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<label class="relative flex flex-col p-4 bg-white border-2 border-primary rounded-2xl cursor-pointer">
+<input checked="" class="sr-only" name="freq" type="radio"/>
+<span class="text-sm font-bold text-primary mb-1">MENSAL</span>
+<span class="text-xl font-bold">10% OFF</span>
+<span class="text-xs text-slate-400 mt-2">A cada 30 dias</span>
+<span class="absolute top-4 right-4 text-primary"><span class="material-symbols-outlined">check_circle</span></span>
+</label>
+<label class="relative flex flex-col p-4 bg-white border border-slate-200 rounded-2xl hover:border-slate-300 transition-all cursor-pointer">
+<input class="sr-only" name="freq" type="radio"/>
+<span class="text-sm font-bold text-slate-400 mb-1">TRIMESTRAL</span>
+<span class="text-xl font-bold">15% OFF</span>
+<span class="text-xs text-slate-400 mt-2">A cada 90 dias</span>
+</label>
+<label class="relative flex flex-col p-4 bg-white border border-slate-200 rounded-2xl hover:border-slate-300 transition-all cursor-pointer">
+<input class="sr-only" name="freq" type="radio"/>
+<span class="text-sm font-bold text-slate-400 mb-1">SEMESTRAL</span>
+<span class="text-xl font-bold">20% OFF</span>
+<span class="text-xs text-slate-400 mt-2">A cada 180 dias</span>
+</label>
+</div>
+</section>
+<section>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="bg-canneo-dark-green text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                        Seus medicamentos atuais
+                    </h3>
+<div class="space-y-4">
+<div class="bg-white border border-slate-200 p-5 rounded-2xl flex items-center gap-6">
+<div class="w-16 h-16 bg-slate-100 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-3xl">medication</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-lg">Óleo de CBD Full Spectrum 1500mg</h4>
+<p class="text-sm text-slate-500">Frasco 30ml • Uso Contínuo</p>
+<div class="mt-1 flex items-center gap-3">
+<span class="text-slate-400 line-through text-sm">R$ 450,00</span>
+<span class="text-primary font-bold">R$ 405,00/mês</span>
+</div>
+</div>
+<button class="px-6 py-2 bg-primary text-canneo-dark-green font-bold rounded-lg hover:bg-primary/90 transition-all shadow-sm">
+                                Ativar Assinatura
+                            </button>
+</div>
+<div class="bg-slate-50 border border-slate-100 p-5 rounded-2xl flex items-center gap-6 opacity-60">
+<div class="w-16 h-16 bg-slate-200 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-3xl">pill</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-lg">Cápsulas Softgel CBD 25mg</h4>
+<p class="text-sm text-slate-500">Pote 60 cápsulas • Uso Diário</p>
+<div class="mt-1 flex items-center gap-3">
+<span class="text-slate-400 line-through text-sm">R$ 290,00</span>
+<span class="text-primary font-bold">R$ 261,00/mês</span>
+</div>
+</div>
+<button class="px-6 py-2 bg-slate-300 text-slate-600 font-bold rounded-lg cursor-not-allowed">
+                                Já Assinado
+                            </button>
+</div>
+</div>
+</section>
+</div>
+<aside class="w-full lg:w-96">
+<div class="bg-white border border-canneo-border p-6 rounded-2xl card-shadow sticky top-24">
+<h3 class="text-xl font-bold mb-6">Resumo do Clube</h3>
+<div class="space-y-4 mb-6 border-b border-slate-100 pb-6">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Medicamentos (1 item)</span>
+<span class="font-medium">R$ 450,00</span>
+</div>
+<div class="flex justify-between text-sm text-primary font-medium">
+<span>Desconto Clube (10% OFF)</span>
+<span>- R$ 45,00</span>
+</div>
+<div class="flex justify-between text-sm text-primary font-medium">
+<span>Frete</span>
+<span class="uppercase">Grátis</span>
+</div>
+</div>
+<div class="mb-8">
+<div class="flex justify-between items-end mb-1">
+<span class="text-slate-700 font-bold">Total Recorrente</span>
+<span class="text-3xl font-black text-canneo-dark-green">R$ 405,00</span>
+</div>
+<p class="text-xs text-slate-400 text-right">Cobrança a cada 30 dias</p>
+</div>
+<div class="bg-primary/10 p-4 rounded-xl mb-8 flex items-center gap-3 border border-primary/20">
+<span class="material-symbols-outlined text-primary">savings</span>
+<div>
+<p class="text-xs text-canneo-dark-green font-bold">Você economiza</p>
+<p class="text-lg font-black text-primary leading-none">R$ 540,00 / ano</p>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-canneo-dark-green font-black rounded-xl hover:bg-primary/90 transition-all shadow-md flex items-center justify-center gap-2 group">
+                        Confirmar Assinatura Recorrente
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-[10px] text-slate-400 mt-4 text-center leading-relaxed">
+                        Ao confirmar, você concorda com os Termos do Clube de Saúde. A assinatura pode ser cancelada a qualquer momento sem custos adicionais.
+                    </p>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<footer class="bg-white border-t border-canneo-border py-12">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-3 opacity-50">
+<div class="size-6 text-canneo-dark-green">
+<svg class="h-full w-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="text-lg font-bold tracking-tight">CANNEO</h1>
+</div>
+<div class="flex gap-8 text-sm text-slate-500 font-medium">
+<a class="hover:text-primary transition-colors" href="#">Ajuda</a>
+<a class="hover:text-primary transition-colors" href="#">Termos de Uso</a>
+<a class="hover:text-primary transition-colors" href="#">Privacidade</a>
+</div>
+<p class="text-sm text-slate-400">© 2024 CANNEO Saúde. Todos os direitos reservados.</p>
+</div>
+</footer>
+
+</body></html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Log de Auditoria</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b8cee",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1a2632",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d141b] dark:text-gray-100 font-display transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-row overflow-x-hidden">
+<aside class="w-64 shrink-0 hidden lg:flex flex-col border-r border-[#cfdbe7] dark:border-gray-700 bg-surface-light dark:bg-surface-dark h-screen sticky top-0 z-10">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 px-2 py-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 border border-gray-200" data-alt="Logotipo geométrico abstrato representando cruz médica e folha" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpxCOXDnJhtcDbdIdgkS__vfclf26jDki3QXbOXGvhpx_vVWjaQibKliEobKW9a-rpCrdvQ4RbTRh_7ss_5b7M0mq03SKHBGKTlwlw4IL9fMi1a9Z9gIlimRolZRG5YUQJbJkBroi4PnZtw10DyemI28nbEctwr_Y27NDeSAPBanPaOkZFwE61obYPLhgf8S3BjAehvwf7vL350f619RKa3r0QlyuwPC6MMbdTGgXWyaWVxUMAjO4OS86DzcIhr7WQdDBPMpCVsOxh");'></div>
+<div class="flex flex-col">
+<h1 class="text-[#0d141b] dark:text-white text-base font-bold leading-normal">Admin CANNEO</h1>
+<p class="text-[#4c739a] dark:text-gray-400 text-xs font-normal leading-normal">Acesso Super Admin</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-[#0d141b] dark:text-gray-400 dark:group-hover:text-white">dashboard</span>
+<p class="text-[#0d141b] dark:text-gray-200 text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-[#0d141b] dark:text-gray-400 dark:group-hover:text-white">group</span>
+<p class="text-[#0d141b] dark:text-gray-200 text-sm font-medium leading-normal">Usuários</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-[#0d141b] dark:text-gray-400 dark:group-hover:text-white">storefront</span>
+<p class="text-[#0d141b] dark:text-gray-200 text-sm font-medium leading-normal">Marketplace</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 dark:bg-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-primary filled">receipt_long</span>
+<p class="text-primary text-sm font-bold leading-normal">Logs de Auditoria</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-[#0d141b] dark:text-gray-400 dark:group-hover:text-white">gavel</span>
+<p class="text-[#0d141b] dark:text-gray-200 text-sm font-medium leading-normal">Conformidade</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-[#0d141b] dark:text-gray-400 dark:group-hover:text-white">settings</span>
+<p class="text-[#0d141b] dark:text-gray-200 text-sm font-medium leading-normal">Configurações</p>
+</a>
+</nav>
+</div>
+<div class="px-3 pb-4">
+<button class="flex w-full items-center gap-3 rounded-lg px-3 py-2 hover:bg-red-50 dark:hover:bg-red-900/20 group transition-colors">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400">logout</span>
+<p class="text-red-600 dark:text-red-400 text-sm font-medium">Sair</p>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-y-auto">
+<header class="bg-surface-light dark:bg-surface-dark border-b border-[#cfdbe7] dark:border-gray-700 px-6 py-5 sticky top-0 z-20">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 max-w-[1400px] mx-auto">
+<div class="flex flex-col gap-1">
+<h1 class="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight tracking-tight flex items-center gap-2">
+                        Log de Auditoria do Sistema
+                        <span class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 text-xs px-2 py-0.5 rounded-full font-medium border border-green-200 dark:border-green-800">Ao Vivo</span>
+</h1>
+<p class="text-[#4c739a] dark:text-gray-400 text-sm font-normal">Monitore a integridade do sistema, ações de usuários e eventos de conformidade.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-surface-dark border border-[#cfdbe7] dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 text-[#0d141b] dark:text-white text-sm font-medium transition-all shadow-sm">
+<span class="material-symbols-outlined text-base">settings</span>
+<span>Configurar</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary hover:bg-blue-600 text-white text-sm font-bold shadow-md shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Exportar Log</span>
+</button>
+</div>
+</div>
+</header>
+<div class="p-6 md:p-8 max-w-[1400px] mx-auto w-full flex flex-col gap-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-surface-light dark:bg-surface-dark border border-[#cfdbe7] dark:border-gray-700 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">event_note</span>
+</div>
+<p class="text-[#4c739a] dark:text-gray-400 text-sm font-medium">Total de Eventos (24h)</p>
+<div class="flex items-end gap-2">
+<p class="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight">1.245</p>
+<span class="text-green-600 dark:text-green-400 text-xs font-semibold bg-green-50 dark:bg-green-900/30 px-1.5 py-0.5 rounded flex items-center">
+<span class="material-symbols-outlined text-[10px] mr-0.5">trending_up</span>+5%
+                        </span>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-surface-light dark:bg-surface-dark border border-[#cfdbe7] dark:border-gray-700 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-red-600">security</span>
+</div>
+<p class="text-[#4c739a] dark:text-gray-400 text-sm font-medium">Alertas de Segurança</p>
+<div class="flex items-end gap-2">
+<p class="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight">12</p>
+<span class="text-red-600 dark:text-red-400 text-xs font-semibold bg-red-50 dark:bg-red-900/30 px-1.5 py-0.5 rounded flex items-center">
+<span class="material-symbols-outlined text-[10px] mr-0.5">trending_up</span>+2%
+                        </span>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-surface-light dark:bg-surface-dark border border-[#cfdbe7] dark:border-gray-700 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-orange-500">warning</span>
+</div>
+<p class="text-[#4c739a] dark:text-gray-400 text-sm font-medium">Avisos Críticos</p>
+<div class="flex items-end gap-2">
+<p class="text-[#0d141b] dark:text-white text-2xl font-bold leading-tight">2</p>
+<span class="text-gray-500 dark:text-gray-400 text-xs font-medium bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">
+                                Sem alterações
+                            </span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4 bg-surface-light dark:bg-surface-dark rounded-xl border border-[#cfdbe7] dark:border-gray-700 p-4 shadow-sm">
+<div class="flex flex-col md:flex-row gap-4">
+<div class="flex-1">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-background-light dark:bg-[#101922] border border-[#cfdbe7] dark:border-gray-600 rounded-lg text-sm text-[#0d141b] dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow" placeholder="Buscar por ID, Nome ou Tipo de Evento..." type="text"/>
+</div>
+</div>
+<div class="w-full md:w-64">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[20px]">calendar_today</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-background-light dark:bg-[#101922] border border-[#cfdbe7] dark:border-gray-600 rounded-lg text-sm text-[#0d141b] dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow" placeholder="Selecionar Data" type="text"/>
+</div>
+</div>
+<button class="flex items-center justify-center gap-2 px-4 py-2.5 bg-background-light dark:bg-[#101922] border border-[#cfdbe7] dark:border-gray-600 rounded-lg text-sm font-medium text-[#0d141b] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                        Mais Filtros
+                    </button>
+</div>
+<div class="flex flex-wrap gap-2">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-white text-xs font-medium shadow-sm ring-1 ring-primary/20">
+                        Todos os Eventos
+                    </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background-light dark:bg-[#101922] border border-[#cfdbe7] dark:border-gray-600 hover:border-primary/50 text-[#0d141b] dark:text-gray-300 text-xs font-medium transition-all">
+<span class="material-symbols-outlined text-[16px] text-green-600">payments</span>
+                        Pagamentos
+                    </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background-light dark:bg-[#101922] border border-[#cfdbe7] dark:border-gray-600 hover:border-primary/50 text-[#0d141b] dark:text-gray-300 text-xs font-medium transition-all">
+<span class="material-symbols-outlined text-[16px] text-blue-500">prescriptions</span>
+                        Prescrições
+                    </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background-light dark:bg-[#101922] border border-[#cfdbe7] dark:border-gray-600 hover:border-primary/50 text-[#0d141b] dark:text-gray-300 text-xs font-medium transition-all">
+<span class="material-symbols-outlined text-[16px] text-red-500">security</span>
+                        Segurança
+                    </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background-light dark:bg-[#101922] border border-[#cfdbe7] dark:border-gray-600 hover:border-primary/50 text-[#0d141b] dark:text-gray-300 text-xs font-medium transition-all">
+<span class="material-symbols-outlined text-[16px] text-orange-500">lock</span>
+                        Logins
+                    </button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-[#cfdbe7] dark:border-gray-700 shadow-sm overflow-hidden flex-1 flex flex-col min-h-[500px]">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/50 border-b border-[#cfdbe7] dark:border-gray-700 text-xs uppercase text-gray-500 dark:text-gray-400 font-semibold tracking-wider">
+<th class="px-6 py-4 w-48">Data/Hora</th>
+<th class="px-6 py-4">Usuário</th>
+<th class="px-6 py-4">Tipo de Evento</th>
+<th class="px-6 py-4">Metadados</th>
+<th class="px-6 py-4 w-32">Status</th>
+<th class="px-6 py-4 w-12"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#cfdbe7] dark:divide-gray-700 text-sm">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">24 Out, 2023</span>
+<span class="text-xs text-gray-500 dark:text-gray-400 font-mono">10:42:15 AM</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xs font-bold border border-blue-200 dark:border-blue-800">DS</div>
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">Dr. Sarah Smith</span>
+<span class="text-xs text-primary">ID: DOC-8821</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500 text-[18px]">prescriptions</span>
+                                        Prescrição Assinada
+                                    </span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Rx #9921 para Paciente P-001</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<code class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-600 dark:text-gray-300 font-mono border border-gray-200 dark:border-gray-700">IP: 192.168.1.1</code>
+</td>
+<td class="px-6 py-4 align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50">
+<span class="material-symbols-outlined text-[14px] filled">check_circle</span>
+                                    Sucesso
+                                </span>
+</td>
+<td class="px-6 py-4 align-middle text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">24 Out, 2023</span>
+<span class="text-xs text-gray-500 dark:text-gray-400 font-mono">10:40:02 AM</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xs font-bold border border-purple-200 dark:border-purple-800">SI</div>
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">Sistema</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Automatizado</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-green-600 text-[18px]">payments</span>
+                                        Pagamento Aprovado
+                                    </span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Pedido #ORD-5542 - R$ 150,00</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<code class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-600 dark:text-gray-300 font-mono border border-gray-200 dark:border-gray-700">Gateway: Stripe</code>
+</td>
+<td class="px-6 py-4 align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50">
+<span class="material-symbols-outlined text-[14px] filled">check_circle</span>
+                                    Sucesso
+                                </span>
+</td>
+<td class="px-6 py-4 align-middle text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">24 Out, 2023</span>
+<span class="text-xs text-gray-500 dark:text-gray-400 font-mono">10:15:33 AM</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-center bg-cover border border-gray-200" data-alt="Logotipo do Fornecedor GreenLeaf" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDWfUpvNI9RZC4E9kjnnyuB2xMlod_U62syIN1jcL9y_Vp9vr6gTDyajdkx3Yae-JavaHup2xXLXtG3NNDRYsVTuBNB2O8-Nm5xSZpN1MaiP7KYVpfSnxk0hd_EZAQWDMIjAqFeVNN4lOvwQVxBLJsS_Kyr7AJhmv2QkCDSWcaELdoyi20j5mEFP6AUj6TzXo6N-KBLatY11JciP3acmRCNn9ObozO9z_peJ8YAC2PL2RBw0cOComKzX3faHnKt11k7pvwT_zuz2fzV");'></div>
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">Fornecedor GreenLeaf</span>
+<span class="text-xs text-primary">ID: VND-442</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500 text-[18px]">account_balance_wallet</span>
+                                        Saque Solicitado
+                                    </span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Valor: R$ 2.450,00</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<code class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-600 dark:text-gray-300 font-mono border border-gray-200 dark:border-gray-700">Req: WD-442</code>
+</td>
+<td class="px-6 py-4 align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800/50">
+<span class="material-symbols-outlined text-[14px] filled">pending</span>
+                                    Pendente
+                                </span>
+</td>
+<td class="px-6 py-4 align-middle text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="bg-red-50/50 dark:bg-red-900/10 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors group cursor-pointer">
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">24 Out, 2023</span>
+<span class="text-xs text-gray-500 dark:text-gray-400 font-mono">09:00:11 AM</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-300 text-xs font-bold border border-gray-300 dark:border-gray-600">JD</div>
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">Jane Doe</span>
+<span class="text-xs text-primary">ID: USR-9921</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-red-600 text-[18px]">lock</span>
+                                        Tentativa de Login Falhou
+                                    </span>
+<span class="text-xs text-red-600 dark:text-red-400">Múltiplas falhas detectadas</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<code class="text-xs bg-red-100 dark:bg-red-900/40 px-2 py-1 rounded text-red-800 dark:text-red-200 font-mono border border-red-200 dark:border-red-800">IP: 45.22.11.9</code>
+</td>
+<td class="px-6 py-4 align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800/50">
+<span class="material-symbols-outlined text-[14px] filled">warning</span>
+                                    Aviso
+                                </span>
+</td>
+<td class="px-6 py-4 align-middle text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">24 Out, 2023</span>
+<span class="text-xs text-gray-500 dark:text-gray-400 font-mono">08:45:12 AM</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 text-xs font-bold border border-teal-200 dark:border-teal-800">AM</div>
+<div class="flex flex-col">
+<span class="font-medium text-[#0d141b] dark:text-white">Admin: Mike</span>
+<span class="text-xs text-primary">ID: ADM-001</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<div class="flex flex-col gap-1">
+<span class="font-medium text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-500 text-[18px]">manage_accounts</span>
+                                        Função de Usuário Atualizada
+                                    </span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Alterou USR-9921 para 'Restrito'</span>
+</div>
+</td>
+<td class="px-6 py-4 align-top">
+<code class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-600 dark:text-gray-300 font-mono border border-gray-200 dark:border-gray-700">Ação: Role_Mod</code>
+</td>
+<td class="px-6 py-4 align-top">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50">
+<span class="material-symbols-outlined text-[14px] filled">check_circle</span>
+                                    Sucesso
+                                </span>
+</td>
+<td class="px-6 py-4 align-middle text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-gray-50 dark:bg-surface-dark border-t border-[#cfdbe7] dark:border-gray-700 p-4 flex items-center justify-between">
+<div class="text-sm text-gray-500 dark:text-gray-400">
+                        Mostrando <span class="font-medium text-[#0d141b] dark:text-white">1</span> a <span class="font-medium text-[#0d141b] dark:text-white">10</span> de <span class="font-medium text-[#0d141b] dark:text-white">1.245</span> resultados
+                    </div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded border border-[#cfdbe7] dark:border-gray-600 bg-white dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-300 disabled:opacity-50 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" disabled="">Anterior</button>
+<button class="px-3 py-1.5 rounded border border-[#cfdbe7] dark:border-gray-600 bg-white dark:bg-gray-800 text-sm font-medium text-[#0d141b] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Próximo</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Meus Cupons de Desconto</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "primary-dark": "#1a6bb8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1c2a38",
+                        "text-main": "#0d141b",
+                        "text-secondary": "#4c739a",
+                        "border-light": "#e7edf3",
+                        "border-dark": "#2d3b4a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white antialiased transition-colors duration-200">
+<div class="relative flex h-screen w-full overflow-hidden">
+<aside class="w-64 flex-none hidden md:flex flex-col bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark">
+<div class="flex flex-col h-full p-4">
+<div class="flex flex-col px-3 py-4 gap-1">
+<h1 class="text-primary text-xl font-bold tracking-tight">CANNEO</h1>
+<p class="text-text-secondary dark:text-slate-400 text-xs font-medium">Portal do Paciente</p>
+</div>
+<nav class="flex flex-col gap-2 mt-6 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">home</span>
+<span class="text-sm font-medium">Início</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">calendar_add_on</span>
+<span class="text-sm font-medium">Agendar Consulta</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">calendar_month</span>
+<span class="text-sm font-medium">Minhas Consultas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">description</span>
+<span class="text-sm font-medium">Documentos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">shopping_bag</span>
+<span class="text-sm font-medium">Comprar Medicamento</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">savings</span>
+<span class="text-sm font-semibold">Meus Cupons</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto">
+<div class="flex items-center gap-3 px-3 py-4 border-t border-border-light dark:border-border-dark">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-slate-500 dark:text-slate-300">logout</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-text-main dark:text-white">Sair</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full min-w-0 bg-background-light dark:bg-background-dark overflow-y-auto">
+<header class="flex-none sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-md px-6 py-3">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-1 rounded-md text-text-main dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-text-main dark:text-white">Central de Descontos</h2>
+</div>
+<div class="flex items-center gap-6">
+<label class="hidden sm:flex flex-col min-w-40 h-10 w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-slate-800">
+<div class="text-text-secondary dark:text-slate-400 flex border-none items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-text-secondary dark:placeholder:text-slate-500 px-3 text-sm font-normal text-text-main dark:text-white" placeholder="Buscar cupom, oferta..."/>
+</div>
+</label>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-text-main dark:text-white transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-surface-light dark:border-surface-dark"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Portrait of a smiling woman in a professional setting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABvBejPgBwcdFYVl68iJ__oVqimayPnxyprgDee2dFDENcmYRHwS8xboTlI_IVT0iGhZ7Vx4U8DWd0HLdHHRgQC75O-x35vCMZNRKb5B1Hk3MaT4VoQGyJfIhA8gSU-xYFXlisDQ5EmfXVjT2LxLbzSrydb5ZxohEqlwUSNPxfISy3JR7Ct1JjInGT8lRhVR1gvYO8VbCD9NxeJgodcRvtePhhxy7nGAd-ub3xZphrIkNDTsOU3LSKh6_XRxfuoK5ADkvbOXExf5by");'></div>
+</div>
+</div>
+</header>
+<div class="flex-1 w-full max-w-[1200px] mx-auto p-4 md:p-8 flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<nav class="flex text-sm text-text-secondary dark:text-slate-400 mb-2">
+<ol class="flex items-center space-x-2">
+<li><a class="hover:text-primary transition-colors" href="#">Início</a></li>
+<li><span class="material-symbols-outlined text-sm">chevron_right</span></li>
+<li><a class="hover:text-primary transition-colors" href="#">Financeiro</a></li>
+<li><span class="material-symbols-outlined text-sm">chevron_right</span></li>
+<li class="font-medium text-text-main dark:text-white">Meus Cupons</li>
+</ol>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl font-bold tracking-tight text-text-main dark:text-white">Meus Cupons de Desconto</h1>
+<p class="text-lg text-text-secondary dark:text-slate-400">Gerencie e resgate códigos promocionais para medicamentos e consultas.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6 shadow-sm">
+<h3 class="text-sm font-bold text-text-main dark:text-white uppercase tracking-wider mb-4">Adicionar Novo Cupom</h3>
+<div class="flex flex-col sm:flex-row gap-4">
+<div class="flex-1 relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary">sell</span>
+</div>
+<input class="pl-10 block w-full rounded-lg border-border-light dark:border-border-dark bg-slate-50 dark:bg-slate-800 text-text-main dark:text-white placeholder-text-secondary/60 focus:ring-primary focus:border-primary sm:text-sm py-3" placeholder="Insira o código do cupom aqui (ex: SAUDE10)" type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary-dark text-white font-medium py-3 px-6 rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                        Aplicar Código
+                    </button>
+</div>
+</div>
+<div class="border-b border-border-light dark:border-border-dark">
+<nav aria-label="Tabs" class="-mb-px flex space-x-8">
+<a class="border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">local_activity</span>
+                        Cupons Ativos
+                        <span class="bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-300 py-0.5 px-2 rounded-full text-xs ml-1">3</span>
+</a>
+<a class="border-transparent text-text-secondary dark:text-slate-400 hover:text-text-main dark:hover:text-slate-200 hover:border-slate-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+                        Cupons Utilizados
+                    </a>
+</nav>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-0 overflow-hidden shadow-sm hover:shadow-md transition-all">
+<div class="flex flex-col sm:flex-row">
+<div class="bg-blue-50 dark:bg-blue-900/10 p-6 flex flex-col items-center justify-center border-b sm:border-b-0 sm:border-r border-border-light dark:border-border-dark min-w-[140px] gap-2 border-dashed relative">
+<div class="absolute -left-2 top-1/2 -mt-2 w-4 h-4 rounded-full bg-background-light dark:bg-background-dark"></div>
+<div class="absolute -right-2 top-1/2 -mt-2 sm:hidden w-4 h-4 rounded-full bg-background-light dark:bg-background-dark"></div>
+<span class="material-symbols-outlined text-4xl text-primary">percent</span>
+<span class="text-2xl font-black text-primary tracking-tight">10%</span>
+<span class="text-xs font-bold text-primary/70 uppercase">OFF</span>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Primeira Consulta</h3>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
+                                            Válido
+                                        </span>
+</div>
+<p class="text-text-secondary dark:text-slate-400 text-sm mb-4">Ganhe 10% de desconto no agendamento da sua primeira consulta com especialista.</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-500">
+<span class="material-symbols-outlined text-sm">calendar_clock</span>
+                                        Válido até 30 Dez, 2024
+                                    </div>
+<button class="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-dashed border-primary/40 bg-primary/5 hover:bg-primary/10 text-primary font-bold text-sm transition-colors group/btn">
+<span class="uppercase tracking-wider">BOASVINDAS10</span>
+<span class="material-symbols-outlined text-sm group-hover/btn:scale-110 transition-transform">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-0 overflow-hidden shadow-sm hover:shadow-md transition-all">
+<div class="flex flex-col sm:flex-row">
+<div class="bg-green-50 dark:bg-green-900/10 p-6 flex flex-col items-center justify-center border-b sm:border-b-0 sm:border-r border-border-light dark:border-border-dark min-w-[140px] gap-2 border-dashed relative">
+<div class="absolute -left-2 top-1/2 -mt-2 w-4 h-4 rounded-full bg-background-light dark:bg-background-dark"></div>
+<div class="absolute -right-2 top-1/2 -mt-2 sm:hidden w-4 h-4 rounded-full bg-background-light dark:bg-background-dark"></div>
+<span class="material-symbols-outlined text-4xl text-green-600 dark:text-green-400">local_shipping</span>
+<span class="text-xl font-black text-green-600 dark:text-green-400 tracking-tight text-center leading-none">FRETE<br/>GRÁTIS</span>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Entrega Gratuita</h3>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
+                                            Válido
+                                        </span>
+</div>
+<p class="text-text-secondary dark:text-slate-400 text-sm mb-4">Frete grátis para todo o Brasil em compras de medicamentos acima de R$ 300,00.</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-2 text-xs text-text-secondary dark:text-slate-500">
+<span class="material-symbols-outlined text-sm">calendar_clock</span>
+                                        Válido até 15 Nov, 2024
+                                    </div>
+<button class="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-dashed border-green-500/40 bg-green-500/5 hover:bg-green-500/10 text-green-700 dark:text-green-400 font-bold text-sm transition-colors group/btn">
+<span class="uppercase tracking-wider">ENTREGAFREE</span>
+<span class="material-symbols-outlined text-sm group-hover/btn:scale-110 transition-transform">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="group bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-0 overflow-hidden shadow-sm hover:shadow-md transition-all">
+<div class="flex flex-col sm:flex-row">
+<div class="bg-purple-50 dark:bg-purple-900/10 p-6 flex flex-col items-center justify-center border-b sm:border-b-0 sm:border-r border-border-light dark:border-border-dark min-w-[140px] gap-2 border-dashed relative">
+<div class="absolute -left-2 top-1/2 -mt-2 w-4 h-4 rounded-full bg-background-light dark:bg-background-dark"></div>
+<div class="absolute -right-2 top-1/2 -mt-2 sm:hidden w-4 h-4 rounded-full bg-background-light dark:bg-background-dark"></div>
+<span class="material-symbols-outlined text-4xl text-purple-600 dark:text-purple-400">medication</span>
+<span class="text-2xl font-black text-purple-600 dark:text-purple-400 tracking-tight">R$ 50</span>
+<span class="text-xs font-bold text-purple-600/70 uppercase">VOUCHER</span>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Desconto em CBD</h3>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300">
+                                            Expira em breve
+                                        </span>
+</div>
+<p class="text-text-secondary dark:text-slate-400 text-sm mb-4">Voucher de R$ 50,00 para sua próxima compra de Óleo CBD Full Spectrum.</p>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-2 text-xs text-red-500 font-medium">
+<span class="material-symbols-outlined text-sm">error</span>
+                                        Expira em 2 dias
+                                    </div>
+<button class="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-dashed border-purple-500/40 bg-purple-500/5 hover:bg-purple-500/10 text-purple-700 dark:text-purple-400 font-bold text-sm transition-colors group/btn">
+<span class="uppercase tracking-wider">CBD50OFF</span>
+<span class="material-symbols-outlined text-sm group-hover/btn:scale-110 transition-transform">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="bg-gradient-to-br from-surface-light to-blue-50 dark:from-surface-dark dark:to-blue-900/20 rounded-xl border border-primary/20 p-5 shadow-sm relative overflow-hidden">
+<div class="absolute -right-6 -top-6 size-24 bg-blue-100 dark:bg-blue-800/30 rounded-full blur-2xl"></div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-xl">stars</span>
+<h3 class="text-sm font-bold text-primary dark:text-blue-300 uppercase tracking-wider">Recomendado para você</h3>
+</div>
+<div class="flex flex-col gap-4">
+<div>
+<h4 class="font-bold text-text-main dark:text-white text-lg">Indique e Ganhe</h4>
+<p class="text-sm text-text-secondary dark:text-slate-400 mt-1">Convide amigos para a CANNEO. Você ganha R$ 20 e eles também!</p>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-lg p-3 border border-border-light dark:border-border-dark flex items-center justify-between">
+<code class="text-sm font-mono text-text-main dark:text-white font-bold">MARIA8821</code>
+<button class="text-primary hover:text-primary-dark transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+<button class="w-full py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors shadow-sm">
+                                Compartilhar Link
+                            </button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+<h3 class="text-sm font-bold text-text-secondary dark:text-slate-400 uppercase tracking-wider mb-4 pb-2 border-b border-border-light dark:border-border-dark">Dica de Economia</h3>
+<div class="flex gap-4">
+<div class="size-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center flex-none">
+<span class="material-symbols-outlined">savings</span>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-sm text-text-main dark:text-slate-300 leading-snug">
+                                    Você comprou <b>Óleo de CBD</b> 3 vezes este ano. Assine nosso plano de recorrência e economize 15% em todas as compras.
+                                </p>
+<a class="text-xs font-bold text-primary hover:underline" href="#">Conhecer Plano de Assinatura →</a>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm flex items-center gap-4">
+<div class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-none text-text-secondary">
+<span class="material-symbols-outlined">help</span>
+</div>
+<div>
+<h4 class="font-bold text-text-main dark:text-white text-sm">Precisa de ajuda?</h4>
+<p class="text-xs text-text-secondary dark:text-slate-400 mt-0.5">Veja as regras de uso dos cupons</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(ls:*)",
+      "Bash(npx prisma db seed)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx swc:*)",
+      "Bash(npx next build)",
+      "Bash(npm install:*)",
+      "Bash(pm2 delete:*)",
+      "Bash(pm2 start:*)",
+      "Bash(PORT=3001 pm2 start:*)",
+      "Bash(PORT=3002 pm2 start:*)",
+      "Bash(PORT=3003 pm2 start:*)",
+      "Bash(PORT=3004 pm2 start:*)",
+      "Bash(pm2 status:*)",
+      "Bash(curl:*)",
+      "Bash(pm2 logs:*)",
+      "Bash(pm2 stop:*)",
+      "Bash(pm2 save:*)",
+      "Bash(grep:*)",
+      "Bash(apt update:*)",
+      "Bash(apt install:*)",
+      "Bash(ln:*)",
+      "Bash(nginx -t:*)",
+      "Bash(systemctl restart:*)",
+      "Bash(systemctl status:*)",
+      "Bash(certbot:*)",
+      "Bash(pm2 restart:*)",
+      "Bash(xargs:*)",
+      "Bash(cat:*)",
+      "Bash(unzip:*)",
+      "Bash(pnpm --filter admin build:*)",
+      "Bash(pm2 list:*)"
+    ]
+  }
+}

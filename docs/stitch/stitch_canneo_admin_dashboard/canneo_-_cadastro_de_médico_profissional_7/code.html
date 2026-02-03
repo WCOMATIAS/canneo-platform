@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Cadastro de Médico Profissional</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="text-primary">
+<svg class="size-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold text-[#0d141b] dark:text-white tracking-tight">CANNEO</h2>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-sm text-slate-500 dark:text-slate-400 hidden md:inline">Alterações salvas automaticamente</span>
+<button class="flex items-center justify-center rounded-lg h-10 px-6 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    Salvar e Sair
+                </button>
+<div class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto flex flex-col md:flex-row gap-8 px-6 py-10">
+<!-- Sidebar Navigation -->
+<aside class="w-full md:w-72 flex-shrink-0">
+<div class="sticky top-24 space-y-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="mb-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Seu Progresso</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Complete os passos abaixo</p>
+</div>
+<div class="flex flex-col gap-3 mb-6">
+<div class="flex items-center justify-between text-sm font-medium mb-1">
+<span>Concluído</span>
+<span class="text-primary">45%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 45%;"></div>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-semibold" href="#dados-pessoais">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="text-sm">Dados Pessoais</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#credenciais">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+<span class="text-sm">Credenciais</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#especialidades">
+<span class="material-symbols-outlined text-[20px]">stethoscope</span>
+<span class="text-sm">Especialidades</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#experiencia">
+<span class="material-symbols-outlined text-[20px]">psychiatry</span>
+<span class="text-sm">Experiência Cannabis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#documentacao">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+<span class="text-sm">Documentação</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#valores">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="text-sm">Valores</span>
+</a>
+</nav>
+</div>
+<div class="bg-green-50 dark:bg-green-900/10 border border-green-100 dark:border-green-800/20 rounded-xl p-4">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-green-600">verified_user</span>
+<div>
+<p class="text-sm font-bold text-green-800 dark:text-green-300">Ambiente Seguro</p>
+<p class="text-xs text-green-700/80 dark:text-green-400/80 mt-1">Seus dados estão protegidos conforme a LGPD.</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Form Content -->
+<div class="flex-1 max-w-[800px]">
+<div class="mb-10">
+<h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Perfil Profissional</h1>
+<p class="text-lg text-slate-500 dark:text-slate-400 mt-2">As informações abaixo serão analisadas pela nossa equipe clínica para validação do seu acesso à plataforma CANNEO.</p>
+</div>
+<form class="space-y-12">
+<!-- 1. Dados Pessoais -->
+<section class="scroll-mt-24" id="dados-pessoais">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center">1</span>
+                        Dados Pessoais
+                    </h2>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm">
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="flex flex-col items-center gap-3">
+<div class="relative size-32 rounded-full bg-slate-100 dark:bg-slate-800 border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center overflow-hidden group">
+<span class="material-symbols-outlined text-4xl text-slate-400">add_a_photo</span>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer">
+<span class="text-white text-xs font-bold">Alterar Foto</span>
+</div>
+<!-- Replace with img tag if needed -->
+</div>
+<p class="text-xs text-slate-500 text-center">Foto de perfil profissional (JPEG/PNG)</p>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nome Completo</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white" placeholder="Ex: Dr. João da Silva" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">CPF</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white" placeholder="000.000.000-00" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Data de Nascimento</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white" type="date"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Credenciais -->
+<section class="scroll-mt-24" id="credenciais">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center">2</span>
+                        Credenciais
+                    </h2>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-6">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Número do CRM</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white" placeholder="123456" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">UF</label>
+<select class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white">
+<option value="">Selecione</option>
+<option value="SP">São Paulo</option>
+<option value="RJ">Rio de Janeiro</option>
+<option value="MG">Minas Gerais</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">RQE (Opcional)</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white" placeholder="Registro de Especialidade" type="text"/>
+</div>
+</div>
+</section>
+<!-- 3. Especialidades -->
+<section class="scroll-mt-24" id="especialidades">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center">3</span>
+                        Especialidades e Qualificações
+                    </h2>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm space-y-6">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Especialidades Atendidas</label>
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                                    Neurologia <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                                    Psiquiatria <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<button class="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-dashed border-slate-300 text-slate-500 text-xs font-bold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span> Adicionar
+                                </button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Formação Acadêmica</label>
+<textarea class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white" placeholder="Descreva sua trajetória acadêmica principal..." rows="3"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Cursos e Certificações</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white" placeholder="Pós-graduação, Certificações Internacionais..." type="text"/>
+</div>
+</div>
+</section>
+<!-- 4. Experiência Cannabis -->
+<section class="scroll-mt-24" id="experiencia">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center">4</span>
+                        Experiência com Cannabis
+                    </h2>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tempo de experiência clínica</label>
+<select class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white">
+<option>Ainda não prescrevo</option>
+<option>Menos de 1 ano</option>
+<option>1 a 3 anos</option>
+<option>Mais de 3 anos</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Principais patologias tratadas com Cannabis</label>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+<label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/> Dor Crônica
+                                </label>
+<label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/> Epilepsia
+                                </label>
+<label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/> Ansiedade
+                                </label>
+<label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/> Insônia
+                                </label>
+<label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/> Parkinson
+                                </label>
+<label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/> Autismo
+                                </label>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Documentação -->
+<section class="scroll-mt-24" id="documentacao">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center">5</span>
+                        Documentação
+                    </h2>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Cédula do CRM (Frente/Verso)</p>
+<div class="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-primary mb-2 transition-colors">cloud_upload</span>
+<span class="text-sm text-slate-600 dark:text-slate-400">Arraste ou clique para enviar</span>
+<span class="text-xs text-slate-400 mt-1">PDF, JPG ou PNG até 5MB</span>
+</div>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Diploma de Medicina</p>
+<div class="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-6 flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-3xl text-slate-400 group-hover:text-primary mb-2 transition-colors">cloud_upload</span>
+<span class="text-sm text-slate-600 dark:text-slate-400">Arraste ou clique para enviar</span>
+<span class="text-xs text-slate-400 mt-1">PDF, JPG ou PNG até 5MB</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Valores -->
+<section class="scroll-mt-24" id="valores">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-sm flex items-center justify-center">6</span>
+                        Valores de Atendimento
+                    </h2>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Valor Médio da Consulta (R$)</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">R$</span>
+<input class="w-full pl-10 rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white" placeholder="0,00" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Duração Média da Consulta</label>
+<select class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-transparent focus:ring-primary focus:border-primary dark:text-white">
+<option>30 minutos</option>
+<option>45 minutos</option>
+<option>60 minutos</option>
+<option>Mais de 60 minutos</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Final Action -->
+<div class="pt-10 border-t border-slate-200 dark:border-slate-800">
+<div class="flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex-1">
+<label class="flex items-start gap-3 cursor-pointer">
+<input class="mt-1 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                                    Declaro que todas as informações prestadas são verdadeiras e estou ciente de que meu acesso será liberado após análise da equipe clínica da CANNEO. Concordo com os <a class="text-primary underline" href="#">Termos de Uso</a>.
+                                </span>
+</label>
+</div>
+<button class="w-full md:w-auto min-w-[300px] h-14 bg-primary text-white rounded-xl font-bold text-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-3">
+                            Finalizar Cadastro e Enviar
+                            <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+</main>
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 mt-20 py-10 px-6">
+<div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 opacity-50">
+<div class="text-slate-900 dark:text-white">
+<svg class="size-6" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+</svg>
+</div>
+<p class="text-sm font-bold text-slate-900 dark:text-white tracking-tight uppercase">CANNEO Portal</p>
+</div>
+<p class="text-xs text-slate-400">© 2024 CANNEO Tecnologias para Saúde. Todos os direitos reservados.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-500 hover:text-primary" href="#">Suporte</a>
+<a class="text-xs text-slate-500 hover:text-primary" href="#">Privacidade</a>
+<a class="text-xs text-slate-500 hover:text-primary" href="#">Ajuda</a>
+</div>
+</div>
+</footer>
+</body></html>

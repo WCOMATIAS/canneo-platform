@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Prescrição Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "primary-dark": "#1a6cb8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem", // rounded-md
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>.step-line::before {
+            content: '';
+            position: absolute;
+            left: 15px;top: 2.5rem;
+            bottom: -0.5rem;
+            width: 2px;
+            background-color: #e5e7eb;
+            z-index: 0;
+        }
+        .step-last::before {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="px-4 md:px-10 py-3 flex items-center justify-between">
+<div class="flex items-center gap-4 text-[#0d141b] dark:text-white">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-4xl">local_pharmacy</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">CANNEO</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold" href="#">Pacientes</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Medicamentos</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Configurações</a>
+</nav>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-700"></div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-9 px-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+<span class="material-symbols-outlined text-[20px] mr-2">help</span>
+<span>Ajuda</span>
+</button>
+<div class="relative group cursor-pointer">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 ring-2 ring-slate-100 dark:ring-slate-700" data-alt="Profile picture of the doctor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBwRvg9NGYvh2tCz8CdWbSAniIWgI6NkNw6Gjd_X1mGbj8IlvnTPSnWIIJyOEzAC856ntNihRxd8b9DRreP2Q1TMP5ck5-OZhpu_r2wBeUjFmowd7oAcVS5dW4zqghXq_F_8vsxUxvhI4lFaZgCuLCm_Hb51sy4vGCDDJ4pCYazoPly6HAJbYWAiUO9ZTLmhSSRNG-fjrDn1AqpAiSBFuhOGxrgszyIp38VivtJUzQgH0c0CvoNvx_R-MUN0kMyPLiBOf-SGbJjiHt1");'></div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-white dark:border-slate-800"></div>
+</div>
+</div>
+</div>
+<button class="md:hidden text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 w-full max-w-[1280px] mx-auto p-4 md:p-8 space-y-6">
+<div class="flex flex-wrap items-center gap-2 text-sm">
+<a class="text-slate-500 hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">home</span> Home
+        </a>
+<span class="text-slate-400">/</span>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Pacientes</a>
+<span class="text-slate-400">/</span>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">John Doe</a>
+<span class="text-slate-400">/</span>
+<span class="text-slate-900 dark:text-white font-medium">Prescrição Digital</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200 dark:border-slate-700">
+<div>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Prescrição Digital</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base">Preencha os detalhes abaixo para emitir o documento.</p>
+</div>
+<div class="flex gap-3">
+<button class="hidden sm:flex items-center gap-2 text-slate-600 dark:text-slate-300 font-medium hover:text-primary transition-colors px-3 py-2">
+<span class="material-symbols-outlined">history</span>
+                Histórico
+            </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<div class="lg:col-span-2 space-y-6">
+<section class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="bg-slate-50 dark:bg-slate-900/50 px-6 py-3 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">person</span> Paciente Selecionado
+                    </h3>
+<button class="text-primary text-sm font-medium hover:underline">Alterar</button>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-semibold mb-1">Nome Completo</p>
+<p class="text-slate-900 dark:text-white font-medium">John Doe</p>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-semibold mb-1">Data de Nascimento</p>
+<p class="text-slate-900 dark:text-white font-medium">12/05/1980 (44 anos)</p>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-semibold mb-1">CPF</p>
+<p class="text-slate-900 dark:text-white font-medium">***.456.789-**</p>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">medication</span>
+                        Detalhes da Medicação
+                    </h2>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+<span class="size-2 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span>
+                        Receita Controlada
+                    </span>
+</div>
+<div class="p-6 space-y-6">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Produto</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md text-sm focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-shadow" placeholder="Busque por nome comercial ou princípio ativo..." type="text" value="Extrato de Cannabis Sativa Full Spectrum 30ml"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">THC (%)</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md text-sm focus:ring-2 focus:ring-primary focus:border-primary dark:text-white" placeholder="0.0" type="number" value="0.3"/>
+<span class="absolute right-3 top-2.5 text-slate-400 text-sm font-medium">%</span>
+</div>
+<p class="text-xs text-amber-600 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                                Acima de 0.2% requer receita amarela.
+                            </p>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">CBD (%)</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md text-sm focus:ring-2 focus:ring-primary focus:border-primary dark:text-white" placeholder="0.0" type="number" value="10.0"/>
+<span class="absolute right-3 top-2.5 text-slate-400 text-sm font-medium">%</span>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Posologia</label>
+<button class="text-primary text-xs font-bold hover:underline">Inserir Modelo Padrão</button>
+</div>
+<textarea class="w-full min-h-[120px] px-4 py-3 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md text-sm focus:ring-2 focus:ring-primary focus:border-primary dark:text-white resize-y" placeholder="Descreva detalhadamente como o paciente deve utilizar o medicamento...">Iniciar com 5 gotas a cada 8 horas. Aumentar 1 gota por dose a cada 3 dias até atingir o efeito terapêutico desejado ou surgirem efeitos colaterais. Ingerir após refeições ricas em lipídios.</textarea>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="col-span-1 md:col-span-2 space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Quantidade</label>
+<div class="flex items-center">
+<button class="px-3 py-2.5 border border-r-0 border-slate-300 dark:border-slate-600 rounded-l-md bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-full text-center py-2.5 border-y border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-sm focus:ring-0 focus:border-slate-300" type="number" value="2"/>
+<button class="px-3 py-2.5 border border-l-0 border-slate-300 dark:border-slate-600 rounded-r-md bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Unidade</label>
+<select class="w-full px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md text-sm focus:ring-2 focus:ring-primary focus:border-primary dark:text-white">
+<option>Frascos</option>
+<option>Caixas</option>
+<option>Gramas</option>
+</select>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
+<button class="w-full sm:w-auto px-6 py-2.5 rounded-md text-slate-600 dark:text-slate-300 font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                            Salvar Rascunho
+                        </button>
+<div class="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
+<button class="flex items-center justify-center gap-2 px-6 py-2.5 rounded-md border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors bg-white dark:bg-slate-800">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                                Gerar PDF
+                            </button>
+<button class="flex items-center justify-center gap-2 px-6 py-2.5 rounded-md bg-primary hover:bg-primary-dark text-white font-bold text-sm shadow-md hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+                                Assinar com ICP-Brasil
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-6">Status do Documento</h3>
+<div class="relative pl-2">
+<div class="relative flex gap-4 pb-8 step-line">
+<div class="relative z-10 flex flex-col items-center">
+<div class="size-8 rounded-full bg-primary flex items-center justify-center text-white shadow-sm ring-4 ring-blue-50 dark:ring-slate-700">
+<span class="material-symbols-outlined text-[16px]">edit_document</span>
+</div>
+</div>
+<div class="pt-1">
+<p class="text-sm font-bold text-primary">Rascunho</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Criado em 24/05 às 10:00</p>
+</div>
+</div>
+<div class="relative flex gap-4 pb-8 step-line">
+<div class="relative z-10 flex flex-col items-center">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined text-[16px]">draw</span>
+</div>
+</div>
+<div class="pt-1">
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Assinada</p>
+<p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Aguardando certificado</p>
+</div>
+</div>
+<div class="relative flex gap-4 step-last">
+<div class="relative z-10 flex flex-col items-center">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+</div>
+</div>
+<div class="pt-1">
+<p class="text-sm font-semibold text-slate-500 dark:text-slate-400">Registrada</p>
+<p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Pendente de emissão</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 dark:bg-slate-800 rounded-lg border border-primary/20 dark:border-slate-700 p-5">
+<div class="flex gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">security</span>
+<h4 class="font-bold text-slate-900 dark:text-white text-sm">Segurança Jurídica</h4>
+</div>
+<p class="text-xs leading-relaxed text-slate-600 dark:text-slate-400 mb-3">
+                    Todas as prescrições emitidas pelo CANNEO seguem os padrões da RDC 660/2022 e Lei 13.989/2020 de Telemedicina.
+                </p>
+<a class="text-xs font-bold text-primary hover:underline" href="#">Ler diretrizes completas →</a>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="h-24 bg-gradient-to-r from-emerald-500 to-teal-600 flex items-center justify-center" data-alt="Abstract gradient representing cannabis product branding">
+<span class="material-symbols-outlined text-white/30 text-6xl">medication_liquid</span>
+</div>
+<div class="p-4">
+<p class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase mb-1">Produto Sugerido</p>
+<p class="text-sm font-medium text-slate-900 dark:text-white line-clamp-2">Extrato de Cannabis Sativa Full Spectrum 30ml</p>
+<div class="mt-3 flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-[10px] font-bold text-slate-600 dark:text-slate-300">THC 0.3%</span>
+<span class="px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-[10px] font-bold text-slate-600 dark:text-slate-300">CBD 10%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

@@ -1,0 +1,220 @@
+// CANNEO - Enums compartilhados (espelham o schema Prisma)
+
+export enum UserRole {
+  ADMIN = 'ADMIN',
+  OPERATIONS = 'OPERATIONS',
+  DOCTOR = 'DOCTOR',
+  PATIENT = 'PATIENT',
+  PHARMACY = 'PHARMACY',
+}
+
+export enum UserStatus {
+  ACTIVE = 'ACTIVE',
+  SUSPENDED = 'SUSPENDED',
+  DELETED = 'DELETED',
+}
+
+export enum MfaType {
+  TOTP = 'TOTP',
+  EMAIL_OTP = 'EMAIL_OTP',
+}
+
+export enum PaymentKind {
+  CONSULT = 'CONSULT',
+  ORDER = 'ORDER',
+  SUBSCRIPTION = 'SUBSCRIPTION',
+}
+
+export enum PaymentMethod {
+  PIX = 'PIX',
+  CARD_CREDIT = 'CARD_CREDIT',
+  CARD_DEBIT = 'CARD_DEBIT',
+}
+
+export enum PaymentIntentStatus {
+  CREATED = 'CREATED',
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  FAILED = 'FAILED',
+  EXPIRED = 'EXPIRED',
+  REFUNDED = 'REFUNDED',
+  CHARGEBACK = 'CHARGEBACK',
+}
+
+export enum AppointmentStatus {
+  DRAFT = 'DRAFT',
+  AWAITING_PAYMENT = 'AWAITING_PAYMENT',
+  CONFIRMED = 'CONFIRMED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  NO_SHOW = 'NO_SHOW',
+  CANCELLED = 'CANCELLED',
+  REFUNDED = 'REFUNDED',
+}
+
+export enum OrderStatus {
+  CREATED = 'CREATED',
+  PAYMENT_PENDING = 'PAYMENT_PENDING',
+  PAID = 'PAID',
+  PROCESSING = 'PROCESSING',
+  READY_FOR_PICKUP = 'READY_FOR_PICKUP',
+  SHIPPED = 'SHIPPED',
+  DELIVERED = 'DELIVERED',
+  CANCELLED = 'CANCELLED',
+  REFUNDED = 'REFUNDED',
+}
+
+export enum ShipmentStatus {
+  QUOTE_CREATED = 'QUOTE_CREATED',
+  LABEL_CREATED = 'LABEL_CREATED',
+  IN_TRANSIT = 'IN_TRANSIT',
+  OUT_FOR_DELIVERY = 'OUT_FOR_DELIVERY',
+  DELIVERED = 'DELIVERED',
+  FAILED = 'FAILED',
+  RETURNED = 'RETURNED',
+}
+
+export enum WithdrawalStatus {
+  REQUESTED = 'REQUESTED',
+  VALIDATING = 'VALIDATING',
+  SCHEDULED = 'SCHEDULED',
+  PROCESSING = 'PROCESSING',
+  PAID = 'PAID',
+  FAILED = 'FAILED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum WalletOwnerType {
+  PLATFORM = 'PLATFORM',
+  DOCTOR = 'DOCTOR',
+  PHARMACY = 'PHARMACY',
+  GATEWAY = 'GATEWAY',
+}
+
+export enum LedgerDirection {
+  CR = 'CR',
+  DR = 'DR',
+}
+
+export enum LedgerEntryType {
+  PAYMENT_APPROVED = 'PAYMENT_APPROVED',
+  GATEWAY_FEE = 'GATEWAY_FEE',
+  CANNEO_FEE = 'CANNEO_FEE',
+  DOCTOR_CREDIT_PENDING = 'DOCTOR_CREDIT_PENDING',
+  HOLD_APPLIED = 'HOLD_APPLIED',
+  HOLD_RELEASED = 'HOLD_RELEASED',
+  WITHDRAWAL_REQUESTED = 'WITHDRAWAL_REQUESTED',
+  WITHDRAWAL_PAID = 'WITHDRAWAL_PAID',
+  WITHDRAWAL_FAILED_RETURN = 'WITHDRAWAL_FAILED_RETURN',
+  REFUND = 'REFUND',
+  CHARGEBACK_HOLD = 'CHARGEBACK_HOLD',
+  ORDER_PAYMENT_APPROVED = 'ORDER_PAYMENT_APPROVED',
+  SHIPPING_FEE = 'SHIPPING_FEE',
+}
+
+export enum HoldReason {
+  ANTIFRAUD = 'ANTIFRAUD',
+  CHARGEBACK = 'CHARGEBACK',
+}
+
+export enum HoldStatus {
+  ACTIVE = 'ACTIVE',
+  RELEASED = 'RELEASED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum ConsentType {
+  TELECONSULTA = 'TELECONSULTA',
+  HEALTH_DATA = 'HEALTH_DATA',
+  RECORDING = 'RECORDING',
+  TRANSCRIPTION = 'TRANSCRIPTION',
+  GEOLOCATION = 'GEOLOCATION',
+  WHATSAPP = 'WHATSAPP',
+  EMAIL = 'EMAIL',
+}
+
+export enum ResourceType {
+  USER = 'USER',
+  DOCTOR = 'DOCTOR',
+  PATIENT = 'PATIENT',
+  PHARMACY = 'PHARMACY',
+  APPOINTMENT = 'APPOINTMENT',
+  PAYMENT_INTENT = 'PAYMENT_INTENT',
+  WITHDRAWAL = 'WITHDRAWAL',
+  ORDER = 'ORDER',
+  SHIPMENT = 'SHIPMENT',
+  PRESCRIPTION = 'PRESCRIPTION',
+  DOCUMENT = 'DOCUMENT',
+  MEDICAL_RECORD = 'MEDICAL_RECORD',
+}
+
+export enum WebhookProvider {
+  PSP = 'PSP',
+  DAILY = 'DAILY',
+  MELHOR_ENVIO = 'MELHOR_ENVIO',
+}
+
+export enum WebhookStatus {
+  RECEIVED = 'RECEIVED',
+  PROCESSED = 'PROCESSED',
+  FAILED = 'FAILED',
+}
+
+export enum PharmacyFulfillmentType {
+  DELIVERY = 'DELIVERY',
+  PICKUP = 'PICKUP',
+}
+
+export enum DoctorVerifiedStatus {
+  PENDING = 'PENDING',
+  VERIFIED = 'VERIFIED',
+  REJECTED = 'REJECTED',
+}
+
+export enum VideoSessionStatus {
+  CREATED = 'CREATED',
+  STARTED = 'STARTED',
+  ENDED = 'ENDED',
+}
+
+export enum PrescriptionStatus {
+  DRAFT = 'DRAFT',
+  SIGNED = 'SIGNED',
+  SNCR_REGISTERED = 'SNCR_REGISTERED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum RecordEntryType {
+  EVOLUTION = 'EVOLUTION',
+  NOTE = 'NOTE',
+  EXAM = 'EXAM',
+  ATTACHMENT = 'ATTACHMENT',
+}
+
+export enum DocumentType {
+  PRESCRIPTION = 'PRESCRIPTION',
+  LAUDO = 'LAUDO',
+  ATESTADO = 'ATESTADO',
+  TCLE = 'TCLE',
+  EXAM_RESULT = 'EXAM_RESULT',
+}
+
+export enum PaymentAttemptStatus {
+  INITIATED = 'INITIATED',
+  AUTHORIZED = 'AUTHORIZED',
+  CAPTURED = 'CAPTURED',
+  FAILED = 'FAILED',
+}
+
+export enum RefundStatus {
+  REQUESTED = 'REQUESTED',
+  PAID = 'PAID',
+  FAILED = 'FAILED',
+}
+
+export enum ChargebackStatus {
+  OPEN = 'OPEN',
+  WON = 'WON',
+  LOST = 'LOST',
+  CLOSED = 'CLOSED',
+}

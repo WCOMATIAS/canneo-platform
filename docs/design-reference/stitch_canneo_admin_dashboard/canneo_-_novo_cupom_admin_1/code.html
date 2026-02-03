@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Cadastro de Nova Filial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b8cee",
+              "secondary": "#10b981", // Soft green for success/active states
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1a2632",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d141b] dark:text-white font-display transition-colors duration-200">
+<div class="relative flex min-h-screen w-full overflow-hidden">
+<aside class="hidden lg:flex w-72 flex-col border-r border-[#e7edf3] dark:border-slate-700 bg-surface-light dark:bg-surface-dark h-screen fixed left-0 top-0 z-20">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-4">
+<div class="flex gap-3 items-center px-2 py-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 shadow-sm ring-2 ring-white dark:ring-slate-700" data-alt="Pharmacy logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAkOiCZVy2W8K9FvyNCCPdXQPfO7albMl1X9uDGC1rCm1jcPS97YOkgsV7p2Ndh2vpJGYpKZkViH8tSmdlC_ybgpr2po8WJV_GDjjlPMt_WloYV0lDveg6r3CL4tTfrKOkY7VeV6A-2PhUyMBU6mW4TjKzvaEw-w-FlRhAcc65cbzrHhsLFWr8-khKec4pd-m-nNqpf_g3TfWPOsvrtMHmMm0o0dnBVWqBiG5XdBiDkDAcX_2xQlnD6hsVv4zsTrmpke9haVPERxbWM");'>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#0d141b] dark:text-white text-base font-bold leading-normal">Farmácia Central</h1>
+<p class="text-[#4c739a] dark:text-slate-400 text-xs font-medium leading-normal uppercase tracking-wider">
+                            Portal do Gestor</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-primary dark:text-slate-400">dashboard</span>
+<p class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-primary dark:text-slate-400">shopping_cart</span>
+<p class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal">Pedidos</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-primary dark:text-slate-400">inventory_2</span>
+<p class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal">Estoque</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 border-l-4 border-primary shadow-sm" href="#">
+<span class="material-symbols-outlined text-primary font-bold fill-1">store</span>
+<p class="text-primary font-bold text-sm leading-normal">Filiais</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-primary dark:text-slate-400">settings</span>
+<p class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal">Configurações</p>
+</a>
+</nav>
+</div>
+<div class="px-2">
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+                    Sair
+                </button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col lg:pl-72 min-h-screen">
+<header class="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-[#e7edf3] dark:border-slate-700 bg-surface-light/80 dark:bg-surface-dark/90 backdrop-blur-md px-6 py-4 lg:px-10">
+<div class="flex items-center gap-4 lg:gap-8 w-full max-w-2xl">
+<div class="lg:hidden">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">menu</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<div class="size-6 bg-primary rounded-md flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">local_pharmacy</span>
+</div>
+<h2 class="text-[#0d141b] dark:text-white text-lg font-bold tracking-tight hidden sm:block">
+                        CANNEO</h2>
+</div>
+<label class="flex flex-col flex-1 max-w-md ml-4">
+<div class="flex w-full items-center rounded-lg bg-[#e7edf3] dark:bg-slate-800/50 h-10 px-3 ring-1 ring-transparent focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-[#4c739a] dark:text-slate-400 text-xl">search</span>
+<input class="w-full bg-transparent border-none text-sm text-[#0d141b] dark:text-white placeholder:text-[#4c739a] focus:ring-0 px-3" placeholder="Buscar filiais, pedidos..."/>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-[#0d141b] dark:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-surface-dark"></span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-[#0d141b] dark:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<div class="flex-1 p-4 lg:p-10 max-w-6xl mx-auto w-full">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-sm text-[#4c739a] dark:text-slate-400 mb-1">
+<span>Rede de Farmácias</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Filiais</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-medium">Nova Unidade</span>
+</div>
+<h1 class="text-[#0d141b] dark:text-white text-3xl font-bold tracking-tight">Cadastro de Nova
+                        Filial</h1>
+<p class="text-[#4c739a] dark:text-slate-400 text-base max-w-2xl">
+                        Preencha os dados abaixo para registrar uma nova unidade de atendimento no sistema.
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+                        Cancelar
+                    </button>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<form class="divide-y divide-slate-100 dark:divide-slate-700">
+<div class="p-6 lg:p-8 space-y-6">
+<h3 class="text-lg font-semibold text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">storefront</span>
+                            Informações Básicas
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<label class="flex flex-col gap-2 md:col-span-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Nome da Unidade <span class="text-red-500">*</span></span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" placeholder="Ex: Farmácia Central - Unidade Centro" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">CNPJ da Filial <span class="text-red-500">*</span></span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" placeholder="00.000.000/0000-00" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Telefone de Contato</span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" placeholder="(00) 0000-0000" type="tel"/>
+</label>
+</div>
+</div>
+<div class="p-6 lg:p-8 space-y-6 bg-slate-50/50 dark:bg-slate-800/20">
+<h3 class="text-lg font-semibold text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                            Localização
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-4 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">CEP <span class="text-red-500">*</span></span>
+<div class="relative flex gap-2">
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" placeholder="00000-000" type="text"/>
+<button class="flex items-center justify-center px-4 py-2 bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/40 dark:hover:bg-blue-900/60 text-primary rounded-lg transition-colors" type="button">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-8 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Endereço</span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400 cursor-not-allowed" placeholder="Rua, Avenida..." readonly="" type="text"/>
+</div>
+<div class="md:col-span-3 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Número <span class="text-red-500">*</span></span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" type="text"/>
+</div>
+<div class="md:col-span-5 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Complemento</span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" placeholder="Sala, Bloco..." type="text"/>
+</div>
+<div class="md:col-span-4 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Bairro</span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400 cursor-not-allowed" readonly="" type="text"/>
+</div>
+<div class="md:col-span-12 pt-2 border-t border-slate-200 dark:border-slate-700/50">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Coordenadas Geográficas (Mapa)</p>
+<div class="grid grid-cols-2 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-xs font-medium text-[#0d141b] dark:text-slate-200">Latitude</span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-2 text-sm text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary font-mono" placeholder="-23.5505" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-medium text-[#0d141b] dark:text-slate-200">Longitude</span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-2 text-sm text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary font-mono" placeholder="-46.6333" type="text"/>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 lg:p-8 space-y-6">
+<h3 class="text-lg font-semibold text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+                            Configurações de Operação
+                        </h3>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-1 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">SLA de Separação (Horas)</span>
+<div class="relative">
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 pr-12 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" min="0" placeholder="Ex: 2" type="number"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-500 font-medium">h</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">Tempo médio para preparar o pedido.</p>
+</div>
+<div class="lg:col-span-2 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200 mb-1">Métodos de Entrega Disponíveis</span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<label class="relative flex flex-col items-center p-4 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 cursor-pointer hover:border-primary/50 transition-all has-[:checked]:border-primary has-[:checked]:bg-blue-50/50 dark:has-[:checked]:bg-blue-900/10">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<span class="material-symbols-outlined text-3xl text-slate-400 peer-checked:text-primary mb-2">store</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200 peer-checked:text-primary">Retirada</span>
+<span class="text-[10px] text-slate-500 text-center mt-1">Cliente busca na loja</span>
+<div class="absolute top-3 right-3 size-2 bg-primary rounded-full opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</label>
+<label class="relative flex flex-col items-center p-4 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 cursor-pointer hover:border-primary/50 transition-all has-[:checked]:border-primary has-[:checked]:bg-blue-50/50 dark:has-[:checked]:bg-blue-900/10">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<span class="material-symbols-outlined text-3xl text-slate-400 peer-checked:text-primary mb-2">delivery_dining</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200 peer-checked:text-primary">Entrega Própria</span>
+<span class="text-[10px] text-slate-500 text-center mt-1">Motoboy da farmácia</span>
+<div class="absolute top-3 right-3 size-2 bg-primary rounded-full opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</label>
+<label class="relative flex flex-col items-center p-4 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 cursor-pointer hover:border-primary/50 transition-all has-[:checked]:border-primary has-[:checked]:bg-blue-50/50 dark:has-[:checked]:bg-blue-900/10">
+<input class="peer sr-only" type="checkbox"/>
+<span class="material-symbols-outlined text-3xl text-slate-400 peer-checked:text-primary mb-2">local_post_office</span>
+<span class="text-sm font-bold text-slate-700 dark:text-slate-200 peer-checked:text-primary">Correios/Envio</span>
+<span class="text-[10px] text-slate-500 text-center mt-1">Logística externa</span>
+<div class="absolute top-3 right-3 size-2 bg-primary rounded-full opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 lg:p-8 space-y-6">
+<h3 class="text-lg font-semibold text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+                            Horário de Funcionamento
+                        </h3>
+<div class="overflow-x-auto border rounded-lg border-slate-200 dark:border-slate-700">
+<table class="w-full text-sm text-left text-slate-500 dark:text-slate-400">
+<thead class="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-800 dark:text-slate-200">
+<tr>
+<th class="px-6 py-3 w-32" scope="col">Dia</th>
+<th class="px-6 py-3 w-24 text-center" scope="col">Status</th>
+<th class="px-6 py-3" scope="col">Abertura</th>
+<th class="px-6 py-3" scope="col">Fechamento</th>
+</tr>
+</thead>
+<tbody class="bg-white dark:bg-slate-900 divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-[#0d141b] dark:text-white">Seg - Sex</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-secondary/50 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</td>
+<td class="px-6 py-4">
+<input class="block p-2 rounded border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-secondary focus:border-secondary" type="time" value="08:00"/>
+</td>
+<td class="px-6 py-4">
+<input class="block p-2 rounded border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-secondary focus:border-secondary" type="time" value="18:00"/>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-[#0d141b] dark:text-white">Sábado</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-secondary/50 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</td>
+<td class="px-6 py-4">
+<input class="block p-2 rounded border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-secondary focus:border-secondary" type="time" value="08:00"/>
+</td>
+<td class="px-6 py-4">
+<input class="block p-2 rounded border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-secondary focus:border-secondary" type="time" value="12:00"/>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-[#0d141b] dark:text-white">Domingo</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-secondary/50 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</td>
+<td class="px-6 py-4">
+<input class="block p-2 rounded border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-400 cursor-not-allowed" disabled="" type="time"/>
+</td>
+<td class="px-6 py-4">
+<input class="block p-2 rounded border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-400 cursor-not-allowed" disabled="" type="time"/>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="p-6 lg:p-8 bg-slate-50 dark:bg-slate-800/50 flex flex-col-reverse sm:flex-row items-center justify-end gap-4">
+<button class="w-full sm:w-auto px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" type="button">
+                            Cancelar
+                        </button>
+<button class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-primary text-white font-semibold shadow-lg shadow-primary/30 hover:bg-blue-600 transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">add_business</span>
+                            Cadastrar Unidade
+                        </button>
+</div>
+</form>
+</div>
+<div class="mt-6 flex items-start gap-3 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 rounded-lg max-w-3xl">
+<span class="material-symbols-outlined text-emerald-600 dark:text-emerald-400 mt-0.5">verified_user</span>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-semibold text-emerald-800 dark:text-emerald-300">Validação Automática</p>
+<p class="text-sm text-emerald-700 dark:text-emerald-400/80 leading-relaxed">
+                        Ao cadastrar uma nova unidade, as coordenadas de geolocalização serão automaticamente sincronizadas com o aplicativo do cliente em até 1 hora.
+                        Certifique-se de que o SLA esteja correto para evitar atrasos nas entregas.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

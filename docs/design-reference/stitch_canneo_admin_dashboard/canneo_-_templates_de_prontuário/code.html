@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Templates de Prontuário</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30abe8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111c21",
+                        "medical-green": "#10B981",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .variable-tag {
+            background-color: rgba(48, 171, 232, 0.15);
+            color: #1e70a2;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col shrink-0">
+<div class="p-6 flex flex-col gap-8">
+<div class="flex gap-3 items-center">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">medical_services</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Portal do Médico</h1>
+<p class="text-primary text-xs font-semibold uppercase tracking-wider">CANNEO</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Pacientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="text-sm font-bold">Modelos de Prontuário</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-sm font-medium">Agenda</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Portrait of a doctor in clinical setting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCI80c0a_693vFP36VM_F98cl_FMz0oJv6nSwXPcZaSbO4PhS1kq98UyvAc7jEJSJGKZqUchi37g7PIgy4kN60XVRShCLRQebuCE8fymKPRiqfNpjtqkkWP7LzeTsMfG90C6DJ6p6wb1ctM-nrcEmoAwJFACfqbHsVX2WaLb9HOQttDDNreWoQFDFRR6elI2XhZSQYM6H0bi4PuduChJmAPdSQMCXktutgeOnAzDcG_CJicQ5A5cArp9LhAiw2fmLAVWC4XmoCDIOQ8')"></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-bold truncate">Dr. Ricardo Silva</p>
+<p class="text-xs text-slate-500 truncate">CRM-SP 123456</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- PageHeader -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 py-6">
+<div class="flex justify-between items-center max-w-7xl mx-auto w-full">
+<div>
+<h2 class="text-slate-900 dark:text-white text-3xl font-black tracking-tight">Meus Modelos de Evolução</h2>
+<p class="text-slate-500 text-sm mt-1">Gerencie seus templates e agilize o atendimento clínico.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold transition-all shadow-sm">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Novo Template</span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<!-- SearchBar -->
+<div class="bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center">
+<div class="pl-4 text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full border-none focus:ring-0 bg-transparent text-slate-700 dark:text-slate-200 placeholder:text-slate-400 px-4 py-3 text-base" placeholder="Pesquisar modelos por nome ou especialidade..." type="text"/>
+<button class="mr-2 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                                Filtrar
+                            </button>
+</div>
+</div>
+<div class="flex gap-6 h-full items-start">
+<!-- Table Section -->
+<div class="flex-1 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Nome do Modelo</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Especialidade</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Data de Criação</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Row 1 (Selected) -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer bg-primary/5">
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="font-bold text-slate-900 dark:text-white">Primeira Consulta - Insônia</span>
+<span class="text-xs text-slate-400">Modelo estruturado para primeira anamnese</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">Psiquiatria</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-500 dark:text-slate-400">12/10/2023</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-medical-green/10 text-medical-green">
+<span class="h-1.5 w-1.5 rounded-full bg-medical-green"></span>
+                                                Ativo
+                                            </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 text-slate-400">
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">content_copy</span></button>
+<button class="hover:text-red-500"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+<td class="px-6 py-5 font-bold text-slate-900 dark:text-white">Retorno - Ansiedade</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">Clínica Geral</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-500 dark:text-slate-400">05/11/2023</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-medical-green/10 text-medical-green">
+<span class="h-1.5 w-1.5 rounded-full bg-medical-green"></span>
+                                                Ativo
+                                            </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 text-slate-400">
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">content_copy</span></button>
+<button class="hover:text-red-500"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+<td class="px-6 py-5 font-bold text-slate-900 dark:text-white">Evolução Padrão - THC</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">Neurologia</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-500 dark:text-slate-400">20/01/2024</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+<span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>
+                                                Inativo
+                                            </span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 text-slate-400">
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="hover:text-primary"><span class="material-symbols-outlined text-xl">content_copy</span></button>
+<button class="hover:text-red-500"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Editor Section (Floating/Side) -->
+<div class="w-[450px] flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden self-stretch">
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex justify-between items-center">
+<h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+                                    Editor de Template
+                                </h3>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-4 space-y-4 flex-1 overflow-y-auto">
+<div>
+<label class="block text-xs font-bold text-slate-500 uppercase mb-1">Título do Modelo</label>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-primary focus:border-primary" type="text" value="Primeira Consulta - Insônia"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-500 uppercase mb-2">Variáveis Dinâmicas (Clique para inserir)</label>
+<div class="flex flex-wrap gap-2">
+<button class="text-[11px] font-bold px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded hover:bg-primary/20 transition-colors">
+                                            {{nome_paciente}}
+                                        </button>
+<button class="text-[11px] font-bold px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded hover:bg-primary/20 transition-colors">
+                                            {{cpf_paciente}}
+                                        </button>
+<button class="text-[11px] font-bold px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded hover:bg-primary/20 transition-colors">
+                                            {{data_hoje}}
+                                        </button>
+<button class="text-[11px] font-bold px-2 py-1 bg-medical-green/10 text-medical-green border border-medical-green/20 rounded hover:bg-medical-green/20 transition-colors">
+                                            {{thc_prescrito}}
+                                        </button>
+<button class="text-[11px] font-bold px-2 py-1 bg-medical-green/10 text-medical-green border border-medical-green/20 rounded hover:bg-medical-green/20 transition-colors">
+                                            {{dosagem_cbd}}
+                                        </button>
+</div>
+</div>
+<div class="flex-1 flex flex-col border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden min-h-[300px]">
+<div class="bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 p-2 flex gap-1">
+<button class="p-1 hover:bg-white dark:hover:bg-slate-700 rounded transition-colors"><span class="material-symbols-outlined text-lg">format_bold</span></button>
+<button class="p-1 hover:bg-white dark:hover:bg-slate-700 rounded transition-colors"><span class="material-symbols-outlined text-lg">format_italic</span></button>
+<button class="p-1 hover:bg-white dark:hover:bg-slate-700 rounded transition-colors"><span class="material-symbols-outlined text-lg">format_list_bulleted</span></button>
+<div class="w-[1px] h-4 bg-slate-300 dark:bg-slate-600 mx-1 self-center"></div>
+<button class="p-1 hover:bg-white dark:hover:bg-slate-700 rounded transition-colors"><span class="material-symbols-outlined text-lg">link</span></button>
+</div>
+<div class="flex-1 p-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-display focus:outline-none bg-white dark:bg-slate-900 overflow-y-auto" contenteditable="true">
+<p><strong>HISTÓRIA DA DOENÇA ATUAL</strong></p>
+<p>Paciente <span class="variable-tag">{{nome_paciente}}</span> comparece para avaliação de queixas relacionadas ao sono. Relata início dos sintomas há aproximadamente 6 meses.</p>
+<br/>
+<p><strong>PLANO TERAPÊUTICO</strong></p>
+<p>Prescrito: <span class="variable-tag">{{thc_prescrito}}</span> para uso noturno, gotas sublinguais.</p>
+<p>Data do Atendimento: <span class="variable-tag">{{data_hoje}}</span></p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<span class="text-[10px] text-slate-400 italic">Alterações salvas automaticamente às 14:32</span>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Cancelar</button>
+<button class="px-6 py-2 bg-primary text-white rounded-lg text-xs font-bold hover:shadow-lg transition-all">Salvar Template</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

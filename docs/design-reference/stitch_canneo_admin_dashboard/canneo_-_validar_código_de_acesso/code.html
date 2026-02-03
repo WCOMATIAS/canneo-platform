@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Validar Código de Acesso</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecda",
+                        "primary-hover": "#0ed3c3",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102220",
+                        "secondary-text": "#4c9a93",
+                        "dark-surface": "#1a2c2a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Main Card Container -->
+<div class="w-full max-w-[520px] bg-white dark:bg-dark-surface rounded-2xl shadow-xl overflow-hidden border border-slate-100 dark:border-slate-800 relative z-10">
+<!-- Decorative Header Gradient -->
+<div class="h-2 w-full bg-gradient-to-r from-teal-400 via-primary to-teal-200"></div>
+<div class="px-8 py-10 md:px-12 md:py-12 flex flex-col items-center text-center">
+<!-- Logo Section -->
+<div class="mb-8 flex items-center justify-center gap-2">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-teal-500 flex items-center justify-center text-[#0d1b1a] shadow-lg shadow-primary/20" data-alt="Logotipo abstrato CANNEO">
+<span class="material-symbols-outlined text-2xl font-bold">medical_services</span>
+</div>
+<span class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">CANNEO</span>
+</div>
+<!-- Page Heading Component -->
+<div class="flex flex-col gap-3 mb-10 w-full">
+<div class="inline-flex mx-auto mb-2 items-center justify-center w-16 h-16 rounded-full bg-primary/10 dark:bg-primary/5 text-primary">
+<span class="material-symbols-outlined text-3xl">mail_lock</span>
+</div>
+<h1 class="text-slate-900 dark:text-white text-3xl font-bold leading-tight tracking-[-0.033em]">
+                    Código Enviado!
+                </h1>
+<p class="text-secondary-text dark:text-slate-400 text-base font-normal leading-relaxed max-w-xs mx-auto">
+                    Insira o código de 6 dígitos enviado para o seu e-mail para continuar.
+                </p>
+</div>
+<!-- Confirmation Code Component -->
+<div class="w-full mb-10">
+<div class="flex justify-center">
+<fieldset class="relative flex gap-2 sm:gap-4 justify-center w-full">
+<!-- Digit 1 -->
+<input class="flex h-14 w-12 sm:w-14 text-center rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none text-xl font-semibold text-slate-900 dark:text-white transition-all shadow-sm" inputmode="numeric" maxlength="1" onkeydown="javascript:(event.key=='Backspace'&amp;&amp;this.value==''&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowLeft'&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowRight'&amp;&amp;this.nextElementSibling&amp;&amp;(this.nextElementSibling.focus()))" onkeyup="javascript:if(this.value.length&gt;=1&amp;&amp;this.nextElementSibling){this.nextElementSibling.focus()}" pattern="[0-9]*" placeholder="-" type="text"/>
+<!-- Digit 2 -->
+<input class="flex h-14 w-12 sm:w-14 text-center rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none text-xl font-semibold text-slate-900 dark:text-white transition-all shadow-sm" inputmode="numeric" maxlength="1" onkeydown="javascript:(event.key=='Backspace'&amp;&amp;this.value==''&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowLeft'&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowRight'&amp;&amp;this.nextElementSibling&amp;&amp;(this.nextElementSibling.focus()))" onkeyup="javascript:if(this.value.length&gt;=1&amp;&amp;this.nextElementSibling){this.nextElementSibling.focus()}" pattern="[0-9]*" placeholder="-" type="text"/>
+<!-- Digit 3 -->
+<input class="flex h-14 w-12 sm:w-14 text-center rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none text-xl font-semibold text-slate-900 dark:text-white transition-all shadow-sm" inputmode="numeric" maxlength="1" onkeydown="javascript:(event.key=='Backspace'&amp;&amp;this.value==''&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowLeft'&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowRight'&amp;&amp;this.nextElementSibling&amp;&amp;(this.nextElementSibling.focus()))" onkeyup="javascript:if(this.value.length&gt;=1&amp;&amp;this.nextElementSibling){this.nextElementSibling.focus()}" pattern="[0-9]*" placeholder="-" type="text"/>
+<!-- Digit 4 -->
+<input class="flex h-14 w-12 sm:w-14 text-center rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none text-xl font-semibold text-slate-900 dark:text-white transition-all shadow-sm" inputmode="numeric" maxlength="1" onkeydown="javascript:(event.key=='Backspace'&amp;&amp;this.value==''&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowLeft'&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowRight'&amp;&amp;this.nextElementSibling&amp;&amp;(this.nextElementSibling.focus()))" onkeyup="javascript:if(this.value.length&gt;=1&amp;&amp;this.nextElementSibling){this.nextElementSibling.focus()}" pattern="[0-9]*" placeholder="-" type="text"/>
+<!-- Digit 5 -->
+<input class="flex h-14 w-12 sm:w-14 text-center rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none text-xl font-semibold text-slate-900 dark:text-white transition-all shadow-sm" inputmode="numeric" maxlength="1" onkeydown="javascript:(event.key=='Backspace'&amp;&amp;this.value==''&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowLeft'&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowRight'&amp;&amp;this.nextElementSibling&amp;&amp;(this.nextElementSibling.focus()))" onkeyup="javascript:if(this.value.length&gt;=1&amp;&amp;this.nextElementSibling){this.nextElementSibling.focus()}" pattern="[0-9]*" placeholder="-" type="text"/>
+<!-- Digit 6 -->
+<input class="flex h-14 w-12 sm:w-14 text-center rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none text-xl font-semibold text-slate-900 dark:text-white transition-all shadow-sm" inputmode="numeric" maxlength="1" onkeydown="javascript:(event.key=='Backspace'&amp;&amp;this.value==''&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowLeft'&amp;&amp;this.previousElementSibling&amp;&amp;(this.previousElementSibling.focus()))||(event.key=='ArrowRight'&amp;&amp;this.nextElementSibling&amp;&amp;(this.nextElementSibling.focus()))" onkeyup="javascript:if(this.value.length&gt;=1){this.blur()}" pattern="[0-9]*" placeholder="-" type="text"/>
+</fieldset>
+</div>
+</div>
+<!-- SingleButton Component -->
+<div class="w-full flex justify-center mb-6">
+<button class="w-full h-12 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary hover:bg-primary-hover active:scale-[0.98] transition-all text-[#0d1b1a] text-base font-bold leading-normal tracking-[0.015em] shadow-md shadow-primary/25 flex gap-2 group">
+<span class="truncate">Validar Código</span>
+<span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- MetaText Component -->
+<div class="w-full">
+<p class="text-secondary-text dark:text-slate-400 text-sm font-medium leading-normal text-center">
+                    Não recebeu o código? 
+                    <a class="text-slate-900 dark:text-primary hover:text-primary dark:hover:text-primary-hover underline decoration-dashed underline-offset-4 transition-colors ml-1 inline-flex items-center gap-1" href="#">
+                        Reenviar
+                        <span class="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-xs text-slate-500 dark:text-slate-300 font-mono border border-slate-200 dark:border-slate-700">00:30s</span>
+</a>
+</p>
+</div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-0 overflow-hidden">
+<div class="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" data-alt="Brilho gradiente de fundo azul ciano"></div>
+<div class="absolute bottom-[10%] -left-[5%] w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-[80px]" data-alt="Brilho gradiente de fundo verde azulado"></div>
+</div>
+</body></html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Prontuário Clínico</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec37",
+                        "primary-hover": "#0fd330",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102213",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a331f",
+                        "text-main": "#0d1b10",
+                        "text-secondary": "#4c9a59",
+                        "border-color": "#e7f3e9",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-text-main">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-border-color bg-surface-light/95 backdrop-blur supports-[backdrop-filter]:bg-surface-light/60 dark:bg-surface-dark/95 dark:border-surface-dark shadow-sm">
+<div class="flex h-16 items-center justify-between px-4 md:px-8 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-text-main">
+<div class="size-8 text-primary">
+<svg class="h-8 w-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">CANNEO</h2>
+</div>
+<div class="hidden md:flex items-center rounded-lg bg-border-color/50 px-3 py-1.5 w-64 ring-1 ring-inset ring-transparent focus-within:ring-primary/50 transition-all">
+<span class="material-symbols-outlined text-text-secondary">search</span>
+<input class="ml-2 w-full bg-transparent border-none p-0 text-sm text-text-main placeholder:text-text-secondary focus:ring-0" placeholder="Buscar paciente..."/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-lg text-text-secondary hover:bg-border-color transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-[1px] bg-border-color"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold text-text-main">Dr. André Souza</p>
+<p class="text-xs text-text-secondary">Cardiologista</p>
+</div>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="Doctor profile photo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuANg6GWpJMCq35diGKH3XSAqmfpe5kUSs9utuvZs4fZX5tr74LcXOnsaVYOWpyd53KiF5iXLBuCJQk_BUQFLF4j5nTxY8CR_X65s2Gp5r9tHKtnaWBrT2PV5eNy6DSzG_IWM450_Q8CWAAGnldy6pVnLrIO0PeLgOEBd4zy-XiUNJCoKjiOIolcaFkPM516Wuf6-xv4dBpFlUBLWV0tfDiU63AIbBNQ0IFKDDeNyvq9QjUcA9Sa_SkMDyWEJRGmlVspWhCKkPXaKZlU");'></div>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-[1440px] mx-auto p-6 md:p-8 lg:p-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Patient Info & Timeline (8/12 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Patient Header Card -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-border-color p-6 md:p-8">
+<div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
+<div class="relative group">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-24 md:size-32 shadow-md ring-4 ring-background-light dark:ring-background-dark" data-alt="Patient profile photo close up" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABrUa04v0QkhRXG6hTosJr-hIFVzozePs9remU-jcjkXsMFstwH-pC-SuDScgGhKEeaheyvaQQrevsljIqYDqqbeh2iEN3ojIj8_8vkF14DM-Pi4mBR3SfqEE7lvRgOTsFQr0yS3lygvTNIRY6expA4-2ynULltcafEYCu8DEGcgd-_SBu3QYteX5xOGuA_fwt0UHtXAWQYw__L272YEx4sB7zX-ztQQ153qRsz3dEwzIqO-UacPTSZfvr3sn_JaOgGqb0nebRIdis");'></div>
+<div class="absolute bottom-1 right-1 bg-primary text-text-main text-xs font-bold px-2 py-1 rounded-full shadow-sm border-2 border-surface-light">
+                                Ativa
+                            </div>
+</div>
+<div class="flex-1 space-y-3">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl md:text-3xl font-bold text-text-main tracking-tight">Maria Aparecida Silva</h1>
+<div class="flex flex-wrap gap-2 mt-2 text-text-secondary text-sm md:text-base items-center">
+<span>42 anos</span>
+<span class="w-1 h-1 bg-text-secondary rounded-full"></span>
+<span>CPF: 123.456.789-00</span>
+<span class="w-1 h-1 bg-text-secondary rounded-full"></span>
+<span>Convênio: Unimed</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="bg-primary/10 text-primary-hover border border-primary/20 px-4 py-2 rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">bloodtype</span>
+<span class="font-bold text-lg">A+</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4 pt-2">
+<button class="text-sm font-medium text-text-secondary hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">edit</span> Editar Dados
+                                </button>
+<button class="text-sm font-medium text-text-secondary hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">history</span> Ver Histórico Completo
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- New Evolution Section -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-border-color overflow-hidden">
+<div class="px-6 py-4 border-b border-border-color bg-background-light/50 flex justify-between items-center">
+<h2 class="text-lg font-bold text-text-main flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+                            Nova Evolução
+                        </h2>
+<span class="text-xs text-text-secondary bg-white px-2 py-1 rounded border border-border-color">Hoje, 24 Out 2023</span>
+</div>
+<div class="p-4 md:p-6">
+<!-- Toolbar -->
+<div class="flex flex-wrap gap-2 mb-3 pb-3 border-b border-border-color">
+<button class="p-1.5 hover:bg-background-light rounded text-text-secondary hover:text-text-main transition-colors" title="Negrito">
+<span class="material-symbols-outlined text-xl">format_bold</span>
+</button>
+<button class="p-1.5 hover:bg-background-light rounded text-text-secondary hover:text-text-main transition-colors" title="Itálico">
+<span class="material-symbols-outlined text-xl">format_italic</span>
+</button>
+<button class="p-1.5 hover:bg-background-light rounded text-text-secondary hover:text-text-main transition-colors" title="Sublinhado">
+<span class="material-symbols-outlined text-xl">format_underlined</span>
+</button>
+<div class="w-[1px] h-6 bg-border-color mx-1 my-auto"></div>
+<button class="p-1.5 hover:bg-background-light rounded text-text-secondary hover:text-text-main transition-colors" title="Lista">
+<span class="material-symbols-outlined text-xl">format_list_bulleted</span>
+</button>
+<button class="p-1.5 hover:bg-background-light rounded text-text-secondary hover:text-text-main transition-colors" title="Link">
+<span class="material-symbols-outlined text-xl">add_link</span>
+</button>
+<div class="w-[1px] h-6 bg-border-color mx-1 my-auto"></div>
+<button class="p-1.5 hover:bg-background-light rounded text-text-secondary hover:text-text-main transition-colors flex items-center gap-1 text-sm font-medium" title="Modelo">
+<span class="material-symbols-outlined text-xl">description</span>
+<span class="hidden sm:inline">Usar Modelo</span>
+</button>
+</div>
+<textarea class="w-full min-h-[160px] resize-y rounded-lg border-border-color bg-background-light/30 focus:border-primary focus:ring-1 focus:ring-primary p-4 text-text-main placeholder:text-text-secondary/50 text-base leading-relaxed" placeholder="Descreva o estado atual do paciente, queixas, exame físico e conduta..."></textarea>
+<div class="flex justify-end gap-3 mt-4">
+<button class="px-4 py-2 rounded-lg border border-border-color text-text-main font-medium hover:bg-background-light transition-colors">
+                                Cancelar
+                            </button>
+<button class="px-6 py-2 rounded-lg bg-primary text-text-main font-bold shadow-sm hover:bg-primary-hover hover:shadow transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">save</span>
+                                Salvar Evolução
+                            </button>
+</div>
+</div>
+</div>
+<!-- Timeline Section -->
+<div>
+<h3 class="text-xl font-bold text-text-main mb-6 px-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-text-secondary">timeline</span>
+                        Histórico Clínico
+                    </h3>
+<div class="relative pl-4 md:pl-8 space-y-8 before:content-[''] before:absolute before:left-[27px] md:before:left-[43px] before:top-2 before:bottom-0 before:w-[2px] before:bg-border-color">
+<!-- Timeline Item 1 -->
+<div class="relative pl-10 md:pl-12">
+<div class="absolute left-0 top-1 size-3 bg-primary rounded-full ring-4 ring-background-light dark:ring-background-dark z-10 md:left-[29px]"></div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-color p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex flex-col sm:flex-row justify-between sm:items-center mb-3 gap-2">
+<div class="flex items-center gap-2">
+<span class="font-bold text-text-main text-lg">Consulta de Retorno</span>
+<span class="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100">Presencial</span>
+</div>
+<div class="text-sm text-text-secondary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+                                        15 Out 2023, 14:30
+                                    </div>
+</div>
+<p class="text-text-main leading-relaxed mb-4">
+                                    Paciente retorna referindo melhora significativa das dores lombares após início da medicação prescrita (Ibuprofeno). Relata, no entanto, leve desconforto gástrico. Pressão arterial 120/80 mmHg. Mantida a conduta fisioterápica.
+                                </p>
+<div class="flex items-center justify-between border-t border-border-color pt-3 mt-2">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-cover bg-center" data-alt="Doctor thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDSLnijg1GXTsFEZNN46yfjaLXmRSuYOuk7cQecO1z4PquGAbB2_wxEEmF0yFw05niCn-JjA_ZIlqatC6D2Ptsu4cL0NsRE4ENNorFN6h2-C0ZDJ6LsipmpMwPaC5_Kk_kqsE1HgJmQBz0P3MRuUkoloUc9Y6_kZZVE5UP3DFOsoDfaSp-JeoSXMXN0oxbI7m4L_3XYJZC1uKi3i1N5FvbCg5DvtdOe39_lXqmZMdmPISApKj1iKDwx3Da5ypGZxC00zzk3xdIG4GOR");'></div>
+<span class="text-sm font-medium text-text-main">Dr. André Souza</span>
+</div>
+<button class="text-primary-hover hover:text-primary font-medium text-sm flex items-center gap-1">
+                                        Ver Detalhes <span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-10 md:pl-12">
+<div class="absolute left-0 top-1 size-3 bg-gray-300 rounded-full ring-4 ring-background-light dark:ring-background-dark z-10 md:left-[29px]"></div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-color p-5 shadow-sm hover:shadow-md transition-shadow opacity-90">
+<div class="flex flex-col sm:flex-row justify-between sm:items-center mb-3 gap-2">
+<div class="flex items-center gap-2">
+<span class="font-bold text-text-main text-lg">Consulta Inicial</span>
+<span class="px-2 py-0.5 rounded-full bg-green-50 text-green-700 text-xs font-semibold border border-green-100">Primeira Vez</span>
+</div>
+<div class="text-sm text-text-secondary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+                                        20 Set 2023, 09:15
+                                    </div>
+</div>
+<p class="text-text-main leading-relaxed mb-4 text-sm md:text-base">
+                                    Paciente sexo feminino, 42 anos, queixa-se de dores na região lombar irradiando para a perna direita. Dor iniciou há 2 semanas após esforço físico. Sem histórico de traumas recentes. Solicito Ressonância Magnética.
+                                </p>
+<div class="flex items-center justify-between border-t border-border-color pt-3 mt-2">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-600">DR</div>
+<span class="text-sm font-medium text-text-main">Dra. Roberta Lima</span>
+</div>
+<button class="text-text-secondary hover:text-primary font-medium text-sm flex items-center gap-1">
+                                        Ver Detalhes <span class="material-symbols-outlined text-base">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-dashed border-border-color rounded-lg text-text-secondary hover:text-primary hover:border-primary hover:bg-background-light transition-all text-sm font-medium flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">expand_more</span>
+                        Carregar evoluções anteriores
+                    </button>
+</div>
+</div>
+<!-- Right Column: Sidebar (4/12 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Floating Action Button (Desktop Sidebar) -->
+<button class="w-full bg-text-main hover:bg-gray-800 text-white rounded-xl py-4 shadow-lg shadow-gray-200 dark:shadow-none flex items-center justify-center gap-3 transition-transform hover:-translate-y-1">
+<span class="material-symbols-outlined text-primary">playlist_add</span>
+<span class="font-bold text-lg">Gerar Nova Prescrição</span>
+</button>
+<!-- Alerts Card -->
+<div class="bg-red-50 dark:bg-red-900/20 rounded-xl p-5 border border-red-100 dark:border-red-900/30">
+<div class="flex items-center gap-2 mb-3 text-red-700 dark:text-red-400">
+<span class="material-symbols-outlined">warning</span>
+<h3 class="font-bold text-sm uppercase tracking-wide">Alergias &amp; Alertas</h3>
+</div>
+<ul class="space-y-2">
+<li class="flex items-start gap-2 text-red-800 dark:text-red-200 font-medium">
+<span class="material-symbols-outlined text-lg mt-0.5">block</span>
+                            Dipirona Sódica
+                        </li>
+<li class="flex items-start gap-2 text-red-800 dark:text-red-200 font-medium">
+<span class="material-symbols-outlined text-lg mt-0.5">block</span>
+                            Penicilina
+                        </li>
+</ul>
+</div>
+<!-- Prescriptions History -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-color shadow-sm flex flex-col">
+<div class="p-4 border-b border-border-color flex justify-between items-center">
+<h3 class="font-bold text-text-main flex items-center gap-2">
+<span class="material-symbols-outlined text-text-secondary">pill</span>
+                            Prescrições Ativas
+                        </h3>
+<button class="text-xs text-primary font-bold hover:underline">Ver todas</button>
+</div>
+<div class="divide-y divide-border-color">
+<div class="p-4 hover:bg-background-light transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-text-main">Ibuprofeno 600mg</span>
+<span class="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold uppercase">Ativo</span>
+</div>
+<p class="text-sm text-text-secondary">Tomar 1 comp. a cada 8h por 5 dias.</p>
+<p class="text-xs text-text-secondary mt-2 flex items-center gap-1 opacity-70">
+<span class="material-symbols-outlined text-sm">event</span> 15/10/2023
+                            </p>
+</div>
+<div class="p-4 hover:bg-background-light transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-text-main">Omeprazol 20mg</span>
+<span class="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold uppercase">Ativo</span>
+</div>
+<p class="text-sm text-text-secondary">Tomar 1 comp. em jejum.</p>
+<p class="text-xs text-text-secondary mt-2 flex items-center gap-1 opacity-70">
+<span class="material-symbols-outlined text-sm">event</span> 15/10/2023
+                            </p>
+</div>
+</div>
+</div>
+<!-- Attached Exams -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-color shadow-sm flex flex-col">
+<div class="p-4 border-b border-border-color flex justify-between items-center">
+<h3 class="font-bold text-text-main flex items-center gap-2">
+<span class="material-symbols-outlined text-text-secondary">folder_open</span>
+                            Exames Anexados
+                        </h3>
+<button class="p-1 hover:bg-background-light rounded text-primary">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="p-2 space-y-1">
+<a class="flex items-center gap-3 p-2 hover:bg-background-light rounded-lg group transition-colors" href="#">
+<div class="bg-red-100 text-red-600 size-10 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-text-main truncate group-hover:text-primary transition-colors">Hemograma_Completo.pdf</p>
+<p class="text-xs text-text-secondary">12 Out 2023 • 2.4 MB</p>
+</div>
+<span class="material-symbols-outlined text-text-secondary hover:text-text-main">download</span>
+</a>
+<a class="flex items-center gap-3 p-2 hover:bg-background-light rounded-lg group transition-colors" href="#">
+<div class="bg-blue-100 text-blue-600 size-10 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-text-main truncate group-hover:text-primary transition-colors">Ressonancia_Lombar.jpg</p>
+<p class="text-xs text-text-secondary">05 Set 2023 • 4.1 MB</p>
+</div>
+<span class="material-symbols-outlined text-text-secondary hover:text-text-main">download</span>
+</a>
+</div>
+<button class="w-full py-3 text-xs font-bold text-text-secondary hover:text-text-main border-t border-border-color uppercase tracking-wide">
+                        Ver todos os arquivos
+                    </button>
+</div>
+<!-- Quick Notes / Sticky Pad -->
+<div class="bg-yellow-50 dark:bg-yellow-900/10 rounded-xl p-5 border border-yellow-100 dark:border-yellow-900/30 relative">
+<div class="absolute top-0 right-0 p-2">
+<span class="material-symbols-outlined text-yellow-600/50 -rotate-12 text-4xl">push_pin</span>
+</div>
+<h3 class="font-bold text-sm text-yellow-800 dark:text-yellow-500 mb-2 uppercase tracking-wide">Observações Gerais</h3>
+<p class="text-sm text-yellow-900/80 dark:text-yellow-200/80 font-medium leading-relaxed">
+                        Paciente prefere agendamentos no período da tarde. Contato de emergência: Marido (Carlos) - (11) 99999-9999.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+</body></html>

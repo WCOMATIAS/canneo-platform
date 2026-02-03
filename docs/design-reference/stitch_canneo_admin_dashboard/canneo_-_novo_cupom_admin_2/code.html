@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Novo Cupom Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b8cee",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1a2632",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d141b] dark:text-white font-display transition-colors duration-200">
+<div class="relative flex min-h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden lg:flex w-72 flex-col border-r border-[#e7edf3] dark:border-slate-700 bg-surface-light dark:bg-surface-dark h-screen fixed left-0 top-0 z-20">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-4">
+<!-- User Profile -->
+<div class="flex gap-3 items-center px-2 py-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 shadow-sm ring-2 ring-white dark:ring-slate-700" data-alt="Profile picture of the admin user with a professional look" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAkOiCZVy2W8K9FvyNCCPdXQPfO7albMl1X9uDGC1rCm1jcPS97YOkgsV7p2Ndh2vpJGYpKZkViH8tSmdlC_ybgpr2po8WJV_GDjjlPMt_WloYV0lDveg6r3CL4tTfrKOkY7VeV6A-2PhUyMBU6mW4TjKzvaEw-w-FlRhAcc65cbzrHhsLFWr8-khKec4pd-m-nNqpf_g3TfWPOsvrtMHmMm0o0dnBVWqBiG5XdBiDkDAcX_2xQlnD6hsVv4zsTrmpke9haVPERxbWM");'>
+</div>
+<div class="flex flex-col">
+<h1 class="text-[#0d141b] dark:text-white text-base font-bold leading-normal">CANNEO Admin</h1>
+<p class="text-[#4c739a] dark:text-slate-400 text-xs font-medium leading-normal uppercase tracking-wider">Gestão da Clínica</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-primary dark:text-slate-400">pie_chart</span>
+<p class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-primary dark:text-slate-400">stethoscope</span>
+<p class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal">Consultas</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-primary dark:text-slate-400">group</span>
+<p class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal">Pacientes</p>
+</a>
+<!-- Active Item -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 border-l-4 border-primary shadow-sm" href="#">
+<span class="material-symbols-outlined text-primary font-bold fill-1">confirmation_number</span>
+<p class="text-primary font-bold text-sm leading-normal">Cupons</p>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#4c739a] group-hover:text-primary dark:text-slate-400">settings</span>
+<p class="text-[#0d141b] dark:text-slate-200 text-sm font-medium leading-normal">Configurações</p>
+</a>
+</nav>
+</div>
+<!-- Bottom Action -->
+<div class="px-2">
+<button class="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">logout</span>
+                        Sair
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col lg:pl-72 min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-[#e7edf3] dark:border-slate-700 bg-surface-light/80 dark:bg-surface-dark/90 backdrop-blur-md px-6 py-4 lg:px-10">
+<div class="flex items-center gap-4 lg:gap-8 w-full max-w-2xl">
+<div class="lg:hidden">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">menu</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<div class="size-6 bg-primary rounded-md flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">medical_services</span>
+</div>
+<h2 class="text-[#0d141b] dark:text-white text-lg font-bold tracking-tight hidden sm:block">CANNEO</h2>
+</div>
+<label class="flex flex-col flex-1 max-w-md ml-4">
+<div class="flex w-full items-center rounded-lg bg-[#e7edf3] dark:bg-slate-800/50 h-10 px-3 ring-1 ring-transparent focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-[#4c739a] dark:text-slate-400 text-xl">search</span>
+<input class="w-full bg-transparent border-none text-sm text-[#0d141b] dark:text-white placeholder:text-[#4c739a] focus:ring-0 px-3" placeholder="Buscar..."/>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-[#0d141b] dark:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-surface-dark"></span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-[#0d141b] dark:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 p-4 lg:p-10 max-w-6xl mx-auto w-full">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-sm text-[#4c739a] dark:text-slate-400 mb-1">
+<span>Cupons</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-medium">Novo</span>
+</div>
+<h1 class="text-[#0d141b] dark:text-white text-3xl font-bold tracking-tight">Novo Cupom</h1>
+<p class="text-[#4c739a] dark:text-slate-400 text-base max-w-2xl">
+                            Configure os detalhes, valores e regras de validação para criar uma nova campanha de desconto.
+                        </p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+                            Descartar
+                        </button>
+</div>
+</div>
+<!-- Main Form Card -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<form class="divide-y divide-slate-100 dark:divide-slate-700">
+<!-- Section 1: Identification -->
+<div class="p-6 lg:p-8 space-y-6">
+<h3 class="text-lg font-semibold text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">badge</span>
+                                Identificação do Cupom
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Código do Cupom <span class="text-red-500">*</span></span>
+<div class="relative">
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400 font-mono uppercase tracking-wide" placeholder="EX: VERAO2024" type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-medium text-primary hover:text-blue-700 px-2 py-1 rounded bg-blue-50 dark:bg-blue-900/30" type="button">
+                                            Gerar Aleatório
+                                        </button>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-400">Este é o código que o paciente irá digitar no checkout.</span>
+</label>
+<label class="flex flex-col gap-2 md:col-span-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Descrição Interna</span>
+<textarea class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400 min-h-[100px]" placeholder="Descreva o propósito deste cupom para controle interno..."></textarea>
+</label>
+</div>
+</div>
+<!-- Section 2: Value Configuration -->
+<div class="p-6 lg:p-8 space-y-6 bg-slate-50/50 dark:bg-slate-800/20">
+<h3 class="text-lg font-semibold text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">payments</span>
+                                Configuração de Valores
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-5 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Tipo de Desconto</span>
+<div class="grid grid-cols-2 p-1 bg-slate-200 dark:bg-slate-700 rounded-lg">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="discount_type" type="radio"/>
+<div class="flex items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium text-slate-600 dark:text-slate-300 peer-checked:bg-white dark:peer-checked:bg-slate-600 peer-checked:text-primary peer-checked:shadow-sm transition-all">
+<span class="material-symbols-outlined text-lg">percent</span>
+                                                Porcentagem
+                                            </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="discount_type" type="radio"/>
+<div class="flex items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium text-slate-600 dark:text-slate-300 peer-checked:bg-white dark:peer-checked:bg-slate-600 peer-checked:text-primary peer-checked:shadow-sm transition-all">
+<span class="material-symbols-outlined text-lg">attach_money</span>
+                                                Valor Fixo
+                                            </div>
+</label>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Valor do Desconto</span>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="text-slate-500 font-semibold">%</span>
+</div>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 p-3 pl-8 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" placeholder="0.00" type="number"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Limits & Dates -->
+<div class="p-6 lg:p-8 space-y-6">
+<h3 class="text-lg font-semibold text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_clock</span>
+                                Vigência e Limites
+                            </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Data de Início</span>
+<div class="relative">
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" type="date"/>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Data de Expiração</span>
+<div class="relative">
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" type="date"/>
+</div>
+</label>
+<label class="flex flex-col gap-2 sm:col-span-2 lg:col-span-1">
+<span class="text-sm font-medium text-[#0d141b] dark:text-slate-200">Limite Total de Usos</span>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 p-3 text-base text-[#0d141b] dark:text-white focus:border-primary focus:ring-primary placeholder:text-slate-400" placeholder="Ex: 100 (Deixe vazio para ilimitado)" type="number"/>
+</label>
+</div>
+</div>
+<!-- Section 4: Rules -->
+<div class="p-6 lg:p-8 space-y-6">
+<h3 class="text-lg font-semibold text-[#0d141b] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">rule</span>
+                                Regras de Aplicabilidade
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="flex items-start gap-3 p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30 cursor-pointer hover:border-primary/50 transition-colors">
+<input class="mt-1 rounded border-slate-300 text-primary focus:ring-primary size-5" type="checkbox"/>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#0d141b] dark:text-white">Apenas Primeira Compra</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 mt-1">Válido somente para novos pacientes sem histórico financeiro.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30 cursor-pointer hover:border-primary/50 transition-colors">
+<input checked="" class="mt-1 rounded border-slate-300 text-primary focus:ring-primary size-5" type="checkbox"/>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#0d141b] dark:text-white">Apenas Consultas</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 mt-1">O desconto não será aplicado a exames ou procedimentos.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30 cursor-pointer hover:border-primary/50 transition-colors">
+<input class="mt-1 rounded border-slate-300 text-primary focus:ring-primary size-5" type="checkbox"/>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#0d141b] dark:text-white">Cumulativo</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 mt-1">Permitir uso em conjunto com outros descontos automáticos.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30 cursor-pointer hover:border-primary/50 transition-colors">
+<input class="mt-1 rounded border-slate-300 text-primary focus:ring-primary size-5" type="checkbox"/>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#0d141b] dark:text-white">Requer Aprovação Manual</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 mt-1">A aplicação do cupom precisará ser validada pela recepção.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-6 lg:p-8 bg-slate-50 dark:bg-slate-800/50 flex flex-col-reverse sm:flex-row items-center justify-end gap-4">
+<button class="w-full sm:w-auto px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" type="button">
+                                Cancelar
+                            </button>
+<button class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-primary text-white font-semibold shadow-lg shadow-primary/30 hover:bg-blue-600 transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">publish</span>
+                                Publicar Cupom
+                            </button>
+</div>
+</form>
+</div>
+<!-- Helper Info / Context -->
+<div class="mt-6 flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-lg max-w-3xl">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 mt-0.5">info</span>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-semibold text-blue-800 dark:text-blue-300">Sobre a Criação de Cupons</p>
+<p class="text-sm text-blue-700 dark:text-blue-400/80 leading-relaxed">
+                            Ao publicar um novo cupom, ele ficará imediatamente disponível para uso no checkout, respeitando a data de início configurada. 
+                            Você pode pausar ou arquivar este cupom a qualquer momento no painel de gestão.
+                        </p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Gestão de Estoque e Preços</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "secondary": "#10b981",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155; 
+        }.table-input {
+            transition: all 0.2s;
+        }
+        .table-input:focus {
+            outline: none;
+            border-color: #2b8cee;
+            box-shadow: 0 0 0 2px rgba(43, 140, 238, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white h-screen flex overflow-hidden selection:bg-primary/20 relative">
+<aside aria-hidden="true" class="w-64 bg-white dark:bg-[#15202b] border-r border-slate-200 dark:border-slate-800 flex-shrink-0 flex flex-col transition-colors duration-200">
+<div class="h-16 flex items-center px-6 border-b border-slate-100 dark:border-slate-800/50">
+<div class="flex gap-3 items-center">
+<div class="bg-secondary/10 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-2xl">local_pharmacy</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-none tracking-tight">CANNEO</h1>
+<span class="text-slate-500 dark:text-slate-400 text-xs font-medium">Portal da Farmácia</span>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-6 px-3 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Visão Geral</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors font-medium" href="#">
+<span class="material-symbols-outlined filled">inventory_2</span>
+<span>Estoque e Preços</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span>Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span>Relatórios</span>
+</a>
+<div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configurações</span>
+</a>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-background-light dark:bg-background-dark relative">
+<header class="h-16 bg-white dark:bg-[#15202b] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-6 lg:px-8 z-20">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Gestão de Estoque</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary hover:bg-blue-600 text-white px-5 py-2 rounded-lg font-medium shadow-sm shadow-primary/30 transition-all flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                    Salvar Alterações
+                </button>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+<button class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#15202b]"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold text-sm">
+                    FM
+                </div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+<div class="grid grid-cols-12 gap-6 max-w-[1600px] mx-auto">
+<div class="col-span-12 xl:col-span-9 flex flex-col gap-6">
+<div class="bg-white dark:bg-[#15202b] p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4 flex-1 min-w-[280px]">
+<div class="relative flex-1 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-primary focus:border-primary table-input dark:text-white dark:placeholder-slate-500" placeholder="Buscar por nome do produto ou SKU..." type="text"/>
+</div>
+<select class="py-2.5 pl-3 pr-10 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-600 dark:text-slate-300 focus:ring-primary focus:border-primary cursor-pointer">
+<option>Todas Categorias</option>
+<option>Óleos Full Spectrum</option>
+<option>Óleos Isolados</option>
+<option>Flores</option>
+<option>Gummies</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mr-2">Visualizar:</span>
+<button class="p-2 text-primary bg-primary/10 rounded-lg"><span class="material-symbols-outlined text-[20px]">list</span></button>
+<button class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg"><span class="material-symbols-outlined text-[20px]">grid_view</span></button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#15202b] rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex-1">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30">
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Produto</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Composição</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-40">Preço Unit. (R$)</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-32">Estoque</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-32 text-center">Status</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-16"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0 flex items-center justify-center border border-slate-200 dark:border-slate-700 overflow-hidden">
+<span class="material-symbols-outlined text-slate-400 text-2xl">medication_liquid</span>
+</div>
+<div>
+<p class="font-semibold text-slate-900 dark:text-white text-sm">Óleo CBD Full Spectrum</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">30ml • Gotas</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col gap-1.5 items-start">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">CBD 10%</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">THC 0.3%</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">R$</span>
+<input class="w-full pl-8 pr-2 py-1.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary table-input dark:text-white text-right font-medium" type="text" value="350,00"/>
+</div>
+</td>
+<td class="py-4 px-6">
+<input class="w-full px-2 py-1.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary table-input dark:text-white text-center font-medium" type="number" value="142"/>
+</td>
+<td class="py-4 px-6 text-center">
+<label class="inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="relative w-9 h-5 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-secondary"></div>
+</label>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-red-50/30 dark:bg-red-900/5">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0 flex items-center justify-center border border-slate-200 dark:border-slate-700 overflow-hidden">
+<span class="material-symbols-outlined text-slate-400 text-2xl">science</span>
+</div>
+<div>
+<p class="font-semibold text-slate-900 dark:text-white text-sm">Extrato Isolado THC</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">10ml • Seringa</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col gap-1.5 items-start">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">CBD 0%</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">THC 20%</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">R$</span>
+<input class="w-full pl-8 pr-2 py-1.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary table-input dark:text-white text-right font-medium" type="text" value="520,00"/>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="relative">
+<input class="w-full px-2 py-1.5 text-sm bg-white dark:bg-slate-900 border border-red-300 dark:border-red-800/50 rounded-md focus:ring-red-500 focus:border-red-500 table-input dark:text-white text-center font-bold text-red-600" type="number" value="3"/>
+<div class="absolute -right-3 top-1/2 -translate-y-1/2 translate-x-full ml-2 group/tooltip">
+<span class="material-symbols-outlined text-red-500 text-lg cursor-help">warning</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-center">
+<label class="inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="relative w-9 h-5 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-secondary"></div>
+</label>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0 flex items-center justify-center border border-slate-200 dark:border-slate-700 overflow-hidden">
+<span class="material-symbols-outlined text-slate-400 text-2xl">potted_plant</span>
+</div>
+<div>
+<p class="font-semibold text-slate-900 dark:text-white text-sm">Flor Seca Premium</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">5g • Pote</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col gap-1.5 items-start">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">CBD 12%</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">THC 8%</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">R$</span>
+<input class="w-full pl-8 pr-2 py-1.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary table-input dark:text-white text-right font-medium" type="text" value="480,00"/>
+</div>
+</td>
+<td class="py-4 px-6">
+<input class="w-full px-2 py-1.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary table-input dark:text-white text-center font-medium" type="number" value="56"/>
+</td>
+<td class="py-4 px-6 text-center">
+<label class="inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="relative w-9 h-5 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-secondary"></div>
+</label>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors opacity-60">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0 flex items-center justify-center border border-slate-200 dark:border-slate-700 overflow-hidden">
+<span class="material-symbols-outlined text-slate-400 text-2xl">pill</span>
+</div>
+<div>
+<p class="font-semibold text-slate-900 dark:text-white text-sm">Cápsulas Softgel</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">30un • Frasco</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col gap-1.5 items-start">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">CBD 25mg</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">R$</span>
+<input class="w-full pl-8 pr-2 py-1.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary table-input dark:text-white text-right font-medium" type="text" value="290,00"/>
+</div>
+</td>
+<td class="py-4 px-6">
+<input class="w-full px-2 py-1.5 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary table-input dark:text-white text-center font-medium" type="number" value="0"/>
+</td>
+<td class="py-4 px-6 text-center">
+<label class="inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="relative w-9 h-5 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-secondary"></div>
+</label>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 px-6 py-4 flex items-center justify-between">
+<span class="text-sm text-slate-500 dark:text-slate-400">Mostrando 4 de 128 produtos</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-sm border border-slate-200 dark:border-slate-700 rounded hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 disabled:opacity-50">Anterior</button>
+<button class="px-3 py-1 text-sm border border-slate-200 dark:border-slate-700 rounded hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">Próximo</button>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 xl:col-span-3 space-y-6">
+<div class="bg-white dark:bg-[#15202b] p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
+<h3 class="font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                            Resumo do Estoque
+                        </h3>
+<div class="space-y-4">
+<div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-semibold">Total de Itens</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">1,248</p>
+</div>
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">inventory</span>
+</div>
+</div>
+<div class="p-4 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-100 dark:border-red-900/20 flex items-center justify-between">
+<div>
+<p class="text-xs text-red-600 dark:text-red-400 uppercase font-bold">Estoque Baixo</p>
+<p class="text-2xl font-bold text-red-700 dark:text-red-400 mt-1">12</p>
+</div>
+<div class="bg-red-100 dark:bg-red-900/30 p-2 rounded-lg animate-pulse">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400">warning</span>
+</div>
+</div>
+<div class="p-4 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-100 dark:border-green-900/20 flex items-center justify-between">
+<div>
+<p class="text-xs text-green-600 dark:text-green-400 uppercase font-semibold">Valor em Estoque</p>
+<p class="text-lg font-bold text-green-700 dark:text-green-400 mt-1">R$ 342k</p>
+</div>
+<div class="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400">attach_money</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-400 dark:text-slate-500 mb-2">Ações Rápidas</p>
+<button class="w-full flex items-center justify-center gap-2 py-3 border border-dashed border-slate-300 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-sm font-medium group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">upload_file</span>
+                                Importar Planilha CSV
+                             </button>
+<p class="text-[10px] text-center text-slate-400 mt-2">Atualize em massa preços e quantidades</p>
+</div>
+</div>
+<div class="bg-primary rounded-xl p-6 text-white shadow-lg shadow-primary/20 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+<h4 class="font-bold text-lg mb-2 relative z-10">Precisa de Ajuda?</h4>
+<p class="text-primary-50 text-sm mb-4 relative z-10">Confira nosso guia de boas práticas para gestão de estoque de controlados.</p>
+<button class="text-xs font-bold bg-white text-primary px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors relative z-10">Ver Guia</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

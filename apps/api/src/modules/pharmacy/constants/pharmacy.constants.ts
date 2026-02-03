@@ -1,0 +1,69 @@
+/**
+ * Order Status Flow:
+ * CREATED → PAYMENT_PENDING → PAID → PROCESSING → READY_FOR_PICKUP | SHIPPED → DELIVERED
+ */
+export const ORDER_STATUS = {
+  CREATED: 'CREATED',
+  PAYMENT_PENDING: 'PAYMENT_PENDING',
+  PAID: 'PAID',
+  PROCESSING: 'PROCESSING',
+  READY_FOR_PICKUP: 'READY_FOR_PICKUP',
+  SHIPPED: 'SHIPPED',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED',
+} as const;
+
+export type OrderStatusType = (typeof ORDER_STATUS)[keyof typeof ORDER_STATUS];
+
+/**
+ * Valid order status transitions
+ */
+export const VALID_ORDER_TRANSITIONS: Record<OrderStatusType, OrderStatusType[]> = {
+  [ORDER_STATUS.CREATED]: [ORDER_STATUS.PAYMENT_PENDING, ORDER_STATUS.CANCELLED],
+  [ORDER_STATUS.PAYMENT_PENDING]: [ORDER_STATUS.PAID, ORDER_STATUS.CANCELLED],
+  [ORDER_STATUS.PAID]: [ORDER_STATUS.PROCESSING, ORDER_STATUS.CANCELLED, ORDER_STATUS.REFUNDED],
+  [ORDER_STATUS.PROCESSING]: [ORDER_STATUS.READY_FOR_PICKUP, ORDER_STATUS.SHIPPED, ORDER_STATUS.CANCELLED],
+  [ORDER_STATUS.READY_FOR_PICKUP]: [ORDER_STATUS.DELIVERED, ORDER_STATUS.CANCELLED],
+  [ORDER_STATUS.SHIPPED]: [ORDER_STATUS.DELIVERED],
+  [ORDER_STATUS.DELIVERED]: [ORDER_STATUS.REFUNDED],
+  [ORDER_STATUS.CANCELLED]: [],
+  [ORDER_STATUS.REFUNDED]: [],
+};
+
+/**
+ * Fulfillment types
+ */
+export const FULFILLMENT_TYPE = {
+  DELIVERY: 'DELIVERY',
+  PICKUP: 'PICKUP',
+} as const;
+
+export type FulfillmentType = (typeof FULFILLMENT_TYPE)[keyof typeof FULFILLMENT_TYPE];
+
+/**
+ * Proximity search weights
+ * score = 0.35*dist + 0.25*frete + 0.20*SLA + 0.10*estoque + 0.10*rating
+ */
+export const PROXIMITY_WEIGHTS = {
+  DISTANCE: 0.35,
+  SHIPPING_COST: 0.25,
+  SLA: 0.20,
+  STOCK: 0.10,
+  RATING: 0.10,
+} as const;
+
+/**
+ * Maximum search radius in kilometers
+ */
+export const MAX_SEARCH_RADIUS_KM = 100;
+
+/**
+ * Default SLA in minutes (3 hours)
+ */
+export const DEFAULT_SLA_MINUTES = 180;
+
+/**
+ * Earth radius for Haversine calculation (km)
+ */
+export const EARTH_RADIUS_KM = 6371;

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Pedido de Medicamento Confirmado</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "primary-dark": "#1a6bb8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1c2a38",
+                        "text-main": "#0d141b",
+                        "text-secondary": "#4c739a",
+                        "border-light": "#e7edf3",
+                        "border-dark": "#2d3b4a",
+                        "success-light": "#dcfce7",
+                        "success-dark": "#14532d",
+                        "success-icon": "#22c55e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white antialiased transition-colors duration-200">
+<div class="relative flex h-screen w-full overflow-hidden">
+<aside class="w-64 flex-none hidden md:flex flex-col bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark">
+<div class="flex flex-col h-full p-4">
+<div class="flex flex-col px-3 py-4 gap-1">
+<h1 class="text-primary text-xl font-bold tracking-tight">CANNEO</h1>
+<p class="text-text-secondary dark:text-slate-400 text-xs font-medium">Portal do Paciente</p>
+</div>
+<nav class="flex flex-col gap-2 mt-6 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">home</span>
+<span class="text-sm font-medium">Início</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">calendar_add_on</span>
+<span class="text-sm font-medium">Agendar Consulta</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">calendar_month</span>
+<span class="text-sm font-medium">Minhas Consultas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">description</span>
+<span class="text-sm font-medium">Documentos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+<span class="text-sm font-semibold">Comprar Medicamento</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto">
+<div class="flex items-center gap-3 px-3 py-4 border-t border-border-light dark:border-border-dark">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-slate-500 dark:text-slate-300">logout</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-text-main dark:text-white">Sair</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full min-w-0 bg-background-light dark:bg-background-dark overflow-y-auto">
+<header class="flex-none sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-md px-6 py-3">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-1 rounded-md text-text-main dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-text-main dark:text-white">Confirmação</h2>
+</div>
+<div class="flex items-center gap-6">
+<label class="hidden sm:flex flex-col min-w-40 h-10 w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-slate-800">
+<div class="text-text-secondary dark:text-slate-400 flex border-none items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-text-secondary dark:placeholder:text-slate-500 px-3 text-sm font-normal text-text-main dark:text-white" placeholder="Buscar pedido, medicamento..."/>
+</div>
+</label>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-text-main dark:text-white transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-surface-light dark:border-surface-dark"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Portrait of a smiling woman in a professional setting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABvBejPgBwcdFYVl68iJ__oVqimayPnxyprgDee2dFDENcmYRHwS8xboTlI_IVT0iGhZ7Vx4U8DWd0HLdHHRgQC75O-x35vCMZNRKb5B1Hk3MaT4VoQGyJfIhA8gSU-xYFXlisDQ5EmfXVjT2LxLbzSrydb5ZxohEqlwUSNPxfISy3JR7Ct1JjInGT8lRhVR1gvYO8VbCD9NxeJgodcRvtePhhxy7nGAd-ub3xZphrIkNDTsOU3LSKh6_XRxfuoK5ADkvbOXExf5by");'></div>
+</div>
+</div>
+</header>
+<div class="flex-1 w-full max-w-[800px] mx-auto p-4 md:p-8 flex flex-col justify-center items-center gap-8 my-auto">
+<div class="w-full bg-surface-light dark:bg-surface-dark rounded-2xl border border-border-light dark:border-border-dark p-8 md:p-12 shadow-sm text-center">
+<div class="mx-auto flex size-24 items-center justify-center rounded-full bg-green-50 dark:bg-green-900/20 text-success-icon mb-8 animate-in zoom-in duration-300">
+<span class="material-symbols-outlined text-5xl">check_circle</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-text-main dark:text-white mb-4">
+                        Pedido Realizado com Sucesso!
+                    </h1>
+<p class="text-lg text-text-secondary dark:text-slate-400 max-w-lg mx-auto mb-10 leading-relaxed">
+                        Obrigado por confiar na CANNEO. Seu pedido <span class="font-bold text-text-main dark:text-white">#4922</span> foi recebido e a farmácia já está preparando seus itens.
+                    </p>
+<div class="bg-background-light dark:bg-background-dark/50 rounded-xl p-6 text-left max-w-lg mx-auto border border-border-light dark:border-border-dark mb-10">
+<h3 class="text-sm font-bold text-text-secondary dark:text-slate-400 uppercase tracking-wider mb-4 pb-2 border-b border-border-light dark:border-border-dark">Resumo Rápido</h3>
+<div class="flex gap-4 mb-4">
+<div class="size-16 rounded-lg bg-white dark:bg-slate-800 bg-center bg-cover border border-border-light dark:border-border-dark flex-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDYEIgSnDzUfcxMTXJ_7QPgYaAPzefhwp6oVHyMs259H_5e-xrc5imoH1FN2EnlEMBcpQA3lysONW7xrmq3HigFQz4sFXX7K-iExPMq_s5Vjzl8sEuw7vxY7Cv4e8b_uJlHiOkwk9rmTeSn2SlmKgegMWBOt83cqlwTfHDJ9nOQxoZ79EUfJiART62pyhL_CUo9i-uE6OAr4OnpCqQ78l1Xxz6GX_mC44zt79i05xINKQ8mN05jrZddA8w6r-wPNcIkPgeHRBLlsUI_');"></div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-text-main dark:text-white text-base">Óleo de CBD Full Spectrum</h4>
+<p class="text-sm text-text-secondary dark:text-slate-400">Frasco 30ml • 1500mg</p>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="text-text-secondary dark:text-slate-400">Método de Pagamento</span>
+<span class="font-medium text-text-main dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">credit_card</span> Cartão de Crédito
+                                </span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-text-secondary dark:text-slate-400">Valor Total</span>
+<span class="font-bold text-primary text-lg">R$ 279,90</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+<a class="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-primary hover:bg-primary-dark text-white font-semibold transition-colors shadow-sm shadow-primary/20" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+                            Rastrear Pedido
+                        </a>
+<a class="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark hover:bg-slate-50 dark:hover:bg-slate-800 text-text-main dark:text-white font-semibold transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+                            Voltar para o Início
+                        </a>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

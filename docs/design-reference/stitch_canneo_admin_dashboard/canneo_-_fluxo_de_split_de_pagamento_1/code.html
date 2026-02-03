@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Documentação WhatsApp API</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#007bff", // Clinical Blue
+                        "whatsapp": "#25D366", // WhatsApp Green
+                        "whatsapp-dark": "#128C7E",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2632",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .code-syntax-key { color: #f87171; }
+        .code-syntax-string { color: #4ade80; }
+        .code-syntax-number { color: #60a5fa; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-4 sm:px-10 py-3 shadow-sm">
+<div class="flex items-center justify-between mx-auto max-w-[1400px]">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">health_and_safety</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">CANNEO Admin</h2>
+</div>
+<div class="flex items-center gap-4 md:gap-8">
+<div class="hidden md:flex flex-1 max-w-md">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="block w-full rounded-lg border-none bg-slate-100 dark:bg-slate-800 py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:ring-2 focus:ring-primary" placeholder="Buscar endpoints, logs ou templates..." type="text"/>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm" data-alt="User profile avatar showing a smiling professional" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOcXmtC0ft6skA0aQ2DjNYefmGVd-oesa_p1QiSPUEdwrkiFLuj9VQTGVQjKly5BTbhqrVnIYJc2iG3I3KwbJhm0WZdcJKHv2fIN3ZKuK8K2F514Nvj63iLxrmuMSdTkD5SRND2hnKNm3R51wPXYQLrzfpDhoRHf2pxBbrbKKjr--Ed5Jqvi2BYea7G1HqaU7EKlWEUuZBuI3-c0_PxIwNKnCmZkzRerieYKlozUL-8E9EzICbQhvaay0wZCCRG7STuyoq5c5DzxR3");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center w-full px-4 sm:px-6 lg:px-8 py-8">
+<div class="w-full max-w-[1200px] flex flex-col gap-6">
+<nav aria-label="Breadcrumb" class="flex px-1">
+<ol class="flex items-center space-x-2">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Home</a></li>
+<li><span class="text-slate-400 dark:text-slate-600">/</span></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Integrações</a></li>
+<li><span class="text-slate-400 dark:text-slate-600">/</span></li>
+<li><span aria-current="page" class="text-slate-900 dark:text-white text-sm font-medium">WhatsApp Business API</span></li>
+</ol>
+</nav>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-10 bg-[#25D366] text-white rounded-full shadow-lg shadow-green-500/20">
+<i class="material-symbols-outlined">chat</i>
+</span>
+<h1 class="text-slate-900 dark:text-white text-3xl md:text-3xl font-black tracking-tight">Integração WhatsApp API</h1>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-base max-w-2xl pl-[3.25rem]">
+                        Gerenciamento de templates, endpoints e status de conexão com a API oficial Meta/WhatsApp.
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="inline-flex items-center justify-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 px-4 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm transition-all">
+<span class="material-symbols-outlined text-[20px]">description</span>
+                        Documentação PDF
+                    </button>
+<button class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#20bd5a] shadow-sm transition-all shadow-green-500/20">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+                        Testar Conexão
+                    </button>
+</div>
+</div>
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-1 rounded-xl bg-surface-light dark:bg-surface-dark p-5 border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden">
+<div class="absolute right-0 top-0 h-full w-1 bg-[#25D366]"></div>
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Status da Conexão</p>
+<span class="material-symbols-outlined text-[#25D366] bg-green-100 dark:bg-green-900/30 p-1 rounded">wifi</span>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<div class="size-2.5 rounded-full bg-[#25D366] animate-pulse"></div>
+<p class="text-slate-900 dark:text-white text-xl font-bold">API Conectada</p>
+</div>
+<p class="text-xs text-slate-400 mt-1">Uptime: 99.9% (últimos 30 dias)</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl bg-surface-light dark:bg-surface-dark p-5 border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Mensagens (24h)</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded">send</span>
+</div>
+<p class="text-slate-900 dark:text-white text-2xl font-bold mt-2">3.450</p>
+<div class="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+12% vs ontem</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl bg-surface-light dark:bg-surface-dark p-5 border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Taxa de Entrega</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded">done_all</span>
+</div>
+<p class="text-slate-900 dark:text-white text-2xl font-bold mt-2">98.5%</p>
+<div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-1.5 mt-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 98.5%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl bg-surface-light dark:bg-surface-dark p-5 border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Qualidade da Conta</p>
+<span class="material-symbols-outlined text-[#25D366] bg-green-100 dark:bg-green-900/30 p-1 rounded">verified_user</span>
+</div>
+<p class="text-slate-900 dark:text-white text-2xl font-bold mt-2">Alta</p>
+<p class="text-xs text-slate-400 mt-1">Tier 2 (10k mensagens/dia)</p>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div class="lg:col-span-5 flex flex-col gap-4">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm h-full">
+<div class="px-5 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 rounded-t-xl">
+<h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">api</span>
+                                Endpoints Principais
+                            </h3>
+<span class="text-xs font-mono bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">v16.0</span>
+</div>
+<div class="p-4 space-y-3">
+<div class="group flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 px-2 py-1 rounded w-14 text-center">POST</span>
+<span class="text-sm font-mono text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">/messages</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">chevron_right</span>
+</div>
+<div class="group flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 px-2 py-1 rounded w-14 text-center">GET</span>
+<span class="text-sm font-mono text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">/templates</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">chevron_right</span>
+</div>
+<div class="group flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 px-2 py-1 rounded w-14 text-center">POST</span>
+<span class="text-sm font-mono text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">/media</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">chevron_right</span>
+</div>
+<div class="group flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-bold uppercase tracking-wider bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 px-2 py-1 rounded w-14 text-center">DEL</span>
+<span class="text-sm font-mono text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors">/session</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">chevron_right</span>
+</div>
+</div>
+<div class="px-4 py-3 bg-slate-50 dark:bg-slate-800/50 rounded-b-xl border-t border-slate-200 dark:border-slate-700">
+<a class="text-xs font-medium text-primary hover:text-blue-700 flex items-center gap-1" href="#">
+                                Ver documentação completa Swagger <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col h-full">
+<div class="px-5 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex justify-between items-center">
+<h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">code</span>
+                                Estrutura de Template
+                            </h3>
+<div class="flex items-center gap-2">
+<select class="text-xs border-slate-200 dark:border-slate-600 rounded bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 py-1 pl-2 pr-6 focus:ring-primary focus:border-primary">
+<option>lembrete_consulta_v2</option>
+<option>receita_digital</option>
+<option>confirmacao_agendamento</option>
+</select>
+<button class="p-1 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">content_copy</span></button>
+</div>
+</div>
+<div class="bg-[#1e1e1e] p-6 overflow-x-auto flex-1 font-mono text-sm leading-relaxed text-slate-300">
+<pre><code><span class="code-syntax-key">{</span>
+  <span class="code-syntax-key">"messaging_product"</span>: <span class="code-syntax-string">"whatsapp"</span>,
+  <span class="code-syntax-key">"to"</span>: <span class="code-syntax-string">"{{paciente_telefone}}"</span>,
+  <span class="code-syntax-key">"type"</span>: <span class="code-syntax-string">"template"</span>,
+  <span class="code-syntax-key">"template"</span>: {
+    <span class="code-syntax-key">"name"</span>: <span class="code-syntax-string">"lembrete_consulta_v2"</span>,
+    <span class="code-syntax-key">"language"</span>: { <span class="code-syntax-key">"code"</span>: <span class="code-syntax-string">"pt_BR"</span> },
+    <span class="code-syntax-key">"components"</span>: [
+      {
+        <span class="code-syntax-key">"type"</span>: <span class="code-syntax-string">"body"</span>,
+        <span class="code-syntax-key">"parameters"</span>: [
+          { <span class="code-syntax-key">"type"</span>: <span class="code-syntax-string">"text"</span>, <span class="code-syntax-key">"text"</span>: <span class="code-syntax-string">"{{paciente_nome}}"</span> },
+          { <span class="code-syntax-key">"type"</span>: <span class="code-syntax-string">"text"</span>, <span class="code-syntax-key">"text"</span>: <span class="code-syntax-string">"{{data_consulta}}"</span> },
+          { <span class="code-syntax-key">"type"</span>: <span class="code-syntax-string">"text"</span>, <span class="code-syntax-key">"text"</span>: <span class="code-syntax-string">"{{medico_nome}}"</span> }
+        ]
+      },
+      {
+        <span class="code-syntax-key">"type"</span>: <span class="code-syntax-string">"button"</span>,
+        <span class="code-syntax-key">"sub_type"</span>: <span class="code-syntax-string">"url"</span>,
+        <span class="code-syntax-key">"index"</span>: <span class="code-syntax-number">0</span>,
+        <span class="code-syntax-key">"parameters"</span>: [
+           { <span class="code-syntax-key">"type"</span>: <span class="code-syntax-string">"text"</span>, <span class="code-syntax-key">"text"</span>: <span class="code-syntax-string">"{{link_sala}}"</span> }
+        ]
+      }
+    ]
+  }
+<span class="code-syntax-key">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<section class="w-full bg-surface-light dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex justify-between items-center">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-[#25D366]">timeline</span>
+                        Fluxo de Mensagem: Jornada do Paciente
+                    </h3>
+<div class="flex gap-2">
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 px-2 py-1 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+<span class="size-2 rounded-full bg-blue-500"></span> Sistema
+                        </span>
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 px-2 py-1 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+<span class="size-2 rounded-full bg-[#25D366]"></span> WhatsApp
+                        </span>
+</div>
+</div>
+<div class="p-8 lg:p-12 overflow-x-auto">
+<div class="min-w-[900px] flex items-start justify-between gap-4 relative">
+<div class="absolute top-[3.5rem] left-[10%] right-[10%] h-0.5 bg-slate-200 dark:bg-slate-700 -z-0"></div>
+<div class="flex flex-col items-center gap-4 w-56 relative z-10">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-blue-500 text-white flex items-center justify-center border-4 border-white dark:border-slate-800 shadow-md mb-2">
+<span class="material-symbols-outlined text-sm">event</span>
+</div>
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">Gatilho</div>
+</div>
+<div class="w-full bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-sm hover:border-blue-400 transition-colors">
+<div class="font-bold text-slate-800 dark:text-slate-200 mb-1">Agendamento</div>
+<p class="text-xs text-slate-500 dark:text-slate-400">Paciente marca consulta no portal.</p>
+<div class="mt-3 flex items-center gap-1.5 text-[10px] text-slate-400 font-mono bg-slate-100 dark:bg-slate-700/50 p-1.5 rounded">
+<span>status:</span> <span class="text-blue-500">scheduled</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-4 w-64 relative z-10">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-[#25D366] text-white flex items-center justify-center border-4 border-white dark:border-slate-800 shadow-md mb-2">
+<span class="material-symbols-outlined text-sm">alarm</span>
+</div>
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">24h Antes</div>
+</div>
+<div class="w-full bg-white dark:bg-slate-800 border-2 border-[#25D366] rounded-xl p-0 shadow-lg shadow-green-500/10 overflow-hidden">
+<div class="bg-[#25D366] px-3 py-1.5 text-white flex items-center justify-between">
+<span class="text-xs font-bold">Template Enviado</span>
+<span class="material-symbols-outlined text-[14px]">send</span>
+</div>
+<div class="p-3 bg-[#e5ddd5] dark:bg-[#2a2f32]">
+<div class="bg-white dark:bg-[#056162] rounded-lg rounded-tl-none p-2 shadow-sm text-xs relative">
+<p class="text-slate-800 dark:text-white leading-snug">Olá <strong>{{paciente}}</strong>, sua consulta é amanhã às <strong>14:00</strong>.</p>
+<div class="flex justify-end mt-1">
+<span class="text-[9px] text-slate-400 flex items-center gap-0.5">10:00 <span class="material-symbols-outlined text-[10px] text-blue-400">done_all</span></span>
+</div>
+</div>
+<div class="mt-2 flex gap-1">
+<div class="flex-1 bg-white dark:bg-[#1f2c34] text-center py-1.5 rounded text-[10px] font-medium text-blue-500 border border-slate-200 dark:border-slate-600 shadow-sm">Confirmar</div>
+<div class="flex-1 bg-white dark:bg-[#1f2c34] text-center py-1.5 rounded text-[10px] font-medium text-blue-500 border border-slate-200 dark:border-slate-600 shadow-sm">Link Sala</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-4 w-56 relative z-10">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-slate-400 text-white flex items-center justify-center border-4 border-white dark:border-slate-800 shadow-md mb-2">
+<span class="material-symbols-outlined text-sm">video_camera_front</span>
+</div>
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">Durante</div>
+</div>
+<div class="w-full bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 border-dashed rounded-xl p-4 shadow-sm text-center">
+<div class="font-bold text-slate-800 dark:text-slate-200 mb-1">Teleconsulta</div>
+<p class="text-xs text-slate-500 dark:text-slate-400">Realização do atendimento médico.</p>
+</div>
+</div>
+<div class="flex flex-col items-center gap-4 w-64 relative z-10">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-[#25D366] text-white flex items-center justify-center border-4 border-white dark:border-slate-800 shadow-md mb-2">
+<span class="material-symbols-outlined text-sm">medication</span>
+</div>
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">Pós-Consulta</div>
+</div>
+<div class="w-full bg-white dark:bg-slate-800 border-2 border-[#25D366] rounded-xl p-0 shadow-lg shadow-green-500/10 overflow-hidden">
+<div class="bg-[#25D366] px-3 py-1.5 text-white flex items-center justify-between">
+<span class="text-xs font-bold">Documento Enviado</span>
+<span class="material-symbols-outlined text-[14px]">attachment</span>
+</div>
+<div class="p-3 bg-[#e5ddd5] dark:bg-[#2a2f32]">
+<div class="bg-white dark:bg-[#056162] rounded-lg rounded-tl-none p-2 shadow-sm text-xs relative flex items-center gap-2">
+<div class="bg-red-100 p-1.5 rounded text-red-500">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-medium text-slate-800 dark:text-white">Receita_Digital.pdf</p>
+<p class="text-[9px] text-slate-500 dark:text-slate-300">120 KB • 1 página</p>
+</div>
+</div>
+<div class="flex justify-end mt-1">
+<span class="text-[9px] text-slate-500 dark:text-slate-400 flex items-center gap-0.5">11:30 <span class="material-symbols-outlined text-[10px] text-slate-400">done</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-200 dark:border-slate-700">
+<div class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">webhook</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Configuração de Webhooks</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Eventos inscritos para atualização de status em tempo real.</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-3">
+<label class="inline-flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-full shadow-sm">
+<div class="size-2 rounded-full bg-blue-500"></div> messages.sent
+                            </label>
+<label class="inline-flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-full shadow-sm">
+<div class="size-2 rounded-full bg-yellow-500"></div> messages.delivered
+                            </label>
+<label class="inline-flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-full shadow-sm">
+<div class="size-2 rounded-full bg-[#25D366]"></div> messages.read
+                            </label>
+<button class="text-xs text-primary hover:underline font-semibold ml-2">Editar Webhooks</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+
+</body></html>

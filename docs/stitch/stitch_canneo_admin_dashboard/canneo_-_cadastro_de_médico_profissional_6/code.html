@@ -1,0 +1,300 @@
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Metas e Desempenho Médico</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "success": "#10b981",
+                        "accent": "#0ea5e9",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(19, 127, 236, 0.1) 0%, rgba(19, 127, 236, 0) 100%);
+        }
+        .progress-bar-glow {
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<header class="sticky top-0 z-40 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-3">
+<div class="max-w-full mx-auto flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="text-primary">
+<svg class="size-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight uppercase">CANNEO</h2>
+</div>
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-4 py-2 text-sm font-bold text-primary border-b-2 border-primary" href="#">Dashboard</a>
+<a class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Financeiro</a>
+<a class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Pacientes</a>
+<a class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Agenda</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-end mr-2">
+<span class="text-sm font-bold text-slate-900 dark:text-white">Dr. Ricardo Silva</span>
+<span class="text-[10px] px-2 py-0.5 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 font-bold rounded-full uppercase">CRM: 12345-SP</span>
+</div>
+<div class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-slate-400">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex-1 flex w-full">
+<aside class="hidden lg:flex w-64 flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-6 gap-8">
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Financeiro</h3>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/5 text-primary rounded-lg font-bold transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                    Metas e Desempenho
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+                    Dados Bancários
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Notas Fiscais
+                </a>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Gestão Clínica</h3>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">event_available</span>
+                    Agenda Futura
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+                    Meus Pacientes
+                </a>
+</div>
+</div>
+</aside>
+<main class="flex-1 p-6 md:p-8 overflow-y-auto">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white">Metas e Desempenho</h1>
+<p class="text-sm text-slate-500">Acompanhamento em tempo real da sua produtividade e faturamento.</p>
+</div>
+<div class="flex items-center gap-2 bg-white dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+<button class="px-4 py-1.5 text-xs font-bold bg-primary text-white rounded-lg transition-all">Este Mês</button>
+<button class="px-4 py-1.5 text-xs font-bold text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg transition-all">Últimos 30 dias</button>
+<button class="px-4 py-1.5 text-xs font-bold text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg transition-all">Personalizado</button>
+<span class="material-symbols-outlined text-slate-400 px-2 text-lg">calendar_today</span>
+</div>
+</div>
+<section class="mb-8">
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm overflow-hidden relative">
+<div class="absolute top-0 right-0 p-4">
+<span class="text-xs font-bold text-success bg-success/10 px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+<span class="size-1.5 bg-success rounded-full animate-pulse"></span>
+                            Em dia com a meta
+                        </span>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">target</span>
+                                Meta de Faturamento Mensal
+                            </h3>
+<p class="text-xs text-slate-500 font-medium">Você atingiu <span class="text-success font-bold">75%</span> da sua meta para Novembro.</p>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold text-slate-900 dark:text-white">R$ 15.000,00</span>
+<span class="text-sm text-slate-400 font-medium">de R$ 20.000,00</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-4 rounded-full overflow-hidden">
+<div class="bg-success h-full w-[75%] transition-all duration-1000 ease-out progress-bar-glow relative">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-between text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Início do Mês</span>
+<span class="text-success">Meta Intermediária (R$ 10k) atingida</span>
+<span>Meta Final</span>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<span class="text-[10px] font-bold text-success">+12% vs mês ant.</span>
+</div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Faturamento Bruto</p>
+<h4 class="text-xl font-bold text-slate-900 dark:text-white">R$ 18.450,00</h4>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl">
+<span class="material-symbols-outlined text-success">account_balance_wallet</span>
+</div>
+<span class="text-[10px] font-bold text-slate-400">Após taxas</span>
+</div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Valor Líquido</p>
+<h4 class="text-xl font-bold text-slate-900 dark:text-white">R$ 16.236,00</h4>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
+<span class="material-symbols-outlined text-purple-600">stethoscope</span>
+</div>
+<span class="text-[10px] font-bold text-success">+4 consultas</span>
+</div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Consultas Realizadas</p>
+<h4 class="text-xl font-bold text-slate-900 dark:text-white">62</h4>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-xl">
+<span class="material-symbols-outlined text-orange-600">trending_up</span>
+</div>
+<span class="text-[10px] font-bold text-orange-600">+R$ 15,00</span>
+</div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Ticket Médio</p>
+<h4 class="text-xl font-bold text-slate-900 dark:text-white">R$ 297,58</h4>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="font-bold text-slate-800 dark:text-white">Evolução Diária</h3>
+<p class="text-xs text-slate-500">Comparativo: Faturamento Atual vs. Projeção de Meta</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-primary"></span>
+<span class="text-[10px] font-bold text-slate-500 uppercase">Realizado</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full border border-dashed border-slate-400"></span>
+<span class="text-[10px] font-bold text-slate-500 uppercase">Meta</span>
+</div>
+</div>
+</div>
+<div class="h-64 relative chart-gradient flex items-end">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 400 150">
+<line stroke="#94a3b8" stroke-dasharray="4" stroke-width="1" x1="0" x2="400" y1="50" y2="50"></line>
+<path d="M0,130 L40,110 L80,120 L120,80 L160,95 L200,60 L240,40 L280,30 L320,45" fill="none" stroke="#137fec" stroke-width="3"></path>
+<circle cx="280" cy="30" fill="#137fec" r="4"></circle>
+</svg>
+<div class="absolute bottom-0 left-0 right-0 flex justify-between px-2 pt-4 border-t border-slate-100 dark:border-slate-800 mt-2">
+<span class="text-[10px] font-medium text-slate-400">01 Nov</span>
+<span class="text-[10px] font-medium text-slate-400">08 Nov</span>
+<span class="text-[10px] font-medium text-slate-400">15 Nov</span>
+<span class="text-[10px] font-medium text-slate-400">22 Nov</span>
+<span class="text-[10px] font-medium text-slate-400">30 Nov</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col">
+<h3 class="font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+                        Próximos Ganhos Previstos
+                    </h3>
+<div class="flex-1 space-y-4">
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Amanhã</p>
+<p class="text-sm font-bold text-slate-700 dark:text-slate-300">8 Consultas</p>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">R$ 2.380,00</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full"></div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800 opacity-80">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Quinta-feira</p>
+<p class="text-sm font-bold text-slate-700 dark:text-slate-300">5 Consultas</p>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">R$ 1.450,00</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[60%]"></div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-800 opacity-60">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Sexta-feira</p>
+<p class="text-sm font-bold text-slate-700 dark:text-slate-300">12 Consultas</p>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">R$ 3.570,00</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-center text-primary font-bold">
+<span class="text-sm">Total Previsto (Semana)</span>
+<span class="text-lg">R$ 7.400,00</span>
+</div>
+<p class="text-[10px] text-slate-400 text-right mt-1">*Baseado na agenda confirmada</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-4 px-6">
+<div class="max-w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-4 opacity-70">
+<p class="text-xs text-slate-500 font-medium">© 2024 CANNEO • Gestão de Repasses Médicos</p>
+<div class="flex gap-6">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-green-500">verified_user</span>
+<span class="text-xs text-slate-500">Criptografia Ativa</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-blue-500">update</span>
+<span class="text-xs text-slate-500">Sincronizado com a Agenda</span>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

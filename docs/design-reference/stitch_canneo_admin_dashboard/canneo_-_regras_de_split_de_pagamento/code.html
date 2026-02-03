@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Regras de Split de Pagamento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#36b7e2",
+                        "primary-dark": "#2aa1c9",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111d21",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c32",
+                        "border-light": "#e8f0f3",
+                        "border-dark": "#2a424b",
+                        "text-main": "#0e171b",
+                        "text-secondary": "#508495",
+                        "success": "#078836",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for table */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-gray-100 transition-colors duration-200">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-4 py-3 lg:px-10">
+<div class="mx-auto flex max-w-7xl items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-text-main dark:text-white">
+<div class="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">dataset</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">CANNEO Admin</h2>
+</div>
+<nav class="hidden items-center gap-6 lg:flex">
+<a class="text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-primary" href="#">Financeiro</a>
+<a class="text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors" href="#">Usuários</a>
+<a class="text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors" href="#">Configurações</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 lg:gap-6">
+<div class="hidden w-full max-w-xs lg:block">
+<div class="relative flex items-center rounded-lg bg-border-light/50 dark:bg-border-dark/30">
+<span class="material-symbols-outlined absolute left-3 text-text-secondary">search</span>
+<input class="w-full rounded-lg border-none bg-transparent py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary dark:text-white placeholder:text-text-secondary/70" placeholder="Buscar transação, ID..." type="text"/>
+</div>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span class="hidden sm:inline">Salvar Alterações</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-gray-200 bg-cover bg-center ring-2 ring-white dark:ring-border-dark" data-alt="Admin user profile picture showing a professional headshot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrJi5gtIDkSa3cEsrwHlbL9TGW8SrHLx6wOf_tF1h3u1ZA8YcFAJeckAJcPxqmkZPnipJ2Gsq3KyviyM134LotzVIUyp2br-ibwZp_irvdJHtk-e_4F5y9KHQThU1xQSNqfED0vc998xekohz647F1gDQjcDm2He0xgNMF-OP8i1bVLKh4Sf_VKWw720yjbkw6HnCZ9xaHhDisdL7Qx6cGwnvYtZCS0G4dw1U7JJEu7zQKsro25REoYTiWTYAcRuZQrVqQLbFePWp4");'></div>
+</div>
+</div>
+</header>
+<main class="mx-auto max-w-7xl px-4 py-8 lg:px-8">
+<!-- Page Header -->
+<div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+<div class="space-y-2">
+<h1 class="text-3xl font-black tracking-tight text-text-main dark:text-white lg:text-4xl">Regras de Split de Pagamento</h1>
+<p class="max-w-2xl text-text-secondary dark:text-gray-400">
+                    Configure a lógica de distribuição automática de receita para telemedicina e marketplace. 
+                    As alterações impactam novos pagamentos imediatamente.
+                </p>
+</div>
+<div class="flex items-center gap-2 rounded-md bg-blue-50 px-3 py-1.5 dark:bg-blue-900/20">
+<span class="material-symbols-outlined text-sm text-blue-600 dark:text-blue-400">info</span>
+<span class="text-xs font-medium text-blue-700 dark:text-blue-300">Última atualização: Hoje, 14:30 por Admin</span>
+</div>
+</div>
+<!-- Stats Overview -->
+<div class="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+<div class="rounded-xl border border-border-light bg-surface-light p-5 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Volume Transacionado (Mês)</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-bold text-text-main dark:text-white">R$ 1.2M</span>
+<span class="flex items-center text-xs font-medium text-success bg-green-100 dark:bg-green-900/30 px-1.5 py-0.5 rounded text-green-700 dark:text-green-400">
+<span class="material-symbols-outlined text-[14px] mr-0.5">trending_up</span>+12%
+                    </span>
+</div>
+</div>
+<div class="rounded-xl border border-border-light bg-surface-light p-5 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Comissão Média Canneo</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-bold text-text-main dark:text-white">18.5%</span>
+<span class="text-xs font-medium text-success">+0.5% vs mês anterior</span>
+</div>
+</div>
+<div class="rounded-xl border border-border-light bg-surface-light p-5 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Taxa de Sucesso Split</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-bold text-text-main dark:text-white">99.8%</span>
+<span class="material-symbols-outlined text-success text-xl">check_circle</span>
+</div>
+</div>
+<div class="rounded-xl border border-border-light bg-surface-light p-5 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Pendentes de Liquidação</p>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-2xl font-bold text-text-main dark:text-white">R$ 45k</span>
+<span class="text-xs font-medium text-orange-500">Aguardando gatilho</span>
+</div>
+</div>
+</div>
+<!-- Main Configuration Grid -->
+<div class="grid gap-8 lg:grid-cols-3">
+<!-- Left Column: Settings Forms (2/3 width) -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Section 1: Telemedicine -->
+<div class="rounded-xl border border-border-light bg-surface-light shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<div class="border-b border-border-light px-6 py-4 dark:border-border-dark flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="rounded-lg bg-blue-50 p-2 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+<span class="material-symbols-outlined">stethoscope</span>
+</div>
+<h3 class="font-bold text-text-main dark:text-white">1. Regra para Consultas (Telemedicina)</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+</span>
+<span class="text-xs font-medium text-text-secondary dark:text-gray-400">Ativo</span>
+</div>
+</div>
+<div class="p-6">
+<div class="grid gap-6 md:grid-cols-2">
+<div class="space-y-2">
+<label class="text-sm font-medium text-text-main dark:text-gray-200">Honorário Médico (%)</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-border-light bg-background-light p-3 pr-10 text-text-main focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white" type="number" value="80"/>
+<span class="absolute right-3 top-3 text-text-secondary">%</span>
+</div>
+<p class="text-xs text-text-secondary">Base de cálculo para o profissional.</p>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-text-main dark:text-gray-200">Comissão Canneo (%)</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-border-light bg-background-light p-3 pr-10 text-text-main focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white" type="number" value="20"/>
+<span class="absolute right-3 top-3 text-text-secondary">%</span>
+</div>
+<p class="text-xs text-text-secondary">Receita líquida da plataforma.</p>
+</div>
+<div class="md:col-span-2 pt-4 border-t border-border-light dark:border-border-dark">
+<label class="mb-3 block text-sm font-medium text-text-main dark:text-gray-200">Quem assume a taxa do Gateway (MDR)?</label>
+<div class="flex flex-wrap gap-4">
+<label class="flex cursor-pointer items-center gap-3 rounded-lg border border-primary bg-primary/5 p-3 dark:border-primary dark:bg-primary/10">
+<input checked="" class="h-4 w-4 border-gray-300 text-primary focus:ring-primary" name="mdr_telemed" type="radio"/>
+<div>
+<span class="block text-sm font-bold text-text-main dark:text-white">Médico</span>
+<span class="text-xs text-text-secondary">Desconta do honorário</span>
+</div>
+</label>
+<label class="flex cursor-pointer items-center gap-3 rounded-lg border border-border-light bg-background-light p-3 hover:bg-gray-50 dark:border-border-dark dark:bg-background-dark dark:hover:bg-border-dark/50">
+<input class="h-4 w-4 border-gray-300 text-primary focus:ring-primary" name="mdr_telemed" type="radio"/>
+<div>
+<span class="block text-sm font-bold text-text-main dark:text-white">Plataforma (Canneo)</span>
+<span class="text-xs text-text-secondary">Canneo absorve o custo</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Marketplace -->
+<div class="rounded-xl border border-border-light bg-surface-light shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<div class="border-b border-border-light px-6 py-4 dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="rounded-lg bg-emerald-50 p-2 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+<h3 class="font-bold text-text-main dark:text-white">2. Regra para Marketplace (Produtos)</h3>
+</div>
+</div>
+<div class="p-6">
+<div class="grid gap-6 md:grid-cols-3">
+<div class="space-y-2">
+<label class="text-sm font-medium text-text-main dark:text-gray-200">Repasse Farmácia (%)</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-border-light bg-background-light p-3 pr-10 text-text-main focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white" type="number" value="85"/>
+<span class="absolute right-3 top-3 text-text-secondary">%</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-text-main dark:text-gray-200">Take Rate Canneo (%)</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-border-light bg-background-light p-3 pr-10 text-text-main focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white" type="number" value="15"/>
+<span class="absolute right-3 top-3 text-text-secondary">%</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-text-main dark:text-gray-200">Taxas e Impostos (%)</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-border-light bg-gray-100 p-3 pr-10 text-gray-500 cursor-not-allowed dark:border-border-dark dark:bg-gray-800 dark:text-gray-400" disabled="" type="number" value="Included"/>
+<span class="absolute right-3 top-3 text-gray-400">Auto</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Timing Trigger -->
+<div class="rounded-xl border border-border-light bg-surface-light shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<div class="border-b border-border-light px-6 py-4 dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="rounded-lg bg-purple-50 p-2 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<h3 class="font-bold text-text-main dark:text-white">3. Configuração de Momento do Split</h3>
+</div>
+</div>
+<div class="p-6">
+<div class="flex flex-col gap-4 sm:flex-row">
+<label class="relative flex flex-1 cursor-pointer rounded-lg border border-border-light bg-background-light p-4 shadow-sm focus-within:ring-2 focus-within:ring-primary hover:border-primary dark:border-border-dark dark:bg-background-dark dark:hover:border-primary">
+<input class="sr-only peer" name="timing" type="radio"/>
+<div class="flex w-full items-center gap-3">
+<div class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-gray-300 peer-checked:border-primary peer-checked:bg-primary">
+<div class="h-2.5 w-2.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+</div>
+<div>
+<p class="font-bold text-text-main dark:text-white">Na Captura (D+0)</p>
+<p class="text-xs text-text-secondary">Split imediato no ato da compra.</p>
+</div>
+</div>
+<div class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary pointer-events-none"></div>
+</label>
+<label class="relative flex flex-1 cursor-pointer rounded-lg border border-border-light bg-background-light p-4 shadow-sm focus-within:ring-2 focus-within:ring-primary hover:border-primary dark:border-border-dark dark:bg-background-dark dark:hover:border-primary">
+<input checked="" class="sr-only peer" name="timing" type="radio"/>
+<div class="flex w-full items-center gap-3">
+<div class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-gray-300 bg-transparent peer-checked:border-primary peer-checked:bg-primary transition-all">
+<div class="h-2.5 w-2.5 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+<div>
+<p class="font-bold text-text-main dark:text-white">Na Entrega (D+14)</p>
+<p class="text-xs text-text-secondary">Após confirmação logística.</p>
+</div>
+</div>
+<div class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary pointer-events-none"></div>
+</label>
+<label class="relative flex flex-1 cursor-pointer rounded-lg border border-border-light bg-background-light p-4 shadow-sm focus-within:ring-2 focus-within:ring-primary hover:border-primary dark:border-border-dark dark:bg-background-dark dark:hover:border-primary">
+<input class="sr-only peer" name="timing" type="radio"/>
+<div class="flex w-full items-center gap-3">
+<div class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-gray-300 peer-checked:border-primary peer-checked:bg-primary">
+<div class="h-2.5 w-2.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+</div>
+<div>
+<p class="font-bold text-text-main dark:text-white">Manual (Review)</p>
+<p class="text-xs text-text-secondary">Aprovação financeira prévia.</p>
+</div>
+</div>
+<div class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary pointer-events-none"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Visualizer & Simulation -->
+<div class="lg:col-span-1 space-y-6">
+<!-- Money Flow Visualizer -->
+<div class="sticky top-24 rounded-xl border border-border-light bg-surface-light shadow-lg dark:border-border-dark dark:bg-surface-dark overflow-hidden">
+<div class="bg-gradient-to-r from-slate-800 to-slate-900 px-6 py-4 dark:from-slate-900 dark:to-black">
+<h3 class="font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">account_tree</span>
+                            Fluxo do Dinheiro
+                        </h3>
+<p class="text-xs text-slate-400 mt-1">Simulação baseada em R$ 100,00</p>
+</div>
+<div class="p-6 flex flex-col items-center relative">
+<!-- Connecting Line -->
+<div class="absolute left-1/2 top-6 bottom-6 w-0.5 bg-gray-200 dark:bg-gray-700 -z-0"></div>
+<!-- Step 1: Checkout -->
+<div class="z-10 mb-6 flex w-full flex-col items-center">
+<div class="flex h-12 w-full max-w-[240px] items-center justify-between rounded-lg border border-gray-200 bg-white px-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+<span class="text-sm font-medium dark:text-white">Checkout Cliente</span>
+<span class="font-bold text-green-600 dark:text-green-400">R$ 100,00</span>
+</div>
+</div>
+<!-- Step 2: Gateway Fee -->
+<div class="z-10 mb-6 flex w-full flex-col items-center">
+<div class="relative flex h-10 w-full max-w-[200px] items-center justify-center rounded bg-red-50 text-xs font-medium text-red-600 border border-red-100 dark:bg-red-900/20 dark:text-red-300 dark:border-red-900/30">
+<span class="material-symbols-outlined mr-1 text-[16px]">credit_card</span>
+                                Taxa Gateway (-R$ 3,50)
+                            </div>
+</div>
+<!-- Step 3: Split Engine -->
+<div class="z-10 mb-8 flex w-full flex-col items-center">
+<div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg ring-4 ring-blue-50 dark:ring-blue-900/20">
+<span class="material-symbols-outlined animate-pulse">settings_b_roll</span>
+</div>
+<span class="mt-2 text-xs font-bold uppercase tracking-wider text-text-secondary">Engine</span>
+</div>
+<!-- Step 4: Final Wallets (Branches) -->
+<div class="z-10 grid w-full grid-cols-2 gap-4">
+<!-- Branch Left -->
+<div class="flex flex-col gap-2">
+<div class="relative flex h-24 flex-col justify-between rounded-lg border border-l-4 border-gray-200 border-l-primary bg-background-light p-3 dark:border-gray-700 dark:bg-gray-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-sm">medical_services</span>
+<span class="text-xs font-bold text-text-main dark:text-white">Médico</span>
+</div>
+<div class="mt-2">
+<p class="text-xs text-text-secondary">Líquido</p>
+<p class="text-lg font-bold text-text-main dark:text-white">R$ 77,20</p>
+</div>
+</div>
+</div>
+<!-- Branch Right -->
+<div class="flex flex-col gap-2">
+<div class="relative flex h-24 flex-col justify-between rounded-lg border border-l-4 border-gray-200 border-l-green-500 bg-background-light p-3 dark:border-gray-700 dark:bg-gray-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-sm">token</span>
+<span class="text-xs font-bold text-text-main dark:text-white">Canneo</span>
+</div>
+<div class="mt-2">
+<p class="text-xs text-text-secondary">Comissão</p>
+<p class="text-lg font-bold text-green-600 dark:text-green-400">R$ 19,30</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-background-light p-4 dark:bg-background-dark border-t border-border-light dark:border-border-dark">
+<div class="flex justify-between items-center text-xs text-text-secondary">
+<span>Processamento estimado</span>
+<span class="font-mono">~150ms</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Beneficiaries Table Section -->
+<div class="mt-8 rounded-xl border border-border-light bg-surface-light shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<div class="flex items-center justify-between border-b border-border-light px-6 py-4 dark:border-border-dark">
+<h3 class="font-bold text-text-main dark:text-white">Beneficiários e Contas Vinculadas</h3>
+<button class="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-dark">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Exportar Relatório
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-background-light text-text-secondary dark:bg-background-dark dark:text-gray-400">
+<tr>
+<th class="px-6 py-3 font-medium">Beneficiário</th>
+<th class="px-6 py-3 font-medium">Função</th>
+<th class="px-6 py-3 font-medium">ID Adquirente (Pagar.me)</th>
+<th class="px-6 py-3 font-medium">Banco</th>
+<th class="px-6 py-3 font-medium">Regra Aplicada</th>
+<th class="px-6 py-3 font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-text-main dark:text-white">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 text-xs font-bold">DR</div>
+                                    Dr. Roberto Silva
+                                </div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400">Médico</td>
+<td class="px-6 py-4 font-mono text-xs text-text-secondary dark:text-gray-400">acct_1J2k3L4m5N6o</td>
+<td class="px-6 py-4 text-text-main dark:text-white">Itaú (341)</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 dark:bg-blue-900/20 dark:text-blue-400 dark:ring-blue-400/30">Consultas (80/20)</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-900/20 dark:text-green-400 dark:ring-green-400/30">Ativo</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-text-main dark:text-white">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 text-xs font-bold">FV</div>
+                                    Farmácia Vida Verde
+                                </div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400">Parceiro (Marketplace)</td>
+<td class="px-6 py-4 font-mono text-xs text-text-secondary dark:text-gray-400">acct_9Z8y7X6w5V4u</td>
+<td class="px-6 py-4 text-text-main dark:text-white">Santander (033)</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-purple-900/20 dark:text-purple-400 dark:ring-purple-400/30">Mktplace (85/15)</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-900/20 dark:text-green-400 dark:ring-green-400/30">Ativo</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-text-main dark:text-white">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 text-xs font-bold">CN</div>
+                                    CANNEO Platform
+                                </div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400">Plataforma</td>
+<td class="px-6 py-4 font-mono text-xs text-text-secondary dark:text-gray-400">acct_primary_001</td>
+<td class="px-6 py-4 text-text-main dark:text-white">Bradesco (237)</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 dark:bg-gray-800 dark:text-gray-400 dark:ring-gray-400/20">Master (Taxas)</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-900/20 dark:text-green-400 dark:ring-green-400/30">Ativo</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 font-medium text-text-main dark:text-white">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 text-xs font-bold">DA</div>
+                                    Dra. Ana Costa
+                                </div>
+</td>
+<td class="px-6 py-4 text-text-secondary dark:text-gray-400">Médico</td>
+<td class="px-6 py-4 font-mono text-xs text-text-secondary dark:text-gray-400">acct_waiting_verify</td>
+<td class="px-6 py-4 text-text-main dark:text-white">Nubank (260)</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10 dark:bg-blue-900/20 dark:text-blue-400 dark:ring-blue-400/30">Consultas (80/20)</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center rounded-full bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20 dark:bg-yellow-900/20 dark:text-yellow-300 dark:ring-yellow-400/30">Pendente</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="border-t border-border-light px-6 py-4 dark:border-border-dark">
+<div class="flex items-center justify-between">
+<p class="text-sm text-text-secondary dark:text-gray-400">Mostrando 4 de 128 contas</p>
+<div class="flex gap-2">
+<button class="rounded border border-border-light bg-white px-3 py-1 text-sm font-medium text-text-secondary hover:bg-gray-50 dark:border-border-dark dark:bg-surface-dark dark:text-gray-400 dark:hover:bg-gray-800">Anterior</button>
+<button class="rounded border border-border-light bg-white px-3 py-1 text-sm font-medium text-text-secondary hover:bg-gray-50 dark:border-border-dark dark:bg-surface-dark dark:text-gray-400 dark:hover:bg-gray-800">Próximo</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

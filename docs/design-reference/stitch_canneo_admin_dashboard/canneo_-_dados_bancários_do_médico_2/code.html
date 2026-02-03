@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Configurações de Taxas Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "secondary-green": "#e7f6f2",
+                        "text-green": "#065f46",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d141b] dark:text-slate-100">
+<div class="flex min-h-screen">
+<aside class="w-72 bg-white dark:bg-[#1a2633] border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between p-6 sticky top-0 h-screen">
+<div class="flex flex-col gap-8">
+<div class="flex gap-3 items-center">
+<div class="bg-primary rounded-lg p-2 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-3xl">admin_panel_settings</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-[#0d141b] dark:text-white leading-tight uppercase tracking-wider">Canneo Admin</h1>
+</div>
+</div>
+<div class="flex gap-3 items-center p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCB8wtg3xRRSePLSIvlxB14G5pGaNljejGvb62T8bDm9Bc0gIyzqnPvnA9nHsWGDSadn0VzEn-yp6iV_ywjd5V_tIbvcL4-wAL6mKJM8tR-I1LZVbtXn17ZJ7-Y1DcvGbzeujTMghZcRtgPa-3xlQzhfjV3AXVcvgB33C8mtIjl0LR0farcNZO7vsoM_HQlyIQ1jVj_ITEA9ActS6Y6DKE7zX_xmA1Do79mZ0Mm0uTcSIAUnspPOfdMUIbSBAYO8mkDNAcE8SwR32ZL");'></div>
+<div class="flex flex-col">
+<h1 class="text-[#0d141b] dark:text-white text-sm font-semibold">Administrador</h1>
+<p class="text-[#4c739a] text-xs">Gestão Global</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<p class="text-sm font-medium">Dashboard Geral</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">medical_information</span>
+<p class="text-sm font-medium">Médicos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">local_pharmacy</span>
+<p class="text-sm font-medium">Marketplace</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[22px]">payments</span>
+<p class="text-sm font-semibold">Configurações de Taxas</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<p class="text-sm font-medium">Sistema</p>
+</a>
+</nav>
+</div>
+<div class="mt-auto">
+<button class="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
+<span class="material-symbols-outlined text-[22px]">logout</span>
+<p class="text-sm font-medium">Sair</p>
+</button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto">
+<div class="max-w-[1200px] w-full mx-auto p-8 lg:px-12">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<nav class="flex gap-2 mb-2">
+<a class="text-[#4c739a] text-xs font-medium hover:text-primary transition-colors" href="#">Painel</a>
+<span class="text-[#4c739a] text-xs">/</span>
+<span class="text-[#0d141b] dark:text-white text-xs font-semibold">Taxas Globais</span>
+</nav>
+<h1 class="text-[#0d141b] dark:text-white text-3xl font-black tracking-tight">Taxas e Comissões</h1>
+<p class="text-[#4c739a] text-base">Defina as comissões e taxas de processamento para toda a plataforma.</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-8 h-12 rounded-lg text-sm font-bold flex items-center justify-center gap-2 shadow-md transition-all">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                        Salvar Novas Taxas
+                    </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+<div class="bg-white dark:bg-[#1a2633] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+<span class="material-symbols-outlined text-primary">stethoscope</span>
+</div>
+<h2 class="text-lg font-bold text-[#0d141b] dark:text-white">Consultas Médicas</h2>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold text-[#4c739a] mb-2">Comissão CANNEO (%)</label>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg pl-4 pr-10 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all dark:text-white" type="text" value="15.00"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">%</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-[#4c739a] mb-2">Taxa Fixa por Transação</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">R$</span>
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all dark:text-white" type="text" value="2,50"/>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2633] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+<span class="material-symbols-outlined text-emerald-600">medication</span>
+</div>
+<h2 class="text-lg font-bold text-[#0d141b] dark:text-white">Marketplace de Medicamentos</h2>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold text-[#4c739a] mb-2">Comissão sobre Venda (%)</label>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg pl-4 pr-10 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all dark:text-white" type="text" value="12.00"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">%</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-[#4c739a] mb-2">Taxa de Gateway</label>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg pl-4 pr-10 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all dark:text-white" type="text" value="3.50"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2633] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+<span class="material-symbols-outlined text-amber-600">account_balance_wallet</span>
+</div>
+<h2 class="text-lg font-bold text-[#0d141b] dark:text-white">Taxas de Saque</h2>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold text-[#4c739a] mb-2">Valor Fixo por Transferência</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">R$</span>
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all dark:text-white" type="text" value="4,90"/>
+</div>
+<p class="text-[10px] text-slate-400 mt-2">Aplicado para médicos e farmácias parceiras.</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2633] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">api</span>
+</div>
+<h2 class="text-lg font-bold text-[#0d141b] dark:text-white">Configuração de Gateway</h2>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold text-[#4c739a] mb-2">Ambiente de Execução</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 outline-none transition-all dark:text-white">
+<option value="sandbox">Sandbox (Testes)</option>
+<option selected="" value="production">Produção (Live)</option>
+</select>
+</div>
+<div class="flex items-center gap-2 p-3 bg-red-50 dark:bg-red-900/10 rounded-lg">
+<span class="material-symbols-outlined text-red-500 text-sm">warning</span>
+<p class="text-[11px] text-red-600 dark:text-red-400">Alterar o ambiente afeta o processamento real de todos os pagamentos.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a2633] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800">
+<h2 class="text-lg font-bold text-[#0d141b] dark:text-white">Histórico de Alterações</h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs uppercase font-bold">
+<tr>
+<th class="px-6 py-4">Data/Hora</th>
+<th class="px-6 py-4">Administrador</th>
+<th class="px-6 py-4">Categoria</th>
+<th class="px-6 py-4">Alteração</th>
+<th class="px-6 py-4">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 text-sm">12/10/2023 14:30</td>
+<td class="px-6 py-4 text-sm font-medium">Ricardo Alencar</td>
+<td class="px-6 py-4 text-sm">Consultas</td>
+<td class="px-6 py-4 text-sm">Comissão alterada de 14% para 15%</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 text-[10px] font-bold rounded uppercase">Aplicado</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 text-sm">05/10/2023 09:15</td>
+<td class="px-6 py-4 text-sm font-medium">Marina Souza</td>
+<td class="px-6 py-4 text-sm">Saques</td>
+<td class="px-6 py-4 text-sm">Taxa fixa ajustada para R$ 4,90</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 text-[10px] font-bold rounded uppercase">Aplicado</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800 flex justify-center">
+<button class="text-sm font-semibold text-primary hover:underline">Ver histórico completo</button>
+</div>
+</div>
+<footer class="mt-12 py-6 text-center border-t border-slate-200 dark:border-slate-800">
+<p class="text-xs text-slate-400">© 2024 CANNEO - Painel Administrativo Global. v2.4.0</p>
+</footer>
+</div>
+</main>
+</div>
+
+</body></html>

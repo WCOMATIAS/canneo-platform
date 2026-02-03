@@ -1,0 +1,25 @@
+{
+  "name": "@canneo/pharmacy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal da Farmácia CANNEO - farma.canneo.com.br",
+  "scripts": {
+    "dev": "next dev -p 3003",
+    "build": "next build",
+    "start": "next start -p 3003",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "clean": "rm -rf .next node_modules .turbo"
+  },
+  "dependencies": {
+    "@canneo/shared": "workspace:*",
+    "@canneo/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@canneo/config": "workspace:*"
+  }
+}

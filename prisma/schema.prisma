@@ -1,0 +1,1057 @@
+// schema.prisma — CANNEO (Telemedicina + Gateway/Ledger + Farmácia/Logística)
+// DB: PostgreSQL | Valores monetários em centavos (Int) | Ledger imutável | Multi-tenant opcional
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+///////////////////////
+// ENUMS
+///////////////////////
+
+enum UserRole {
+  ADMIN
+  OPERATIONS
+  DOCTOR
+  PATIENT
+  PHARMACY
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum MfaType {
+  TOTP
+  EMAIL_OTP
+}
+
+enum PaymentKind {
+  CONSULT
+  ORDER
+  SUBSCRIPTION
+}
+
+enum PaymentMethod {
+  PIX
+  CARD_CREDIT
+  CARD_DEBIT
+}
+
+enum PaymentIntentStatus {
+  CREATED
+  PENDING
+  APPROVED
+  FAILED
+  EXPIRED
+  REFUNDED
+  CHARGEBACK
+}
+
+enum AppointmentStatus {
+  DRAFT
+  AWAITING_PAYMENT
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  NO_SHOW
+  CANCELLED
+  REFUNDED
+}
+
+enum OrderStatus {
+  CREATED
+  PAYMENT_PENDING
+  PAID
+  PROCESSING
+  READY_FOR_PICKUP
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum ShipmentStatus {
+  QUOTE_CREATED
+  LABEL_CREATED
+  IN_TRANSIT
+  OUT_FOR_DELIVERY
+  DELIVERED
+  FAILED
+  RETURNED
+}
+
+enum WithdrawalStatus {
+  REQUESTED
+  VALIDATING
+  SCHEDULED
+  PROCESSING
+  PAID
+  FAILED
+  CANCELLED
+}
+
+enum WalletOwnerType {
+  PLATFORM
+  DOCTOR
+  PHARMACY
+  GATEWAY
+}
+
+enum LedgerDirection {
+  CR
+  DR
+}
+
+enum LedgerEntryType {
+  PAYMENT_APPROVED
+  GATEWAY_FEE
+  CANNEO_FEE
+  DOCTOR_CREDIT_PENDING
+  HOLD_APPLIED
+  HOLD_RELEASED
+  WITHDRAWAL_REQUESTED
+  WITHDRAWAL_PAID
+  WITHDRAWAL_FAILED_RETURN
+  REFUND
+  CHARGEBACK_HOLD
+  ORDER_PAYMENT_APPROVED
+  SHIPPING_FEE
+}
+
+enum HoldReason {
+  ANTIFRAUD
+  CHARGEBACK
+}
+
+enum HoldStatus {
+  ACTIVE
+  RELEASED
+  CANCELLED
+}
+
+enum ConsentType {
+  TELECONSULTA
+  HEALTH_DATA
+  RECORDING
+  TRANSCRIPTION
+  GEOLOCATION
+  WHATSAPP
+  EMAIL
+}
+
+enum ResourceType {
+  USER
+  DOCTOR
+  PATIENT
+  PHARMACY
+  APPOINTMENT
+  PAYMENT_INTENT
+  WITHDRAWAL
+  ORDER
+  SHIPMENT
+  PRESCRIPTION
+  DOCUMENT
+  MEDICAL_RECORD
+}
+
+enum WebhookProvider {
+  PSP
+  DAILY
+  MELHOR_ENVIO
+}
+
+enum WebhookStatus {
+  RECEIVED
+  PROCESSED
+  FAILED
+}
+
+enum PharmacyFulfillmentType {
+  DELIVERY
+  PICKUP
+}
+
+///////////////////////
+// CORE / MULTI-TENANT
+///////////////////////
+
+model Tenant {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users         User[]
+  doctors       Doctor[]
+  patients      Patient[]
+  pharmacies    Pharmacy[]
+  wallets       Wallet[]
+  auditLogs     AuditLog[]
+  consents      Consent[]
+  appointments  Appointment[]
+  ledgerEntries LedgerEntry[]
+  paymentIntents PaymentIntent[]
+  fees          Fee[]
+  holds         Hold[]
+  refunds       Refund[]
+  chargebacks   Chargeback[]
+  bankAccounts  BankAccount[]
+  withdrawals   Withdrawal[]
+  orders        Order[]
+
+  @@index([isActive])
+}
+
+model User {
+  id           String     @id @default(cuid())
+  tenantId     String?
+  tenant       Tenant?    @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  email        String     @unique
+  passwordHash String
+  role         UserRole
+  status       UserStatus @default(ACTIVE)
+  fullName     String
+  phone        String?
+  lastLoginAt  DateTime?
+
+  doctor       Doctor?
+  patient      Patient?
+  pharmacyUser PharmacyUser?
+
+  sessions       Session[]
+  mfaSecrets     MfaSecret[]
+  auditLogs      AuditLog[]       @relation("AuditActor")
+  consents       Consent[]
+  recordEntries  RecordEntry[]
+  signedDocuments Document[]      @relation("SignedDocuments")
+  paymentIntents PaymentIntent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId, role])
+  @@index([status])
+}
+
+model Session {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  refreshTokenHash String
+  accessIssuedAt   DateTime @default(now())
+  refreshExpiresAt DateTime
+
+  deviceHash    String?
+  ipMasked      String?
+  userAgentHash String?
+
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([refreshExpiresAt])
+}
+
+model MfaSecret {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type      MfaType
+  secretEnc String
+  enabledAt DateTime?
+  verifiedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, type])
+}
+
+///////////////////////
+// PROFILES
+///////////////////////
+
+model Doctor {
+  id         String   @id @default(cuid())
+  tenantId   String?
+  tenant     Tenant?  @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  crmNumber      String
+  crmUF          String
+  specialty      String?
+  verifiedStatus String   @default("PENDING")
+  verifiedAt     DateTime?
+
+  bankAccounts BankAccount[]
+  wallet       Wallet?
+  slots        AppointmentSlot[]
+  appointments Appointment[]
+  prescriptions Prescription[]
+  withdrawals  Withdrawal[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([crmUF, crmNumber])
+}
+
+model Patient {
+  id        String   @id @default(cuid())
+  tenantId  String?
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  cpfEnc    String?
+  birthDate DateTime?
+  addressId String?
+  address   Address? @relation(fields: [addressId], references: [id], onDelete: SetNull)
+
+  appointments  Appointment[]
+  medicalRecord MedicalRecord?
+  prescriptions Prescription[]
+  orders        Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+}
+
+model Pharmacy {
+  id        String   @id @default(cuid())
+  tenantId  String?
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  name             String
+  cnpjEnc          String?
+  phone            String?
+  email            String?
+  addressId        String?
+  address          Address? @relation(fields: [addressId], references: [id], onDelete: SetNull)
+
+  shippingOriginCep String
+  lat              Float?
+  lng              Float?
+  slaMinutes       Int      @default(180)
+  supportsPickup   Boolean  @default(true)
+  supportsDelivery Boolean  @default(true)
+  rating           Float    @default(5.0)
+
+  wallet           Wallet?
+  users            PharmacyUser[]
+  products         Product[]
+  inventory        InventoryItem[]
+  orders           Order[]
+  shippingQuotes   ShippingQuote[]
+  melhorEnvioToken MelhorEnvioToken?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([shippingOriginCep])
+  @@index([lat, lng])
+}
+
+model PharmacyUser {
+  id         String   @id @default(cuid())
+  pharmacyId String
+  pharmacy   Pharmacy @relation(fields: [pharmacyId], references: [id], onDelete: Cascade)
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([pharmacyId])
+}
+
+model Address {
+  id         String  @id @default(cuid())
+  street     String?
+  number     String?
+  complement String?
+  district   String?
+  city       String?
+  state      String?
+  country    String? @default("BR")
+  cep        String?
+
+  lat Float?
+  lng Float?
+
+  patients   Patient[]
+  pharmacies Pharmacy[]
+  orders     Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([cep])
+  @@index([lat, lng])
+}
+
+///////////////////////
+// SCHEDULING
+///////////////////////
+
+model AppointmentSlot {
+  id       String   @id @default(cuid())
+  doctorId String
+  doctor   Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  startsAt DateTime
+  endsAt   DateTime
+  isBooked Boolean  @default(false)
+
+  appointment Appointment?
+
+  createdAt DateTime @default(now())
+
+  @@unique([doctorId, startsAt, endsAt])
+  @@index([doctorId, startsAt])
+}
+
+model Appointment {
+  id       String            @id @default(cuid())
+  tenantId String?
+  tenant   Tenant?           @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  status AppointmentStatus @default(DRAFT)
+
+  doctorId  String
+  doctor    Doctor  @relation(fields: [doctorId], references: [id], onDelete: Restrict)
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Restrict)
+
+  slotId String?          @unique
+  slot   AppointmentSlot? @relation(fields: [slotId], references: [id], onDelete: SetNull)
+
+  paymentIntentId String?
+  paymentIntent   PaymentIntent? @relation(fields: [paymentIntentId], references: [id], onDelete: SetNull)
+
+  videoSession  VideoSession?
+  prescriptions Prescription[]
+  documents     Document[]
+
+  startedAt DateTime?
+  endedAt   DateTime?
+  notes     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([doctorId, status])
+  @@index([patientId, status])
+}
+
+///////////////////////
+// TELEHEALTH (DAILY)
+///////////////////////
+
+model VideoSession {
+  id            String      @id @default(cuid())
+  appointmentId String      @unique
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+
+  provider String @default("DAILY")
+  roomName String
+  roomUrl  String
+  meetingId String?
+  status   String @default("CREATED")
+
+  recordingEnabled     Boolean @default(false)
+  transcriptionEnabled Boolean @default(false)
+
+  recordingUrl      String?
+  transcriptionUrl  String?
+  transcriptionText String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([roomName])
+}
+
+///////////////////////
+// MEDICAL RECORDS & DOCS
+///////////////////////
+
+model MedicalRecord {
+  id        String  @id @default(cuid())
+  patientId String  @unique
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  entries   RecordEntry[]
+  documents Document[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RecordEntry {
+  id              String        @id @default(cuid())
+  medicalRecordId String
+  medicalRecord   MedicalRecord @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
+
+  authorUserId String
+  authorUser   User   @relation(fields: [authorUserId], references: [id], onDelete: Restrict)
+
+  type      String   @default("EVOLUTION")
+  content   String
+  createdAt DateTime @default(now())
+
+  @@index([medicalRecordId, createdAt])
+  @@index([authorUserId])
+}
+
+model Document {
+  id              String         @id @default(cuid())
+  medicalRecordId String?
+  medicalRecord   MedicalRecord? @relation(fields: [medicalRecordId], references: [id], onDelete: SetNull)
+
+  appointmentId String?
+  appointment   Appointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+
+  prescriptionId String?
+  prescription   Prescription? @relation(fields: [prescriptionId], references: [id], onDelete: SetNull)
+
+  type           String
+  fileUrl        String
+  hashPre        String?
+  hashPost       String?
+  signedByUserId String?
+  signedByUser   User?     @relation("SignedDocuments", fields: [signedByUserId], references: [id], onDelete: SetNull)
+  signedAt       DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([type])
+  @@index([appointmentId])
+  @@index([prescriptionId])
+}
+
+model Prescription {
+  id            String      @id @default(cuid())
+  appointmentId String
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+
+  doctorId  String
+  doctor    Doctor  @relation(fields: [doctorId], references: [id], onDelete: Restrict)
+
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Restrict)
+
+  status       String  @default("DRAFT")
+  productName  String
+  thcPercent   Float?
+  cbdPercent   Float?
+  dosage       String
+  durationDays Int?
+  quantityText String?
+
+  sncrRequired Boolean @default(false)
+  sncrNumber   String?
+  sncrStatus   String?
+
+  documents Document[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([doctorId, createdAt])
+  @@index([patientId, createdAt])
+  @@index([sncrRequired, sncrStatus])
+}
+
+///////////////////////
+// PAYMENTS CORE (LEDGER/WALLET)
+///////////////////////
+
+model Wallet {
+  id        String          @id @default(cuid())
+  tenantId  String?
+  tenant    Tenant?         @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  ownerType WalletOwnerType
+  ownerId   String?
+  currency  String          @default("BRL")
+
+  doctorId   String? @unique
+  doctor     Doctor? @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  pharmacyId String?   @unique
+  pharmacy   Pharmacy? @relation(fields: [pharmacyId], references: [id], onDelete: Cascade)
+
+  balances    WalletBalance?
+  entries     LedgerEntry[]
+  holds       Hold[]
+  withdrawals Withdrawal[]
+
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([ownerType, ownerId])
+}
+
+model WalletBalance {
+  id               String @id @default(cuid())
+  walletId         String @unique
+  wallet           Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  balanceTotal     Int @default(0)
+  balancePending   Int @default(0)
+  balanceAvailable Int @default(0)
+  balanceOnHold    Int @default(0)
+  balanceWithdrawn Int @default(0)
+
+  updatedAt DateTime @updatedAt
+}
+
+model LedgerEntry {
+  id       String          @id @default(cuid())
+  tenantId String?
+  tenant   Tenant?         @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  walletId String
+  wallet   Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  direction      LedgerDirection
+  amountCents    Int
+  currency       String          @default("BRL")
+  entryType      LedgerEntryType
+
+  referenceType  ResourceType
+  referenceId    String
+  idempotencyKey String?
+
+  createdAt DateTime @default(now())
+
+  @@unique([walletId, idempotencyKey])
+  @@index([walletId, createdAt])
+  @@index([referenceType, referenceId])
+  @@index([tenantId])
+}
+
+model PaymentIntent {
+  id       String              @id @default(cuid())
+  tenantId String?
+  tenant   Tenant?             @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  kind   PaymentKind
+  method PaymentMethod
+  status PaymentIntentStatus @default(CREATED)
+
+  amountCents Int
+  currency    String @default("BRL")
+
+  customerUserId String?
+  customerUser   User?   @relation(fields: [customerUserId], references: [id], onDelete: SetNull)
+
+  appointments Appointment[]
+  orders       Order[]
+
+  expiresAt DateTime?
+  metadata  Json?
+
+  attempts    PaymentAttempt[]
+  fees        Fee?
+  refunds     Refund[]
+  chargebacks Chargeback[]
+  holds       Hold[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([status, createdAt])
+  @@index([kind])
+}
+
+model PaymentAttempt {
+  id              String        @id @default(cuid())
+  paymentIntentId String
+  paymentIntent   PaymentIntent @relation(fields: [paymentIntentId], references: [id], onDelete: Cascade)
+
+  pspProvider  String
+  pspPaymentId String?
+  status       String  @default("INITIATED")
+  failureCode  String?
+  rawPayload   Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([paymentIntentId])
+  @@index([pspProvider, pspPaymentId])
+}
+
+model WebhookEvent {
+  id        String          @id @default(cuid())
+  provider  WebhookProvider
+  eventId   String
+  eventType String
+  status    WebhookStatus   @default(RECEIVED)
+
+  receivedAt  DateTime  @default(now())
+  processedAt DateTime?
+  rawPayload  Json?
+
+  @@unique([provider, eventId])
+  @@index([provider, status])
+}
+
+model Fee {
+  id       String  @id @default(cuid())
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  paymentIntentId String        @unique
+  paymentIntent   PaymentIntent @relation(fields: [paymentIntentId], references: [id], onDelete: Cascade)
+
+  gatewayFeeCents Int
+  canneoFeeCents  Int
+  otherFeeCents   Int @default(0)
+
+  gatewayRateBps Int?
+  canneoRateBps  Int?
+
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+}
+
+model Hold {
+  id       String  @id @default(cuid())
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  paymentIntentId String?
+  paymentIntent   PaymentIntent? @relation(fields: [paymentIntentId], references: [id], onDelete: SetNull)
+
+  walletId String
+  wallet   Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  amountCents Int
+  reason      HoldReason
+  status      HoldStatus @default(ACTIVE)
+
+  releaseAt  DateTime?
+  createdAt  DateTime  @default(now())
+  releasedAt DateTime?
+
+  @@index([walletId, status])
+  @@index([releaseAt])
+}
+
+model Refund {
+  id       String  @id @default(cuid())
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  paymentIntentId String
+  paymentIntent   PaymentIntent @relation(fields: [paymentIntentId], references: [id], onDelete: Cascade)
+
+  amountCents Int
+  status      String  @default("REQUESTED")
+  reason      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([paymentIntentId])
+}
+
+model Chargeback {
+  id       String  @id @default(cuid())
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  paymentIntentId String
+  paymentIntent   PaymentIntent @relation(fields: [paymentIntentId], references: [id], onDelete: Cascade)
+
+  amountCents Int
+  status      String    @default("OPEN")
+  openedAt    DateTime?
+  closedAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([paymentIntentId])
+}
+
+model BankAccount {
+  id       String  @id @default(cuid())
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  ownerType    WalletOwnerType
+  ownerId      String
+
+  doctorId     String?
+  doctor       Doctor? @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  bankCode     String?
+  branch       String?
+  account      String?
+  accountDigit String?
+  pixKeyEnc    String?
+
+  verifiedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  withdrawals Withdrawal[]
+
+  @@index([tenantId])
+  @@index([ownerType, ownerId])
+}
+
+model Withdrawal {
+  id       String  @id @default(cuid())
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  doctorId String
+  doctor   Doctor @relation(fields: [doctorId], references: [id], onDelete: Restrict)
+
+  walletId String
+  wallet   Wallet @relation(fields: [walletId], references: [id], onDelete: Restrict)
+
+  bankAccountId String
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+
+  amountCents Int
+  currency    String           @default("BRL")
+  status      WithdrawalStatus @default(REQUESTED)
+
+  requestedAt   DateTime @default(now())
+  processedAt   DateTime?
+  failureReason String?
+
+  pspProvider String?
+  pspPayoutId String?
+
+  @@index([tenantId])
+  @@index([doctorId, status])
+}
+
+///////////////////////
+// PHARMACY COMMERCE
+///////////////////////
+
+model Product {
+  id          String  @id @default(cuid())
+  pharmacyId  String?
+  pharmacy    Pharmacy? @relation(fields: [pharmacyId], references: [id], onDelete: Cascade)
+
+  name        String
+  description String?
+  sku         String  @unique
+  active      Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  inventoryItems InventoryItem[]
+  orderItems     OrderItem[]
+}
+
+model InventoryItem {
+  id         String   @id @default(cuid())
+  pharmacyId String
+  pharmacy   Pharmacy @relation(fields: [pharmacyId], references: [id], onDelete: Cascade)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  priceCents Int
+  inStock    Boolean @default(true)
+  stockQty   Int?
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([pharmacyId, productId])
+  @@index([pharmacyId, inStock])
+}
+
+model Order {
+  id       String      @id @default(cuid())
+  tenantId String?
+  tenant   Tenant?     @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  status OrderStatus @default(CREATED)
+
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Restrict)
+
+  pharmacyId String
+  pharmacy   Pharmacy @relation(fields: [pharmacyId], references: [id], onDelete: Restrict)
+
+  fulfillmentType PharmacyFulfillmentType
+
+  subtotalCents Int    @default(0)
+  shippingCents Int    @default(0)
+  totalCents    Int    @default(0)
+  currency      String @default("BRL")
+
+  shippingAddressId String?
+  shippingAddress   Address? @relation(fields: [shippingAddressId], references: [id], onDelete: SetNull)
+
+  paymentIntentId String?
+  paymentIntent   PaymentIntent? @relation(fields: [paymentIntentId], references: [id], onDelete: SetNull)
+
+  shipment       Shipment?
+  shippingQuotes ShippingQuote[]
+  items          OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([patientId, status])
+  @@index([pharmacyId, status])
+}
+
+model OrderItem {
+  id      String @id @default(cuid())
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  quantity       Int @default(1)
+  unitPriceCents Int
+  lineTotalCents Int
+
+  @@index([orderId])
+}
+
+model ShippingQuote {
+  id      String  @id @default(cuid())
+  orderId String?
+  order   Order?  @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  pharmacyId String
+  pharmacy   Pharmacy @relation(fields: [pharmacyId], references: [id], onDelete: Cascade)
+
+  originCep      String
+  destinationCep String
+
+  provider     String @default("MELHOR_ENVIO")
+  serviceName  String?
+  serviceCode  String?
+  priceCents   Int
+  deliveryDays Int?
+
+  rawPayload Json?
+  createdAt  DateTime @default(now())
+
+  @@index([pharmacyId, createdAt])
+  @@index([destinationCep])
+}
+
+model Shipment {
+  id      String @id @default(cuid())
+  orderId String @unique
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  status ShipmentStatus @default(QUOTE_CREATED)
+
+  provider    String  @default("MELHOR_ENVIO")
+  serviceName String?
+  serviceCode String?
+
+  trackingCode          String?
+  labelUrl              String?
+  melhorEnvioCartId     String?
+  melhorEnvioShipmentId String?
+
+  shippedAt   DateTime?
+  deliveredAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MelhorEnvioToken {
+  id         String   @id @default(cuid())
+  pharmacyId String   @unique
+  pharmacy   Pharmacy @relation(fields: [pharmacyId], references: [id], onDelete: Cascade)
+
+  accessTokenEnc  String
+  refreshTokenEnc String?
+  expiresAt       DateTime?
+  scope           String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+///////////////////////
+// CONSENTS & AUDIT
+///////////////////////
+
+model Consent {
+  id       String  @id @default(cuid())
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type       ConsentType
+  version    String
+  acceptedAt DateTime    @default(now())
+  revokedAt  DateTime?
+
+  ipMasked      String?
+  userAgentHash String?
+
+  @@index([tenantId])
+  @@index([userId, type])
+}
+
+model AuditLog {
+  id       String  @id @default(cuid())
+  tenantId String?
+  tenant   Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
+
+  actorUserId String?
+  actorUser   User?     @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+  actorRole   UserRole?
+
+  action        String
+  resourceType  ResourceType
+  resourceId    String
+  correlationId String?
+
+  ipMasked      String?
+  userAgentHash String?
+
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([tenantId, createdAt])
+  @@index([resourceType, resourceId])
+  @@index([actorUserId, createdAt])
+}

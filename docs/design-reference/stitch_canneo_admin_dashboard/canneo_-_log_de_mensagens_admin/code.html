@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Log de Mensagens Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#36b7e2",
+                        "primary-dark": "#2a9dc5",
+                        "background-light": "#f8fbfb",
+                        "background-dark": "#111d21",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2c32",
+                        "text-main": "#0e171b",
+                        "text-secondary": "#508495",
+                        "success": "#078836",
+                        "error": "#e11d48",
+                        "warning": "#f59e0b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main antialiased min-h-screen flex flex-col overflow-x-hidden transition-colors duration-200">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-[#e8f0f3] bg-surface-light dark:bg-surface-dark px-6 py-3 shadow-sm">
+<div class="mx-auto flex max-w-7xl items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">local_hospital</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-text-main dark:text-white">CANNEO Admin</h2>
+<div class="hidden h-6 w-px bg-gray-200 dark:bg-gray-700 md:block"></div>
+<!-- Breadcrumbs in header for efficiency -->
+<nav class="hidden items-center gap-2 text-sm md:flex">
+<a class="font-medium text-text-secondary hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-text-secondary">/</span>
+<a class="font-medium text-text-secondary hover:text-primary transition-colors" href="#">Logs</a>
+<span class="text-text-secondary">/</span>
+<span class="font-semibold text-text-main dark:text-white">Mensagens</span>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden gap-6 md:flex">
+<a class="text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-primary" href="#">Dashboard</a>
+<a class="text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-primary" href="#">Pacientes</a>
+<a class="text-sm font-medium text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-primary" href="#">Profissionais</a>
+<a class="text-sm font-medium text-primary" href="#">Logs</a>
+</nav>
+<div class="flex items-center gap-3 pl-6 border-l border-gray-100 dark:border-gray-700">
+<button class="relative rounded-full p-2 text-text-secondary hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-surface-dark"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-9 w-9 border-2 border-white shadow-sm cursor-pointer" data-alt="Admin user profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdnCLiqEs-1-0aStA0Lv7PZT813wSXFR_qLbQmWe2q0o2BNaYfnvT2VXnT3HnsCw7U7zb_Q6sSy-2LV_FqI0tQlQhfeVFr_rQ4BbrMpw8BkCUcU5fiVkOiXy_I7RgFeuXbMyzA8FiFzDJN4o4pcn5g1BJhh69WY-GtCTuWDeTpyRAySDGZL3UHyIp7B1GEbgnvkQhkoQBKP8_7jhcRYU5TMF2xOPYWn3DCe3cemHN3NmLgLjDl06NtbcP9VNu5tNz0nwPPlR5vlw16");'></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
+<!-- Page Heading & Actions -->
+<div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+<div>
+<h1 class="text-3xl font-black tracking-tight text-text-main dark:text-white">Log de Comunicações</h1>
+<p class="mt-2 text-text-secondary dark:text-gray-400">Auditoria e monitoramento de envios de E-mail e WhatsApp.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-text-main hover:bg-gray-50 dark:border-gray-700 dark:bg-surface-dark dark:text-white dark:hover:bg-gray-800 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Exportar CSV
+                </button>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-dark transition-all shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                    Atualizar Dados
+                </button>
+</div>
+</div>
+<!-- KPI Stats Cards -->
+<div class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+<!-- Card 1 -->
+<div class="rounded-xl border border-gray-100 bg-surface-light p-5 shadow-sm dark:border-gray-700 dark:bg-surface-dark">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Taxa de Entrega Global</p>
+<span class="material-symbols-outlined text-primary/60">check_circle</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<p class="text-3xl font-bold text-text-main dark:text-white">98.4%</p>
+<span class="flex items-center text-xs font-semibold text-success">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                        1.2%
+                    </span>
+</div>
+<div class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
+<div class="h-full rounded-full bg-primary" style="width: 98.4%"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="rounded-xl border border-gray-100 bg-surface-light p-5 shadow-sm dark:border-gray-700 dark:bg-surface-dark">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Volume (24h)</p>
+<span class="material-symbols-outlined text-primary/60">mark_chat_unread</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<p class="text-3xl font-bold text-text-main dark:text-white">452</p>
+<span class="flex items-center text-xs font-semibold text-success">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                        5.0%
+                    </span>
+</div>
+<p class="mt-2 text-xs text-text-secondary dark:text-gray-500">Média de 18 msgs/hora</p>
+</div>
+<!-- Card 3 -->
+<div class="rounded-xl border border-gray-100 bg-surface-light p-5 shadow-sm dark:border-gray-700 dark:bg-surface-dark">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Taxa de Falha</p>
+<span class="material-symbols-outlined text-error/60">error</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<p class="text-3xl font-bold text-text-main dark:text-white">1.6%</p>
+<span class="flex items-center text-xs font-semibold text-success">
+<span class="material-symbols-outlined text-[14px]">arrow_downward</span>
+                        0.2%
+                    </span>
+</div>
+<p class="mt-2 text-xs text-text-secondary dark:text-gray-500">7 falhas críticas hoje</p>
+</div>
+<!-- Card 4 -->
+<div class="rounded-xl border border-gray-100 bg-surface-light p-5 shadow-sm dark:border-gray-700 dark:bg-surface-dark">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-text-secondary dark:text-gray-400">Tempo Médio de Leitura</p>
+<span class="material-symbols-outlined text-warning/60">timer</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<p class="text-3xl font-bold text-text-main dark:text-white">12<span class="text-lg font-normal text-text-secondary ml-1">min</span></p>
+</div>
+<p class="mt-2 text-xs text-text-secondary dark:text-gray-500">Para mensagens de WhatsApp</p>
+</div>
+</div>
+<!-- Filters Section -->
+<div class="mb-6 rounded-xl border border-gray-200 bg-surface-light p-4 shadow-sm dark:border-gray-700 dark:bg-surface-dark">
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-12">
+<!-- Search -->
+<div class="lg:col-span-4">
+<label class="mb-1.5 block text-xs font-semibold text-text-secondary">Buscar Destinatário</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-gray-200 bg-background-light py-2.5 pl-10 pr-3 text-sm text-text-main placeholder-text-secondary focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400" placeholder="Nome, telefone ou e-mail..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-text-secondary text-[20px]">search</span>
+</div>
+</div>
+<!-- Date Range -->
+<div class="lg:col-span-3">
+<label class="mb-1.5 block text-xs font-semibold text-text-secondary">Período</label>
+<div class="relative">
+<input class="block w-full rounded-lg border-gray-200 bg-background-light py-2.5 pl-10 pr-3 text-sm text-text-main focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-white" type="text" value="01/10/2023 - 31/10/2023"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-text-secondary text-[20px]">calendar_month</span>
+</div>
+</div>
+<!-- Dropdowns -->
+<div class="lg:col-span-2">
+<label class="mb-1.5 block text-xs font-semibold text-text-secondary">Canal</label>
+<select class="block w-full rounded-lg border-gray-200 bg-background-light py-2.5 pl-3 pr-8 text-sm text-text-main focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+<option>Todos</option>
+<option>WhatsApp</option>
+<option>E-mail</option>
+</select>
+</div>
+<div class="lg:col-span-2">
+<label class="mb-1.5 block text-xs font-semibold text-text-secondary">Status</label>
+<select class="block w-full rounded-lg border-gray-200 bg-background-light py-2.5 pl-3 pr-8 text-sm text-text-main focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+<option>Todos</option>
+<option>Enviado</option>
+<option>Entregue</option>
+<option>Lido</option>
+<option>Falhou</option>
+</select>
+</div>
+<!-- Filter Button -->
+<div class="flex items-end lg:col-span-1">
+<button class="flex h-[42px] w-full items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-hidden rounded-xl border border-gray-200 bg-surface-light shadow-sm dark:border-gray-700 dark:bg-surface-dark">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm text-text-main dark:text-gray-200">
+<thead class="bg-gray-50 text-xs uppercase text-text-secondary dark:bg-gray-800 dark:text-gray-400">
+<tr>
+<th class="px-6 py-4 font-semibold tracking-wider" scope="col">Data / Hora</th>
+<th class="px-6 py-4 font-semibold tracking-wider" scope="col">Canal</th>
+<th class="px-6 py-4 font-semibold tracking-wider" scope="col">Destinatário</th>
+<th class="px-6 py-4 font-semibold tracking-wider" scope="col">Evento</th>
+<th class="px-6 py-4 font-semibold tracking-wider" scope="col">Status</th>
+<th class="px-6 py-4 font-semibold tracking-wider text-right" scope="col">Ação</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+<!-- Row 1 -->
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="whitespace-nowrap px-6 py-4 font-medium">
+                                24/10/2023 <span class="ml-1 text-text-secondary font-normal">14:30</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366]">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main dark:text-white">Maria Silva</span>
+<span class="text-xs text-text-secondary">+55 11 99999-8888</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                                    Lembrete de Consulta
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-bold text-success border border-success/20">
+<span class="h-1.5 w-1.5 rounded-full bg-success"></span>
+                                    Lido
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<button class="text-text-secondary hover:text-primary transition-colors" title="Ver Conteúdo">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="whitespace-nowrap px-6 py-4 font-medium">
+                                24/10/2023 <span class="ml-1 text-text-secondary font-normal">14:28</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main dark:text-white">João Souza</span>
+<span class="text-xs text-text-secondary">joao.souza@email.com</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                                    Confirmação Agendamento
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-error/10 px-3 py-1 text-xs font-bold text-error border border-error/20">
+<span class="h-1.5 w-1.5 rounded-full bg-error"></span>
+                                    Falhou
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-3">
+<button class="text-xs font-bold text-primary hover:text-primary-dark underline decoration-transparent hover:decoration-current transition-all" title="Tentar Novamente">
+                                        Reenviar
+                                    </button>
+<button class="text-text-secondary hover:text-primary transition-colors" title="Ver Detalhes do Erro">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="whitespace-nowrap px-6 py-4 font-medium">
+                                24/10/2023 <span class="ml-1 text-text-secondary font-normal">13:15</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366]">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main dark:text-white">Ana Paula Lima</span>
+<span class="text-xs text-text-secondary">+55 21 98888-7777</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                                    Boas-vindas
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary border border-primary/20">
+<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                    Entregue
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<button class="text-text-secondary hover:text-primary transition-colors" title="Ver Conteúdo">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="whitespace-nowrap px-6 py-4 font-medium">
+                                24/10/2023 <span class="ml-1 text-text-secondary font-normal">11:45</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main dark:text-white">Carlos Mendes</span>
+<span class="text-xs text-text-secondary">carlos.m@empresa.com</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                                    Recuperação de Senha
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary border border-primary/20">
+<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                    Enviado
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<button class="text-text-secondary hover:text-primary transition-colors" title="Ver Conteúdo">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="whitespace-nowrap px-6 py-4 font-medium">
+                                24/10/2023 <span class="ml-1 text-text-secondary font-normal">10:05</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366]">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main dark:text-white">Roberto Almeida</span>
+<span class="text-xs text-text-secondary">+55 31 97777-6666</span>
+</div>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                                    Pesquisa de Satisfação
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-gray-200 px-3 py-1 text-xs font-bold text-gray-600 border border-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600">
+<span class="h-1.5 w-1.5 rounded-full bg-gray-500"></span>
+                                    Aguardando
+                                </span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<button class="text-text-secondary hover:text-primary transition-colors" title="Ver Conteúdo">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-gray-200 bg-white px-6 py-4 dark:border-gray-700 dark:bg-surface-dark">
+<p class="text-sm text-text-secondary dark:text-gray-400">
+                    Mostrando <span class="font-semibold text-text-main dark:text-white">1-5</span> de <span class="font-semibold text-text-main dark:text-white">452</span> resultados
+                </p>
+<div class="flex gap-2">
+<button class="inline-flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-text-secondary hover:bg-gray-50 hover:text-primary disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined mr-1 text-[16px]">chevron_left</span>
+                        Anterior
+                    </button>
+<button class="inline-flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-text-secondary hover:bg-gray-50 hover:text-primary dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
+                        Próximo
+                        <span class="material-symbols-outlined ml-1 text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

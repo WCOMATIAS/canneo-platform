@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Diário de Tratamento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#137fec",
+                        "primary-light": "#e8f2fd",
+                        "secondary-green": "#34d399",
+                        "secondary-green-light": "#ecfdf5",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#101922",
+                        "text-main": "#0f172a",
+                        "text-secondary": "#64748b",
+                        "border-color": "#e2e8f0"
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "0.75rem",
+                        xl: "1rem",
+                        full: "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom range slider styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        /* Custom scrollbar for cleanliness */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-background-light text-text-main font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Side Navigation -->
+<aside class="hidden lg:flex w-64 flex-col border-r border-border-color bg-white h-full z-10 shadow-sm">
+<div class="flex h-16 items-center px-6 border-b border-border-color">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">local_florist</span>
+<h2 class="text-xl font-bold tracking-tight text-text-main">CANNEO</h2>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+<div class="mb-8 flex items-center gap-3 px-2">
+<div class="h-10 w-10 rounded-full bg-slate-200 bg-cover bg-center" data-alt="Portrait of a smiling woman" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7LPqjgXhSwPbHyJfOKKWiP3HWhaVTLJbhIJX0l0gKIZkIfXoPt4auTOJwI91vJWVkkKwodNnCfA5yirXGkRd9wFk_QwNv3vk02SKJr-Nazd0t-KYK3t35in4_uKRT85PAX2OCobRD61fOS0yC3vbTw2P7siq-gPHZiR6zE5aiTxUYYLwZ4AvhdgYK-oecPG1LzlvZlJjWPcqQKB_K7LTXVvM6i0IWqfrrpA7gV7jTbukikPmhOiVL0L_CNuZEm0G1wXURsDz2Z6DQ')"></div>
+<div>
+<p class="text-sm font-semibold text-text-main">Maria Silva</p>
+<p class="text-xs text-text-secondary">Paciente</p>
+</div>
+</div>
+<p class="px-2 text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2 mt-6">Menu Principal</p>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Visão Geral</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 bg-primary-light text-primary transition-colors" href="#">
+<span class="material-symbols-outlined fill-current">edit_note</span>
+<span class="text-sm font-medium">Diário</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-sm font-medium">Consultas</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">medication_liquid</span>
+<span class="text-sm font-medium">Tratamento</span>
+</a>
+<p class="px-2 text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2 mt-8">Configurações</p>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-sm font-medium">Perfil</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</a>
+</div>
+<div class="p-4 border-t border-border-color">
+<button class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-red-500 hover:bg-red-50 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Sair</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light">
+<!-- Mobile Header -->
+<header class="lg:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-border-color">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">local_florist</span>
+<span class="font-bold text-lg text-text-main">CANNEO</span>
+</div>
+<button class="text-text-main">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Top Header Desktop -->
+<header class="hidden lg:flex items-center justify-between px-8 py-5 bg-white border-b border-border-color shadow-sm z-10">
+<div>
+<h1 class="text-2xl font-bold text-text-main">Diário de Tratamento</h1>
+<p class="text-text-secondary text-sm">Registre seu progresso diário para otimizar seu tratamento.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-text-secondary hover:bg-slate-50 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></span>
+</button>
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Novo Registro
+                    </button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-4 lg:p-8">
+<div class="max-w-6xl mx-auto flex flex-col xl:flex-row gap-6">
+<!-- Left Column: Daily Entry -->
+<div class="flex-1 flex flex-col gap-6">
+<!-- Calendar Strip -->
+<div class="bg-white rounded-xl shadow-sm border border-border-color p-1">
+<div class="flex justify-between items-center text-center">
+<button class="p-2 hover:bg-slate-50 rounded-lg text-text-secondary"><span class="material-symbols-outlined">chevron_left</span></button>
+<div class="flex-1 grid grid-cols-7 gap-1">
+<!-- Past Day -->
+<div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-slate-50 group">
+<span class="text-xs text-text-secondary font-medium group-hover:text-primary">DOM</span>
+<span class="text-sm font-bold text-text-secondary group-hover:text-primary">11</span>
+</div>
+<!-- Past Day -->
+<div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-slate-50 group">
+<span class="text-xs text-text-secondary font-medium group-hover:text-primary">SEG</span>
+<span class="text-sm font-bold text-text-secondary group-hover:text-primary">12</span>
+</div>
+<!-- Past Day -->
+<div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-slate-50 group">
+<span class="text-xs text-text-secondary font-medium group-hover:text-primary">TER</span>
+<span class="text-sm font-bold text-text-secondary group-hover:text-primary">13</span>
+</div>
+<!-- Current Day (Active) -->
+<div class="flex flex-col items-center justify-center p-2 rounded-lg bg-primary text-white shadow-md transform scale-105">
+<span class="text-xs font-medium opacity-90">QUA</span>
+<span class="text-lg font-bold">14</span>
+</div>
+<!-- Future Day -->
+<div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-slate-50 group opacity-50">
+<span class="text-xs text-text-secondary font-medium">QUI</span>
+<span class="text-sm font-bold text-text-secondary">15</span>
+</div>
+<!-- Future Day -->
+<div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-slate-50 group opacity-50">
+<span class="text-xs text-text-secondary font-medium">SEX</span>
+<span class="text-sm font-bold text-text-secondary">16</span>
+</div>
+<!-- Future Day -->
+<div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-slate-50 group opacity-50">
+<span class="text-xs text-text-secondary font-medium">SÁB</span>
+<span class="text-sm font-bold text-text-secondary">17</span>
+</div>
+</div>
+<button class="p-2 hover:bg-slate-50 rounded-lg text-text-secondary"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<!-- Main Form Card -->
+<div class="bg-white rounded-xl shadow-sm border border-border-color p-6 lg:p-8 space-y-8">
+<!-- Mood Section -->
+<section>
+<h3 class="text-xl font-bold text-text-main mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-green">sentiment_satisfied</span>
+                                    Como você está se sentindo hoje?
+                                </h3>
+<div class="flex justify-between items-center gap-2 max-w-md mx-auto">
+<button class="flex flex-col items-center gap-2 group transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 rounded-full border-2 border-slate-200 group-hover:border-red-400 group-hover:bg-red-50 flex items-center justify-center text-3xl transition-colors grayscale group-hover:grayscale-0">
+                                            😫
+                                        </div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-red-500">Péssimo</span>
+</button>
+<button class="flex flex-col items-center gap-2 group transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 rounded-full border-2 border-slate-200 group-hover:border-orange-400 group-hover:bg-orange-50 flex items-center justify-center text-3xl transition-colors grayscale group-hover:grayscale-0">
+                                            😕
+                                        </div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-orange-500">Ruim</span>
+</button>
+<button class="flex flex-col items-center gap-2 group transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 rounded-full border-2 border-slate-200 group-hover:border-yellow-400 group-hover:bg-yellow-50 flex items-center justify-center text-3xl transition-colors grayscale group-hover:grayscale-0">
+                                            😐
+                                        </div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-yellow-600">Regular</span>
+</button>
+<button class="flex flex-col items-center gap-2 group transition-transform hover:-translate-y-1">
+<div class="w-14 h-14 rounded-full border-2 border-primary bg-primary-light flex items-center justify-center text-4xl shadow-md transform scale-110">
+                                            🙂
+                                        </div>
+<span class="text-sm font-bold text-primary">Bem</span>
+</button>
+<button class="flex flex-col items-center gap-2 group transition-transform hover:-translate-y-1">
+<div class="w-12 h-12 rounded-full border-2 border-slate-200 group-hover:border-green-400 group-hover:bg-green-50 flex items-center justify-center text-3xl transition-colors grayscale group-hover:grayscale-0">
+                                            😁
+                                        </div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-green-600">Ótimo</span>
+</button>
+</div>
+</section>
+<hr class="border-border-color/60"/>
+<!-- Pain Scale Section -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-lg font-semibold text-text-main">Nível de Dor</h3>
+<span class="px-3 py-1 bg-slate-100 rounded-full text-sm font-bold text-primary">Nível: 3</span>
+</div>
+<div class="relative pt-2 pb-6">
+<input class="w-full h-3 bg-gradient-to-r from-secondary-green via-yellow-400 to-red-500 rounded-lg appearance-none cursor-pointer" max="10" min="0" type="range" value="3"/>
+<div class="flex justify-between text-xs text-text-secondary mt-2 font-medium uppercase tracking-wide">
+<span>Sem dor</span>
+<span>Dor moderada</span>
+<span>Dor insuportável</span>
+</div>
+<!-- Custom thumb styling handled in CSS block -->
+</div>
+</section>
+<!-- Dosage & Symptoms Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Dosage -->
+<div class="space-y-3">
+<label class="block text-sm font-medium text-text-main">Dosagem Utilizada</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary text-[20px]">water_drop</span>
+</div>
+<input class="pl-10 block w-full rounded-lg border-border-color bg-slate-50 text-text-main focus:ring-primary focus:border-primary sm:text-sm py-2.5" placeholder="0" type="number"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+<span class="text-text-secondary text-xs font-semibold">GOTAS</span>
+</div>
+</div>
+</div>
+<!-- Symptoms -->
+<div class="space-y-3">
+<label class="block text-sm font-medium text-text-main">Sintomas (Selecione)</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-full border border-border-color bg-white text-xs font-medium text-text-secondary hover:border-primary hover:text-primary transition">Sono</button>
+<button class="px-3 py-1.5 rounded-full border border-primary bg-primary-light text-xs font-medium text-primary transition">Ansiedade</button>
+<button class="px-3 py-1.5 rounded-full border border-border-color bg-white text-xs font-medium text-text-secondary hover:border-primary hover:text-primary transition">Apetite</button>
+<button class="px-3 py-1.5 rounded-full border border-border-color bg-white text-xs font-medium text-text-secondary hover:border-primary hover:text-primary transition">Foco</button>
+<button class="px-3 py-1.5 rounded-full border border-border-color bg-white text-xs font-medium text-text-secondary hover:border-primary hover:text-primary transition">Náusea</button>
+</div>
+</div>
+</div>
+<!-- Notes -->
+<div class="space-y-3">
+<label class="block text-sm font-medium text-text-main">Observações livres</label>
+<textarea class="block w-full rounded-lg border-border-color bg-slate-50 text-text-main focus:ring-primary focus:border-primary sm:text-sm resize-none p-3" placeholder="Descreva como se sentiu após a medicação..." rows="3"></textarea>
+</div>
+<!-- Submit Button -->
+<div class="pt-2">
+<button class="w-full bg-primary hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined">save</span>
+                                    Salvar Registro Diário
+                                </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Stats & Info -->
+<div class="w-full xl:w-96 flex flex-col gap-6">
+<!-- Chart Card -->
+<div class="bg-white rounded-xl shadow-sm border border-border-color p-6 flex flex-col h-full min-h-[400px]">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-text-main">Evolução Semestral</h3>
+<button class="text-text-secondary hover:text-primary">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Mock Chart Container -->
+<div class="flex-1 relative w-full h-48 mb-4">
+<div class="absolute inset-0 flex items-end justify-between px-2 pb-6 border-b border-border-color border-l border-border-color">
+<!-- Bars mimicking a line chart trend -->
+<div class="w-2 bg-primary/20 h-[30%] rounded-t-sm relative group">
+<div class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 bg-text-main text-white text-[10px] px-1.5 py-0.5 rounded">3.0</div>
+</div>
+<div class="w-2 bg-primary/30 h-[45%] rounded-t-sm relative group">
+<div class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 bg-text-main text-white text-[10px] px-1.5 py-0.5 rounded">4.5</div>
+</div>
+<div class="w-2 bg-primary/40 h-[40%] rounded-t-sm relative group">
+<div class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 bg-text-main text-white text-[10px] px-1.5 py-0.5 rounded">4.0</div>
+</div>
+<div class="w-2 bg-primary/50 h-[60%] rounded-t-sm relative group">
+<div class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 bg-text-main text-white text-[10px] px-1.5 py-0.5 rounded">6.0</div>
+</div>
+<div class="w-2 bg-primary/60 h-[55%] rounded-t-sm relative group">
+<div class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 bg-text-main text-white text-[10px] px-1.5 py-0.5 rounded">5.5</div>
+</div>
+<div class="w-2 bg-primary h-[75%] rounded-t-sm relative group">
+<div class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 bg-text-main text-white text-[10px] px-1.5 py-0.5 rounded">7.5</div>
+</div>
+</div>
+<!-- Background grid lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none pb-6 pr-2">
+<div class="border-t border-dashed border-slate-200 w-full h-0"></div>
+<div class="border-t border-dashed border-slate-200 w-full h-0"></div>
+<div class="border-t border-dashed border-slate-200 w-full h-0"></div>
+<div class="border-t border-dashed border-slate-200 w-full h-0"></div>
+</div>
+</div>
+<div class="flex justify-between text-xs text-text-secondary px-2">
+<span>Mar</span>
+<span>Abr</span>
+<span>Mai</span>
+<span>Jun</span>
+<span>Jul</span>
+<span>Ago</span>
+</div>
+<div class="mt-6 space-y-4">
+<div class="flex items-center gap-3 p-3 bg-secondary-green-light rounded-lg border border-secondary-green/20">
+<div class="p-2 bg-white rounded-full text-secondary-green shadow-sm">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+</div>
+<div>
+<p class="text-xs text-text-secondary font-medium uppercase">Bem-estar</p>
+<p class="text-sm font-bold text-text-main text-secondary-green">+15% este mês</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-border-color">
+<div class="p-2 bg-white rounded-full text-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">medication</span>
+</div>
+<div>
+<p class="text-xs text-text-secondary font-medium uppercase">Aderência</p>
+<p class="text-sm font-bold text-text-main">98% de registros</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Disclaimer Card -->
+<div class="bg-primary/5 rounded-xl border border-primary/10 p-4 flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary mt-0.5">verified_user</span>
+<p class="text-xs text-text-secondary leading-relaxed">
+<strong class="text-primary font-semibold block mb-1">Dados Seguros</strong>
+                                Estes dados serão compartilhados automaticamente com seu médico responsável (Dr. André Gomes) para otimizar seu tratamento com segurança.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

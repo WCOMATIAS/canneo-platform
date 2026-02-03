@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Histórico de Compras</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for better look in table/sidebar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px; 
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-hidden h-screen flex">
+<!-- Sidebar -->
+<aside class="w-64 bg-white dark:bg-[#1a2632] border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between h-full shrink-0 z-20">
+<div class="flex flex-col h-full">
+<!-- Brand & User -->
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+</div>
+<div>
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-none tracking-tight">CANNEO</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Portal do Paciente</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl mb-6 border border-slate-100 dark:border-slate-700">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 shrink-0 border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Portrait of the logged in patient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAFAtsq7y2biFjEGY7anmQ9L86gI5GQ1CG8bzhzMb4ptcrFXH6HyqoPXU6lyicRHzWeS8h1OYXFsOIX6Wuz8oydZhoEBTnGb2z23tAqHsu4CmsK3bzu92G67Ekj1k9Np5W-1FnkVu_IkEJCbki93QZqJHDkblex6lBwV36njaPm4C08fr5bSYYciLm4sksAjot_PDMNEcjK_orW4BZ2iWF0Nv634hbmd6TuvAv0DlhDTO0WUP2u8MPqM7LN6UnfTM2ROlCT9eqcaJK3");'>
+</div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-slate-900 dark:text-white text-sm font-semibold truncate">Ricardo Souza</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs truncate">Paciente ID: #4829</p>
+</div>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 px-4 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">home</span>
+<span class="text-sm font-medium">Início</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">prescriptions</span>
+<span class="text-sm font-medium">Minhas Receitas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">calendar_month</span>
+<span class="text-sm font-medium">Consultas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-blue-400 dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined icon-filled">shopping_bag</span>
+<span class="text-sm font-medium">Minhas Compras</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">person</span>
+<span class="text-sm font-medium">Meu Perfil</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800 mt-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">logout</span>
+<span class="text-sm font-medium">Sair</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative">
+<!-- Top Bar / Header -->
+<header class="bg-white dark:bg-[#1a2632] border-b border-slate-200 dark:border-slate-800 px-8 py-5 shrink-0">
+<div class="max-w-6xl mx-auto w-full">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 mb-3">
+<a class="text-slate-500 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Início</a>
+<span class="text-slate-400 text-sm font-medium">/</span>
+<span class="text-primary text-sm font-medium">Minhas Compras</span>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+<div>
+<h1 class="text-slate-900 dark:text-white text-3xl font-black tracking-tight mb-2">Minhas Compras</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal">Gerencie seus pedidos, repita compras e acompanhe o status de entrega.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg shadow-sm shadow-blue-200 dark:shadow-none transition-all text-sm font-medium">
+<span class="material-symbols-outlined" style="font-size: 20px;">storefront</span>
+                            Ir para Marketplace
+                        </button>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-6xl mx-auto w-full flex flex-col gap-6">
+<!-- Filters & Search Toolbar -->
+<div class="bg-white dark:bg-[#1a2632] p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
+<!-- Search -->
+<div class="relative w-full lg:w-96">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400" style="font-size: 20px;">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg leading-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-shadow" placeholder="Buscar por ID do pedido ou medicamento..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-2 w-full lg:w-auto">
+<button class="group flex h-9 items-center justify-center gap-x-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 pl-3 pr-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="text-slate-700 dark:text-slate-200 text-sm font-medium">Status: Todos</span>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600" style="font-size: 20px;">expand_more</span>
+</button>
+<button class="group flex h-9 items-center justify-center gap-x-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 pl-3 pr-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="text-slate-700 dark:text-slate-200 text-sm font-medium">Data: Últimos 30 dias</span>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600" style="font-size: 20px;">calendar_today</span>
+</button>
+<button class="group flex h-9 items-center justify-center gap-x-2 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 pl-3 pr-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="text-slate-700 dark:text-slate-200 text-sm font-medium">Farmácia: Todas</span>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600" style="font-size: 20px;">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-white dark:bg-[#1a2632] rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700">
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[120px]">ID Pedido</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[140px]">Data</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider min-w-[200px]">Produto(s)</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider min-w-[150px]">Farmácia</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[140px]">Valor Total</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[160px]">Status</th>
+<th class="px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right w-[180px]">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-primary">#ORD-925</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">24/10/2023</td>
+<td class="px-6 py-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Cannabidiol Isolate 30ml</div>
+<div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Frasco 3000mg</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">Verde Vida</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">R$ 350,00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                            Entregue
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Ver Detalhes">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Rastrear Entrega">
+<span class="material-symbols-outlined" style="font-size: 20px;">local_shipping</span>
+</button>
+<button class="p-2 text-primary bg-primary/10 hover:bg-primary hover:text-white rounded-lg transition-colors" title="Repetir Pedido">
+<span class="material-symbols-outlined" style="font-size: 20px;">autorenew</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-primary">#ORD-922</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">20/10/2023</td>
+<td class="px-6 py-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Full Spectrum Oil 5%</div>
+<div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">2 unidades</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">MedCann</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">R$ 420,00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
+                                            Em Transporte
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Ver Detalhes">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+<button class="p-2 text-blue-600 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40 rounded-lg transition-colors" title="Rastrear Entrega">
+<span class="material-symbols-outlined" style="font-size: 20px;">location_on</span>
+</button>
+<button class="p-2 text-slate-300 cursor-not-allowed rounded-lg" disabled="" title="Repetir Pedido indisponível">
+<span class="material-symbols-outlined" style="font-size: 20px;">autorenew</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-primary">#ORD-920</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">15/10/2023</td>
+<td class="px-6 py-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Kit 2x CBD Oil</div>
+<div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Promoção Pack</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">Natureza Pura</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">R$ 600,00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400 border border-green-200 dark:border-green-800">
+                                            Entregue
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Ver Detalhes">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-primary dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Rastrear Entrega">
+<span class="material-symbols-outlined" style="font-size: 20px;">local_shipping</span>
+</button>
+<button class="p-2 text-primary bg-primary/10 hover:bg-primary hover:text-white rounded-lg transition-colors" title="Repetir Pedido">
+<span class="material-symbols-outlined" style="font-size: 20px;">autorenew</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-primary">#ORD-918</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">10/10/2023</td>
+<td class="px-6 py-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Pomada CBD Anti-inflamatória</div>
+<div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Uso Tópico</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">Verde Vida</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">R$ 150,00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-400 border border-red-200 dark:border-red-800">
+                                            Cancelado
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Ver Detalhes">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+<button class="p-2 text-slate-300 cursor-not-allowed rounded-lg" disabled="">
+<span class="material-symbols-outlined" style="font-size: 20px;">local_shipping</span>
+</button>
+<button class="p-2 text-primary bg-primary/10 hover:bg-primary hover:text-white rounded-lg transition-colors" title="Refazer Pedido">
+<span class="material-symbols-outlined" style="font-size: 20px;">autorenew</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-primary">#ORD-915</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">01/10/2023</td>
+<td class="px-6 py-4">
+<div class="text-sm font-medium text-slate-900 dark:text-white">Gummies CBD (Morango)</div>
+<div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">30 unidades</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-300">MedCann</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">R$ 200,00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800">
+                                            Pagamento Pendente
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Ver Detalhes">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+<button class="p-2 text-slate-300 cursor-not-allowed rounded-lg" disabled="">
+<span class="material-symbols-outlined" style="font-size: 20px;">local_shipping</span>
+</button>
+<button class="flex items-center justify-center h-8 px-3 rounded-lg bg-yellow-100 text-yellow-800 hover:bg-yellow-200 text-xs font-medium transition-colors">
+                                                Pagar Agora
+                                            </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="border-t border-slate-200 dark:border-slate-700 px-6 py-4 flex items-center justify-between">
+<p class="text-sm text-slate-500 dark:text-slate-400">
+                            Mostrando <span class="font-medium text-slate-900 dark:text-white">1</span> a <span class="font-medium text-slate-900 dark:text-white">5</span> de <span class="font-medium text-slate-900 dark:text-white">12</span> pedidos
+                        </p>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_left</span>
+</button>
+<button class="p-2 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-primary">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer note -->
+<div class="flex justify-center pb-6">
+<p class="text-xs text-slate-400 text-center">
+                        Em caso de dúvidas sobre seus pedidos, entre em contato com o <a class="text-primary hover:underline" href="#">Suporte CANNEO</a>.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+</body></html>

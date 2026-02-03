@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Ajuda e Suporte Paciente</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#137fec",
+                        "primary-light": "#e8f2fd",
+                        "primary-dark": "#0f61b8",
+                        "secondary-green": "#34d399",
+                        "secondary-green-light": "#ecfdf5",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#101922",
+                        "text-main": "#0f172a",
+                        "text-secondary": "#64748b",
+                        "border-color": "#e2e8f0"
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "0.75rem",
+                        xl: "1rem",
+                        "2xl": "1.5rem",
+                        full: "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-text-main font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<aside class="hidden lg:flex w-64 flex-col border-r border-border-color bg-white h-full z-10 shadow-sm">
+<div class="flex h-16 items-center px-6 border-b border-border-color">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">local_florist</span>
+<h2 class="text-xl font-bold tracking-tight text-text-main">CANNEO</h2>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+<div class="mb-8 flex items-center gap-3 px-2">
+<div class="h-10 w-10 rounded-full bg-slate-200 bg-cover bg-center" data-alt="Portrait of a smiling woman" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7LPqjgXhSwPbHyJfOKKWiP3HWhaVTLJbhIJX0l0gKIZkIfXoPt4auTOJwI91vJWVkkKwodNnCfA5yirXGkRd9wFk_QwNv3vk02SKJr-Nazd0t-KYK3t35in4_uKRT85PAX2OCobRD61fOS0yC3vbTw2P7siq-gPHZiR6zE5aiTxUYYLwZ4AvhdgYK-oecPG1LzlvZlJjWPcqQKB_K7LTXVvM6i0IWqfrrpA7gV7jTbukikPmhOiVL0L_CNuZEm0G1wXURsDz2Z6DQ')"></div>
+<div>
+<p class="text-sm font-semibold text-text-main">Maria Silva</p>
+<p class="text-xs text-text-secondary">Paciente</p>
+</div>
+</div>
+<p class="px-2 text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2 mt-6">Menu Principal</p>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Visão Geral</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span class="text-sm font-medium">Carteira Digital</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="text-sm font-medium">Diário</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-sm font-medium">Consultas</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">medication_liquid</span>
+<span class="text-sm font-medium">Tratamento</span>
+</a>
+<p class="px-2 text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2 mt-8">Configurações</p>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-sm font-medium">Perfil</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 bg-primary-light text-primary transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined fill-current">help</span>
+<span class="text-sm font-medium">Ajuda e Suporte</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-text-secondary hover:bg-slate-50 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</a>
+</div>
+<div class="p-4 border-t border-border-color">
+<button class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-red-500 hover:bg-red-50 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Sair</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light relative">
+<header class="lg:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-border-color">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">local_florist</span>
+<span class="font-bold text-lg text-text-main">CANNEO</span>
+</div>
+<button class="text-text-main">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<header class="hidden lg:flex items-center justify-between px-8 py-5 bg-white border-b border-border-color shadow-sm z-10">
+<div>
+<h1 class="text-2xl font-bold text-text-main">Central de Ajuda</h1>
+<p class="text-text-secondary text-sm">Suporte especializado para dúvidas sobre seu tratamento e a plataforma.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-text-secondary hover:bg-slate-50 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500"></span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-4 lg:p-8">
+<div class="max-w-5xl mx-auto flex flex-col gap-8">
+<div class="w-full bg-gradient-to-r from-blue-600 to-primary rounded-2xl shadow-lg p-8 md:p-12 text-center text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+<div class="absolute bottom-0 left-0 w-48 h-48 bg-secondary-green/20 rounded-full blur-2xl -ml-10 -mb-10"></div>
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="text-2xl md:text-3xl font-bold mb-2">Como podemos ajudar você hoje?</h2>
+<p class="text-blue-100 mb-8">Busque por artigos, tutoriais ou entre em contato com especialistas.</p>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-4 rounded-xl text-gray-900 border-0 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white/50 bg-white shadow-xl transition-all" placeholder="Digite sua dúvida aqui..." type="text"/>
+<button class="absolute right-2 top-2 bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                    Buscar
+                                </button>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-bold text-text-main mb-4 px-1">Navegue por tópicos</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+<a class="bg-white p-6 rounded-xl border border-border-color shadow-sm hover:shadow-md hover:border-primary/50 transition-all group flex flex-col items-center text-center" href="#">
+<div class="w-14 h-14 rounded-full bg-blue-50 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">medication</span>
+</div>
+<h4 class="font-bold text-text-main group-hover:text-primary transition-colors">Dúvidas sobre o Uso</h4>
+<p class="text-xs text-text-secondary mt-2">Posologia, efeitos e instruções médicas</p>
+</a>
+<a class="bg-white p-6 rounded-xl border border-border-color shadow-sm hover:shadow-md hover:border-primary/50 transition-all group flex flex-col items-center text-center" href="#">
+<div class="w-14 h-14 rounded-full bg-green-50 text-secondary-green flex items-center justify-center mb-4 group-hover:bg-secondary-green group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">payments</span>
+</div>
+<h4 class="font-bold text-text-main group-hover:text-primary transition-colors">Pagamentos e Planos</h4>
+<p class="text-xs text-text-secondary mt-2">Faturas, reembolsos e assinaturas</p>
+</a>
+<a class="bg-white p-6 rounded-xl border border-border-color shadow-sm hover:shadow-md hover:border-primary/50 transition-all group flex flex-col items-center text-center" href="#">
+<div class="w-14 h-14 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center mb-4 group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">build</span>
+</div>
+<h4 class="font-bold text-text-main group-hover:text-primary transition-colors">Problemas Técnicos</h4>
+<p class="text-xs text-text-secondary mt-2">Acesso à conta, erros e bugs</p>
+</a>
+<a class="bg-white p-6 rounded-xl border border-border-color shadow-sm hover:shadow-md hover:border-primary/50 transition-all group flex flex-col items-center text-center" href="#">
+<div class="w-14 h-14 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">gavel</span>
+</div>
+<h4 class="font-bold text-text-main group-hover:text-primary transition-colors">Regulamentação</h4>
+<p class="text-xs text-text-secondary mt-2">Normas ANVISA e legislação</p>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-4">
+<h3 class="text-lg font-bold text-text-main px-1">Perguntas Frequentes (FAQ)</h3>
+<div class="bg-white rounded-2xl border border-border-color shadow-sm overflow-hidden">
+<div class="divide-y divide-border-color">
+<details class="group open:bg-slate-50 transition-colors duration-200">
+<summary class="flex justify-between items-center p-5 cursor-pointer list-none text-text-main font-medium hover:text-primary transition-colors">
+<span>Como tomar as gotas corretamente?</span>
+<span class="material-symbols-outlined text-text-secondary transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-sm text-text-secondary leading-relaxed">
+<p class="pl-4 border-l-2 border-secondary-green">
+                                                A recomendação geral é aplicar as gotas sob a língua (sublingual) e aguardar cerca de 60 segundos antes de engolir. Isso facilita a absorção pelo organismo. Sempre siga a dosagem prescrita pelo seu médico na receita.
+                                            </p>
+</div>
+</details>
+<details class="group open:bg-slate-50 transition-colors duration-200">
+<summary class="flex justify-between items-center p-5 cursor-pointer list-none text-text-main font-medium hover:text-primary transition-colors">
+<span>Como renovar minha receita médica?</span>
+<span class="material-symbols-outlined text-text-secondary transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-sm text-text-secondary leading-relaxed">
+<p class="pl-4 border-l-2 border-secondary-green">
+                                                Para renovar sua receita, acesse a aba "Consultas" no menu lateral e agende um retorno com seu médico prescritor. Caso sua receita ainda esteja na validade, você pode visualizá-la na sua "Carteira Digital".
+                                            </p>
+</div>
+</details>
+<details class="group open:bg-slate-50 transition-colors duration-200">
+<summary class="flex justify-between items-center p-5 cursor-pointer list-none text-text-main font-medium hover:text-primary transition-colors">
+<span>O que fazer se a entrega do medicamento atrasar?</span>
+<span class="material-symbols-outlined text-text-secondary transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-sm text-text-secondary leading-relaxed">
+<p class="pl-4 border-l-2 border-secondary-green">
+                                                Verifique o código de rastreio enviado para seu e-mail. Se o prazo estipulado já passou, entre em contato imediatamente com nosso suporte através do chat abaixo ou pelo telefone disponível na área de contato.
+                                            </p>
+</div>
+</details>
+<details class="group open:bg-slate-50 transition-colors duration-200">
+<summary class="flex justify-between items-center p-5 cursor-pointer list-none text-text-main font-medium hover:text-primary transition-colors">
+<span>Como funciona a autorização da ANVISA?</span>
+<span class="material-symbols-outlined text-text-secondary transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="px-5 pb-5 text-sm text-text-secondary leading-relaxed">
+<p class="pl-4 border-l-2 border-secondary-green">
+                                                A autorização é pessoal e intransferível, válida por 2 anos. Nossa equipe cuida de todo o processo burocrático para você. O documento oficial fica disponível para download na sua Carteira Digital.
+                                            </p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-primary-light/50 rounded-2xl p-6 border border-primary/20">
+<h4 class="font-bold text-primary mb-2">Horário de Atendimento</h4>
+<p class="text-sm text-text-secondary mb-4">Nossa equipe de especialistas está disponível para ajudar você.</p>
+<ul class="space-y-2 text-sm">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">schedule</span>
+<span class="text-text-main">Seg - Sex: 08h às 20h</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">schedule</span>
+<span class="text-text-main">Sábados: 09h às 14h</span>
+</li>
+</ul>
+</div>
+<div class="bg-white rounded-2xl p-6 border border-border-color shadow-sm">
+<h4 class="font-bold text-text-main mb-2">Contato de Emergência</h4>
+<p class="text-sm text-text-secondary mb-4">Para reações adversas graves, procure um pronto-socorro imediatamente.</p>
+<a class="flex items-center justify-center gap-2 w-full py-2.5 bg-red-50 text-red-600 rounded-xl font-semibold text-sm border border-red-100 hover:bg-red-100 transition-colors" href="#">
+<span class="material-symbols-outlined">emergency</span>
+                                    SOS Emergência
+                                </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 right-6 lg:bottom-10 lg:right-10 flex flex-col items-end z-50 pointer-events-none">
+<div class="pointer-events-auto bg-white px-4 py-3 rounded-t-2xl rounded-bl-2xl shadow-xl border border-border-color mb-3 transform transition-all hover:scale-105 origin-bottom-right">
+<p class="text-sm font-semibold text-text-main">Olá, Maria! 👋</p>
+<p class="text-xs text-text-secondary">Fale com nosso suporte agora.</p>
+</div>
+<button class="pointer-events-auto h-16 w-16 bg-gradient-to-br from-secondary-green to-emerald-500 rounded-full shadow-2xl flex items-center justify-center text-white hover:shadow-emerald-500/40 hover:-translate-y-1 transition-all duration-300 group">
+<span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">chat</span>
+<span class="absolute top-0 right-0 h-4 w-4 bg-red-500 border-2 border-white rounded-full"></span>
+</button>
+</div>
+</main>
+</div>
+
+</body></html>

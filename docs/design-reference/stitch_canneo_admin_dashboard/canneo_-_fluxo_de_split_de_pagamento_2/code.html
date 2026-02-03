@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Fluxo de Split de Pagamento</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2632",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-4 sm:px-10 py-3 shadow-sm">
+<div class="flex items-center justify-between mx-auto max-w-[1400px]">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">CANNEO Admin</h2>
+</div>
+<div class="flex items-center gap-4 md:gap-8">
+<!-- Search Bar (Hidden on mobile) -->
+<div class="hidden md:flex flex-1 max-w-md">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="block w-full rounded-lg border-none bg-slate-100 dark:bg-slate-800 py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:ring-2 focus:ring-primary" placeholder="Buscar transação, ID ou data..." type="text"/>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm" data-alt="User profile avatar showing a smiling professional" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOcXmtC0ft6skA0aQ2DjNYefmGVd-oesa_p1QiSPUEdwrkiFLuj9VQTGVQjKly5BTbhqrVnIYJc2iG3I3KwbJhm0WZdcJKHv2fIN3ZKuK8K2F514Nvj63iLxrmuMSdTkD5SRND2hnKNm3R51wPXYQLrzfpDhoRHf2pxBbrbKKjr--Ed5Jqvi2BYea7G1HqaU7EKlWEUuZBuI3-c0_PxIwNKnCmZkzRerieYKlozUL-8E9EzICbQhvaay0wZCCRG7STuyoq5c5DzxR3");'></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col items-center w-full px-4 sm:px-6 lg:px-8 py-8">
+<div class="w-full max-w-[1200px] flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex px-1">
+<ol class="flex items-center space-x-2">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Home</a></li>
+<li><span class="text-slate-400 dark:text-slate-600">/</span></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium" href="#">Financeiro</a></li>
+<li><span class="text-slate-400 dark:text-slate-600">/</span></li>
+<li><span aria-current="page" class="text-slate-900 dark:text-white text-sm font-medium">Split de Pagamentos</span></li>
+</ol>
+</nav>
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-slate-900 dark:text-white text-3xl md:text-4xl font-black tracking-tight">Fluxo de Dados: Split de Pagamento</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base max-w-2xl">
+                        Visualização em tempo real do DFD (Diagrama de Fluxo de Dados) e regras de divisão automática de receitas para a plataforma CANNEO.
+                    </p>
+</div>
+<div class="flex gap-3">
+<button class="inline-flex items-center justify-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 px-4 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        Exportar Relatório
+                    </button>
+<button class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-600 shadow-sm transition-all shadow-blue-500/20">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+                        Editar Regras
+                    </button>
+</div>
+</div>
+<!-- Stats / Simulation Controls -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-1 rounded-xl bg-surface-light dark:bg-surface-dark p-5 border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Valor da Transação (Simulado)</p>
+<span class="material-symbols-outlined text-green-500 bg-green-500/10 p-1 rounded">attach_money</span>
+</div>
+<div class="flex items-baseline gap-2 mt-2">
+<p class="text-slate-900 dark:text-white text-2xl font-bold">R$ 1.000,00</p>
+<span class="text-green-600 dark:text-green-400 text-xs font-medium px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900/30">Confirmado</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl bg-surface-light dark:bg-surface-dark p-5 border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Data da Simulação</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded">calendar_today</span>
+</div>
+<p class="text-slate-900 dark:text-white text-2xl font-bold mt-2">15/10/2023</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl bg-surface-light dark:bg-surface-dark p-5 border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Status do Sistema</p>
+<span class="material-symbols-outlined text-green-500 bg-green-500/10 p-1 rounded">check_circle</span>
+</div>
+<p class="text-slate-900 dark:text-white text-2xl font-bold mt-2">Operacional</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl bg-surface-light dark:bg-surface-dark p-5 border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Transações Hoje</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded">bar_chart</span>
+</div>
+<p class="text-slate-900 dark:text-white text-2xl font-bold mt-2">1.248</p>
+</div>
+</section>
+<!-- DFD Diagram Section -->
+<section class="w-full bg-surface-light dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex justify-between items-center">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schema</span>
+                        Visualização do Fluxo
+                    </h3>
+<div class="flex gap-2">
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 px-2 py-1 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+<span class="size-2 rounded-full bg-primary"></span> Processamento
+                        </span>
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 px-2 py-1 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+<span class="size-2 rounded-full bg-green-500"></span> Crédito
+                        </span>
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 px-2 py-1 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+<span class="size-2 rounded-full bg-slate-400"></span> Débito/Taxa
+                        </span>
+</div>
+</div>
+<!-- Diagram Canvas -->
+<div class="p-8 lg:p-12 overflow-x-auto">
+<div class="min-w-[900px] flex items-stretch gap-8 relative">
+<!-- Step 1: Início -->
+<div class="flex flex-col items-center justify-center gap-4 w-48 relative z-10">
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">1. Início</div>
+<div class="w-full bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm hover:border-primary/50 transition-colors group">
+<div class="flex items-center gap-3 mb-3">
+<div class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">shopping_cart_checkout</span>
+</div>
+<div class="font-bold text-slate-800 dark:text-slate-200">Checkout</div>
+</div>
+<div class="space-y-1">
+<p class="text-xs text-slate-500 dark:text-slate-400">Valor Total</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">R$ 1.000,00</p>
+<div class="pt-2 mt-2 border-t border-dashed border-slate-200 dark:border-slate-700">
+<p class="text-xs text-slate-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">credit_card</span> Cartão Crédito
+                                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Connector Arrow -->
+<div class="flex items-center justify-center w-12 text-slate-300 dark:text-slate-600">
+<span class="material-symbols-outlined text-4xl animate-pulse">arrow_right_alt</span>
+</div>
+<!-- Step 2: Processamento -->
+<div class="flex flex-col items-center justify-center gap-4 w-48 relative z-10">
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">2. Gateway</div>
+<div class="w-full bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-3 mb-3">
+<div class="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 p-2 rounded-lg">
+<span class="material-symbols-outlined">shield_lock</span>
+</div>
+<div class="font-bold text-slate-800 dark:text-slate-200">Segurança</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-500">Antifraude</span>
+<span class="text-xs font-bold text-green-600 bg-green-100 dark:bg-green-900/30 dark:text-green-400 px-1.5 py-0.5 rounded">OK</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-500">Saldo</span>
+<span class="text-xs font-bold text-green-600 bg-green-100 dark:bg-green-900/30 dark:text-green-400 px-1.5 py-0.5 rounded">OK</span>
+</div>
+<div class="pt-2 mt-2 border-t border-slate-100 dark:border-slate-700 text-center">
+<span class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide">Capturado</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Connector Arrow -->
+<div class="flex items-center justify-center w-12 text-slate-300 dark:text-slate-600">
+<span class="material-symbols-outlined text-4xl animate-pulse">arrow_right_alt</span>
+</div>
+<!-- Step 3: Split Engine (The Hub) -->
+<div class="flex flex-col items-center justify-center gap-4 w-56 relative z-10">
+<div class="text-xs uppercase tracking-wider font-bold text-primary">3. Split Engine</div>
+<div class="w-full bg-white dark:bg-slate-800 border-2 border-primary rounded-xl p-0 shadow-lg shadow-primary/10 overflow-hidden">
+<div class="bg-primary px-4 py-2 text-white flex items-center justify-between">
+<span class="text-sm font-bold">Motor de Regras</span>
+<span class="material-symbols-outlined text-[18px]">settings_suggest</span>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex justify-between items-center text-xs border-b border-slate-100 dark:border-slate-700 pb-2">
+<span class="text-slate-500">Total Entrada</span>
+<span class="font-bold text-slate-900 dark:text-white">R$ 1.000,00</span>
+</div>
+<!-- Rules Breakdown -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-xs">
+<span class="text-slate-500 flex items-center gap-1"><span class="size-1.5 rounded-full bg-indigo-500"></span> Canneo</span>
+<span class="font-mono text-slate-700 dark:text-slate-300">10%</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-slate-500 flex items-center gap-1"><span class="size-1.5 rounded-full bg-teal-500"></span> Médicos</span>
+<span class="font-mono text-slate-700 dark:text-slate-300">60%</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-slate-500 flex items-center gap-1"><span class="size-1.5 rounded-full bg-purple-500"></span> Farmácia</span>
+<span class="font-mono text-slate-700 dark:text-slate-300">25%</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-slate-500 flex items-center gap-1"><span class="size-1.5 rounded-full bg-slate-400"></span> Taxas</span>
+<span class="font-mono text-slate-700 dark:text-slate-300">5%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Connector Branching Lines -->
+<div class="w-16 flex flex-col justify-between py-8 relative">
+<!-- Draw lines using borders -->
+<!-- Top connection -->
+<div class="absolute top-[18%] left-0 w-full h-[32%] border-l-2 border-t-2 border-slate-300 dark:border-slate-600 rounded-tl-xl"></div>
+<!-- Mid-Top connection -->
+<div class="absolute top-[40%] left-0 w-full h-[10%] border-l-2 border-t-2 border-slate-300 dark:border-slate-600 rounded-tl-xl"></div>
+<!-- Mid-Bottom connection -->
+<div class="absolute bottom-[40%] left-0 w-full h-[10%] border-l-2 border-b-2 border-slate-300 dark:border-slate-600 rounded-bl-xl"></div>
+<!-- Bottom connection -->
+<div class="absolute bottom-[18%] left-0 w-full h-[32%] border-l-2 border-b-2 border-slate-300 dark:border-slate-600 rounded-bl-xl"></div>
+</div>
+<!-- Step 4: Destinations & Settlement -->
+<div class="flex flex-col gap-4 w-72 justify-between py-2">
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-[-1rem] pl-2">4. Destino &amp; Liquidação</div>
+<!-- Branch 1: Canneo -->
+<div class="flex items-center gap-3 bg-white dark:bg-slate-800 p-3 rounded-lg border-l-4 border-indigo-500 shadow-sm">
+<div class="bg-indigo-50 dark:bg-indigo-900/20 p-2 rounded text-indigo-600">
+<span class="material-symbols-outlined text-[20px]">domain</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<p class="text-xs font-bold text-slate-700 dark:text-slate-200 truncate">Comissão Canneo</p>
+<p class="text-sm font-bold text-slate-900 dark:text-white">R$ 100,00</p>
+</div>
+<div class="flex justify-between items-center mt-1">
+<p class="text-[10px] text-slate-500">Banco Inter</p>
+<span class="text-[10px] bg-green-100 text-green-700 px-1.5 rounded font-medium">D+0</span>
+</div>
+</div>
+</div>
+<!-- Branch 2: Doctors -->
+<div class="flex items-center gap-3 bg-white dark:bg-slate-800 p-3 rounded-lg border-l-4 border-teal-500 shadow-sm">
+<div class="bg-teal-50 dark:bg-teal-900/20 p-2 rounded text-teal-600">
+<span class="material-symbols-outlined text-[20px]">stethoscope</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<p class="text-xs font-bold text-slate-700 dark:text-slate-200 truncate">Honorários Médicos</p>
+<p class="text-sm font-bold text-slate-900 dark:text-white">R$ 600,00</p>
+</div>
+<div class="flex justify-between items-center mt-1">
+<p class="text-[10px] text-slate-500">Dr. Silva (Nubank)</p>
+<span class="text-[10px] bg-amber-100 text-amber-700 px-1.5 rounded font-medium">D+30</span>
+</div>
+</div>
+</div>
+<!-- Branch 3: Pharmacy -->
+<div class="flex items-center gap-3 bg-white dark:bg-slate-800 p-3 rounded-lg border-l-4 border-purple-500 shadow-sm">
+<div class="bg-purple-50 dark:bg-purple-900/20 p-2 rounded text-purple-600">
+<span class="material-symbols-outlined text-[20px]">medication</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<p class="text-xs font-bold text-slate-700 dark:text-slate-200 truncate">Produtos Farmácia</p>
+<p class="text-sm font-bold text-slate-900 dark:text-white">R$ 250,00</p>
+</div>
+<div class="flex justify-between items-center mt-1">
+<p class="text-[10px] text-slate-500">Raia Drogasil</p>
+<span class="text-[10px] bg-green-100 text-green-700 px-1.5 rounded font-medium">D+0</span>
+</div>
+</div>
+</div>
+<!-- Branch 4: Acquirer Fees -->
+<div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border-l-4 border-slate-400 shadow-none border border-slate-200 dark:border-slate-700">
+<div class="bg-slate-100 dark:bg-slate-700 p-2 rounded text-slate-500">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<p class="text-xs font-bold text-slate-600 dark:text-slate-300 truncate">Taxas Adquirente</p>
+<p class="text-sm font-bold text-slate-600 dark:text-slate-400">- R$ 50,00</p>
+</div>
+<div class="flex justify-between items-center mt-1">
+<p class="text-[10px] text-slate-400">Taxa MDR</p>
+<span class="text-[10px] bg-slate-200 text-slate-600 px-1.5 rounded font-medium">Retido</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Legend / Info Footer -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-200 dark:border-slate-700 flex flex-wrap gap-6 text-xs text-slate-500 dark:text-slate-400">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<strong>Legenda:</strong>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded bg-green-100 text-green-700 font-bold text-[10px]">D+0</span>
+<span>Liquidação no mesmo dia (Imediata)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 font-bold text-[10px]">D+30</span>
+<span>Liquidação em 30 dias (Fluxo de Caixa)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded bg-slate-200 text-slate-600 font-bold text-[10px]">Retido</span>
+<span>Taxa descontada na fonte</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

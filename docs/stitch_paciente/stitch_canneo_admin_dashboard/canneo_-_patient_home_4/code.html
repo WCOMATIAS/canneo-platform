@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Rastreamento de Pedido</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "primary-dark": "#1a6bb8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1c2a38",
+                        "text-main": "#0d141b",
+                        "text-secondary": "#4c739a",
+                        "border-light": "#e7edf3",
+                        "border-dark": "#2d3b4a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white antialiased transition-colors duration-200">
+<div class="relative flex h-screen w-full overflow-hidden">
+<aside class="w-64 flex-none hidden md:flex flex-col bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark">
+<div class="flex flex-col h-full p-4">
+<div class="flex flex-col px-3 py-4 gap-1">
+<h1 class="text-primary text-xl font-bold tracking-tight">CANNEO</h1>
+<p class="text-text-secondary dark:text-slate-400 text-xs font-medium">Portal do Paciente</p>
+</div>
+<nav class="flex flex-col gap-2 mt-6 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">home</span>
+<span class="text-sm font-medium">Início</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">calendar_add_on</span>
+<span class="text-sm font-medium">Agendar Consulta</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">calendar_month</span>
+<span class="text-sm font-medium">Minhas Consultas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">description</span>
+<span class="text-sm font-medium">Documentos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+<span class="text-sm font-semibold">Comprar Medicamento</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-main dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] text-text-secondary group-hover:text-primary dark:group-hover:text-white transition-colors">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto">
+<div class="flex items-center gap-3 px-3 py-4 border-t border-border-light dark:border-border-dark">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-slate-500 dark:text-slate-300">logout</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-text-main dark:text-white">Sair</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full min-w-0 bg-background-light dark:bg-background-dark overflow-y-auto">
+<header class="flex-none sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-md px-6 py-3">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-1 rounded-md text-text-main dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-text-main dark:text-white">Detalhes do Pedido</h2>
+</div>
+<div class="flex items-center gap-6">
+<label class="hidden sm:flex flex-col min-w-40 h-10 w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-slate-800">
+<div class="text-text-secondary dark:text-slate-400 flex border-none items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-text-secondary dark:placeholder:text-slate-500 px-3 text-sm font-normal text-text-main dark:text-white" placeholder="Buscar pedido, medicamento..."/>
+</div>
+</label>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-text-main dark:text-white transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-surface-light dark:border-surface-dark"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Portrait of a smiling woman in a professional setting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABvBejPgBwcdFYVl68iJ__oVqimayPnxyprgDee2dFDENcmYRHwS8xboTlI_IVT0iGhZ7Vx4U8DWd0HLdHHRgQC75O-x35vCMZNRKb5B1Hk3MaT4VoQGyJfIhA8gSU-xYFXlisDQ5EmfXVjT2LxLbzSrydb5ZxohEqlwUSNPxfISy3JR7Ct1JjInGT8lRhVR1gvYO8VbCD9NxeJgodcRvtePhhxy7nGAd-ub3xZphrIkNDTsOU3LSKh6_XRxfuoK5ADkvbOXExf5by");'></div>
+</div>
+</div>
+</header>
+<div class="flex-1 w-full max-w-[1200px] mx-auto p-4 md:p-8 flex flex-col gap-8">
+<div class="flex flex-col gap-2">
+<nav class="flex text-sm text-text-secondary dark:text-slate-400 mb-2">
+<ol class="flex items-center space-x-2">
+<li><a class="hover:text-primary transition-colors" href="#">Início</a></li>
+<li><span class="material-symbols-outlined text-sm">chevron_right</span></li>
+<li><a class="hover:text-primary transition-colors" href="#">Meus Pedidos</a></li>
+<li><span class="material-symbols-outlined text-sm">chevron_right</span></li>
+<li class="font-medium text-text-main dark:text-white">Rastreamento #4921</li>
+</ol>
+</nav>
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl font-bold tracking-tight text-text-main dark:text-white">Pedido #4921</h1>
+<p class="text-lg text-text-secondary dark:text-slate-400">Óleo de CBD Full Spectrum</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-300 text-sm font-bold border border-blue-100 dark:border-blue-800">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+                            Em Trânsito
+                        </div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<div class="lg:col-span-2 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6 md:p-8 shadow-sm">
+<h2 class="text-xl font-bold text-text-main dark:text-white mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+                        Status da Entrega
+                    </h2>
+<div class="relative pl-4 md:pl-6 border-l-2 border-slate-100 dark:border-slate-700 space-y-10 ml-3 md:ml-4">
+<div class="relative group">
+<span class="absolute -left-[27px] md:-left-[35px] top-0 flex size-8 md:size-10 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 border-4 border-surface-light dark:border-surface-dark transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-base md:text-xl">check</span>
+</span>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-green-600 dark:text-green-400 uppercase tracking-wider">Concluído</span>
+<h3 class="text-base md:text-lg font-bold text-text-main dark:text-white">Pedido Realizado</h3>
+<p class="text-sm text-text-secondary dark:text-slate-400">Recebemos seu pedido com sucesso.</p>
+<span class="text-xs text-slate-400 dark:text-slate-500 mt-1">20 Out, 10:30</span>
+</div>
+</div>
+<div class="relative group">
+<span class="absolute -left-[27px] md:-left-[35px] top-0 flex size-8 md:size-10 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 border-4 border-surface-light dark:border-surface-dark transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-base md:text-xl">check</span>
+</span>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-green-600 dark:text-green-400 uppercase tracking-wider">Concluído</span>
+<h3 class="text-base md:text-lg font-bold text-text-main dark:text-white">Pagamento Confirmado</h3>
+<p class="text-sm text-text-secondary dark:text-slate-400">Pagamento aprovado via Cartão de Crédito.</p>
+<span class="text-xs text-slate-400 dark:text-slate-500 mt-1">20 Out, 10:45</span>
+</div>
+</div>
+<div class="relative group">
+<span class="absolute -left-[27px] md:-left-[35px] top-0 flex size-8 md:size-10 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 border-4 border-surface-light dark:border-surface-dark transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-base md:text-xl">check</span>
+</span>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-green-600 dark:text-green-400 uppercase tracking-wider">Concluído</span>
+<h3 class="text-base md:text-lg font-bold text-text-main dark:text-white">Em Separação na Farmácia</h3>
+<p class="text-sm text-text-secondary dark:text-slate-400">Seu medicamento foi separado e embalado.</p>
+<span class="text-xs text-slate-400 dark:text-slate-500 mt-1">21 Out, 09:00</span>
+</div>
+</div>
+<div class="relative">
+<span class="absolute -left-[27px] md:-left-[35px] top-0 flex size-8 md:size-10 items-center justify-center rounded-full bg-primary text-white border-4 border-surface-light dark:border-surface-dark shadow-lg shadow-primary/30 z-10">
+<span class="material-symbols-outlined text-base md:text-xl animate-pulse">local_shipping</span>
+</span>
+<div class="flex flex-col gap-1 p-5 rounded-xl bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800 -mt-2 shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-bold text-primary dark:text-blue-300 uppercase tracking-wider">Status Atual</span>
+<span class="text-[10px] font-bold bg-white dark:bg-slate-800 text-primary px-2 py-0.5 rounded border border-blue-100 dark:border-blue-800">BR123456789</span>
+</div>
+<h3 class="text-base md:text-lg font-bold text-primary dark:text-white">Enviado / Saiu para Entrega</h3>
+<p class="text-sm text-text-main dark:text-slate-300">O pedido está com a transportadora e a caminho.</p>
+<span class="text-xs text-text-secondary dark:text-slate-400 mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                                    Atualizado: 21 Out, 14:20 • Transportadora Express
+                                </span>
+</div>
+</div>
+<div class="relative opacity-60 grayscale">
+<span class="absolute -left-[27px] md:-left-[35px] top-0 flex size-8 md:size-10 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 border-4 border-surface-light dark:border-surface-dark">
+<span class="material-symbols-outlined text-base md:text-xl">inventory_2</span>
+</span>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">Pendente</span>
+<h3 class="text-base md:text-lg font-bold text-text-main dark:text-white">Entregue</h3>
+<p class="text-sm text-text-secondary dark:text-slate-400">Previsão: 23 de Outubro</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+<div class="flex gap-4">
+<div class="size-20 rounded-lg bg-slate-100 dark:bg-slate-800 bg-center bg-cover border border-border-light dark:border-border-dark flex-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDYEIgSnDzUfcxMTXJ_7QPgYaAPzefhwp6oVHyMs259H_5e-xrc5imoH1FN2EnlEMBcpQA3lysONW7xrmq3HigFQz4sFXX7K-iExPMq_s5Vjzl8sEuw7vxY7Cv4e8b_uJlHiOkwk9rmTeSn2SlmKgegMWBOt83cqlwTfHDJ9nOQxoZ79EUfJiART62pyhL_CUo9i-uE6OAr4OnpCqQ78l1Xxz6GX_mC44zt79i05xINKQ8mN05jrZddA8w6r-wPNcIkPgeHRBLlsUI_');"></div>
+<div class="flex flex-col justify-center">
+<h4 class="font-bold text-text-main dark:text-white leading-tight">Óleo de CBD Full Spectrum</h4>
+<p class="text-xs text-text-secondary dark:text-slate-400 mt-1">Frasco 30ml • 1500mg</p>
+<a class="text-xs font-semibold text-primary mt-2 hover:underline" href="#">Ver detalhes do produto</a>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+<h3 class="text-sm font-bold text-text-secondary dark:text-slate-400 uppercase tracking-wider mb-4 border-b border-border-light dark:border-border-dark pb-2">Dados de Entrega</h3>
+<div class="flex items-start gap-3">
+<div class="mt-1 flex-none text-primary bg-blue-50 dark:bg-blue-900/20 p-1.5 rounded-full">
+<span class="material-symbols-outlined text-lg">location_on</span>
+</div>
+<div class="text-sm text-text-main dark:text-slate-300">
+<p class="font-bold text-base mb-1">Casa</p>
+<p>Rua da Consolação, 1234, Apt 402</p>
+<p>Cerqueira César, São Paulo - SP</p>
+<p class="text-xs text-text-secondary mt-1">CEP: 01416-000</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-5 shadow-sm">
+<h3 class="text-sm font-bold text-text-secondary dark:text-slate-400 uppercase tracking-wider mb-4 border-b border-border-light dark:border-border-dark pb-2">Resumo do Pedido</h3>
+<div class="flex flex-col gap-3 text-sm">
+<div class="flex justify-between text-text-secondary dark:text-slate-400">
+<span>Subtotal</span>
+<span>R$ 289,90</span>
+</div>
+<div class="flex justify-between text-text-secondary dark:text-slate-400">
+<span>Frete</span>
+<span class="text-green-600 dark:text-green-400 font-medium">Grátis</span>
+</div>
+<div class="flex justify-between text-text-secondary dark:text-slate-400">
+<span>Desconto (Plano Fidelidade)</span>
+<span class="text-green-600 dark:text-green-400 font-medium">- R$ 10,00</span>
+</div>
+<div class="border-t border-border-light dark:border-border-dark my-1"></div>
+<div class="flex justify-between font-bold text-text-main dark:text-white text-base">
+<span>Total</span>
+<span>R$ 279,90</span>
+</div>
+<div class="flex items-center gap-2 mt-2 text-xs text-text-secondary dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-lg border border-slate-100 dark:border-slate-800">
+<span class="material-symbols-outlined text-sm">credit_card</span>
+<span>Pago com Mastercard final 4022</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 mt-2">
+<button class="flex items-center justify-center gap-2 w-full py-3 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark text-text-main dark:text-white font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-xl text-text-secondary">receipt_long</span>
+                            Ver Nota Fiscal
+                        </button>
+<button class="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-300 font-bold hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors border border-blue-100 dark:border-blue-800">
+<span class="material-symbols-outlined text-xl">support_agent</span>
+                            Falar com Suporte
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

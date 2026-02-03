@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Gestão de Banners Admin</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#36b7e2",
+                        "secondary": "#078836",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111d21",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>.custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1e1e6;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0e171b] antialiased">
+<div class="flex h-screen w-full overflow-hidden">
+<aside class="w-64 flex-shrink-0 flex flex-col bg-surface-light border-r border-[#e8f0f3] h-full hidden md:flex">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<div class="flex gap-3 items-center px-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shadow-sm" data-alt="Admin profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmyXf14a9wrF4x0DGobKpic9rPDCX9zYs39qBZ9rO3JszcwYOPT_28cAdKQ2TWK96u7oDPZGXEF3KyfDSOuUynFlclmgpZ4nzH2501qLUnF10cuHyCj-Z-lSf4xFRg8eKc-TICh0-VkCs52r86DYL3IJSYSSpddHilMztAnpv0E-lvsCXDfYrOcyhNwEmQRaJEAnmtryAMOjJn5dARz5i79jzr5ja9dEytd3rygArO_MBlXxR351TNjirJW0Qrsk3hFQb9mQ_lBO2y");'></div>
+<div class="flex flex-col">
+<h1 class="text-[#0e171b] text-base font-bold leading-normal">Admin Portal</h1>
+<p class="text-[#508495] text-xs font-normal leading-normal">CANNEO Saúde</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium leading-normal">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium leading-normal">Usuários</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">account_balance_wallet</span>
+<span class="text-sm font-medium leading-normal">Financeiro</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px] fill-1">campaign</span>
+<span class="text-sm font-bold leading-normal">Marketing</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">pie_chart</span>
+<span class="text-sm font-medium leading-normal">Relatórios</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-background-light text-[#508495] hover:text-[#0e171b] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium leading-normal">Configurações</span>
+</a>
+</nav>
+</div>
+<div class="px-2">
+<button class="flex items-center gap-3 px-3 py-2 w-full text-left text-[#508495] hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[24px]">logout</span>
+<span class="text-sm font-medium leading-normal">Sair</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-y-auto bg-background-light">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-6 md:px-12 flex flex-1 justify-center py-8">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1 gap-6">
+<div class="flex flex-col gap-4">
+<div class="flex flex-wrap gap-2 items-center">
+<a class="text-[#508495] text-sm font-medium leading-normal hover:text-primary" href="#">Home</a>
+<span class="text-[#508495] text-sm font-medium leading-normal">/</span>
+<a class="text-[#508495] text-sm font-medium leading-normal hover:text-primary" href="#">Marketing</a>
+<span class="text-[#508495] text-sm font-medium leading-normal">/</span>
+<span class="text-[#0e171b] text-sm font-medium leading-normal">Banners e Campanhas</span>
+</div>
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h2 class="text-[#0e171b] text-3xl md:text-4xl font-black leading-tight tracking-tight">Gestão de Banners</h2>
+<p class="text-[#508495] text-base font-normal leading-normal">Gerencie campanhas visuais, posicionamento e desempenho no marketplace e portal.</p>
+</div>
+<button class="flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-wide shadow-sm hover:bg-[#2da1c9] transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="truncate">Novo Banner</span>
+</button>
+</div>
+<div class="flex gap-3 flex-wrap items-center mt-2">
+<div class="relative group">
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#d1e1e6] pl-4 pr-3 hover:border-primary/50 transition-colors shadow-sm">
+<p class="text-[#0e171b] text-sm font-medium">Posicionamento: Todos</p>
+<span class="material-symbols-outlined text-[20px] text-[#508495]">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex h-9 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#d1e1e6] pl-4 pr-3 hover:border-primary/50 transition-colors shadow-sm">
+<p class="text-[#0e171b] text-sm font-medium">Status: Todos</p>
+<span class="material-symbols-outlined text-[20px] text-[#508495]">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="relative ml-auto md:ml-0">
+<input class="h-9 rounded-lg border border-[#d1e1e6] bg-white pl-9 pr-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[#0e171b] placeholder:text-[#508495] w-full md:w-64" placeholder="Buscar campanha..." type="text"/>
+<span class="material-symbols-outlined text-[18px] text-[#508495] absolute left-2.5 top-2.5">search</span>
+</div>
+<button class="text-primary text-sm font-bold hover:underline ml-auto md:ml-2">Limpar Filtros</button>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col rounded-xl bg-white border border-[#e8f0f3] shadow-sm overflow-hidden">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left text-sm whitespace-nowrap">
+<thead class="bg-[#f8fbfb] text-[#508495]">
+<tr>
+<th class="px-6 py-4 font-semibold w-32">Miniatura</th>
+<th class="px-6 py-4 font-semibold">Título da Campanha</th>
+<th class="px-6 py-4 font-semibold">Posicionamento</th>
+<th class="px-6 py-4 font-semibold">Período</th>
+<th class="px-6 py-4 font-semibold text-center">Desempenho</th>
+<th class="px-6 py-4 font-semibold text-center">Status</th>
+<th class="px-6 py-4 font-semibold text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e8f0f3]">
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="w-24 h-14 rounded-lg overflow-hidden border border-[#e8f0f3] bg-gray-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-300">image</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-[#0e171b] text-base">Campanha Outubro Rosa</span>
+<span class="text-xs text-[#508495]">Promoção Exames Preventivos</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-[#f0f9ff] text-[#0284c7] border border-[#e0f2fe]">
+<span class="material-symbols-outlined text-[14px]">home</span>
+                                                Home Paciente
+                                            </span>
+</td>
+<td class="px-6 py-4 text-[#0e171b]">
+<div class="flex flex-col text-xs">
+<span><strong class="text-[#508495]">Início:</strong> 01/10/2023</span>
+<span><strong class="text-[#508495]">Fim:</strong> 31/10/2023</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="flex flex-col items-center">
+<span class="font-bold text-[#0e171b]">12.4k</span>
+<span class="text-xs text-[#508495]">Impressões</span>
+<span class="text-xs text-secondary font-medium mt-0.5">450 cliques (3.6%)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                                Ativo
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 text-[#508495] hover:text-primary hover:bg-primary/10 rounded-lg transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-[#508495] hover:text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Pausar">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+<button class="p-1.5 text-[#508495] hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Excluir">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="w-24 h-14 rounded-lg overflow-hidden border border-[#e8f0f3] bg-primary/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary/40">ad_units</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-[#0e171b] text-base">Novembro Azul - Checkup</span>
+<span class="text-xs text-[#508495]">Saúde do Homem</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-[#fcf5ff] text-[#86198f] border border-[#fae8ff]">
+<span class="material-symbols-outlined text-[14px]">medical_services</span>
+                                                Sidebar Médico
+                                            </span>
+</td>
+<td class="px-6 py-4 text-[#0e171b]">
+<div class="flex flex-col text-xs">
+<span><strong class="text-[#508495]">Início:</strong> 01/11/2023</span>
+<span><strong class="text-[#508495]">Fim:</strong> 30/11/2023</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-sm text-[#508495] italic">--</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+<span class="material-symbols-outlined text-[14px] mr-1">schedule</span>
+                                                Programado
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 text-[#508495] hover:text-primary hover:bg-primary/10 rounded-lg transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-[#508495] hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Excluir">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="w-24 h-14 rounded-lg overflow-hidden border border-[#e8f0f3] bg-[#eefcf4] flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary/40">local_pharmacy</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-[#0e171b] text-base">Lançamento Marketplace</span>
+<span class="text-xs text-[#508495]">Nova linha de suplementos</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-[#fff7ed] text-[#c2410c] border border-[#ffedd5]">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+                                                Marketplace Header
+                                            </span>
+</td>
+<td class="px-6 py-4 text-[#0e171b]">
+<div class="flex flex-col text-xs">
+<span><strong class="text-[#508495]">Início:</strong> 15/09/2023</span>
+<span><strong class="text-[#508495]">Fim:</strong> 15/12/2023</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="flex flex-col items-center">
+<span class="font-bold text-[#0e171b]">45.2k</span>
+<span class="text-xs text-[#508495]">Impressões</span>
+<span class="text-xs text-secondary font-medium mt-0.5">1.2k cliques (2.6%)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                                Ativo
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 text-[#508495] hover:text-primary hover:bg-primary/10 rounded-lg transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-[#508495] hover:text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Pausar">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+<button class="p-1.5 text-[#508495] hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Excluir">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fbfb] transition-colors group opacity-70 hover:opacity-100">
+<td class="px-6 py-4">
+<div class="w-24 h-14 rounded-lg overflow-hidden border border-[#e8f0f3] bg-gray-100 flex items-center justify-center grayscale">
+<span class="material-symbols-outlined text-gray-400">vaccines</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-[#508495] text-base">Campanha Vacinação Gripe</span>
+<span class="text-xs text-[#508495]">Inverno 2023</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
+<span class="material-symbols-outlined text-[14px]">home</span>
+                                                Home Paciente
+                                            </span>
+</td>
+<td class="px-6 py-4 text-[#508495]">
+<div class="flex flex-col text-xs">
+<span><strong class="text-[#508495]">Início:</strong> 01/06/2023</span>
+<span><strong class="text-[#508495]">Fim:</strong> 31/08/2023</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="flex flex-col items-center">
+<span class="font-bold text-[#508495]">8.5k</span>
+<span class="text-xs text-[#508495]">Impressões</span>
+<span class="text-xs text-[#508495] mt-0.5">210 cliques</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
+                                                Expirado
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 text-[#508495] hover:text-primary hover:bg-primary/10 rounded-lg transition-colors" title="Duplicar">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+<button class="p-1.5 text-[#508495] hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Arquivar">
+<span class="material-symbols-outlined text-[20px]">archive</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-[#f8fbfb] transition-colors group">
+<td class="px-6 py-4">
+<div class="w-24 h-14 rounded-lg overflow-hidden border border-[#e8f0f3] bg-[#fdf2f8] flex items-center justify-center">
+<span class="material-symbols-outlined text-pink-300">spa</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-[#0e171b] text-base">Bem-estar Mental</span>
+<span class="text-xs text-[#508495]">Programa de Mindfulness</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-[#f0f9ff] text-[#0284c7] border border-[#e0f2fe]">
+<span class="material-symbols-outlined text-[14px]">home</span>
+                                                Home Paciente
+                                            </span>
+</td>
+<td class="px-6 py-4 text-[#0e171b]">
+<div class="flex flex-col text-xs">
+<span><strong class="text-[#508495]">Início:</strong> 10/10/2023</span>
+<span><strong class="text-[#508495]">Fim:</strong> 10/01/2024</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<div class="flex flex-col items-center">
+<span class="font-bold text-[#0e171b]">3.1k</span>
+<span class="text-xs text-[#508495]">Impressões</span>
+<span class="text-xs text-secondary font-medium mt-0.5">85 cliques (2.7%)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                                Ativo
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 text-[#508495] hover:text-primary hover:bg-primary/10 rounded-lg transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-[#508495] hover:text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Pausar">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+<button class="p-1.5 text-[#508495] hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors" title="Excluir">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-[#f8fbfb] px-6 py-4 border-t border-[#e8f0f3] flex items-center justify-between">
+<p class="text-sm text-[#508495]">Mostrando 1-5 de 24 campanhas</p>
+<div class="flex gap-2">
+<button class="size-8 rounded flex items-center justify-center border border-[#d1e1e6] bg-white text-[#508495] hover:bg-gray-50 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="size-8 rounded flex items-center justify-center border border-primary bg-primary text-white">1</button>
+<button class="size-8 rounded flex items-center justify-center border border-[#d1e1e6] bg-white text-[#508495] hover:bg-gray-50">2</button>
+<button class="size-8 rounded flex items-center justify-center border border-[#d1e1e6] bg-white text-[#508495] hover:bg-gray-50">3</button>
+<button class="size-8 rounded flex items-center justify-center border border-[#d1e1e6] bg-white text-[#508495] hover:bg-gray-50">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

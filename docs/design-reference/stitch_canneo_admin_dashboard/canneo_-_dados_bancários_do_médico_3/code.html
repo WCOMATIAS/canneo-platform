@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Dados Bancários do Médico</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "secondary-green": "#e7f6f2",
+                        "text-green": "#065f46",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d141b] dark:text-slate-100">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation -->
+<aside class="w-72 bg-white dark:bg-[#1a2633] border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between p-6">
+<div class="flex flex-col gap-8">
+<div class="flex gap-3 items-center">
+<div class="bg-primary rounded-lg p-2 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-3xl">medical_services</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-[#0d141b] dark:text-white leading-tight uppercase tracking-wider">Canneo</h1>
+</div>
+</div>
+<div class="flex gap-3 items-center p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="Foto de perfil do médico Dr. Silva" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDeZKzxpWEHFeuBxXRvNo-uJ0Tc7IFoFIHO8TXJlWD-yqRKHToRt4eMbBf-4HlCvdXc_XZ9hKM5fhBpoBQaPlKRmFPO-PCF33AI1bSxaJMl5_ykvYKHq3BlyoFGBNxgwAb04jUGEoP4_k-fjSfgc4zTk_vLcAOlX3UZREZl6vN9Fp_w_kZJ85p4qfG7ESSgD8ApnacCT8giQwa7FTraUQQI9d5wngrVxp7lsdDGjyljF_09JSRnY4iqjR0EfsOnHEV89XKfbCveFyaK");'></div>
+<div class="flex flex-col">
+<h1 class="text-[#0d141b] dark:text-white text-sm font-semibold">Dr. Silva</h1>
+<p class="text-[#4c739a] text-xs">CRM/SP 123456</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+<p class="text-sm font-medium">Agendamentos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">group</span>
+<p class="text-sm font-medium">Pacientes</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+<p class="text-sm font-semibold">Financeiro</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c739a] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<p class="text-sm font-medium">Configurações</p>
+</a>
+</nav>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center rounded-lg h-11 px-4 bg-primary hover:bg-primary/90 text-white text-sm font-bold shadow-sm transition-all">
+<span class="truncate">Novo Atendimento</span>
+</button>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<div class="max-w-[1000px] w-full mx-auto p-8 lg:px-12">
+<!-- Breadcrumbs -->
+<nav class="flex flex-wrap gap-2 mb-2">
+<a class="text-[#4c739a] text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-[#4c739a] text-sm">/</span>
+<a class="text-[#4c739a] text-sm font-medium hover:text-primary transition-colors" href="#">Perfil</a>
+<span class="text-[#4c739a] text-sm">/</span>
+<span class="text-[#0d141b] dark:text-white text-sm font-semibold">Dados Bancários</span>
+</nav>
+<!-- Page Heading -->
+<div class="flex flex-col gap-2 mb-8">
+<h1 class="text-[#0d141b] dark:text-white text-3xl font-black tracking-tight">Dados Bancários</h1>
+<p class="text-[#4c739a] text-base">Gerencie suas informações para recebimento de repasses de consultas.</p>
+</div>
+<!-- Form Container -->
+<div class="bg-white dark:bg-[#1a2633] rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Security Banner -->
+<div class="bg-secondary-green/50 dark:bg-emerald-950/20 p-5 flex gap-4 items-start border-b border-emerald-100 dark:border-emerald-900/30">
+<span class="material-symbols-outlined text-text-green dark:text-emerald-400 mt-0.5">verified_user</span>
+<div class="flex flex-col gap-1">
+<p class="text-text-green dark:text-emerald-400 text-sm font-bold leading-tight">Segurança dos Dados</p>
+<p class="text-text-green/80 dark:text-emerald-400/70 text-sm font-normal">Os dados informados devem ser de titularidade do CPF cadastrado no CRM. Pagamentos a terceiros não são permitidos por normas de compliance.</p>
+</div>
+</div>
+<form class="p-8 flex flex-col gap-8">
+<!-- Bank Selection -->
+<div>
+<h2 class="text-[#0d141b] dark:text-white text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+                                Instituição Bancária
+                            </h2>
+<div class="relative">
+<label class="block text-sm font-semibold text-[#0d141b] dark:text-slate-300 mb-2">Nome do Banco
+<div class="flex items-center border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800/50 focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary transition-all overflow-hidden px-3 py-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center mr-3 overflow-hidden" data-alt="Ícone ou logo do banco selecionado">
+<img alt="Logo Banco" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0gLF8_biwV0wUov0zOf4IknXb8if2O0slhajd66p5B1wP4fcQadnKBIjiD7tPcNoYaFum2BTJD0Z5UcPH5WhPHDO3fFc1SnMn8tIXTGdGrk4eXR3GegAorF1CAOUsXjos-w9L-NXo20FAhKVcsc4AGEXjGQLK-t6PgqwIllESCuFWIXkc2KlSU_eyjS82PV_fwQGTdEOR-7zJYinaNZ9j_DnwCoPUdZZuW--mbea_7aF9_gZRE6WgFEHvzWsPH-JxQqE8gJ_ZpJ-5"/>
+</div>
+<select class="bg-transparent border-none text-sm w-full focus:ring-0 text-[#0d141b] dark:text-white">
+<option value="">Selecione seu banco</option>
+<option value="001">001 - Banco do Brasil S.A.</option>
+<option value="033">033 - Banco Santander (Brasil) S.A.</option>
+<option value="104">104 - Caixa Econômica Federal</option>
+<option value="237">237 - Banco Bradesco S.A.</option>
+<option value="341">341 - Itaú Unibanco S.A.</option>
+<option value="260">260 - Nu Pagamentos S.A. (Nubank)</option>
+<option value="077">077 - Banco Inter S.A.</option>
+</select>
+</div>
+</label></div>
+</div>
+<!-- Account Details -->
+<div>
+<h2 class="text-[#0d141b] dark:text-white text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+                                Detalhes da Conta
+                            </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="col-span-1">
+<label class="block text-sm font-semibold text-[#0d141b] dark:text-slate-300 mb-2">Tipo de Conta</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all dark:text-white">
+<option value="corrente">Conta Corrente</option>
+<option value="poupanca">Conta Poupança</option>
+</select>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-semibold text-[#0d141b] dark:text-slate-300 mb-2">Agência</label>
+<div class="flex gap-2">
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all dark:text-white" placeholder="0001" type="text"/>
+<input class="w-16 bg-slate-50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-3 text-sm text-center focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all dark:text-white" placeholder="0" type="text"/>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-semibold text-[#0d141b] dark:text-slate-300 mb-2">Conta</label>
+<div class="flex gap-2">
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-3 text-sm focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all dark:text-white" placeholder="12345" type="text"/>
+<input class="w-16 bg-slate-50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-3 text-sm text-center focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all dark:text-white" placeholder="X" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- PIX Configuration -->
+<div>
+<h2 class="text-[#0d141b] dark:text-white text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">payments</span>
+                                Chave PIX
+                            </h2>
+<div class="flex flex-col gap-4">
+<div class="flex flex-wrap gap-3">
+<label class="cursor-pointer">
+<input checked="" class="hidden peer" name="pix_type" type="radio"/>
+<div class="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all dark:text-slate-300">
+                                            CPF
+                                        </div>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="pix_type" type="radio"/>
+<div class="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all dark:text-slate-300">
+                                            E-mail
+                                        </div>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="pix_type" type="radio"/>
+<div class="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all dark:text-slate-300">
+                                            Celular
+                                        </div>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="pix_type" type="radio"/>
+<div class="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-all dark:text-slate-300">
+                                            Chave Aleatória
+                                        </div>
+</label>
+</div>
+<input class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all dark:text-white" placeholder="Informe sua chave PIX" type="text"/>
+</div>
+</div>
+<!-- Submit and Warning -->
+<div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="flex items-center gap-3 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-amber-500">info</span>
+<p class="text-xs leading-tight max-w-[400px]">
+<span class="font-bold block mb-0.5 text-slate-700 dark:text-slate-300">Atenção</span>
+                                    Alterações nos dados bancários podem levar até 48h para validação interna antes do próximo ciclo de pagamento.
+                                </p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 h-12 rounded-lg text-sm font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" type="button">
+                                    Cancelar
+                                </button>
+<button class="bg-primary hover:bg-primary/90 text-white px-8 h-12 rounded-lg text-sm font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all" type="submit">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+                                    Salvar Dados Bancários
+                                </button>
+</div>
+</div>
+</form>
+</div>
+<!-- Action Panel / Additional Help -->
+<div class="mt-8 @container">
+<div class="flex flex-1 flex-col items-start justify-between gap-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a2633] p-6 @[480px]:flex-row @[480px]:items-center">
+<div class="flex flex-col gap-1">
+<p class="text-[#0d141b] dark:text-white text-base font-bold leading-tight">Dúvidas sobre o recebimento?</p>
+<p class="text-[#4c739a] dark:text-slate-400 text-sm font-normal">Confira nossa central de ajuda sobre cronogramas de repasses e taxas.</p>
+</div>
+<a class="text-sm font-bold leading-normal tracking-[0.015em] flex items-center gap-2 text-primary hover:underline" href="#">
+                            Ver central de ajuda
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Simple Footer -->
+<footer class="mt-auto py-6 text-center border-t border-slate-200 dark:border-slate-800">
+<p class="text-xs text-slate-400">© 2024 CANNEO - Portal do Médico. Todos os direitos reservados.</p>
+</footer>
+</main>
+</div>
+</body></html>

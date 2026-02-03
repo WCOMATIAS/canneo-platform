@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Painel Admin</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#30abe8",
+                        "primary-dark": "#2589ba",
+                        "secondary": "#078836",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111c21",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1d2b33",
+                        "text-main": "#0e171b",
+                        "text-muted": "#4e7f97",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-gray-100 overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex flex-col h-full bg-surface-light dark:bg-surface-dark border-r border-slate-200 dark:border-slate-700 flex-shrink-0 transition-colors duration-200">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Abstract blue medical logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALZQWFLKb83-sxQUDa9qeAciEY57r2PMfzZi6cqKX3DbFVjObkLMET62J9IL6gPINcummFTNCBILzu3p6nYNk7gpkgG-TB6F6bBNNlyp5j8L8bOIRQwabPwWAijMxnYZiWicBVtkbq3PGW1xk8aMEYr4EwnEkuRMc4Sqk24uJeu-H0Jzl4r1JfmuYSSKXcyyXQW8i2SY5u3LTlFtZuwCjb-pdX-U9JNklkcg-fhEKJGBmIPQoS4pKNQ60qc-3ENGUh1dZiCvtqilxB");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-main dark:text-white text-lg font-bold leading-none tracking-tight">CANNEO</h1>
+<p class="text-primary text-xs font-semibold uppercase tracking-wider mt-1">Administrativo</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 py-6 space-y-1">
+<!-- Active Item -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 text-primary dark:text-primary-400 group transition-all" href="#">
+<span class="material-symbols-outlined filled">dashboard</span>
+<span class="text-sm font-semibold">Painel</span>
+</a>
+<!-- Standard Items -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-muted hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700/50 hover:text-text-main dark:hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="text-sm font-medium">Médicos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-muted hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700/50 hover:text-text-main dark:hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Pacientes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-muted hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700/50 hover:text-text-main dark:hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-sm font-medium">Consultas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-muted hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700/50 hover:text-text-main dark:hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">attach_money</span>
+<span class="text-sm font-medium">Financeiro</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-muted hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700/50 hover:text-text-main dark:hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">local_pharmacy</span>
+<span class="text-sm font-medium">Farmácias</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-muted hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700/50 hover:text-text-main dark:hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="text-sm font-medium">Auditoria</span>
+</a>
+<div class="pt-4 mt-4 border-t border-slate-100 dark:border-slate-700">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-muted hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700/50 hover:text-text-main dark:hover:text-slate-200 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-700">
+<div class="flex items-center gap-3 px-2 py-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-600 flex items-center justify-center text-xs font-bold text-slate-500 dark:text-slate-300">v2.4</div>
+<div class="flex flex-col">
+<p class="text-xs font-medium text-text-muted dark:text-slate-400">Versão do Sistema</p>
+<p class="text-xs text-slate-400 dark:text-slate-500">Atualizado hoje</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="flex-1 flex flex-col h-full relative overflow-hidden">
+<!-- Top Header -->
+<header class="h-16 flex items-center justify-between px-8 bg-surface-light dark:bg-surface-dark border-b border-slate-200 dark:border-slate-700 shrink-0 z-10">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-text-muted">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-lg font-bold text-text-main dark:text-white tracking-tight">Painel Geral</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search Bar -->
+<div class="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 w-96 border border-transparent focus-within:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-text-muted dark:text-slate-400 text-[20px]">search</span>
+<input class="bg-transparent border-none text-sm w-full ml-2 focus:ring-0 text-text-main dark:text-white placeholder-text-muted dark:placeholder-slate-500" placeholder="Buscar por médico, paciente ou CPF..." type="text"/>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-2">
+<button class="size-10 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-text-muted dark:text-slate-400 transition-colors relative">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute top-2.5 right-2.5 size-2 bg-red-500 rounded-full border border-white dark:border-surface-dark"></span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-text-muted dark:text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-[24px]">help</span>
+</button>
+</div>
+<!-- Profile -->
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-700">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-semibold text-text-main dark:text-white leading-none">Admin Principal</p>
+<p class="text-xs text-primary mt-1 leading-none">Super Admin</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-white dark:border-slate-600 shadow-sm cursor-pointer" data-alt="Profile picture of administrator" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBmxN53pMvEdH8PTflguqPOjOtGGWAky8JQz0tF3wHrOfnYuw_dglHPxhHB3RiIkArged6QGxv_yxhH54_iPKJsOvx-714y-HedDbEoKU1NnpbD0q5BCVt5Od8iQ_2xf3PX3nQQZFp_VWrOuaC23I9b2DdhnxBa1H5jZfzn8HOw10DOhMmZ7Xouedr8ZYKSdlYdtFAjFKdq15hR__BObqYk79d835eCK4NwwSJFWWmz1Z1_vU2Y1zRO_VI_z-I7qV39hfxD2uIvKCS6");'></div>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Stats Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<span class="flex items-center text-secondary text-xs font-bold bg-secondary/10 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+                                    +5%
+                                </span>
+</div>
+<div>
+<p class="text-text-muted dark:text-slate-400 text-sm font-medium">Consultas Hoje</p>
+<h3 class="text-2xl font-bold text-text-main dark:text-white mt-1">42</h3>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/10 rounded-lg text-secondary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="flex items-center text-secondary text-xs font-bold bg-secondary/10 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+                                    +12%
+                                </span>
+</div>
+<div>
+<p class="text-text-muted dark:text-slate-400 text-sm font-medium">Faturamento Total</p>
+<h3 class="text-2xl font-bold text-text-main dark:text-white mt-1">R$ 145.200</h3>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined">pie_chart</span>
+</div>
+<span class="flex items-center text-secondary text-xs font-bold bg-secondary/10 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+                                    +12%
+                                </span>
+</div>
+<div>
+<p class="text-text-muted dark:text-slate-400 text-sm font-medium">Taxas Canneo</p>
+<h3 class="text-2xl font-bold text-text-main dark:text-white mt-1">R$ 14.520</h3>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="flex items-center text-text-muted dark:text-slate-400 text-xs font-medium px-2 py-1">
+                                    8 pendentes
+                                </span>
+</div>
+<div>
+<p class="text-text-muted dark:text-slate-400 text-sm font-medium">Saques Pendentes</p>
+<h3 class="text-2xl font-bold text-text-main dark:text-white mt-1">12</h3>
+</div>
+</div>
+</section>
+<!-- Main Chart & Shortcuts Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Chart Section (2/3 width) -->
+<div class="lg:col-span-2 bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-text-main dark:text-white text-base font-bold">Crescimento da Plataforma</h3>
+<p class="text-text-muted dark:text-slate-400 text-sm mt-1">Novas consultas nos últimos 30 dias</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-secondary text-2xl font-bold tracking-tight">+15.4%</span>
+<div class="bg-secondary/10 text-secondary p-1 rounded">
+<span class="material-symbols-outlined text-sm">north_east</span>
+</div>
+</div>
+</div>
+<!-- Chart Visual -->
+<div class="relative w-full h-[240px]">
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 478 150">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#30abe8" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#30abe8" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V150H0V109Z" fill="url(#chartGradient)"></path>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#30abe8" stroke-linecap="round" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+</svg>
+</div>
+<div class="flex justify-between mt-4 text-xs font-medium text-text-muted dark:text-slate-500">
+<span>01 Jun</span>
+<span>05 Jun</span>
+<span>10 Jun</span>
+<span>15 Jun</span>
+<span>20 Jun</span>
+<span>25 Jun</span>
+<span>30 Jun</span>
+</div>
+</div>
+<!-- Shortcuts (1/3 width) -->
+<div class="flex flex-col gap-4">
+<h3 class="text-text-main dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Atalhos Rápidos</h3>
+<div class="grid grid-cols-2 gap-3 h-full">
+<button class="flex flex-col items-center justify-center gap-3 p-4 bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<span class="text-sm font-semibold text-text-main dark:text-slate-200">Aprovar Médico</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-4 bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<span class="text-sm font-semibold text-text-main dark:text-slate-200">Novo Aviso</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-4 bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">summarize</span>
+</div>
+<span class="text-sm font-semibold text-text-main dark:text-slate-200">Relatório Diário</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-4 bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-xl hover:border-primary/50 hover:shadow-md transition-all group">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">settings_account_box</span>
+</div>
+<span class="text-sm font-semibold text-text-main dark:text-slate-200">Gestão Acessos</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recent Activity Section (Optional but adds density) -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+<h3 class="font-bold text-text-main dark:text-white">Transações Recentes</h3>
+<button class="text-primary text-sm font-medium hover:underline">Ver tudo</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead class="text-xs text-text-muted dark:text-slate-400 uppercase bg-slate-50 dark:bg-slate-800/50">
+<tr>
+<th class="px-6 py-3" scope="col">ID</th>
+<th class="px-6 py-3" scope="col">Médico</th>
+<th class="px-6 py-3" scope="col">Paciente</th>
+<th class="px-6 py-3" scope="col">Valor</th>
+<th class="px-6 py-3" scope="col">Status</th>
+<th class="px-6 py-3" scope="col">Data</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+<tr class="bg-white dark:bg-surface-dark hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-text-main dark:text-white">#TR-4291</td>
+<td class="px-6 py-4 text-text-main dark:text-slate-300">Dr. Roberto Silva</td>
+<td class="px-6 py-4 text-text-muted dark:text-slate-400">Ana Clara Souza</td>
+<td class="px-6 py-4 text-text-main dark:text-white font-medium">R$ 250,00</td>
+<td class="px-6 py-4">
+<span class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs font-medium px-2.5 py-0.5 rounded">Pago</span>
+</td>
+<td class="px-6 py-4 text-text-muted dark:text-slate-400">Hoje, 14:30</td>
+</tr>
+<tr class="bg-white dark:bg-surface-dark hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-text-main dark:text-white">#TR-4290</td>
+<td class="px-6 py-4 text-text-main dark:text-slate-300">Dra. Juliana Mendes</td>
+<td class="px-6 py-4 text-text-muted dark:text-slate-400">Carlos Eduardo</td>
+<td class="px-6 py-4 text-text-main dark:text-white font-medium">R$ 320,00</td>
+<td class="px-6 py-4">
+<span class="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 text-xs font-medium px-2.5 py-0.5 rounded">Pendente</span>
+</td>
+<td class="px-6 py-4 text-text-muted dark:text-slate-400">Hoje, 13:15</td>
+</tr>
+<tr class="bg-white dark:bg-surface-dark hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-text-main dark:text-white">#TR-4289</td>
+<td class="px-6 py-4 text-text-main dark:text-slate-300">Dr. Pedro Santos</td>
+<td class="px-6 py-4 text-text-muted dark:text-slate-400">Maria Oliveira</td>
+<td class="px-6 py-4 text-text-main dark:text-white font-medium">R$ 180,00</td>
+<td class="px-6 py-4">
+<span class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs font-medium px-2.5 py-0.5 rounded">Pago</span>
+</td>
+<td class="px-6 py-4 text-text-muted dark:text-slate-400">Ontem, 16:45</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-8 mb-4 text-center">
+<p class="text-xs text-text-muted dark:text-slate-500">© 2024 CANNEO Health Tech. Todos os direitos reservados.</p>
+</div>
+</div>
+</main>
+</div>
+</body></html>

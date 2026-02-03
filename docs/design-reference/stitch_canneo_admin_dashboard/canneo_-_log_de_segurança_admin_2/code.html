@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CANNEO - Log de Segurança Admin</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex-shrink-0 h-full overflow-y-auto">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">local_hospital</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">CANNEO</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wide">Portal Admin</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-1 px-3 py-2 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">group</span>
+<span class="text-sm font-medium">Usuários</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">stethoscope</span>
+<span class="text-sm font-medium">Pacientes</span>
+</a>
+<div class="my-2 border-t border-slate-100 dark:border-slate-800"></div>
+<p class="px-3 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Segurança</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary group" href="#">
+<span class="material-symbols-outlined text-[22px] icon-filled">shield_lock</span>
+<span class="text-sm font-semibold">Log de Segurança</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">vpn_key</span>
+<span class="text-sm font-medium">Controle de Acesso</span>
+</a>
+<div class="my-2 border-t border-slate-100 dark:border-slate-800"></div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="text-sm font-medium">Configurações</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 rounded-lg bg-slate-50 dark:bg-slate-800 p-3">
+<div class="size-9 rounded-full bg-slate-300 bg-cover bg-center" data-alt="Admin avatar profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAqXyY7iq-F28xCJCQ_QnZnO8X8mqNiUUT4KoBCoX6yvQsfYru3l259fURMsL_OBvE3jSA4amJc7bdUx7iSFjB0GIMaOKPJHFkLdqUg4f2bCqFVjF0oOY30YNNVTeWg9qw5oLKX3SEIVUk6YKUI49t54SS8MlXbMB6Gl2Mw2hU6Vw63CcGUkld9Z_dTCbV_HzgdLt3-10eLiRbYBJwmdT-8yJ1qkAw92z5sNfi7uNGas3NyJQWgdgUmpgDYf0pLJk_9FKcTZuQnnEsh");'></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-bold text-slate-900 dark:text-white truncate">Carlos Mendes</p>
+<p class="text-xs text-slate-500 truncate">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative">
+<!-- Header Area -->
+<header class="flex-shrink-0 px-6 pt-6 pb-2 bg-background-light dark:bg-background-dark z-10">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-4">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Administração</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="font-medium text-slate-900 dark:text-white">Log de Segurança</span>
+</nav>
+<!-- Page Title & Main Actions -->
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+<div class="flex flex-col gap-1 max-w-2xl">
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Log de Segurança</h1>
+<p class="text-slate-500 dark:text-slate-400">Monitoramento detalhado de eventos, acessos e tentativas de intrusão no sistema CANNEO.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-medium text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                            Exportar Relatório
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-400 font-medium text-sm hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">block</span>
+                            Bloquear IP Suspeito
+                        </button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-6 pb-6">
+<!-- Filters Toolbar -->
+<div class="mb-6 flex flex-col gap-4">
+<div class="p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+<!-- Search -->
+<div class="md:col-span-4 lg:col-span-5">
+<label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-1.5">Buscar</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined">search</span>
+<input class="w-full h-11 pl-10 pr-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400" placeholder="Endereço IP, Usuário ou ID do Evento" type="text"/>
+</div>
+</div>
+<!-- Date Range -->
+<div class="md:col-span-4 lg:col-span-3">
+<label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-1.5">Período</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]">calendar_today</span>
+<input class="w-full h-11 pl-10 pr-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" type="text" value="12/10/2023 - 13/10/2023"/>
+</div>
+</div>
+<!-- Severity Filter -->
+<div class="md:col-span-4 lg:col-span-4 flex items-center gap-2 h-11">
+<div class="flex-1">
+<label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-1.5">Gravidade</label>
+<select class="w-full h-11 px-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary cursor-pointer">
+<option>Todas as Gravidades</option>
+<option>Baixa (Informação)</option>
+<option>Média (Avisos)</option>
+<option>Alta (Crítico)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Chip Filters -->
+<div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+                                Todos
+                            </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="size-2 rounded-full bg-red-500"></span>
+                                Falhas de Login
+                            </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="size-2 rounded-full bg-orange-400"></span>
+                                Acesso Dados Sensíveis
+                            </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="size-2 rounded-full bg-blue-500"></span>
+                                Admins
+                            </button>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-700">
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[180px]">Data/Hora</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[240px]">Usuário</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[200px]">Tipo de Ação</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[160px]">IP</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Localização</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Dispositivo</th>
+<th class="py-4 px-6 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider w-[50px]"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<!-- Critical Alert Row -->
+<tr class="bg-red-50/60 dark:bg-red-900/10 hover:bg-red-100/60 dark:hover:bg-red-900/20 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-900 dark:text-white">12 Out 2023</span>
+<span class="text-xs text-red-600 dark:text-red-400 font-mono">14:42:05</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-lg">person</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">admin_sys</span>
+<span class="text-xs text-slate-500">Sistema</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 text-xs font-bold border border-red-200 dark:border-red-800">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                                            Falha Login (x5)
+                                        </span>
+</td>
+<td class="py-4 px-6">
+<span class="font-mono text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-700">192.168.0.105</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-red-500"></div>
+<span class="text-sm text-slate-700 dark:text-slate-300">São Paulo, SP</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">Chrome / Win10</span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Warning Row -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">12 Out 2023</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-mono">14:15:22</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="User profile picture of Dr. Ana Silva" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBoWVq2MdwEubUIfJBaLiiSwG6fMnRUBHZ4z3p3T53JXJGMDuiLZTgf8nw2XJr1YNtUU_cYwaGwL1D_z4KkGBAquJ5f4PMonVovArAiyWR1aKBzHHfbxoKNxu2YMz9eLVFiQGZsbF0RwzllepGCl7Q0xy7KtuzaMeCNWMTbau1TSf2Ou615gOcCNodyOuljs3TwOJY-Ybte-XqQUwHhmHOjywThFiGuKwHesRKJirXgP6gT7-KqgrlgS86DaZhEGw5fZe-vRo2ko11Q");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Dr. Ana Silva</span>
+<span class="text-xs text-slate-500">Médica</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 text-xs font-semibold border border-orange-100 dark:border-orange-800">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                                            Dados Sensíveis
+                                        </span>
+</td>
+<td class="py-4 px-6">
+<span class="font-mono text-sm text-slate-600 dark:text-slate-400">200.180.10.5</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">Rio de Janeiro, RJ</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">Safari / iPhone</span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Normal Row -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">12 Out 2023</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-mono">13:50:01</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="User profile picture of Julia Costa" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuByessEQrTGzv7MMvPgVRlqd-AZFjcA9hAoW7xPhiH4IR9wKDjfZlxsOAy6117LjXNXNRrmozMfbhW0OxnEVTv2fW2QAci8z037F2uUUb5PBQKw2Sr8xZciCmRoKFdp4IBhpQVvSo9ZDgcCBd8GWHEw3T7HJu-KKEhGAwpaRx687xN5Uj4Y32rqirOaW9PRy8oWavDCLw_RM1CN-7YGElVAxdAIKhnxUsRUlWtmIQQqnwjNcrUbUwL2ngNvoU1Q0KOe6PtlQkpKYI_O");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Julia Costa</span>
+<span class="text-xs text-slate-500">Enfermeira</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-xs font-semibold border border-green-100 dark:border-green-800">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                            Login Sucesso
+                                        </span>
+</td>
+<td class="py-4 px-6">
+<span class="font-mono text-sm text-slate-600 dark:text-slate-400">192.168.0.55</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">Curitiba, PR</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">Firefox / Linux</span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Normal Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">12 Out 2023</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-mono">11:20:18</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="User profile picture of Roberto Lima" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-Hjw16yW8HPo26g43Oeadvejh6NQHhRyrxtSpJU_N_YJjMvSll-T2PS65HB7Ezk1O5ZXvKzoKwWc4Vv4Fqb63Peg1FN-71E2txGU4pGhdEZqMBiGkIqT2fQzp66EzvYeelHDIjbnKN9gwvC-BalpBi35uq-Xg7BvMeCQL0f_WtnAyvvJyg4pH824vXiDhcn0jfJ26N6MA2UlxYgUmBjMPPoKTo9hlgl8zAQAw1opcOKmErEPthAYpkf3MyyowoCQHvszM1dXMByN4");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Roberto Lima</span>
+<span class="text-xs text-slate-500">Recepção</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-600">
+<span class="material-symbols-outlined text-[16px]">lock_reset</span>
+                                            Troca de Senha
+                                        </span>
+</td>
+<td class="py-4 px-6">
+<span class="font-mono text-sm text-slate-600 dark:text-slate-400">192.168.0.22</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">São Paulo, SP</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">Chrome / Win11</span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Normal Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">12 Out 2023</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-mono">09:45:00</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="User profile picture of Dr. Pedro Santos" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCj06TK_5iqvsahUnGDJxjNGhW1UwTCHwYR-8601ZW5DdF7U4d7boLTHclImWemZSXo0JQRvmRbEjd0DI6TdJ1BJwI_PVX1HiMsxh24ehiVHyWVjyHjVg7LMRVRO0qqvpclz3Fg7wr0J2yaJAX9uXq7AkF3QwK_503aaKrOdCJ6XQP8C4XEq4OQkjQS_BLFMflxLfmVT1lLyTY7pymnf8vEK3jwjcvqhZQDCFpb0GKWaYbvlH1D_B_hokDLjDml4WUf9O4_Li8u29gt");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Dr. Pedro Santos</span>
+<span class="text-xs text-slate-500">Médico</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-xs font-semibold border border-green-100 dark:border-green-800">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                                            Login Sucesso
+                                        </span>
+</td>
+<td class="py-4 px-6">
+<span class="font-mono text-sm text-slate-600 dark:text-slate-400">201.55.12.88</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">Belo Horizonte, MG</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-slate-600 dark:text-slate-400">Edge / Mac</span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex items-center justify-between">
+<div class="text-sm text-slate-500 dark:text-slate-400">
+                            Mostrando <span class="font-medium text-slate-900 dark:text-white">1-5</span> de <span class="font-medium text-slate-900 dark:text-white">1,248</span> eventos
+                        </div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-md hover:bg-slate-50 dark:hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed">
+                                Anterior
+                            </button>
+<div class="flex items-center">
+<button class="size-8 flex items-center justify-center text-sm font-medium rounded-md bg-primary text-white">1</button>
+<button class="size-8 flex items-center justify-center text-sm font-medium rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">2</button>
+<button class="size-8 flex items-center justify-center text-sm font-medium rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="size-8 flex items-center justify-center text-sm font-medium rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">10</button>
+</div>
+<button class="px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-md hover:bg-slate-50 dark:hover:bg-slate-600">
+                                Próximo
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
